@@ -1,6 +1,6 @@
 # DESCRIPTION
 
-Implementation of connectors for NetworkX which allows to create a graph from a file.
+Implementation of connectors for NetworkX for creating a graph from a file.
 The files' types could be: csv, json
 
 ### CSV case
