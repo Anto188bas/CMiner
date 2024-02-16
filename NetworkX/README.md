@@ -1,9 +1,12 @@
-# DESCRIPTION
+# NetworkX
+NetworkX is a Python package for the creation, manipulation, and study of the structure, dynamics, and functions of complex networks.
+
+# CONNECTORS
 
 Implementation of connectors for NetworkX for creating a graph from a file.
 The files' types could be: csv, json
 
-### CSV case
+## CSV case
 
 <b> 1. nodes.csv</b>
 
@@ -59,3 +62,67 @@ Therefore, we need to read the nodes.csv file, and then transform it into a pyth
 At this point:
 
     nx.set_node_attributes(G, attrs)
+
+
+
+## JSON case
+
+The network has to be formed:
+
+    {
+       'directed': False, 
+       'multigraph': False, 
+       'graph': {}, 
+       'nodes': [
+           {
+              'id': 'A', 
+              'p1': 20, 
+                 ..., 
+              'pn':21
+           },
+           {
+               'id': 'B',
+               'p1': 10,
+                  ..., 
+               'pn':25
+           }
+       ], 
+       'links': [
+           {
+              'source': 'A',
+              'target': 'B',
+              'pa': 3, 
+                   ..., 
+              'pm':32
+           }
+       ]
+    }
+
+Starting from the above file, the network could be created by using the function `node_link_data`
+
+    node_link_graph(data, directed=False, multigraph=True, *, source='source', target='target', name='id', key='key', link='links')
+
+    where:
+       - data: dict, 
+         node-link formatted graph data
+
+       - directed: bool, optional (default=False), 
+         if True, and direction not specified in data, return a directed graph.
+
+       - multigraph: bool, optional (default=True), 
+         if True, and multigraph not specified in data, return a multigraph.
+
+       - source: string, optional (default='source'), 
+         a string that provides the ‘source’ attribute name for storing NetworkX-internal graph data.
+       
+       - target: string, optional (default='target')
+         a string that provides the ‘target’ attribute name for storing NetworkX-internal graph data.
+
+       - name: string, optional (default='id')
+         a string that provides the ‘name’ attribute name for storing NetworkX-internal graph data.
+
+       - key: string, optional (default='key')
+         a string that provides the ‘key’ attribute name for storing NetworkX-internal graph data.
+         key is only used for multigraphs
+ 
+       - link: string, optional (default='links')
