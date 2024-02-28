@@ -1,0 +1,8 @@
+{
+   "edges_path"   : "path to the edges file",
+   "nodes_path"   : "path to the nodes file",
+   "sep_feat"     : "separator for the features (sep related to the file)",
+   "sep_label"    : "separator for the labels",
+   "id_col_nm"    : "column name for the node id",
+   "label_col_nm" : "column name for the node label"
+}
