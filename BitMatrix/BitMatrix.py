@@ -42,8 +42,6 @@ class BitMatrix(ABC):
         
         :rtype void
         """
-        # Set the boolean variable to True when the method is triggered
-        self.computed = True  
         pass
 
     def _lazy_computing(self):
@@ -52,6 +50,7 @@ class BitMatrix(ABC):
         :rtype void
         """
         not self.is_computed() and self.compute()
+        self.computed = True  
 
     def get_matrix(self):
         """ Retrieve the BitMatrix

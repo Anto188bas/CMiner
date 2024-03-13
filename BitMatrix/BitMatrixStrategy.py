@@ -1,3 +1,4 @@
+# pylint: disable=missing-class-docstring
 from abc import ABC, abstractmethod
 from bitarray import bitarray
 from bitstring import BitArray
