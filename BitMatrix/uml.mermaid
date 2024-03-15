@@ -1,0 +1,60 @@
+classDiagram
+
+    BitMatrix <|-- QueryBitMatrix
+    BitMatrix <|-- TargetBitMatrix
+    BitMatrix o-- BitMatrixStrategy
+    BitMatrixStrategy <|-- BitMatrixStrategy1
+    BitMatrixStrategy <|-- BitMatrixStrategy2
+
+
+    class BitMatrix {
+        -BitMatrixStrategy bit_matrix_strategy
+        -Graph graph
+        -List < Bitmaap > matrix
+        -List < tuple(node, node) > matrix_indices
+        -boolean computed
+        <<abstract>>
+        +BitMatrix(graph, bit_matrix_strategy)
+        +compute()
+        +get_matrix() : List < Bitmaap >
+        +get_graph() : Graph
+        +get_matrix_indices() : List < tuple(node, node) >
+        +is_computed() : boolean
+        +show()
+        +split_bitmap(row_num) : list < string >
+        -_lazy_computing()
+        +new_entry(source_node, destination_node)
+    }
+
+    class QueryBitMatrix {
+        +QueryBitMatrix(graph, bit_matrix_strategy)
+        +compute()
+    }
+
+    class TargetBitMatrix {
+        +TargetBitMatrix(graph, bit_matrix_strategy)
+        +compute()
+        +find_candidates(target_bitmatrix) : list < tuple(edge, edge) >
+        -_adapt_query_to_target(target_graph)
+    }
+
+    class BitMatrixStrategy {
+        -Graph graph
+        <<abstract>>
+        +BitMatrixStrategy()
+        +compute_row() : bitmap
+        -_get_row_string(edge) : string
+        -_compute_node_string_bitmap(node) : string
+        -_compute_edge_string_bitmap(node) : string
+        +new_row()
+    }
+
+    class BitMatrixStrategy1 {
+        +BitMatrixWithBitArray(graph)
+        +compute_row(edge)
+    }
+
+    class BitMatrixStrategy2 {
+        +BitMatrixWithBitArray(graph)
+        +compute_row(edge)
+    }
