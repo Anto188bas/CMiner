@@ -355,13 +355,14 @@ class QueryBitMatrixOptimized(QueryBitMatrix):
         # the keys of the dictionary. The less keys the dictionary
         # has the more candidates are associated to the same bitmap.
         indices = sorted(range(len(indexed_bitmatrix)), key=lambda i: len(indexed_bitmatrix[i].keys()))
+
         for bmq_i in range(len(self.matrix)):
             # take the i-th row of the query bitmap and split it in 4 parts
             query_row = self.split_bitmap_row(bmq_i)
             # set of indices candidates
             partial_match = set()
 
-            for i in range(4):
+            for i in indices:
                 # take the i-th subpart of the query bitmap
                 bitmap_query = query_row[i]
                 # take the i-th indexing of the target
@@ -381,7 +382,7 @@ class QueryBitMatrixOptimized(QueryBitMatrix):
                     partial_match = set()
                     break
                 # if I found for the first time the candidates I just add them to the match
-                if i == 0:
+                if i == indices[0]:
                     partial_match = candidates
                 else:
                     # if I already found some candidates I take the intersection.
