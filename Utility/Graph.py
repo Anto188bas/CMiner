@@ -56,4 +56,75 @@ class MultiDiGraph(nx.MultiDiGraph):
             label = random.choice(self.get_all_edge_labels())
             G.add_edge(u, v, type=label)
 
-        return G
+        return G    
+    
+    def are_equivalent(node1, node2, G):
+        # Verifica se le etichette di node1 sono un sottoinsieme o uguali alle etichette di node2
+        if set(G.nodes[node1]['label']) == set(G.nodes[node2]['label']):
+            # Verifica se gli attributi degli archi in uscita sono gli stessi
+
+            out_edges_node1 = sorted([G.edges[edge]['type'] for edge in G.out_edges(node1)])
+            out_edges_node2 = sorted([G.edges[edge]['type'] for edge in G.out_edges(node2)])
+
+            if out_edges_node1 != out_edges_node2:
+                return False
+
+            # Verifica se gli attributi degli archi in entrata sono gli stessi
+            in_edges_node1 = sorted([G.edges[edge]['type'] for edge in G.in_edges(node1)])
+            in_edges_node2 = sorted([G.edges[edge]['type'] for edge in G.in_edges(node2)])
+
+            if in_edges_node1 != in_edges_node2:
+                return False
+            return True
+        else:
+            
+            return False
+        
+    
+    def get_labels(graph):
+        # Utilizza le funzionalità di networkx per ottenere le etichette dei nodi
+        node_labels = nx.get_node_attributes(graph, 'label')
+
+        # Dizionari per memorizzare le etichette degli archi uscenti e entranti
+        edge_out_labels = {}
+        edge_in_labels = {}
+
+        # Itera attraverso tutti gli archi del grafo
+        for source_node, target_node, edge_data in graph.edges(data=True):
+            # Aggiunge l'etichetta dell'arco (tipo) al dizionario degli archi uscenti
+            edge_out_labels.setdefault(source_node, {})[target_node] = edge_data.get('type', '')
+            # Aggiunge l'etichetta dell'arco (tipo) al dizionario degli archi entranti
+            edge_in_labels.setdefault(target_node, {})[source_node] = edge_data.get('type', '')
+
+        # Restituisce i dizionari contenenti le etichette dei nodi, degli archi uscenti e degli archi entranti
+
+        return node_labels, edge_out_labels, edge_in_labels
+    
+    def compute_orbits(graph):
+        print("Calcolando le orbite...")
+        # Lista per memorizzare le orbite
+        orbits = []
+        
+        # Insieme dei nodi non ancora visitati
+        unvisited_nodes = set(graph.nodes())
+        
+        # Finché ci sono nodi non visitati
+        while unvisited_nodes:
+            # Prendi un nodo di partenza dalla lista dei nodi non visitati
+            start_node = unvisited_nodes.pop()
+            orbit = {start_node}
+            
+            # Copia di unvisited_nodes per iterare
+            nodes_to_check = unvisited_nodes.copy()
+            
+            # Verifica l'equivalenza con gli altri nodi
+            for node in nodes_to_check:
+                if are_equivalent(start_node, node, graph):
+                    orbit.add(node)
+                    unvisited_nodes.remove(node)
+                
+
+            # Aggiungi l'orbita alla lista delle orbite
+            orbits.append(orbit)
+        # Restituisce la lista delle orbite
+        return orbits
