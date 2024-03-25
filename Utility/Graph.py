@@ -1,5 +1,6 @@
 import networkx as nx
 import random
+import matplotlib.pyplot as plt
 
 
 """ Utility function
@@ -42,6 +43,7 @@ class MultiDiGraph(nx.MultiDiGraph):
         return self.edge_labels
 
     def generate_random_query(self, num_nodes, num_edges):
+        """Generate a random query graph with num_nodes nodes and num_edges edges."""
         # Create a graph
         G = MultiDiGraph()
 
@@ -57,3 +59,16 @@ class MultiDiGraph(nx.MultiDiGraph):
             G.add_edge(u, v, type=label)
 
         return G
+
+    def random_labeling(self, graph, max_labels=1):
+        """Assign random labels to nodes and edges of the graph"""
+        # Assign labels to vertices
+        for node in graph.nodes:
+            graph.nodes[node]['labels'] = [random.choice(self.get_all_node_labels()) for _ in range(random.randint(1, max_labels))]
+
+        # Assign labels to edges
+        for edge in graph.edges:
+            graph.edges[edge]['type'] = random.choice(self.get_all_edge_labels())
+
+    def random_connected_subgraph(self, num_nodes):
+        pass
