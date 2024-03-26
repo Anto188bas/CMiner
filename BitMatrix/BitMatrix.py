@@ -38,11 +38,12 @@ class BitMatrix(ABC):
     def compute(self):
         """ Compute the BitMatrix
 
-        Method that is defined in the Concrete istance depending on the
+        Method that is defined in the Concrete instance depending on the
         type of the BitMatrix (QueryBitMatrix, TargetBitMatrix)
 
         :rtype void
         """
+        self.computed = True
         self.graph.reset_memoization()
         pass
 
@@ -53,6 +54,7 @@ class BitMatrix(ABC):
         """
         not self.is_computed() and self.compute()
         self.computed = True
+
 
     def get_matrix(self):
         """ Retrieve the BitMatrix
@@ -181,7 +183,7 @@ class TargetBitMatrixOptimized(TargetBitMatrix):
                 if row_num in value:
                     bitmap += key
                     break
-        print(bitmap)
+
         return self.split_bitmap(self.bit_matrix_strategy.str_to_bitmap(bitmap))
 
     def compute(self):
@@ -191,6 +193,7 @@ class TargetBitMatrixOptimized(TargetBitMatrix):
         See also:
             :func get()
         """
+        self.computed = True
         self.graph.reset_memoization()
         # Extracting edges
         # Using a set to have single occurrence of each edge
@@ -247,19 +250,19 @@ class QueryBitMatrix(BitMatrix):
         See also:
             :func get()
         """
+        self.computed = True
         super().compute()
         # The comments are the same as the TargetBitMatrix compute
         # method, the small change is at the end.
         edges = set(self.graph.edges())
         for edge in edges:
-            edge_to_compute = ()
             if edge[0] < edge[1]:
                 edge_to_compute = edge
             elif edge[1] < edge[0]:
                 edge_to_compute = (edge[1], edge[0])
             else:
                 # This will be executed only if the edge source and destination
-                # are the same. To comprend why check how the query graph is
+                # are the same. To comprehend why check how the query graph is
                 # constructed
                 continue
             if edge_to_compute not in self.matrix_indices:
@@ -272,6 +275,7 @@ class QueryBitMatrix(BitMatrix):
                 row_parts = self.split_bitmap_row(i)  # taking the parts of the bitmap
                 self.matrix.append(row_parts[3] + row_parts[2] + row_parts[1] + row_parts[0])
                 self.matrix_indices.append((edge_to_compute[1], edge_to_compute[0]))
+
 
     def _adapt_query_to_target(self, target_graph):
         """ Adding the correct labels to perform the query
