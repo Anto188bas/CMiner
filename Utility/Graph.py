@@ -47,19 +47,20 @@ class MultiDiGraph(nx.MultiDiGraph):
         return self.edge_labels
 
     def generate_random_query(self, num_nodes, num_edges):
+        """Generate a random query graph with num_nodes nodes and num_edges edges."""
         # Create a graph
         G = MultiDiGraph()
 
         # Add nodes with random labels
         for i in range(num_nodes):
-            labels = random.choice(self.get_all_node_labels())
-            self.add_node(node_for_adding=i, labels=[labels])
+            label = random.choice(self.get_all_node_labels())
+            G.add_node(node_for_adding=i, labels=[label])
 
         # Add edges with random labels
         for _ in range(num_edges):
             u, v = random.sample(range(num_nodes), 2)
-            labels = random.choice(self.get_all_edge_labels())
-            self.add_edge(u, v, type=labels)
+            label = random.choice(self.get_all_edge_labels())
+            G.add_edge(u, v, type=label)
 
         return G
 
@@ -145,7 +146,39 @@ class MultiDiGraph(nx.MultiDiGraph):
         return orbits
 
     def t_out_deg(self, node_id, t):
-        return 1
+        """
+        Returns the number of edges that exit from the node with id node_id and have label t.
+
+        Parameters:
+        - node_id: The ID of the node.
+        - t: The label of the edge.
+
+        Returns:
+        - The number of edges that exit from the node with label t.
+        """
+        # Get all outgoing edges from the node with node_id
+        out_edges = self.out_edges(node_id, data=True)
+
+        # Count the number of edges with label t
+        count = sum(1 for _, _, attrs in out_edges if attrs.get('type') == t)
+
+        return count
 
     def t_in_deg(self, node_id, t):
-        return 1
+        """
+        Returns the number of edges that enter the node with id node_id and have label t.
+
+        Parameters:
+        - node_id: The ID of the node.
+        - t: The label of the edge.
+
+        Returns:
+        - The number of edges that enter the node with label t.
+        """
+        # Get all incoming edges to the node with node_id
+        in_edges = self.in_edges(node_id, data=True)
+
+        # Count the number of edges with label t
+        count = sum(1 for _, _, attrs in in_edges if attrs.get('type') == t)
+
+        return count
