@@ -101,7 +101,6 @@ class MultiDiGraph(nx.MultiDiGraph):
         return node_labels, edge_out_labels, edge_in_labels
     
     def compute_orbits(graph):
-        print("Calcolando le orbite...")
         # Lista per memorizzare le orbite
         orbits = []
         
@@ -127,4 +126,40 @@ class MultiDiGraph(nx.MultiDiGraph):
             # Aggiungi l'orbita alla lista delle orbite
             orbits.append(orbit)
         # Restituisce la lista delle orbite
+        return orbits
+    
+    def are_equivalent_edges(edge1, edge2, G):
+       
+        source1, target1 = edge1
+        source2, target2 = edge2
+
+        # Verifica se i nodi sorgente e destinazione hanno le stesse etichette
+        if set(G.nodes[source1]['label']) == set(G.nodes[source2]['label']) and \
+        set(G.nodes[target1]['label']) == set(G.nodes[target2]['label']):
+            # Verifica se gli archi hanno lo stesso tipo
+            if G.edges[edge1]['type'] == G.edges[edge2]['type']:
+                
+                return True
+
+        
+        return False
+
+    def compute_orbits_edges(graph):
+        
+        orbits = []
+        unvisited_edges = set(graph.edges())
+
+        while unvisited_edges:
+            start_edge = unvisited_edges.pop()
+            orbit = {start_edge}
+            edges_to_check = unvisited_edges.copy()
+            
+            for edge in edges_to_check:
+                if are_equivalent_edges(start_edge, edge, graph):
+                    orbit.add(edge)
+                    unvisited_edges.remove(edge)
+                    
+
+            orbits.append(orbit)
+
         return orbits
