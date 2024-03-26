@@ -64,87 +64,6 @@ class MultiDiGraph(nx.MultiDiGraph):
 
         return G
 
-    def are_equivalent(self, node1, node2):
-        # Verifica se le etichette di node1 sono un sottoinsieme o uguali alle etichette di node2
-        if set(self.nodes[node1]['labels']) == set(self.nodes[node2]['labels']):
-            # Verifica se gli attributi degli archi in uscita sono gli stessi
-
-            out_edges_node1 = sorted([self.edges[edge]['type'] for edge in self.out_edges(node1) if len(edge) == 3])
-            out_edges_node2 = sorted([self.edges[edge]['type'] for edge in self.out_edges(node2) if len(edge) == 3])
-
-            if out_edges_node1 != out_edges_node2:
-                return False
-
-            # Verifica se gli attributi degli archi in entrata sono gli stessi
-            in_edges_node1 = sorted([self.edges[edge]['type'] for edge in self.in_edges(node1) if len(edge) == 3])
-            in_edges_node2 = sorted([self.edges[edge]['type'] for edge in self.in_edges(node2) if len(edge) == 3])
-
-            if in_edges_node1 != in_edges_node2:
-                return False
-            return True
-        else:
-            return False
-
-    def compute_orbits(self):
-        # Lista per memorizzare le orbite
-        orbits = []
-
-        # Insieme dei nodi non ancora visitati
-        unvisited_nodes = set(self.nodes())
-
-        # Finché ci sono nodi non visitati
-        while unvisited_nodes:
-            # Prendi un nodo di partenza dalla lista dei nodi non visitati
-            start_node = unvisited_nodes.pop()
-            orbit = {start_node}
-
-            # Copia di unvisited_nodes per iterare
-            nodes_to_check = unvisited_nodes.copy()
-
-            # Verifica l'equivalenza con gli altri nodi
-            for node in nodes_to_check:
-                if self.are_equivalent(start_node, node):
-                    orbit.add(node)
-                    unvisited_nodes.remove(node)
-
-            # Aggiungi l'orbita alla lista delle orbite
-            orbits.append(orbit)
-        # Restituisce la lista delle orbite
-        return orbits
-
-    def are_equivalent_edges(self, edge1, edge2):
-
-        source1, target1 = edge1
-        source2, target2 = edge2
-
-        # Verifica se i nodi sorgente e destinazione hanno le stesse etichette
-        if set(self.nodes[source1]['labels']) == set(self.nodes[source2]['labels']) and \
-                set(self.nodes[target1]['labels']) == set(self.nodes[target2]['labels']):
-            # Verifica se gli archi hanno lo stesso tipo
-            if self.edges[edge1]['type'] == self.edges[edge2]['type']:
-                return True
-
-        return False
-
-    def compute_orbits_edges(self):
-
-        orbits = []
-        unvisited_edges = set(self.edges())
-
-        while unvisited_edges:
-            start_edge = unvisited_edges.pop()
-            orbit = {start_edge}
-            edges_to_check = unvisited_edges.copy()
-
-            for edge in edges_to_check:
-                if self.are_equivalent_edges(start_edge, edge):
-                    orbit.add(edge)
-                    unvisited_edges.remove(edge)
-
-            orbits.append(orbit)
-
-        return orbits
-
     def t_out_deg(self, node_id, t):
         """
         Returns the number of edges that exit from the node with id node_id and have label t.
@@ -182,3 +101,97 @@ class MultiDiGraph(nx.MultiDiGraph):
         count = sum(1 for _, _, attrs in in_edges if attrs.get('type') == t)
 
         return count
+
+    def are_equivalent(self, node1, node2):
+
+        # Verifica se le etichette di node1 sono un sottoinsieme o uguali alle etichette di node2
+        if set(self.nodes[node1]['labels']) == set(self.nodes[node2]['labels']):
+            # Verifica se gli attributi degli archi in uscita sono gli stessi
+            out_edges_node1 = sorted([self.edges[edge]['type'] for edge in self.out_edges(node1, keys=True)])
+            out_edges_node2 = sorted([self.edges[edge]['type'] for edge in self.out_edges(node2, keys=True)])
+            if out_edges_node1 != out_edges_node2:
+                return False
+
+            # Verifica se gli attributi degli archi in entrata sono gli stessi
+            in_edges_node1 = sorted([self.edges[edge]['type'] for edge in self.in_edges(node1, keys=True)])
+            in_edges_node2 = sorted([self.edges[edge]['type'] for edge in self.in_edges(node2, keys=True)])
+            if in_edges_node1 != in_edges_node2:
+                return False
+            # Se tutte le condizioni sono soddisfatte, i nodi sono equivalenti
+            return True
+        else:
+            return False
+
+    def compute_orbits(self):
+        # Lista per memorizzare le orbite
+        orbits = []
+
+        # Insieme dei nodi non ancora visitati
+        unvisited_nodes = set(self.nodes())
+
+        # Finché ci sono nodi non visitati
+        while unvisited_nodes:
+            # Prendi un nodo di partenza dalla lista dei nodi non visitati
+            start_node = unvisited_nodes.pop()
+            orbit = {start_node}
+
+            # Copia di unvisited_nodes per iterare
+            nodes_to_check = unvisited_nodes.copy()
+
+            # Verifica l'equivalenza con gli altri nodi
+            for node in nodes_to_check:
+                if self.are_equivalent(start_node, node):
+                    orbit.add(node)
+                    unvisited_nodes.remove(node)
+            # Aggiungi l'orbita alla lista delle orbite
+            orbits.append(orbit)
+
+        return orbits
+
+    def are_equivalent_edges(self, edge1, edge2):
+
+        source1, target1, key1 = edge1
+        source2, target2, key2 = edge2
+
+        # Verifica se i nodi sorgente e destinazione hanno le stesse etichette
+        if (set(self.nodes[source1]['labels']) == set(self.nodes[source2]['labels'])) and \
+                (set(self.nodes[target1]['labels']) == set(self.nodes[target2]['labels'])):
+            # Verifica se gli archi hanno lo stesso tipo
+            if self.edges[edge1]['type'] == self.edges[edge2]['type']:
+                return True
+
+        return False
+
+    def set_node_attributes(self, node_attributes, attribute_name):
+        for node, attributes in node_attributes.items():
+            if node not in self.nodes:
+                self.add_node(node)  # Aggiungi il nodo se non esiste
+            self.nodes[node][attribute_name] = attributes
+
+    # Metodo per impostare gli attributi degli archi
+    def set_edge_attributes(self, edge_attributes, attribute_name):
+        for edge, attribute in edge_attributes.items():
+            u, v = edge  # Estrai i nodi sorgente e destinazione dall'arco
+            if not self.has_edge(u, v):
+                self.add_edge(u, v)  # Aggiungi l'arco se non esiste
+            self[u][v][0][attribute_name] = attribute  # Imposta l'attributo per l'arco
+
+    def compute_orbits_edges(self):
+
+        orbits = []
+        unvisited_edges = set(self.edges(keys=True))
+
+        while unvisited_edges:
+            start_edge = unvisited_edges.pop()
+
+            orbit = {start_edge}
+            edges_to_check = unvisited_edges.copy()
+
+            for edge in edges_to_check:
+                if self.are_equivalent_edges(start_edge, edge):
+                    orbit.add(edge)
+                    unvisited_edges.remove(edge)
+
+            orbits.append(orbit)
+
+        return orbits
