@@ -46,6 +46,24 @@ class MultiDiGraph(nx.MultiDiGraph):
                 set([self.get_edge_data(edge[0], edge[1], edge[2])['type'] for edge in self.edges]))
         return self.edge_labels
 
+    def jaccard_similarity(self, node_id_1, node_id_2):
+        """
+        Compute the Jaccard similarity between two nodes.
+        The Jaccard similarity is defined as the size of the
+        intersection of the neighbors of the two nodes divided
+        by the size of the union of the neighbors of the two
+        nodes.
+        :param node_id_1:
+        :param node_id_2:
+        :return:
+        """
+        neighbors_1 = set(self.neighbors(node_id_1))
+        neighbors_2 = set(self.neighbors(node_id_2))
+        intersection = neighbors_1.intersection(neighbors_2)
+        union = neighbors_1.union(neighbors_2)
+        return len(intersection) / len(union)
+
+
     def generate_random_query(self, num_nodes, num_edges):
         """Generate a random query graph with num_nodes nodes and num_edges edges."""
         # Create a graph
@@ -63,6 +81,33 @@ class MultiDiGraph(nx.MultiDiGraph):
             G.add_edge(u, v, type=label)
 
         return G
+
+    def tot_deg(self, node_id):
+        """
+        Returns the total degree of the node with id node_id.
+
+        :param node_id: The ID of the node.
+        :return: The total degree of the node.
+        """
+        return self.in_deg(node_id) + self.out_deg(node_id)
+
+    def in_deg(self, node_id):
+        """
+        Returns the in-degree of the node with id node_id.
+
+        :param node_id: The ID of the node.
+        :return: The in-degree of the node.
+        """
+        return len(self.in_edges(node_id))
+
+    def out_deg(self, node_id):
+        """
+        Returns the out-degree of the node with id node_id.
+
+        :param node_id: The ID of the node.
+        :return: The out-degree of the node.
+        """
+        return len(self.out_edges(node_id))
 
     def t_out_deg(self, node_id, t):
         """
