@@ -10,6 +10,17 @@ class CompatibilityDomain:
         self.qbm = query_bit_matrix
         self.tbm = target_bit_matrix
         self.domain = {}
+        self.computed = False
+
+    def edge_domain_cardinality(self, edge):
+        """
+        Return the cardinality of the domain of the edge.
+
+        :param edge:
+        :return: int
+        """
+        return len(self.domain[edge])
+
 
     def _check_conditions(self, query_edge, target_edge):
         """
@@ -45,6 +56,10 @@ class CompatibilityDomain:
         return True
 
     def compute(self):
+        if self.computed:
+            return
+        # set the flag to True to avoid re-computation
+        self.computed = True
         # array of tuples [(query_edge_index, target_edge_index), ...]
         candidates = self.qbm.find_candidates(self.tbm)
         # the i-th matrix index corresponds to an edge in the graph
@@ -63,7 +78,7 @@ class CompatibilityDomain:
         #       place 1: (q2, q1) -> odd index 1
         #       place 2: (q1, q3) -> even index 2
         #       place 3: (q3, q1) -> odd index 3
-        for i in range(0, len(qbm_indices), 2): # i = 0, i = 2, i = 4, ...
+        for i in range(0, len(qbm_indices), 2):  # i = 0, i = 2, i = 4, ...
             self.domain[qbm_indices[i]] = []
         # compute the domain of each edge
         for candidate in candidates:
@@ -88,4 +103,8 @@ class CompatibilityDomain:
                 # if the conditions are satisfied we add the target edge to the domain
                 self.domain[query_edge].append(target_edge)
 
+    def get_domain(self):
         return self.domain
+
+    def get_edges(self):
+        return self.domain.keys()
