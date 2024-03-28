@@ -11,23 +11,23 @@ class Ordering:
         self.node_count = {}
 
     def score_cf_0(self, q_i, q_j):
-        print(q_i, q_j, self.query_graph.tot_deg(q_i), self.query_graph.tot_deg(q_j), self.query_graph.jaccard_similarity(q_i, q_j), self.compatibility_domain.edge_domain_cardinality((q_i, q_j)))
+        print(q_i, q_j, self.query_graph.tot_deg(q_i), self.query_graph.tot_deg(q_j), self.query_graph.jaccard_similarity(q_i, q_j), self.compatibility_domain.get_domain_cardinality((q_i, q_j)))
         return (
                 self.query_graph.tot_deg(q_i) *
                 self.query_graph.tot_deg(q_j) *
                 self.query_graph.jaccard_similarity(q_i, q_j) /
-                self.compatibility_domain.edge_domain_cardinality((q_i, q_j))
+                self.compatibility_domain.get_domain_cardinality((q_i, q_j))
         )
 
     def score_cf_1(self, q_i, q_j, free_node):
         return (
                 self.query_graph.tot_deg(free_node) *
                 self.query_graph.jaccard_similarity(q_i, q_j) /
-                self.compatibility_domain.edge_domain_cardinality((q_i, q_j))
+                self.compatibility_domain.get_domain_cardinality((q_i, q_j))
         )
 
     def score_cf_2(self, q_i, q_j):
-        return 1 / self.compatibility_domain.edge_domain_cardinality((q_i, q_j))
+        return 1 / self.compatibility_domain.get_domain_cardinality((q_i, q_j))
 
     def compute_cf_score(self, q_i, q_j):
         return self.node_count[q_i] + self.node_count[q_j]
@@ -49,7 +49,7 @@ class Ordering:
         self.compatibility_domain.compute()
         # take edges (q_i, q_j) so that id(q_i) < id(q_j)
         # they are the key of the compatibility domain (See CompatibilityDomain/CompatibilityDomain.py)
-        edges = list(self.compatibility_domain.get_edges())
+        edges = list(self.compatibility_domain.get_all_query_edges())
         distinct_nodes = set(q for edge in edges for q in edge)
         # node_count[q] = 0 if q is not in the order, 1 otherwise
         # used to compute cf score for each edge

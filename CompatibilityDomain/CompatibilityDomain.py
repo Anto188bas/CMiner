@@ -1,4 +1,7 @@
-class CompatibilityDomain:
+from abc import ABC, abstractmethod
+
+
+class CompatibilityDomain(ABC):
 
     def __init__(self, query_bit_matrix, target_bit_matrix):
         """
@@ -9,18 +12,7 @@ class CompatibilityDomain:
         """
         self.qbm = query_bit_matrix
         self.tbm = target_bit_matrix
-        self.domain = {}
         self.computed = False
-
-    def edge_domain_cardinality(self, edge):
-        """
-        Return the cardinality of the domain of the edge.
-
-        :param edge:
-        :return: int
-        """
-        return len(self.domain[edge])
-
 
     def _check_conditions(self, query_edge, target_edge):
         """
@@ -54,6 +46,51 @@ class CompatibilityDomain:
                 return False
         # if all conditions are satisfied we return True
         return True
+
+    @abstractmethod
+    def compute(self):
+        self.computed = True
+
+    @abstractmethod
+    def get_all_query_edges(self):
+        """
+        Return all the edges of the query graph with a domain.
+        :return list of tuples
+        """
+        pass
+
+    @abstractmethod
+    def get_domain(self, edge):
+        """
+        Return the domain of the edge (q_i, q_j).
+
+        :param edge: tuple
+        :return list of tuples
+        """
+        pass
+
+    @abstractmethod
+    def get_domain_cardinality(self, edge):
+        """
+        Return the cardinality of the domain of the edge.
+
+        :param edge: tuple
+        :return: int
+        """
+        pass
+
+
+class CompatibilityDomainWithDictionary(CompatibilityDomain):
+
+    def __init__(self, query_bit_matrix, target_bit_matrix):
+        """
+        Constructor for the CompatibilityDomain class.
+
+        :param query_bit_matrix:
+        :param target_bit_matrix:
+        """
+        super().__init__(query_bit_matrix, target_bit_matrix)
+        self.domain = {}
 
     def compute(self):
         if self.computed:
@@ -103,8 +140,17 @@ class CompatibilityDomain:
                 # if the conditions are satisfied we add the target edge to the domain
                 self.domain[query_edge].append(target_edge)
 
-    def get_domain(self):
-        return self.domain
+    def get_all_query_edges(self):
+        return list(self.domain.keys())
 
-    def get_edges(self):
-        return self.domain.keys()
+    def get_domain(self, edge):
+        return self.domain[edge]
+
+    def get_domain_cardinality(self, edge):
+        """
+        Return the cardinality of the domain of the edge.
+
+        :param edge:
+        :return: int
+        """
+        return len(self.domain[edge])
