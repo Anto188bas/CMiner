@@ -46,6 +46,27 @@ class MultiDiGraph(nx.MultiDiGraph):
                 set([self.get_edge_data(edge[0], edge[1], edge[2])['type'] for edge in self.edges]))
         return self.edge_labels
 
+    def get_edges_consider_no_direction(self, node_id_1, node_id_2):
+        """
+        Returns the edges between source and destination nodes, not considering the direction of the edges.
+        EXAMPLE:
+            G = MultiDiGraph()
+            G.add_edge(1, 2, type="A")
+            G.add_edge(2, 1, type="B")
+            G.get_edges_consider_no_direction(1, 2) -> [(1, 2, 0), (2, 1, 0)]
+        :param source:
+        :param destination:
+        :return list of edges between source and destination nodes
+        """
+        edges = []
+        if self.has_edge(node_id_1, node_id_2):
+            edges.extend((node_id_1, node_id_2, key) for key in self[node_id_1][node_id_2])
+        if self.has_edge(node_id_2, node_id_1):
+            edges.extend((node_id_2, node_id_1, key) for key in self[node_id_2][node_id_1])
+        return edges
+
+
+
     def jaccard_similarity(self, node_id_1, node_id_2):
         """
         Compute the Jaccard similarity between two nodes.
