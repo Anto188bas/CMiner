@@ -306,4 +306,45 @@ class MultiDiGraph(nx.MultiDiGraph):
             if all(attr in edge_attributes.items() for attr in attributes.items()):
                 return True
         return False
+    
+    #Valutare con Simone --->Funzionamento + Utility 
+    def compute_symmetry_breaking_conditions(self):
+        """
+        Computes the symmetry breaking conditions for both nodes and edges in the graph.
+
+        Returns:
+            A list containing the symmetry breaking conditions for nodes and edges.
+            Each element in the list is a list of conditions for either nodes or edges,
+            where each condition is represented as a list of node IDs or edge tuples.
+        """
+        # Compute orbits for nodes and edges
+        node_orbits = self.compute_orbits_nodes()
+        edge_orbits = self.compute_orbits_edges()
+
+        # List to store the symmetry breaking conditions for nodes and edges
+        breaking_conditions = []
+
+        # Compute symmetry breaking conditions for nodes
+        node_breaking_conditions = []
+        for orbit in node_orbits:
+            if len(orbit) > 1:
+                smallest_node = min(orbit)
+                # Sort the node IDs within each orbit for consistency
+                condition = sorted(orbit, key=lambda node: node)
+                node_breaking_conditions.append(condition)
+
+        # Compute symmetry breaking conditions for edges
+        edge_breaking_conditions = []
+        for orbit in edge_orbits:
+            if len(orbit) > 1:
+                smallest_edge = min(orbit)
+                # Sort the edge tuples within each orbit based on their third element (ID) for consistency
+                condition = sorted(orbit, key=lambda edge: edge[2])
+                edge_breaking_conditions.append(condition)
+
+        # Append node and edge breaking conditions to the main list
+        breaking_conditions.append(node_breaking_conditions)
+        breaking_conditions.append(edge_breaking_conditions)
+
+        return breaking_conditions
 
