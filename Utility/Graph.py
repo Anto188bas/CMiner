@@ -1,7 +1,8 @@
 import networkx as nx
 import random
 
-# TO-DO: try to remove the check len(edge) == 3 in are_equivalent
+# TO-DO: test orbits with new graph 
+#To-DO : sign all method with comment 
 
 """ Utility function
 """
@@ -176,7 +177,6 @@ class MultiDiGraph(nx.MultiDiGraph):
         return count
 
     def are_equivalent(self, node1, node2):
-
         # Verifica se le etichette di node1 sono un sottoinsieme o uguali alle etichette di node2
         if set(self.nodes[node1]['labels']) == set(self.nodes[node2]['labels']):
             # Verifica se gli attributi degli archi in uscita sono gli stessi
@@ -195,22 +195,23 @@ class MultiDiGraph(nx.MultiDiGraph):
         else:
             return False
 
+
     def compute_orbits(self):
         # Lista per memorizzare le orbite
         orbits = []
-
+        
         # Insieme dei nodi non ancora visitati
         unvisited_nodes = set(self.nodes())
-
+        
         # Finché ci sono nodi non visitati
         while unvisited_nodes:
             # Prendi un nodo di partenza dalla lista dei nodi non visitati
             start_node = unvisited_nodes.pop()
             orbit = {start_node}
-
+            
             # Copia di unvisited_nodes per iterare
             nodes_to_check = unvisited_nodes.copy()
-
+            
             # Verifica l'equivalenza con gli altri nodi
             for node in nodes_to_check:
                 if self.are_equivalent(start_node, node):
@@ -256,7 +257,6 @@ class MultiDiGraph(nx.MultiDiGraph):
 
         while unvisited_edges:
             start_edge = unvisited_edges.pop()
-
             orbit = {start_edge}
             edges_to_check = unvisited_edges.copy()
 
@@ -264,12 +264,6 @@ class MultiDiGraph(nx.MultiDiGraph):
                 if self.are_equivalent_edges(start_edge, edge):
                     orbit.add(edge)
                     unvisited_edges.remove(edge)
-
+                    
             orbits.append(orbit)
-
         return orbits
-
-
-
-
-
