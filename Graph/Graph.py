@@ -196,7 +196,7 @@ class MultiDiGraph(nx.MultiDiGraph):
             return False
 
 
-    def compute_orbits(self):
+    def compute_orbits_nodes(self):
         # Lista per memorizzare le orbite
         orbits = []
         
