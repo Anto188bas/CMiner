@@ -170,21 +170,12 @@ class MultiDiGraph(nx.MultiDiGraph):
         return count
 
     def are_equivalent(self, node1, node2):
-<<<<<<< HEAD
-        
-=======
-
->>>>>>> dd1ba03a1e4e68ae30d79c54f5d8d7b569a72117
         # Verifica se le etichette di node1 sono un sottoinsieme o uguali alle etichette di node2
         if set(self.nodes[node1]['labels']) == set(self.nodes[node2]['labels']):
             # Verifica se gli attributi degli archi in uscita sono gli stessi
             out_edges_node1 = sorted([self.edges[edge]['type'] for edge in self.out_edges(node1, keys=True)])
             out_edges_node2 = sorted([self.edges[edge]['type'] for edge in self.out_edges(node2, keys=True)])
-<<<<<<< HEAD
-            if out_edges_node1 != out_edges_node2:  
-=======
             if out_edges_node1 != out_edges_node2:
->>>>>>> dd1ba03a1e4e68ae30d79c54f5d8d7b569a72117
                 return False
 
             # Verifica se gli attributi degli archi in entrata sono gli stessi
@@ -238,8 +229,6 @@ class MultiDiGraph(nx.MultiDiGraph):
 
         return False
 
-<<<<<<< HEAD
-=======
     def set_node_attributes(self, node_attributes, attribute_name):
         for node, attributes in node_attributes.items():
             if node not in self.nodes:
@@ -253,7 +242,6 @@ class MultiDiGraph(nx.MultiDiGraph):
             if not self.has_edge(u, v):
                 self.add_edge(u, v)  # Aggiungi l'arco se non esiste
             self[u][v][0][attribute_name] = attribute  # Imposta l'attributo per l'arco
->>>>>>> dd1ba03a1e4e68ae30d79c54f5d8d7b569a72117
 
     def compute_orbits_edges(self):
 
@@ -262,11 +250,6 @@ class MultiDiGraph(nx.MultiDiGraph):
 
         while unvisited_edges:
             start_edge = unvisited_edges.pop()
-<<<<<<< HEAD
-            
-=======
-
->>>>>>> dd1ba03a1e4e68ae30d79c54f5d8d7b569a72117
             orbit = {start_edge}
             edges_to_check = unvisited_edges.copy()
 
@@ -276,16 +259,5 @@ class MultiDiGraph(nx.MultiDiGraph):
                     unvisited_edges.remove(edge)
                     
             orbits.append(orbit)
-<<<<<<< HEAD
             
         return orbits
-
-    def t_out_deg(self, node_id, t):
-        return 1
-
-    def t_in_deg(self, node_id, t):
-        return 1
-=======
-
-        return orbits
->>>>>>> dd1ba03a1e4e68ae30d79c54f5d8d7b569a72117
