@@ -267,3 +267,43 @@ class MultiDiGraph(nx.MultiDiGraph):
                     
             orbits.append(orbit)
         return orbits
+
+    def node_contains_attributes(self, node_id, attributes):
+        """
+        Checks if a node in the graph contains the specified attributes.
+
+        Args:
+            node_id: The ID of the node to check.
+            attributes: A dictionary containing the attributes to check for, 
+                        where keys are attribute names and values are attribute values.
+
+        Returns:
+            True if the node contains all the specified attributes, False otherwise.
+        """
+        if node_id in self.nodes:
+            node_attributes = self.nodes[node_id]
+            if all(attr in node_attributes.items() for attr in attributes.items()):
+                return True
+        return False
+
+    def edge_contains_attributes(self, source, target, attributes):
+        """
+        Checks if an edge in the graph contains the specified attributes.
+
+        Args:
+            source: The source node of the edge.
+            target: The target node of the edge.
+            attributes: A dictionary containing the attributes to check for, 
+                        where keys are attribute names and values are attribute values.
+
+        Returns:
+            True if the edge contains all the specified attributes, False otherwise.
+        """
+        if self.has_edge(source, target):
+            
+            edge_attributes = self[source][target][0]
+            
+            if all(attr in edge_attributes.items() for attr in attributes.items()):
+                return True
+        return False
+
