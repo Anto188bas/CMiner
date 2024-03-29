@@ -65,11 +65,18 @@ class MultiDiGraph(nx.MultiDiGraph):
             edges.extend((node_id_2, node_id_1, key) for key in self[node_id_2][node_id_1])
         return edges
 
-
+    def all_neighbors(self, node_id):
+        """
+        Returns all neighbors of the node with id node_id.
+        It does not consider the direction of the edges.
+        :param node_id: The ID of the node.
+        :return: A list of neighbors of the node.
+        """
+        return set(self.successors(node_id)) | set(self.predecessors(node_id))
 
     def jaccard_similarity(self, node_id_1, node_id_2):
         """
-        Compute the Jaccard similarity between two nodes.
+        Compute the Jaccard similarity between two nodes considering all neighbors.
         The Jaccard similarity is defined as the size of the
         intersection of the neighbors of the two nodes divided
         by the size of the union of the neighbors of the two
@@ -78,8 +85,8 @@ class MultiDiGraph(nx.MultiDiGraph):
         :param node_id_2:
         :return:
         """
-        neighbors_1 = set(self.neighbors(node_id_1))
-        neighbors_2 = set(self.neighbors(node_id_2))
+        neighbors_1 = self.all_neighbors(node_id_1)
+        neighbors_2 = self.all_neighbors(node_id_2)
         intersection = neighbors_1.intersection(neighbors_2)
         union = neighbors_1.union(neighbors_2)
         return len(intersection) / len(union)
@@ -261,3 +268,8 @@ class MultiDiGraph(nx.MultiDiGraph):
             orbits.append(orbit)
 
         return orbits
+
+
+
+
+
