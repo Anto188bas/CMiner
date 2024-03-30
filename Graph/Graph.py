@@ -58,8 +58,8 @@ class MultiDiGraph(nx.MultiDiGraph):
             G.add_edge(1, 2, type="A")
             G.add_edge(2, 1, type="B")
             G.get_edges_consider_no_direction(1, 2) -> [(1, 2, 0), (2, 1, 0)]
-        :param source:
-        :param destination:
+        :param node_id_2:
+        :param node_id_1:
         :return list of edges between source and destination nodes
         """
         edges = []
@@ -291,3 +291,84 @@ class MultiDiGraph(nx.MultiDiGraph):
 
             orbits.append(orbit)
         return orbits
+
+    def node_contains_attributes(self, node_id, attributes):
+        """
+        Checks if a node in the graph contains the specified attributes.
+
+        Args:
+            node_id: The ID of the node to check.
+            attributes: A dictionary containing the attributes to check for, 
+                        where keys are attribute names and values are attribute values.
+
+        Returns:
+            True if the node contains all the specified attributes, False otherwise.
+        """
+        if node_id in self.nodes:
+            node_attributes = self.nodes[node_id]
+            if all(attr in node_attributes.items() for attr in attributes.items()):
+                return True
+        return False
+
+    def edge_contains_attributes(self, source, target, attributes):
+        """
+        Checks if an edge in the graph contains the specified attributes.
+
+        Args:
+            source: The source node of the edge.
+            target: The target node of the edge.
+            attributes: A dictionary containing the attributes to check for, 
+                        where keys are attribute names and values are attribute values.
+
+        Returns:
+            True if the edge contains all the specified attributes, False otherwise.
+        """
+        if self.has_edge(source, target):
+            
+            edge_attributes = self[source][target][0]
+            
+            if all(attr in edge_attributes.items() for attr in attributes.items()):
+                return True
+        return False
+    
+    #Valutare con Simone --->Funzionamento + Utility 
+    def compute_symmetry_breaking_conditions(self):
+        """
+        Computes the symmetry breaking conditions for both nodes and edges in the graph.
+
+        Returns:
+            A list containing the symmetry breaking conditions for nodes and edges.
+            Each element in the list is a list of conditions for either nodes or edges,
+            where each condition is represented as a list of node IDs or edge tuples.
+        """
+        # Compute orbits for nodes and edges
+        node_orbits = self.compute_orbits_nodes()
+        edge_orbits = self.compute_orbits_edges()
+
+        # List to store the symmetry breaking conditions for nodes and edges
+        breaking_conditions = []
+
+        # Compute symmetry breaking conditions for nodes
+        node_breaking_conditions = []
+        for orbit in node_orbits:
+            if len(orbit) > 1:
+                smallest_node = min(orbit)
+                # Sort the node IDs within each orbit for consistency
+                condition = sorted(orbit, key=lambda node: node)
+                node_breaking_conditions.append(condition)
+
+        # Compute symmetry breaking conditions for edges
+        edge_breaking_conditions = []
+        for orbit in edge_orbits:
+            if len(orbit) > 1:
+                smallest_edge = min(orbit)
+                # Sort the edge tuples within each orbit based on their third element (ID) for consistency
+                condition = sorted(orbit, key=lambda edge: edge[2])
+                edge_breaking_conditions.append(condition)
+
+        # Append node and edge breaking conditions to the main list
+        breaking_conditions.append(node_breaking_conditions)
+        breaking_conditions.append(edge_breaking_conditions)
+
+        return breaking_conditions
+
