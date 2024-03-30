@@ -82,16 +82,6 @@ class MultiDiGraph(nx.MultiDiGraph):
         """
         return all(attr in self.nodes[node_id] for attr in attributes)
 
-    def edge_contains_attributes(self, source, destination, attributes):    # CHECK IF IT WORKS
-        """
-        Check if the edge contains the attributes.
-        :param source: The source node of the edge.
-        :param destination: The destination node of the edge.
-        :param attributes: The attributes to check.
-        :return: True if the edge contains the attributes, False otherwise.
-        """
-        return all(attr in self[source][destination] for attr in attributes)
-
     def all_neighbors(self, node_id):
         """
         Returns all neighbors of the node with id node_id.
