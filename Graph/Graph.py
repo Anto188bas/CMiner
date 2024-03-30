@@ -73,15 +73,6 @@ class MultiDiGraph(nx.MultiDiGraph):
         return [(u, v, key) for u, v, key in self.edges(keys=True) if
                 (u, v) == (node_id_1, node_id_2) or (u, v) == (node_id_2, node_id_1)]
 
-    def node_contains_attributes(self, node_id, attributes):    # CHECK IF IT WORKS
-        """
-        Check if the node with id node_id contains the attributes.
-        :param node_id: The ID of the node.
-        :param attributes: The attributes to check.
-        :return: True if the node contains the attributes, False otherwise.
-        """
-        return all(attr in self.nodes[node_id] for attr in attributes)
-
     def all_neighbors(self, node_id):
         """
         Returns all neighbors of the node with id node_id.
@@ -294,11 +285,7 @@ class MultiDiGraph(nx.MultiDiGraph):
         Returns:
             True if the node contains all the specified attributes, False otherwise.
         """
-        if node_id in self.nodes:
-            node_attributes = self.nodes[node_id]
-            if all(attr in node_attributes.items() for attr in attributes.items()):
-                return True
-        return False
+        return node_id in self.nodes and all(attr in self.nodes[node_id].items() for attr in attributes.items())
 
     def edge_contains_attributes(self, source, target, attributes):
         """
