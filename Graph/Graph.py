@@ -2,6 +2,7 @@ import networkx as nx
 import random
 
 # TO DO: improve random query generation
+# TO DO: come è strutturato l'arco esempio di tupla (source, target, key, id ) ? 
 
 """ Utility function
 """
@@ -252,6 +253,7 @@ class MultiDiGraph(nx.MultiDiGraph):
                 self.add_edge(u, v)  # Aggiungi l'arco se non esiste
             self[u][v][0][attribute_name] = attribute  # Imposta l'attributo per l'arco
 
+# modifica questa funzione con id anziche 
     def compute_orbits_edges(self):
 
         orbits = []
@@ -331,7 +333,7 @@ class MultiDiGraph(nx.MultiDiGraph):
             if len(orbit) > 1:
                 smallest_edge = min(orbit)
                 # Sort the edge tuples within each orbit based on their third element (ID) for consistency
-                condition = sorted(orbit, key=lambda edge: edge[2])
+                condition = sorted(orbit, key=lambda edge: edge[2]) #assumento che l'id sia in posix 2 cioè terzo elemento della tupla
                 edge_breaking_conditions.append(condition)
 
         # Append node and edge breaking conditions to the main list
@@ -340,12 +342,22 @@ class MultiDiGraph(nx.MultiDiGraph):
 
         return breaking_conditions
 
-    def edge_id(self, edge):
+    #Valutare col professore se la funzione è corretta sulla base della definzione dell'arco(NB: Arco tupla(s,t,k,id))
+    def edge_id(self, source, target, key):
         """
         Returns the ID of the edge.
 
-        :param edge: (source, target, key)
+        :param source: Source node.
+        :param target: Target node.
+        :param key: Key identifying the edge.
         :return: The ID of the edge.
         """
-        pass
+        for u, v, k, attrs in self.edges(keys=True, data=True):
+            if u == source and v == target and k == key:
+                # Verifica se 'id' è un attributo dell'arco e restituiscilo se presente
+                if 'id' in attrs:
+                    return attrs['id']
+                else:
+                    raise ValueError("Edge ID not found in edge attributes")
+        raise ValueError("Edge not found")
 
