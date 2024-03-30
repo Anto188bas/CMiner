@@ -1,13 +1,10 @@
 import networkx as nx
 import random
 
-# TO-DO: test orbits with new graph 
-# To-DO : sign all method with comment
+# TO DO: improve random query generation
 
 """ Utility function
 """
-
-
 def flat_map(list_of_lists):
     array = []
     for l in list_of_lists:
@@ -342,4 +339,13 @@ class MultiDiGraph(nx.MultiDiGraph):
         breaking_conditions.append(edge_breaking_conditions)
 
         return breaking_conditions
+
+    def edge_id(self, edge):
+        """
+        Returns the ID of the edge.
+
+        :param edge: (source, target, key)
+        :return: The ID of the edge.
+        """
+        pass
 
