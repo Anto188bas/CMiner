@@ -2,7 +2,7 @@ import networkx as nx
 import random
 
 # TO-DO: test orbits with new graph 
-#To-DO : sign all method with comment 
+# To-DO : sign all method with comment
 
 """ Utility function
 """
@@ -32,6 +32,9 @@ class MultiDiGraph(nx.MultiDiGraph):
         if (self.has_edge(source, destination)):
             labels.extend([edge_data.get('type') for edge_data in self[source][destination].values()])
         return sorted(set(labels))
+
+    def get_edge_label(self, source, destination, key):
+        return self[source][destination][key]['type']
 
     def get_node_labels(self, id):
         return sorted(set(self.nodes[id]["labels"]))
@@ -66,6 +69,29 @@ class MultiDiGraph(nx.MultiDiGraph):
             edges.extend((node_id_2, node_id_1, key) for key in self[node_id_2][node_id_1])
         return edges
 
+    def edges_between_nodes(self, node_id_1, node_id_2):      # OPTIMIZE
+        return [(u, v, key) for u, v, key in self.edges(keys=True) if
+                (u, v) == (node_id_1, node_id_2) or (u, v) == (node_id_2, node_id_1)]
+
+    def node_contains_attributes(self, node_id, attributes):    # CHECK IF IT WORKS
+        """
+        Check if the node with id node_id contains the attributes.
+        :param node_id: The ID of the node.
+        :param attributes: The attributes to check.
+        :return: True if the node contains the attributes, False otherwise.
+        """
+        return all(attr in self.nodes[node_id] for attr in attributes)
+
+    def edge_contains_attributes(self, source, destination, attributes):    # CHECK IF IT WORKS
+        """
+        Check if the edge contains the attributes.
+        :param source: The source node of the edge.
+        :param destination: The destination node of the edge.
+        :param attributes: The attributes to check.
+        :return: True if the edge contains the attributes, False otherwise.
+        """
+        return all(attr in self[source][destination] for attr in attributes)
+
     def all_neighbors(self, node_id):
         """
         Returns all neighbors of the node with id node_id.
@@ -91,7 +117,6 @@ class MultiDiGraph(nx.MultiDiGraph):
         intersection = neighbors_1.intersection(neighbors_2)
         union = neighbors_1.union(neighbors_2)
         return len(intersection) / len(union)
-
 
     def generate_random_query(self, num_nodes, num_edges):
         """Generate a random query graph with num_nodes nodes and num_edges edges."""
@@ -195,23 +220,22 @@ class MultiDiGraph(nx.MultiDiGraph):
         else:
             return False
 
-
     def compute_orbits_nodes(self):
         # Lista per memorizzare le orbite
         orbits = []
-        
+
         # Insieme dei nodi non ancora visitati
         unvisited_nodes = set(self.nodes())
-        
+
         # Finché ci sono nodi non visitati
         while unvisited_nodes:
             # Prendi un nodo di partenza dalla lista dei nodi non visitati
             start_node = unvisited_nodes.pop()
             orbit = {start_node}
-            
+
             # Copia di unvisited_nodes per iterare
             nodes_to_check = unvisited_nodes.copy()
-            
+
             # Verifica l'equivalenza con gli altri nodi
             for node in nodes_to_check:
                 if self.are_equivalent(start_node, node):
@@ -264,6 +288,6 @@ class MultiDiGraph(nx.MultiDiGraph):
                 if self.are_equivalent_edges(start_edge, edge):
                     orbit.add(edge)
                     unvisited_edges.remove(edge)
-                    
+
             orbits.append(orbit)
         return orbits
