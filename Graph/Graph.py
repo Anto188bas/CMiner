@@ -313,13 +313,7 @@ class MultiDiGraph(nx.MultiDiGraph):
         Returns:
             True if the edge contains all the specified attributes, False otherwise.
         """
-        if self.has_edge(source, target):
-            
-            edge_attributes = self[source][target][0]
-            
-            if all(attr in edge_attributes.items() for attr in attributes.items()):
-                return True
-        return False
+        return self.has_edge(source, target) and all(attr in self[source][target][0].items() for attr in attributes.items())
     
     #Valutare con Simone --->Funzionamento + Utility 
     def compute_symmetry_breaking_conditions(self):
