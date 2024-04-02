@@ -27,7 +27,7 @@ class MultiDiGraph(nx.MultiDiGraph):
 
     def get_edge_labels(self, source, destination):
         labels = []
-        if (self.has_edge(source, destination)):
+        if self.has_edge(source, destination):
             labels.extend([edge_data.get('type') for edge_data in self[source][destination].values()])
         return sorted(set(labels))
 
@@ -38,7 +38,7 @@ class MultiDiGraph(nx.MultiDiGraph):
         return sorted(set(self.nodes[id]["labels"]))
 
     def get_all_node_labels(self):
-        if self.node_labels == None:
+        if self.node_labels is None:
             self.node_labels = sorted(set(flat_map([self.nodes[node]['labels'] for node in self.nodes])))
         return self.node_labels
 
@@ -48,7 +48,7 @@ class MultiDiGraph(nx.MultiDiGraph):
                 set([self.get_edge_data(edge[0], edge[1], edge[2])['type'] for edge in self.edges]))
         return self.edge_labels
 
-    def get_edges_consider_no_direction(self, node_id_1, node_id_2):
+    def get_edges_consider_no_direction(self, edge):
         """
         Returns the edges between source and destination nodes, not considering the direction of the edges.
         EXAMPLE:
@@ -56,10 +56,10 @@ class MultiDiGraph(nx.MultiDiGraph):
             G.add_edge(1, 2, type="A")
             G.add_edge(2, 1, type="B")
             G.get_edges_consider_no_direction(1, 2) -> [(1, 2, 0), (2, 1, 0)]
-        :param node_id_2:
-        :param node_id_1:
+        :param edge: tuple (source, destination)
         :return list of edges between source and destination nodes
         """
+        node_id_1, node_id_2 = edge
         edges = []
         if self.has_edge(node_id_1, node_id_2):
             edges.extend((node_id_1, node_id_2, key) for key in self[node_id_1][node_id_2])
@@ -67,9 +67,14 @@ class MultiDiGraph(nx.MultiDiGraph):
             edges.extend((node_id_2, node_id_1, key) for key in self[node_id_2][node_id_1])
         return edges
 
-    def edges_between_nodes(self, node_id_1, node_id_2):      # OPTIMIZE
-        return [(u, v, key) for u, v, key in self.edges(keys=True) if
-                (u, v) == (node_id_1, node_id_2) or (u, v) == (node_id_2, node_id_1)]
+    def edges_keys(self, edge):
+        """
+        Returns the edge keys between source and destination nodes.
+
+        :param edge: tuple (source, destination)
+        :return list of keys
+        """
+        return list(self[edge[0]][edge[1]].keys())
 
     def all_neighbors(self, node_id):
         """
@@ -239,6 +244,14 @@ class MultiDiGraph(nx.MultiDiGraph):
 
         return False
 
+    def get_node_attributes(self, node_id):
+        # delete labels from attributes
+        return {k: v for k, v in self.nodes[node_id].items() if k != 'labels'}
+
+    def get_edge_attributes(self, source, target, key):
+        # delete type from attributes
+        return {k: v for k, v in self[source][target][key].items() if k != 'type'}
+
     def set_node_attributes(self, node_attributes, attribute_name):
         for node, attributes in node_attributes.items():
             if node not in self.nodes:
@@ -286,7 +299,7 @@ class MultiDiGraph(nx.MultiDiGraph):
         """
         return node_id in self.nodes and all(attr in self.nodes[node_id].items() for attr in attributes.items())
 
-    def edge_contains_attributes(self, source, target, attributes):
+    def edge_contains_attributes(self, source, target, key, attributes):
         """
         Checks if an edge in the graph contains the specified attributes.
 
@@ -299,7 +312,7 @@ class MultiDiGraph(nx.MultiDiGraph):
         Returns:
             True if the edge contains all the specified attributes, False otherwise.
         """
-        return self.has_edge(source, target) and all(attr in self[source][target][0].items() for attr in attributes.items())
+        return self.has_edge(source, target, key) and all(attr in self[source][target][key].items() for attr in attributes.items())
     
     #Valutare con Simone --->Funzionamento + Utility 
     def compute_symmetry_breaking_conditions(self):
