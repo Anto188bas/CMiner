@@ -357,23 +357,40 @@ class MultiDiGraph(nx.MultiDiGraph):
 
         return breaking_conditions
 
-    #Valutare col professore se la funzione è corretta sulla base della definzione dell'arco(NB: Arco tupla(s,t,k,id))
-    def edge_id(self, source, target, key):
-        """
-        Returns the ID of the edge.
+    def compute_orbits_edges_id(self):
+        orbits = []
+        unvisited_edges = set(self.edges(keys=True))
 
-        :param source: Source node.
-        :param target: Target node.
-        :param key: Key identifying the edge.
-        :return: The ID of the edge.
-        """
-        for u, v, k, attrs in self.edges(keys=True, data=True):
-            if u == source and v == target and k == key:
-                # Verifica se 'id' è un attributo dell'arco e restituiscilo se presente
-                if 'id' in attrs:
-                    return attrs['id']
-                else:
-                    raise ValueError("Edge ID not found in edge attributes")
-        raise ValueError("Edge not found")
+        while unvisited_edges:
+            start_edge = unvisited_edges.pop()
+            orbit = {start_edge}
+            edges_to_check = unvisited_edges.copy()
+
+            for edge in edges_to_check:
+                if self.are_equivalent_edges(start_edge, edge):
+                    orbit.add(edge)
+                    unvisited_edges.remove(edge)
+                        
+            orbits.append(list(orbit))
+
+        return orbits
+
+    def compute_orbits_nodes_id(self):
+        orbits = []
+        unvisited_nodes = set(self.nodes())
+
+        while unvisited_nodes:
+            start_node = unvisited_nodes.pop()
+            orbit = {start_node}
+            nodes_to_check = unvisited_nodes.copy()
+
+            for node in nodes_to_check:
+                if self.are_equivalent(start_node, node):
+                    orbit.add(node)
+                    unvisited_nodes.remove(node)
+            
+            orbits.append(list(orbit))
+
+        return orbits
     
 
