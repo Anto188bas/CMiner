@@ -3,6 +3,8 @@ import random
 
 # TO DO: improve random query generation
 # TO DO: come è strutturato l'arco esempio di tupla (source, target, key, id ) ? 
+# To DO: valutare assieme i metodi set_edge_attributes, are_equivalent_edge, compute_orbits_edge,edge_contain_attributes
+# breaking_condition, e edge_id
 
 """ Utility function
 """
@@ -253,7 +255,7 @@ class MultiDiGraph(nx.MultiDiGraph):
                 self.add_edge(u, v)  # Aggiungi l'arco se non esiste
             self[u][v][0][attribute_name] = attribute  # Imposta l'attributo per l'arco
 
-# modifica questa funzione con id anziche 
+
     def compute_orbits_edges(self):
 
         orbits = []
@@ -360,4 +362,5 @@ class MultiDiGraph(nx.MultiDiGraph):
                 else:
                     raise ValueError("Edge ID not found in edge attributes")
         raise ValueError("Edge not found")
+    
 
