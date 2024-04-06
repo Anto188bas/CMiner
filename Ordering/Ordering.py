@@ -11,23 +11,25 @@ class Ordering:
         self.node_count = {}
 
     def score_cf_0(self, q_i, q_j):
-        print(q_i, q_j, self.query_graph.tot_deg(q_i), self.query_graph.tot_deg(q_j), self.query_graph.jaccard_similarity(q_i, q_j), self.compatibility_domain.get_domain_cardinality((q_i, q_j)))
+        denominator = self.compatibility_domain.get_domain_cardinality((q_i, q_j))
         return (
                 self.query_graph.tot_deg(q_i) *
                 self.query_graph.tot_deg(q_j) *
                 self.query_graph.jaccard_similarity(q_i, q_j) /
                 self.compatibility_domain.get_domain_cardinality((q_i, q_j))
-        )
+        ) if denominator != 0 else 0
 
     def score_cf_1(self, q_i, q_j, free_node):
+        denominator = self.compatibility_domain.get_domain_cardinality((q_i, q_j))
         return (
                 self.query_graph.tot_deg(free_node) *
                 self.query_graph.jaccard_similarity(q_i, q_j) /
-                self.compatibility_domain.get_domain_cardinality((q_i, q_j))
-        )
+                denominator
+        ) if denominator != 0 else 0
 
     def score_cf_2(self, q_i, q_j):
-        return 1 / self.compatibility_domain.get_domain_cardinality((q_i, q_j))
+        denominator = self.compatibility_domain.get_domain_cardinality((q_i, q_j))
+        return 1 / self.compatibility_domain.get_domain_cardinality((q_i, q_j)) if denominator != 0 else 0
 
     def compute_cf_score(self, q_i, q_j):
         return self.node_count[q_i] + self.node_count[q_j]
@@ -70,13 +72,12 @@ class Ordering:
                 tuple_score_candidate = (self.compute_cf_score(q_i, q_j), self.partial_candidate_score(q_i, q_j))
                 # if the partial candidate has a better score than the candidate
                 if compare_tuple_score(tuple_score_candidate, tuple_score):
-                    print(tuple_score_candidate, tuple_score)
                     # update the candidate
                     candidate = partial_candidate
                     tuple_score = tuple_score_candidate
 
             # add all edges between q_i and q_j to the order
-            for edge in self.query_graph.get_edges_consider_no_direction(candidate[0], candidate[1]):
+            for edge in self.query_graph.get_edges_consider_no_direction(candidate):
                 self.order.append(edge)
             # remove the edge from the list of edges to consider
             edges.remove(candidate)
@@ -84,5 +85,14 @@ class Ordering:
             self.node_count[candidate[0]] = 1
             self.node_count[candidate[1]] = 1
 
-        return self.order
+        # DELETE THIS
+        self.order = [('q3', 'q4', 0), ('q1', 'q3', 0), ('q2', 'q1', 0), ('q2', 'q1', 1)]
+        print("Ordering: ", self.order)
 
+
+
+    def length(self):
+        return len(self.order)
+
+    def get(self, index):
+        return self.order[index]

@@ -139,11 +139,20 @@ class CompatibilityDomainWithDictionary(CompatibilityDomain):
             if self._check_conditions(query_edge, target_edge):
                 # if the conditions are satisfied we add the target edge to the domain
                 self.domain[query_edge].append(target_edge)
+        print("CompatibilityDomain: ", self.domain)
 
     def get_all_query_edges(self):
         return list(self.domain.keys())
 
     def get_domain(self, edge):
+        # domain is defined for (q_i, q_j) with id(q_i) < id(q_j)
+        # so we need to check if the edge is (q_i, q_j) or (q_j, q_i)
+        # if the edge is (q_j, q_i) we swap the nodes of the edge in the domain
+        if edge[0] > edge[1]:
+            print("moifemoifmr", self.domain[(edge[1], edge[0])])
+            a = [(t_j, t_i) for t_i, t_j in self.domain[(edge[1], edge[0])]]
+            print(a)
+            return a
         return self.domain[edge]
 
     def get_domain_cardinality(self, edge):

@@ -31,7 +31,8 @@ class MultiDiGraph(nx.MultiDiGraph):
             labels.extend([edge_data.get('type') for edge_data in self[source][destination].values()])
         return sorted(set(labels))
 
-    def get_edge_label(self, source, destination, key):
+    def get_edge_label(self, edge):
+        source, destination, key = edge
         return self[source][destination][key]['type']
 
     def get_node_labels(self, id):
@@ -74,6 +75,8 @@ class MultiDiGraph(nx.MultiDiGraph):
         :param edge: tuple (source, destination)
         :return list of keys
         """
+        if not self.has_edge(edge[0], edge[1]):
+            return []
         return list(self[edge[0]][edge[1]].keys())
 
     def all_neighbors(self, node_id):
@@ -119,6 +122,20 @@ class MultiDiGraph(nx.MultiDiGraph):
             G.add_edge(u, v, type=label)
 
         return G
+
+    def get_all_edges(self):
+        """
+        Returns a list of tuples representing all edges in the graph,
+        including their keys.
+        Each tuple contains (source, target, key).
+        """
+        all_edges = []
+        for u, v, key in self.edges(keys=True):
+            if u == "dummy" or v == "dummy":
+                continue
+            all_edges.append((u, v, key))
+        return all_edges
+
 
     def tot_deg(self, node_id):
         """
@@ -248,8 +265,9 @@ class MultiDiGraph(nx.MultiDiGraph):
         # delete labels from attributes
         return {k: v for k, v in self.nodes[node_id].items() if k != 'labels'}
 
-    def get_edge_attributes(self, source, target, key):
+    def get_edge_attributes(self, edge):
         # delete type from attributes
+        source, target, key = edge
         return {k: v for k, v in self[source][target][key].items() if k != 'type'}
 
     def set_node_attributes(self, node_attributes, attribute_name):
@@ -299,7 +317,7 @@ class MultiDiGraph(nx.MultiDiGraph):
         """
         return node_id in self.nodes and all(attr in self.nodes[node_id].items() for attr in attributes.items())
 
-    def edge_contains_attributes(self, source, target, key, attributes):
+    def edge_contains_attributes(self, edge, attributes):
         """
         Checks if an edge in the graph contains the specified attributes.
 
@@ -312,6 +330,7 @@ class MultiDiGraph(nx.MultiDiGraph):
         Returns:
             True if the edge contains all the specified attributes, False otherwise.
         """
+        source, target, key = edge
         return self.has_edge(source, target, key) and all(attr in self[source][target][key].items() for attr in attributes.items())
     
     #Valutare con Simone --->Funzionamento + Utility 
