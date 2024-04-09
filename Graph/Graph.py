@@ -367,7 +367,7 @@ class MultiDiGraph(nx.MultiDiGraph):
             if len(orbit) > 1:
                 smallest_edge = min(orbit)
                 # Sort the edge tuples within each orbit based on their third element (ID) for consistency
-                condition = sorted(orbit, key=lambda edge: edge[2]) #assumento che l'id sia in posix 2 cioè terzo elemento della tupla
+                condition = sorted(orbit, key=lambda edge: edge[2]) 
                 edge_breaking_conditions.append(condition)
 
         # Append node and edge breaking conditions to the main list
