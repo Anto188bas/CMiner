@@ -335,47 +335,7 @@ class MultiDiGraph(nx.MultiDiGraph):
         source, target, key = edge
         return self.has_edge(source, target, key) and all(attr in self[source][target][key].items() for attr in attributes.items())
     
-    #Valutare con Simone --->Funzionamento + Utility 
-    def compute_symmetry_breaking_conditions(self):
-        """
-        Computes the symmetry breaking conditions for both nodes and edges in the graph.
-
-        Returns:
-            A list containing the symmetry breaking conditions for nodes and edges.
-            Each element in the list is a list of conditions for either nodes or edges,
-            where each condition is represented as a list of node IDs or edge tuples.
-        """
-        # Compute orbits for nodes and edges
-        node_orbits = self.compute_orbits_nodes()
-        edge_orbits = self.compute_orbits_edges()
-
-        # List to store the symmetry breaking conditions for nodes and edges
-        breaking_conditions = []
-
-        # Compute symmetry breaking conditions for nodes
-        node_breaking_conditions = []
-        for orbit in node_orbits:
-            if len(orbit) > 1:
-                smallest_node = min(orbit)
-                # Sort the node IDs within each orbit for consistency
-                condition = sorted(orbit, key=lambda node: node)
-                node_breaking_conditions.append(condition)
-
-        # Compute symmetry breaking conditions for edges
-        edge_breaking_conditions = []
-        for orbit in edge_orbits:
-            if len(orbit) > 1:
-                smallest_edge = min(orbit)
-                # Sort the edge tuples within each orbit based on their third element (ID) for consistency
-                condition = sorted(orbit, key=lambda edge: edge[2]) 
-                edge_breaking_conditions.append(condition)
-
-        # Append node and edge breaking conditions to the main list
-        breaking_conditions.append(node_breaking_conditions)
-        breaking_conditions.append(edge_breaking_conditions)
-
-        return breaking_conditions
-
+    #valutare
     def compute_orbits_edges_id(self):
         orbits = []
         unvisited_edges = set(self.edges(keys=True))
@@ -393,7 +353,7 @@ class MultiDiGraph(nx.MultiDiGraph):
             orbits.append(list(orbit))
 
         return orbits
-
+    #valutare
     def compute_orbits_nodes_id(self):
         orbits = []
         unvisited_nodes = set(self.nodes())
@@ -411,5 +371,77 @@ class MultiDiGraph(nx.MultiDiGraph):
             orbits.append(list(orbit))
 
         return orbits
+    #valutare
+    def compute_symmetry_breaking_conditions(self):
+        """
+        Computes the symmetry breaking conditions for both nodes and edges in the graph.
+
+        Returns:
+            A list containing the symmetry breaking conditions for nodes and edges.
+            Each element in the list is a list of conditions for either nodes or edges,
+            where each condition is represented as a tuple of node IDs or edge tuples.
+        """
+        # Compute orbits for nodes and edges
+        node_orbits = self.compute_orbits_nodes_id()
+        edge_orbits = self.compute_orbits_edges_id()
+
+        # List to store the symmetry breaking conditions for nodes and edges
+        breaking_conditions = []
+
+        # Compute symmetry breaking conditions for nodes
+        node_breaking_conditions = []
+        for orbit in node_orbits:
+            if len(orbit) > 1:
+                # Sort node IDs within each orbit for consistency
+                sorted_orbit = sorted(orbit)
+                smallest_node = min(sorted_orbit)
+                condition = (sorted_orbit, smallest_node)
+                node_breaking_conditions.append(condition)
+
+        # Compute symmetry breaking conditions for edges
+        edge_breaking_conditions = []
+        for orbit in edge_orbits:
+            if len(orbit) > 1:
+                # Sort edge tuples within each orbit based on their IDs
+                sorted_orbit = sorted(orbit)
+                smallest_edge = min(sorted_orbit)  # Considera il minimo dell'orbita
+                condition = (sorted_orbit, smallest_edge)
+                edge_breaking_conditions.append(condition)
+
+        # Append node and edge breaking conditions to the main list
+        breaking_conditions.append(node_breaking_conditions)
+        breaking_conditions.append(edge_breaking_conditions)
+
+        return breaking_conditions
+
+   #valutare 
+    def calculate_automorphisms_and_orbits(self):
+        """
+        Calculate automorphisms and orbits of the graph.
+
+        Returns:
+            A tuple containing a dictionary of automorphisms and a list of orbits.
+        """
+        automorphisms = {}
+        orbits = []
+        visited = set()
+
+        for node in self.nodes():
+            if node not in visited:
+                orbit = {node}
+                visited.add(node)
+                for neighbor in self.neighbors(node):
+                    if neighbor not in visited:
+                        orbit.add(neighbor)
+                        visited.add(neighbor)
+                orbits.append(orbit)
+
+                # Assign the same automorphism value to all nodes in the orbit
+                for n in orbit:
+                    automorphisms[n] = len(orbits) - 1
+
+        return automorphisms, orbits
+
+    
     
 
