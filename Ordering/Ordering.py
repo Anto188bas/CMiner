@@ -85,8 +85,6 @@ class Ordering:
             self.node_count[candidate[0]] = 1
             self.node_count[candidate[1]] = 1
 
-        # DELETE THIS
-        self.order = [('q3', 'q4', 0), ('q1', 'q3', 0), ('q2', 'q1', 0), ('q2', 'q1', 1)]
         print("Ordering: ", self.order)
 
 

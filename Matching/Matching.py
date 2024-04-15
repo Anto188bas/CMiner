@@ -189,6 +189,8 @@ class MultiSubgraphMatching:
                     # shift the index to the next candidate
                     self.cand_index[query_edge] += 1
 
+        print("SOLUTIONS FOUND: ", len(self.occurrences))
+
     def _find_candidates(self, query_edge):
         q_i, q_j, query_key = query_edge
         print("Find candidates for: ", query_edge)

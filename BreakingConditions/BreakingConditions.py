@@ -38,7 +38,16 @@ class BreakingConditions(ABC):
         """
         return self._get_breaking_condition_array(elem)[:self.index[elem][1]]
 
+    def _get_elements_with_greater_id(self, elem):
+        """
+        Return the nodes with greater id than q.
+        :param q:
+        :return: list of nodes
+        """
+        return self._get_breaking_condition_array(elem)[self.index[elem][1] + 1:]
+
     def check(self, q, t_element):
+        print("Check if {} can be mapped to {}".format(q, t_element))
         """
         Check if the node q can be mapped to the node t.
 
@@ -48,11 +57,28 @@ class BreakingConditions(ABC):
         :param t:
         :return:
         """
-        for elem in self._get_elements_with_smaller_id(q):
-            if self.mapping_function[elem] is None:
-                continue
-            if self.mapping_function[elem] >= t_element:
-                return False
+        # WRITE BETTER
+        elements = self._get_elements_with_smaller_id(q)
+        if len(elements) > 0:
+            print("Elements with smaller id than {}: {}".format(q, elements))
+            for elem in self._get_elements_with_smaller_id(q):
+                if self.mapping_function[elem] is None:
+                    continue
+                print(self.mapping_function[elem], t_element)
+                if self.mapping_function[elem] >= t_element:
+                    print("Not valid mapping")
+                    return False
+        else:
+            elements = self._get_elements_with_greater_id(q)
+            print("Elements with greater id than {}: {}".format(q, elements))
+            for elem in self._get_elements_with_greater_id(q):
+                if self.mapping_function[elem] is None:
+                    continue
+                print(self.mapping_function[elem], t_element)
+                if self.mapping_function[elem] <= t_element:
+                    print("Not valid mapping")
+                    return False
+        print("Valid mapping")
         return True
 
 

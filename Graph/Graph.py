@@ -125,6 +125,34 @@ class MultiDiGraph(nx.MultiDiGraph):
 
         return G
 
+    def get_connected_subgraph_with_n_nodes(self, n):
+        # Initialize the set of visited nodes
+        visited = set()
+
+        # Choose a random starting node
+        start_node = random.choice(list(self.nodes()))
+
+        # Initialize a queue for BFS
+        queue = [start_node]
+
+        # Explore the graph using BFS until finding a connected subgraph with n nodes
+        while queue:
+            node = queue.pop(0)
+            visited.add(node)
+
+            # If the connected subgraph has n nodes, return it
+            if len(visited) == n:
+                return self.subgraph(visited).copy()
+
+            # Add neighboring nodes to the queue
+            neighbors = list(self.neighbors(node))
+            for neighbor in neighbors:
+                if neighbor not in visited:
+                    queue.append(neighbor)
+
+        # If no connected subgraph with n nodes is found, return None
+        return None
+
     def get_all_edges(self):
         """
         Returns a list of tuples representing all edges in the graph,
@@ -411,5 +439,3 @@ class MultiDiGraph(nx.MultiDiGraph):
             orbits.append(list(orbit))
 
         return orbits
-    
-

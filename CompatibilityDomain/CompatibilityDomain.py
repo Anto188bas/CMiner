@@ -139,6 +139,10 @@ class CompatibilityDomainWithDictionary(CompatibilityDomain):
             if self._check_conditions(query_edge, target_edge):
                 # if the conditions are satisfied we add the target edge to the domain
                 self.domain[query_edge].append(target_edge)
+
+        # self.domain = {('q1', 'q3'): [('t1', 't4'), ('t1', 't2'), ('t1', 't3')], ('q1', 'q2'): [('t1', 't4'), ('t1', 't2'), ('t1', 't3')]}
+        # self.domain = {('q1', 'q2'): [('t1', 't3'), ('t1', 't2'), ('t1', 't4')], ('q1', 'q3'): [('t1', 't3'), ('t1', 't2'), ('t1', 't4')]}
+        # self.domain = {('q1', 'q3'): [('t1', 't2'), ('t1', 't3')], ('q1', 'q2'): [('t1', 't2'), ('t1', 't3')]}
         print("CompatibilityDomain: ", self.domain)
 
     def get_all_query_edges(self):
@@ -149,10 +153,8 @@ class CompatibilityDomainWithDictionary(CompatibilityDomain):
         # so we need to check if the edge is (q_i, q_j) or (q_j, q_i)
         # if the edge is (q_j, q_i) we swap the nodes of the edge in the domain
         if edge[0] > edge[1]:
-            print("moifemoifmr", self.domain[(edge[1], edge[0])])
-            a = [(t_j, t_i) for t_i, t_j in self.domain[(edge[1], edge[0])]]
-            print(a)
-            return a
+            return [(t_j, t_i) for t_i, t_j in self.domain[(edge[1], edge[0])]]
+        # sort in decreasing order
         return self.domain[edge]
 
     def get_domain_cardinality(self, edge):
