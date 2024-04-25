@@ -4,6 +4,24 @@ from BreakingConditions.BreakingConditions import BreakingConditionsNodes, Break
 from CompatibilityDomain.CompatibilityDomain import CompatibilityDomainWithDictionary
 from Ordering.Ordering import Ordering
 
+class Solution:
+
+    def __init__(self, f, g):
+        self.f = f
+        self.g = g
+
+
+    def __str__(self):
+        str = "------------------------------------------\n"
+        str += "Query node mapping:\n"
+        for key in self.f.keys():
+            str += f"{key} -> {self.f[key]}\n"
+        str += "\nQuery edge mapping:\n"
+        for key in self.g.keys():
+            str += f"{key} -> {self.g[key]}\n"
+        str += "------------------------------------------\n"
+        return str
+
 
 class MultiSubgraphMatching:
 
@@ -71,10 +89,7 @@ class MultiSubgraphMatching:
                         forceBack = True
                         # SOLUTION FOUND
                         # save the mapping
-                        self.occurrences.append({
-                            "f": self.f.copy(),
-                            "g": self.g.copy()
-                        })
+                        self.occurrences.append(Solution(self.f.copy(), self.g.copy()))
                         # shift the index to the next candidate
                         # self.cand_index[query_edge] += 1
                     else:
