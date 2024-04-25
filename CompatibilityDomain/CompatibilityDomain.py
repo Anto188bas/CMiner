@@ -140,11 +140,6 @@ class CompatibilityDomainWithDictionary(CompatibilityDomain):
                 # if the conditions are satisfied we add the target edge to the domain
                 self.domain[query_edge].append(target_edge)
 
-        # self.domain = {('q1', 'q3'): [('t1', 't4'), ('t1', 't2'), ('t1', 't3')], ('q1', 'q2'): [('t1', 't4'), ('t1', 't2'), ('t1', 't3')]}
-        # self.domain = {('q1', 'q2'): [('t1', 't3'), ('t1', 't2'), ('t1', 't4')], ('q1', 'q3'): [('t1', 't3'), ('t1', 't2'), ('t1', 't4')]}
-        # self.domain = {('q1', 'q3'): [('t1', 't2'), ('t1', 't3')], ('q1', 'q2'): [('t1', 't2'), ('t1', 't3')]}
-        print("CompatibilityDomain: ", self.domain)
-
     def get_all_query_edges(self):
         return list(self.domain.keys())
 
