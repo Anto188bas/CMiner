@@ -131,8 +131,8 @@ class MultiSubgraphMatching:
                         self.target.get_edge_label(target_edge) == self.query.get_edge_label(query_edge) and
                         self.target.edge_contains_attributes(target_edge, self.query.get_edge_attributes(query_edge))
                 ):
-                    # if self.br_cond_edge.check(query_edge, target_edge):
-                    self.cand[query_edge].append(target_edge)
+                    if self.br_cond_edge.check(query_edge, target_edge):
+                        self.cand[query_edge].append(target_edge)
         elif self.f[q_i] is not None:
             for t_i, t_j in self.domain.get_domain((q_i, q_j)):
                 if t_i == self.f[q_i]:
@@ -144,8 +144,8 @@ class MultiSubgraphMatching:
                                 self.target.edge_contains_attributes(target_edge,
                                                                      self.query.get_edge_attributes(query_edge))
                         ):
-                            # if self.br_cond_node.check(q_j, t_j):
-                            self.cand[query_edge].append(target_edge)
+                            if self.br_cond_node.check(q_j, t_j):
+                                self.cand[query_edge].append(target_edge)
         else:
             for t_i, t_j in self.domain.get_domain((q_i, q_j)):
                 if t_j == self.f[q_j]:
@@ -158,8 +158,8 @@ class MultiSubgraphMatching:
                                 self.target.edge_contains_attributes(target_edge,
                                                                      self.query.get_edge_attributes(query_edge))
                         ):
-                            # if self.br_cond_node.check(q_i, t_i):
-                            self.cand[query_edge].append(target_edge)
+                            if self.br_cond_node.check(q_i, t_i):
+                                self.cand[query_edge].append(target_edge)
 
 
     def solutions(self):

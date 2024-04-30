@@ -47,7 +47,6 @@ class BreakingConditions(ABC):
         return self._get_breaking_condition_array(elem)[self.index[elem][1] + 1:]
 
     def check(self, q, t_element):
-        print("Check if {} can be mapped to {}".format(q, t_element))
         """
         Check if the node q can be mapped to the node t.
 
@@ -60,25 +59,18 @@ class BreakingConditions(ABC):
         # WRITE BETTER
         elements = self._get_elements_with_smaller_id(q)
         if len(elements) > 0:
-            print("Elements with smaller id than {}: {}".format(q, elements))
             for elem in self._get_elements_with_smaller_id(q):
                 if self.mapping_function[elem] is None:
                     continue
-                print(self.mapping_function[elem], t_element)
                 if self.mapping_function[elem] >= t_element:
-                    print("Not valid mapping")
                     return False
         else:
             elements = self._get_elements_with_greater_id(q)
-            print("Elements with greater id than {}: {}".format(q, elements))
             for elem in self._get_elements_with_greater_id(q):
                 if self.mapping_function[elem] is None:
                     continue
-                print(self.mapping_function[elem], t_element)
                 if self.mapping_function[elem] <= t_element:
-                    print("Not valid mapping")
                     return False
-        print("Valid mapping")
         return True
 
 
@@ -86,13 +78,57 @@ class BreakingConditionsNodes(BreakingConditions):
 
     def __init__(self, query_graph, node_mapping_function):
         super().__init__(query_graph, node_mapping_function)
-        self.conditions = [sorted(orbit) for orbit in query_graph.compute_orbits_nodes()]  # Compute orbits already sorted
+        self.conditions = [sorted(orbit) for orbit in
+                           query_graph.compute_orbits_nodes()]  # Compute orbits already sorted
         self.index = self.index_condition()
+        self.breaking_conditions = {}
 
 
-class BreakingConditionsEdges(BreakingConditions):
+# class BreakingConditionsEdges(BreakingConditions):
+#
+#     def __init__(self, query_graph, edge_mapping_function):
+#         super().__init__(query_graph, edge_mapping_function)
+#         self.conditions = [sorted(orbit) for orbit in query_graph.compute_orbits_edges()]  # Compute orbits already sorted
+#         self.index = self.index_condition()
+#
+class BreakingConditionsEdges:
 
     def __init__(self, query_graph, edge_mapping_function):
-        super().__init__(query_graph, edge_mapping_function)
-        self.conditions = [sorted(orbit) for orbit in query_graph.compute_orbits_edges()]  # Compute orbits already sorted
-        self.index = self.index_condition()
+        self.query_graph = query_graph
+        self.mapping_function = edge_mapping_function
+        self.breaking_conditions = self.init_breaking_conditions()
+
+    def init_breaking_conditions(self):
+        breaking_conditions = {}
+        # take all src and dest nodes connected by an edge
+        edges = set(self.query_graph.edges())
+
+        for src, dest in edges:
+            group = {}
+            # get all keys of the edges between src and dest
+            keys = self.query_graph.edges_keys((src, dest))
+            for k in sorted(keys):
+                label = self.query_graph.get_edge_label((src, dest, k))
+                if label not in group:
+                    group[label] = []
+                group[label].append(k)
+
+            for label in group:
+                breaking_conditions[(src, dest, label)] = group[label]
+
+        return breaking_conditions
+
+    def check(self, e_q, e_t):
+        e_src, e_dest, e_key = e_q
+        label = self.query_graph.get_edge_label(e_q)
+        br_cond_array = self.breaking_conditions.get((e_src, e_dest, label))
+        index_key = br_cond_array.index(e_key)
+        if index_key is None:
+            return True
+        br_left_elements = br_cond_array[:index_key]
+        for e_left_q in br_left_elements:
+            if self.g[e_left_q] is None:
+                continue
+            if self.g[e_left_q] >= e_t:
+                return False
+        return True
