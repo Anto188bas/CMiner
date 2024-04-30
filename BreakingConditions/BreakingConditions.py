@@ -1,15 +1,10 @@
-from abc import ABC, abstractmethod
+class BreakingConditionsNodes:
 
-
-# TO DO: if orbits are computed already sorted we don't need to sort them again
-
-class BreakingConditions(ABC):
-
-    def __init__(self, query_graph, mapping_function):
+    def __init__(self, query_graph, node_mapping_function):
         self.query_graph = query_graph
-        self.mapping_function = mapping_function
-        self.index = {}
-        self.conditions = []
+        self.node_mapping_function = node_mapping_function
+        self.conditions = [sorted(orbit) for orbit in query_graph.compute_orbits_nodes()]
+        self.index = self.index_condition()
 
     def index_condition(self):
         """
@@ -60,42 +55,25 @@ class BreakingConditions(ABC):
         elements = self._get_elements_with_smaller_id(q)
         if len(elements) > 0:
             for elem in self._get_elements_with_smaller_id(q):
-                if self.mapping_function[elem] is None:
+                if self.node_mapping_function[elem] is None:
                     continue
-                if self.mapping_function[elem] >= t_element:
+                if self.node_mapping_function[elem] >= t_element:
                     return False
         else:
             elements = self._get_elements_with_greater_id(q)
             for elem in self._get_elements_with_greater_id(q):
-                if self.mapping_function[elem] is None:
+                if self.node_mapping_function[elem] is None:
                     continue
-                if self.mapping_function[elem] <= t_element:
+                if self.node_mapping_function[elem] <= t_element:
                     return False
         return True
 
 
-class BreakingConditionsNodes(BreakingConditions):
-
-    def __init__(self, query_graph, node_mapping_function):
-        super().__init__(query_graph, node_mapping_function)
-        self.conditions = [sorted(orbit) for orbit in
-                           query_graph.compute_orbits_nodes()]  # Compute orbits already sorted
-        self.index = self.index_condition()
-        self.breaking_conditions = {}
-
-
-# class BreakingConditionsEdges(BreakingConditions):
-#
-#     def __init__(self, query_graph, edge_mapping_function):
-#         super().__init__(query_graph, edge_mapping_function)
-#         self.conditions = [sorted(orbit) for orbit in query_graph.compute_orbits_edges()]  # Compute orbits already sorted
-#         self.index = self.index_condition()
-#
 class BreakingConditionsEdges:
 
     def __init__(self, query_graph, edge_mapping_function):
         self.query_graph = query_graph
-        self.mapping_function = edge_mapping_function
+        self.edge_mapping_function = edge_mapping_function
         self.breaking_conditions = self.init_breaking_conditions()
 
     def init_breaking_conditions(self):
@@ -122,13 +100,16 @@ class BreakingConditionsEdges:
         e_src, e_dest, e_key = e_q
         label = self.query_graph.get_edge_label(e_q)
         br_cond_array = self.breaking_conditions.get((e_src, e_dest, label))
+        # find index of the key in the array
         index_key = br_cond_array.index(e_key)
+
         if index_key is None:
             return True
+        # take all e_q' with smaller id than e_q
         br_left_elements = br_cond_array[:index_key]
         for e_left_q in br_left_elements:
-            if self.g[e_left_q] is None:
+            if self.edge_mapping_function[e_left_q] is None:
                 continue
-            if self.g[e_left_q] >= e_t:
+            if self.edge_mapping_function[e_left_q] >= e_t:
                 return False
         return True
