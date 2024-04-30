@@ -4,12 +4,12 @@ from BreakingConditions.BreakingConditions import BreakingConditionsNodes, Break
 from CompatibilityDomain.CompatibilityDomain import CompatibilityDomainWithDictionary
 from Ordering.Ordering import Ordering
 
+
 class Solution:
 
     def __init__(self, f, g):
         self.f = f
         self.g = g
-
 
     def __str__(self):
         str = "------------------------------------------\n"
@@ -121,7 +121,8 @@ class MultiSubgraphMatching:
                             # check if the target edge destination node contains the same attributes as the query edge destination node
                             self.target.node_contains_attributes(t_j, self.query.get_node_attributes(q_j)) and
                             # check if the target edge contains the same attributes as the query edge
-                            self.target.edge_contains_attributes(target_edge, self.query.get_edge_attributes(query_edge))
+                            self.target.edge_contains_attributes(target_edge,
+                                                                 self.query.get_edge_attributes(query_edge))
                     ):
                         self.cand[query_edge].append(target_edge)
         elif self.f[q_i] is not None and self.f[q_j] is not None:
@@ -160,7 +161,6 @@ class MultiSubgraphMatching:
                         ):
                             if self.br_cond_node.check(q_i, t_i):
                                 self.cand[query_edge].append(target_edge)
-
 
     def solutions(self):
         return self.occurrences
