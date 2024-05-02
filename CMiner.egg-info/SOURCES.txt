@@ -1,7 +1,0 @@
-LICENSE
-README.md
-setup.py
-CMiner.egg-info/PKG-INFO
-CMiner.egg-info/SOURCES.txt
-CMiner.egg-info/dependency_links.txt
-CMiner.egg-info/top_level.txt
