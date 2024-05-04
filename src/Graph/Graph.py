@@ -463,7 +463,8 @@ class MultiDiGraph(nx.MultiDiGraph):
 
         return orbits
 
-    def generate_graph(self, pattern, times):
+    @staticmethod
+    def generate_graph(pattern, times):
         """
         Generate a graph by repeating a given pattern multiple times.
 
@@ -475,6 +476,7 @@ class MultiDiGraph(nx.MultiDiGraph):
             A new graph containing 'times' repetitions of the pattern, connected to form a connected graph.
         """
         # Create a new MultiDiGraph
+        global mapping
         new_graph = MultiDiGraph()
 
         # Repeat the pattern 'times' times
@@ -483,7 +485,7 @@ class MultiDiGraph(nx.MultiDiGraph):
             mapping = {}  # Mapping of old node IDs to new node IDs in the new graph
             for node in pattern.nodes(data=True):
                 # Add node to the new graph
-                new_node_id = new_graph.number_of_nodes() + node[0]  # Generate unique node ID
+                new_node_id = new_graph.number_of_nodes()  # Generate unique node ID
                 new_graph.add_node(new_node_id, labels=node[1]['labels'])
                 mapping[node[0]] = new_node_id
 
@@ -493,12 +495,21 @@ class MultiDiGraph(nx.MultiDiGraph):
                 target = mapping[edge[1]]
                 new_graph.add_edge(source, target, key=edge[2], type=edge[3]['type'])
 
-        # Connect the repetitions of the pattern to form a connected graph
-        # Connect the last node of each repetition to the first node of the next repetition
-        for i in range(times - 1):
-            last_node_curr = max(mapping[node_id] for node_id in pattern.nodes())
-            first_node_next = min(mapping[node_id] for node_id in pattern.nodes()) + (i + 1) * pattern.number_of_nodes()
-            new_graph.add_edge(last_node_curr, first_node_next)
+            # Connect the pattern to the new graph
+            if i > 0:
+                # Create num_nodes random edges between pattern and new_graph
+                num_nodes = pattern.number_of_nodes()
+                for _ in range(num_nodes):
+                    node_pattern = random.choice(list(pattern.nodes()))
+                    node_new_graph = random.choice(list(new_graph.nodes()))
+                    # randomize the edge direction
+                    if random.random() < 0.5:
+                        src = node_new_graph
+                        dest = mapping[node_pattern]
+                    else:
+                        src = mapping[node_pattern]
+                        dest = node_new_graph
+                    new_graph.add_edge(src, dest, type=random.choice(new_graph.get_all_edge_labels()))
 
         return new_graph
 
