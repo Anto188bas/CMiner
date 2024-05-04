@@ -113,8 +113,12 @@ class MultiSubgraphMatching:
                 for target_key in self.target.edges_keys((t_i, t_j)):
                     target_edge = (t_i, t_j, target_key)
                     if (
-                            # check if the edge labels are the same
-                            self.target.get_edge_label(target_edge) == self.query.get_edge_label(query_edge) and
+                            (
+                                    # if query edge label is not specified it means that any edge label is accepted
+                                    not self.query.edge_has_label(query_edge) or
+                                    # check if the edge labels are the same
+                                    self.target.get_edge_label(target_edge) == self.query.get_edge_label(query_edge)
+                            ) and
                             # check if the target edge source node contains the same attributes as the query edge source node
                             self.target.node_contains_attributes(t_i, self.query.get_node_attributes(q_i)) and
                             # check if the target edge destination node contains the same attributes as the query edge destination node
@@ -128,7 +132,12 @@ class MultiSubgraphMatching:
             for target_key in self.target.edges_keys((self.f[q_i], self.f[q_j])):
                 target_edge = (self.f[q_i], self.f[q_j], target_key)
                 if (
-                        self.target.get_edge_label(target_edge) == self.query.get_edge_label(query_edge) and
+                        (
+                                # if query edge label is not specified it means that any edge label is accepted
+                                not self.query.edge_has_label(query_edge) or
+                                # check if the edge labels are the same
+                                self.target.get_edge_label(target_edge) == self.query.get_edge_label(query_edge)
+                        ) and
                         self.target.edge_contains_attributes(target_edge, self.query.get_edge_attributes(query_edge))
                 ):
                     if self.br_cond_edge.check(query_edge, target_edge):
@@ -139,7 +148,12 @@ class MultiSubgraphMatching:
                     for target_key in self.target.edges_keys((t_i, t_j)):
                         target_edge = (t_i, t_j, target_key)
                         if (
-                                self.target.get_edge_label(target_edge) == self.query.get_edge_label(query_edge) and
+                                (
+                                        # if query edge label is not specified it means that any edge label is accepted
+                                        not self.query.edge_has_label(query_edge) or
+                                        # check if the edge labels are the same
+                                        self.target.get_edge_label(target_edge) == self.query.get_edge_label(query_edge)
+                                ) and
                                 self.target.node_contains_attributes(t_j, self.query.get_node_attributes(q_j)) and
                                 self.target.edge_contains_attributes(target_edge,
                                                                      self.query.get_edge_attributes(query_edge))
