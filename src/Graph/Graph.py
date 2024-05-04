@@ -462,3 +462,43 @@ class MultiDiGraph(nx.MultiDiGraph):
             orbits.append(list(orbit))
 
         return orbits
+
+    def generate_graph(self, pattern, times):
+        """
+        Generate a graph by repeating a given pattern multiple times.
+
+        Args:
+            pattern: The pattern graph to be repeated.
+            times: The number of times the pattern should be repeated.
+
+        Returns:
+            A new graph containing 'times' repetitions of the pattern, connected to form a connected graph.
+        """
+        # Create a new MultiDiGraph
+        new_graph = MultiDiGraph()
+
+        # Repeat the pattern 'times' times
+        for i in range(times):
+            # Add nodes and edges from the pattern to the new graph
+            mapping = {}  # Mapping of old node IDs to new node IDs in the new graph
+            for node in pattern.nodes(data=True):
+                # Add node to the new graph
+                new_node_id = new_graph.number_of_nodes() + node[0]  # Generate unique node ID
+                new_graph.add_node(new_node_id, labels=node[1]['labels'])
+                mapping[node[0]] = new_node_id
+
+            for edge in pattern.edges(data=True, keys=True):
+                # Add edge to the new graph
+                source = mapping[edge[0]]
+                target = mapping[edge[1]]
+                new_graph.add_edge(source, target, key=edge[2], type=edge[3]['type'])
+
+        # Connect the repetitions of the pattern to form a connected graph
+        # Connect the last node of each repetition to the first node of the next repetition
+        for i in range(times - 1):
+            last_node_curr = max(mapping[node_id] for node_id in pattern.nodes())
+            first_node_next = min(mapping[node_id] for node_id in pattern.nodes()) + (i + 1) * pattern.number_of_nodes()
+            new_graph.add_edge(last_node_curr, first_node_next)
+
+        return new_graph
+
