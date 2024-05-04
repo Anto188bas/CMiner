@@ -1,18 +1,21 @@
 import networkx as nx
 import random
 
+
 # TO DO: improve random query generation
 # TO DO: come è strutturato l'arco esempio di tupla (source, target, key, id ) ? 
 # To DO: valutare assieme i metodi set_edge_attributes, are_equivalent_edge, compute_orbits_edge,edge_contain_attributes
 # breaking_condition, e edge_id
 
-""" Utility function
-"""
+
 def flat_map(list_of_lists):
     array = []
     for l in list_of_lists:
         array.extend(l)
     return array
+
+
+NULL_LABEL = ""
 
 
 # TO DO: valutare se ordinare le etichette o no
@@ -27,14 +30,35 @@ class MultiDiGraph(nx.MultiDiGraph):
         self.node_labels = None
         self.edge_labels = None
 
+    def add_edge(self, u_of_edge, v_of_edge, key=None, **attr):
+        if key is None:
+            key = 0
+            while self.has_edge(u_of_edge, v_of_edge, key):
+                key += 1
+        # check if the user pass the type attribute
+        if 'type' not in attr:
+            # set the type attribute to the default value
+            attr['type'] = NULL_LABEL
+        super().add_edge(u_of_edge, v_of_edge, key, **attr)
+
+    def add_node(self, node_for_adding, **attr):
+        if 'labels' not in attr:
+            attr['labels'] = []
+        super().add_node(node_for_adding, **attr)
+
+    def edge_has_label(self, edge):
+        source, target, key = edge
+        return self[source][target][key]['type'] != NULL_LABEL
+
     def get_edge_labels(self, source, destination):
         labels = []
         if self.has_edge(source, destination):
-            labels.extend([edge_data.get('type') for edge_data in self[source][destination].values()])
+            labels.extend([edge_data.get('type') for edge_data in self[source][destination].values() if edge_data.get('type') != NULL_LABEL])
         return sorted(set(labels))
 
     def get_edge_label(self, edge):
         source, destination, key = edge
+        label = self[source][destination][key]['type']
         return self[source][destination][key]['type']
 
     def get_node_labels(self, id):
@@ -48,7 +72,7 @@ class MultiDiGraph(nx.MultiDiGraph):
     def get_all_edge_labels(self):
         if self.edge_labels is None:
             self.edge_labels = sorted(
-                set([self.get_edge_data(edge[0], edge[1], edge[2])['type'] for edge in self.edges]))
+                set([self.get_edge_data(edge[0], edge[1], edge[2])['type'] for edge in self.edges if self.get_edge_data(edge[0], edge[1], edge[2])['type'] != NULL_LABEL]))
         return self.edge_labels
 
     def get_edges_consider_no_direction(self, edge):
@@ -165,7 +189,6 @@ class MultiDiGraph(nx.MultiDiGraph):
                 continue
             all_edges.append((u, v, key))
         return all_edges
-
 
     def tot_deg(self, node_id):
         """
@@ -314,7 +337,6 @@ class MultiDiGraph(nx.MultiDiGraph):
                 self.add_edge(u, v)  # Aggiungi l'arco se non esiste
             self[u][v][0][attribute_name] = attribute  # Imposta l'attributo per l'arco
 
-
     def compute_orbits_edges(self):
 
         orbits = []
@@ -361,9 +383,10 @@ class MultiDiGraph(nx.MultiDiGraph):
             True if the edge contains all the specified attributes, False otherwise.
         """
         source, target, key = edge
-        return self.has_edge(source, target, key) and all(attr in self[source][target][key].items() for attr in attributes.items())
-    
-    #Valutare con Simone --->Funzionamento + Utility 
+        return self.has_edge(source, target, key) and all(
+            attr in self[source][target][key].items() for attr in attributes.items())
+
+    # Valutare con Simone --->Funzionamento + Utility
     def compute_symmetry_breaking_conditions(self):
         """
         Computes the symmetry breaking conditions for both nodes and edges in the graph.
@@ -395,7 +418,7 @@ class MultiDiGraph(nx.MultiDiGraph):
             if len(orbit) > 1:
                 smallest_edge = min(orbit)
                 # Sort the edge tuples within each orbit based on their third element (ID) for consistency
-                condition = sorted(orbit, key=lambda edge: edge[2]) 
+                condition = sorted(orbit, key=lambda edge: edge[2])
                 edge_breaking_conditions.append(condition)
 
         # Append node and edge breaking conditions to the main list
@@ -417,7 +440,7 @@ class MultiDiGraph(nx.MultiDiGraph):
                 if self.are_equivalent_edges(start_edge, edge):
                     orbit.add(edge)
                     unvisited_edges.remove(edge)
-                        
+
             orbits.append(list(orbit))
 
         return orbits
@@ -435,7 +458,7 @@ class MultiDiGraph(nx.MultiDiGraph):
                 if self.are_equivalent(start_node, node):
                     orbit.add(node)
                     unvisited_nodes.remove(node)
-            
+
             orbits.append(list(orbit))
 
         return orbits
