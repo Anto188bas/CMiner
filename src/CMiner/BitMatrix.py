@@ -56,7 +56,6 @@ class BitMatrix(ABC):
         not self.is_computed() and self.compute()
         self.computed = True
 
-
     def get_matrix(self):
         """ Retrieve the BitMatrix
 
@@ -277,7 +276,6 @@ class QueryBitMatrix(BitMatrix):
                 self.matrix.append(row_parts[3] + row_parts[2] + row_parts[1] + row_parts[0])
                 self.matrix_indices.append((edge_to_compute[1], edge_to_compute[0]))
 
-
     def _adapt_query_to_target(self, target_graph):
         """ Adding the correct labels to perform the query
 
@@ -400,7 +398,6 @@ class QueryBitMatrixOptimized(QueryBitMatrix):
         return match
 
 
-
 class BitMatrixStrategy(ABC):
 
     def __init__(self):
@@ -449,11 +446,20 @@ class BitMatrixStrategy(ABC):
 
         :rtype string
         """
-        return ''.join('1' if label in self.graph.get_node_labels(node) else '0' for label in self.graph.get_all_node_labels())
+        all_node_labels = self.graph.get_all_node_labels()
+        node_labels = self.graph.get_node_labels(node)
+        # if the node has no labels it means that the
+        # query graph on the specific node has no constraints
+        # about the labels, so we return a string of zeros
+        # because during the AND operation with the target
+        # every node will match
+        if len(node_labels) == 0:
+            return '0' * len(all_node_labels)
+        return ''.join('1' if label in node_labels else '0' for label in all_node_labels)
 
     def _compute_edge_string_bitmap(self, edge):
         """
-        Given an edge this method comput the bitmap of the label
+        Given an edge this method compute the bitmap of the label
         of that edge
 
         Example:    all edge labels in the graph [a, b, c, d]
@@ -465,8 +471,16 @@ class BitMatrixStrategy(ABC):
 
         :rtype string
         """
-        return ''.join('1' if label in self.graph.get_edge_labels(edge[0], edge[1]) else '0' for label in
-                       self.graph.get_all_edge_labels())
+        all_edge_labels = self.graph.get_all_edge_labels()
+        edge_labels = self.graph.get_edge_labels(edge[0], edge[1])
+        # if the edge has no labels it means that the
+        # query graph on the specific edge has no constraints
+        # about the labels, so we return a string of zeros
+        # because during the AND operation with the target
+        # every edge will match
+        if len(edge_labels) == 0:
+            return '0' * len(all_edge_labels)
+        return ''.join('1' if label in edge_labels else '0' for label in all_edge_labels)
 
 
 class BitMatrixStrategy1(BitMatrixStrategy):

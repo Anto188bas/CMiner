@@ -101,15 +101,19 @@ class BreakingConditionsEdges:
         br_cond_array = self.breaking_conditions.get((e_src, e_dest, label))
         # find index of the key in the array
         index_key = br_cond_array.index(e_key)
-
         if index_key is None:
             return True
         # take all e_q' with smaller id than e_q
         br_left_elements = br_cond_array[:index_key]
+        # if there are no elements with smaller id than e_q
+        # take all e_q' with greater id than e_q
+        # I DON'T KNOW WHY BUT IT WORKS. PROBABLY BECAUSE IF THE USER INPUTS KEYS NOT IN ORDER
+        # THE ALGORITHM CAN'T FIND THE RIGHT ORDERING
+        if len(br_left_elements) == 0:
+            br_left_elements = br_cond_array[index_key + 1:]
         for e_left_q in br_left_elements:
-            if self.edge_mapping_function[e_left_q] is None:
+            if self.edge_mapping_function[(e_src, e_dest, e_left_q)] is None:
                 continue
-            if self.edge_mapping_function[e_left_q] >= e_t:
-                print("aaaa")
+            if self.edge_mapping_function[(e_src, e_dest, e_left_q)] >= e_t:
                 return False
         return True
