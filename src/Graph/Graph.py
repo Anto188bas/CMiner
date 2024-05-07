@@ -497,11 +497,14 @@ class MultiDiGraph(nx.MultiDiGraph):
 
             # Connect the pattern to the new graph
             if i > 0:
-                # Create num_nodes random edges between pattern and new_graph
-                num_nodes = pattern.number_of_nodes()
-                for _ in range(num_nodes):
+                # Create up to num_nodes random edges between pattern and new_graph
+                num_new_edges = random.randint(1, len(pattern.nodes()))
+                for _ in range(num_new_edges):
+                    # take a random node from the pattern and a random node from the new graph
                     node_pattern = random.choice(list(pattern.nodes()))
-                    node_new_graph = random.choice(list(new_graph.nodes()))
+                    # the new node on the graph cannot be the same as the node in the pattern
+                    cand = list(set(new_graph.nodes()).difference(set([mapping[n] for n in pattern.nodes()])))
+                    node_new_graph = random.choice(cand)
                     # randomize the edge direction
                     if random.random() < 0.5:
                         src = node_new_graph
@@ -512,4 +515,3 @@ class MultiDiGraph(nx.MultiDiGraph):
                     new_graph.add_edge(src, dest, type=random.choice(new_graph.get_all_edge_labels()))
 
         return new_graph
-
