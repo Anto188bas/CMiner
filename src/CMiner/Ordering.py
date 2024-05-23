@@ -85,8 +85,6 @@ class Ordering:
             self.node_count[candidate[0]] = 1
             self.node_count[candidate[1]] = 1
 
-        print("Ordering:", self.order)
-
 
 
     def length(self):

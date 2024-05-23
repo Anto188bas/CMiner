@@ -3,7 +3,7 @@ import random
 
 
 # TO DO: improve random query generation
-# TO DO: come è strutturato l'arco esempio di tupla (source, target, key, id ) ? 
+# TO DO: come è strutturato l'arco esempio di tupla (source, target, key, id ) ?
 # To DO: valutare assieme i metodi set_edge_attributes, are_equivalent_edge, compute_orbits_edge,edge_contain_attributes
 # breaking_condition, e edge_id
 
@@ -361,7 +361,7 @@ class MultiDiGraph(nx.MultiDiGraph):
 
         Args:
             node_id: The ID of the node to check.
-            attributes: A dictionary containing the attributes to check for, 
+            attributes: A dictionary containing the attributes to check for,
                         where keys are attribute names and values are attribute values.
 
         Returns:
@@ -376,7 +376,7 @@ class MultiDiGraph(nx.MultiDiGraph):
         Args:
             source: The source node of the edge.
             target: The target node of the edge.
-            attributes: A dictionary containing the attributes to check for, 
+            attributes: A dictionary containing the attributes to check for,
                         where keys are attribute names and values are attribute values.
 
         Returns:
@@ -464,7 +464,7 @@ class MultiDiGraph(nx.MultiDiGraph):
         return orbits
 
     @staticmethod
-    def generate_graph(pattern, times):
+    def generate_graph(pattern, times, seed = None):
         """
         Generate a graph by repeating a given pattern multiple times.
 
@@ -476,8 +476,11 @@ class MultiDiGraph(nx.MultiDiGraph):
             A new graph containing 'times' repetitions of the pattern, connected to form a connected graph.
         """
         # Create a new MultiDiGraph
-        global mapping
+        mapping = {}
         new_graph = MultiDiGraph()
+
+        if seed is not None:
+            random.seed(seed)
 
         # Repeat the pattern 'times' times
         for i in range(times):
@@ -486,14 +489,15 @@ class MultiDiGraph(nx.MultiDiGraph):
             for node in pattern.nodes(data=True):
                 # Add node to the new graph
                 new_node_id = new_graph.number_of_nodes()  # Generate unique node ID
-                new_graph.add_node(new_node_id, labels=node[1]['labels'])
+                # Add node to the new graph considering all the attributes
+                new_graph.add_node(new_node_id, **node[1])
                 mapping[node[0]] = new_node_id
 
             for edge in pattern.edges(data=True, keys=True):
                 # Add edge to the new graph
                 source = mapping[edge[0]]
                 target = mapping[edge[1]]
-                new_graph.add_edge(source, target, key=edge[2], type=edge[3]['type'])
+                new_graph.add_edge(source, target, key=edge[2], **edge[3])
 
             # Connect the pattern to the new graph
             if i > 0:
@@ -502,7 +506,7 @@ class MultiDiGraph(nx.MultiDiGraph):
                 for _ in range(num_new_edges):
                     # take a random node from the pattern and a random node from the new graph
                     node_pattern = random.choice(list(pattern.nodes()))
-                    # the new node on the graph cannot be the same as the node in the pattern
+                    # the new node on the graph cannot be the same as the node in the pattern (no loops)
                     cand = list(set(new_graph.nodes()).difference(set([mapping[n] for n in pattern.nodes()])))
                     node_new_graph = random.choice(cand)
                     # randomize the edge direction
