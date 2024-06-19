@@ -11,6 +11,12 @@ class Solution:
         self.f = f
         self.g = g
 
+    def nodes_mapping(self):
+        return self.f
+
+    def edges_mapping(self):
+        return self.g
+
     def __str__(self):
         str = "------------------------------------------\n"
         str += "Query node mapping:\n"

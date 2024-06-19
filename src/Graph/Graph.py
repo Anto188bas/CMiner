@@ -22,9 +22,20 @@ NULL_LABEL = ""
 class MultiDiGraph(nx.MultiDiGraph):
 
     def __init__(self, incoming_graph_data=None, multigraph_input=None, **attr):
-        super().__init__(incoming_graph_data, multigraph_input, **attr)
+        super().__init__(**attr)
         self.node_labels = None
         self.edge_labels = None
+        if incoming_graph_data:
+            self._initialize_from_graph_data(incoming_graph_data)
+
+    def _initialize_from_graph_data(self, incoming_graph_data):
+        for node, node_data in incoming_graph_data.nodes(data=True):
+            self.add_node(node, **node_data)
+        edge_key = 0
+        for u, v, edge_data in incoming_graph_data.edges(data=True):
+            self.add_edge(u, v, key=edge_key, **edge_data)
+            edge_key += 1
+
 
     def reset_memoization(self):
         self.node_labels = None
@@ -74,6 +85,7 @@ class MultiDiGraph(nx.MultiDiGraph):
             self.edge_labels = sorted(
                 set([self.get_edge_data(edge[0], edge[1], edge[2])['type'] for edge in self.edges if self.get_edge_data(edge[0], edge[1], edge[2])['type'] != NULL_LABEL]))
         return self.edge_labels
+
 
     def get_edges_consider_no_direction(self, edge):
         """
