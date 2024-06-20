@@ -2,7 +2,6 @@ from src.CMiner.BitMatrix import QueryBitMatrixOptimized, TargetBitMatrixOptimiz
 from src.CMiner.BreakingConditions import BreakingConditionsNodes, BreakingConditionsEdges
 from src.CMiner.CompatibilityDomain import CompatibilityDomainWithDictionary
 from src.CMiner.Ordering import Ordering
-import timeit
 
 
 class Solution:
@@ -29,27 +28,79 @@ class Solution:
         return str
 
 
-class MultiSubgraphMatching:
+class MultiGraphMatch:
 
-    def __init__(self, target, query):
+    def __init__(self, target, target_bit_matrix=None):
         self.target = target
+        if target_bit_matrix is None:
+            self.tbm = TargetBitMatrixOptimized(self.target, BitMatrixStrategy2())
+        else:
+            self.tbm = target_bit_matrix
+        # all of this attributes are initialized in the match method
+        # so that the class can be reused
+        self.query = None
+        self.qbm = None
+        self.node_mapping_function = None
+        self.edge_mapping_function = None
+        self.cand = None
+        self.cand_index = None
+        self.br_cond_node = None
+        self.br_cond_edge = None
+        self.domain = None
+        self.ordering = None
+        self.solutions = None
+        self.f = None
+        self.g = None
+
+    def _init_matching(self,
+                       query,
+                       query_bit_matrix=None,
+                       compatibility_domain=None,
+                       ordering=None,
+                       breaking_conditions_nodes=None,
+                       breaking_conditions_edges=None
+                       ):
+        self.solutions = []
         self.query = query
-        qbm = QueryBitMatrixOptimized(self.query, BitMatrixStrategy2())
-        tbm = TargetBitMatrixOptimized(self.target, BitMatrixStrategy2())
-        self.f = {node: None for node in self.query.nodes()}
-        self.g = {edge: None for edge in self.query.get_all_edges()}
+        self.f = {node: None for node in query.nodes()}
+        self.g = {edge: None for edge in query.get_all_edges()}
         self.cand = {edge: [] for edge in self.query.get_all_edges()}
         self.cand_index = {edge: 0 for edge in self.query.get_all_edges()}
-        self.br_cond_node = BreakingConditionsNodes(self.query, self.f)
-        self.br_cond_edge = BreakingConditionsEdges(self.query, self.g)
-        self.domain = CompatibilityDomainWithDictionary(qbm, tbm)
-        self.ordering = Ordering(self.query, self.domain)
-        self.occurrences = []
+        self.solutions = []
+        if query_bit_matrix is None:
+            self.qbm = QueryBitMatrixOptimized(query, BitMatrixStrategy2())
+        else:
+            self.qbm = query_bit_matrix
+        if compatibility_domain is None:
+            self.domain = CompatibilityDomainWithDictionary(self.qbm, self.tbm)
+        else:
+            self.domain = compatibility_domain
+        if ordering is None:
+            self.ordering = Ordering(self.query, self.domain)
+        else:
+            self.ordering = ordering
+        if breaking_conditions_nodes is None:
+            self.br_cond_node = BreakingConditionsNodes(self.query, self.f)
+        else:
+            self.br_cond_node = breaking_conditions_nodes
+        if breaking_conditions_edges is None:
+            self.br_cond_edge = BreakingConditionsEdges(self.query, self.g)
+        else:
+            self.br_cond_edge = breaking_conditions_edges
 
-    def get_occurrences(self):
-        return self.occurrences
-
-    def match(self):
+    def match(self,
+              query,
+              query_bit_matrix=None,
+              compatibility_domain=None,
+              ordering=None,
+              breaking_conditions_nodes=None,
+              breaking_conditions_edges=None):
+        self._init_matching(query,
+                            query_bit_matrix,
+                            compatibility_domain,
+                            ordering,
+                            breaking_conditions_nodes,
+                            breaking_conditions_edges)
         self.ordering.compute()
         forceBack = False
         i = 0
@@ -95,7 +146,7 @@ class MultiSubgraphMatching:
                         forceBack = True
                         # SOLUTION FOUND
                         # save the mapping
-                        self.occurrences.append(Solution(self.f.copy(), self.g.copy()))
+                        self.solutions.append(Solution(self.f.copy(), self.g.copy()))
                         # shift the index to the next candidate
                         # self.cand_index[query_edge] += 1
                     else:
@@ -182,5 +233,5 @@ class MultiSubgraphMatching:
                             if self.br_cond_node.check(q_i, t_i):
                                 self.cand[query_edge].append(target_edge)
 
-    def solutions(self):
-        return self.occurrences
+    def get_solutions(self):
+        return self.solutions

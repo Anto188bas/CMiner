@@ -42,6 +42,7 @@ class MultiDiGraph(nx.MultiDiGraph):
         self.edge_labels = None
 
     def add_edge(self, u_of_edge, v_of_edge, key=None, **attr):
+        self.edge_labels = None
         if key is None:
             key = 0
             while self.has_edge(u_of_edge, v_of_edge, key):
@@ -53,6 +54,7 @@ class MultiDiGraph(nx.MultiDiGraph):
         super().add_edge(u_of_edge, v_of_edge, key, **attr)
 
     def add_node(self, node_for_adding, **attr):
+        self.node_labels = None
         if 'labels' not in attr:
             attr['labels'] = []
         super().add_node(node_for_adding, **attr)

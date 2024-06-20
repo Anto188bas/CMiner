@@ -109,6 +109,22 @@ class BitMatrix(ABC):
         ]
         return row_parts
 
+    @abstractmethod
+    def L_first_distinct_values(self):
+        pass
+
+    @abstractmethod
+    def L_second_distinct_values(self):
+        pass
+
+    @abstractmethod
+    def T_in_distinct_values(self):
+        pass
+
+    @abstractmethod
+    def T_out_distinct_values(self):
+        pass
+
 
 class TargetBitMatrix(BitMatrix):
     """ Concrete class for describing a BitMatrix for a Target Graph
@@ -209,6 +225,8 @@ class TargetBitMatrixOptimized(TargetBitMatrix):
                 edge_to_compute = edge
             elif edge[1] < edge[0]:  # condition 2
                 edge_to_compute = (edge[1], edge[0])
+            else:
+                continue
             # there could exist an edge (a, b) and (b, a)
             # so we check if the edges is already been computed
             if edge_to_compute not in self.matrix_indices:  # FIND BETTER METHOD
@@ -222,6 +240,18 @@ class TargetBitMatrixOptimized(TargetBitMatrix):
                     self.matrix[i][str_part] = self.matrix[i].get(str_part, []) + [edge_index]
                 # saving the edge associated to the bitmap
                 self.matrix_indices.append(edge_to_compute)
+
+    def L_first_distinct_values(self):
+        return list(self.matrix[0].keys())
+
+    def L_second_distinct_values(self):
+        return list(self.matrix[3].keys())
+
+    def T_in_distinct_values(self):
+        return list(self.matrix[1].keys())
+
+    def T_out_distinct_values(self):
+        return list(self.matrix[2].keys())
 
 
 class QueryBitMatrix(BitMatrix):
@@ -297,6 +327,10 @@ class QueryBitMatrix(BitMatrix):
         for label in target_graph.get_all_edge_labels():
             self.graph.add_edge('dummy', 'dummy', type=label)
 
+    def _undo_adapt_query_to_target(self):
+        self.graph.remove_node('dummy')
+        self.graph.remove_edges_from(self.graph.edges('dummy'))
+
     def find_candidates(self, target_bitmatrix):
         """ Find the candidate target edges
 
@@ -323,6 +357,8 @@ class QueryBitMatrix(BitMatrix):
                 # check if the edge are compatible (read method explanation)
                 if self.matrix[bmq_i] & bmt[bmt_i] == self.matrix[bmq_i]:
                     candidates.append((bmq_i, bmt_i))
+
+        self._undo_adapt_query_to_target()
         return candidates
 
 
@@ -394,8 +430,20 @@ class QueryBitMatrixOptimized(QueryBitMatrix):
 
             # if there are candidates I add them to the match
             match.extend([(bmq_i, edge) for edge in partial_match])
-
+        self._undo_adapt_query_to_target()
         return match
+
+    def L_first_distinct_values(self):
+        raise NotImplementedError
+
+    def L_second_distinct_values(self):
+        raise NotImplementedError
+
+    def T_in_distinct_values(self):
+        raise NotImplementedError
+
+    def T_out_distinct_values(self):
+        raise NotImplementedError
 
 
 class BitMatrixStrategy(ABC):

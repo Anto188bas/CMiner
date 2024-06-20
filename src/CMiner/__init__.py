@@ -1,2 +1,4 @@
-from src.CMiner.Matching import MultiSubgraphMatching
-from src.Graph.Graph import MultiDiGraph
+from .CMiner import CMiner
+from .MultiGraphMatch import MultiGraphMatch
+
+__version__ = '0.0.1'
