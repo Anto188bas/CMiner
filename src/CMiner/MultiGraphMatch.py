@@ -2,6 +2,8 @@ from src.CMiner.BitMatrix import QueryBitMatrixOptimized, TargetBitMatrixOptimiz
 from src.CMiner.BreakingConditions import BreakingConditionsNodes, BreakingConditionsEdges
 from src.CMiner.CompatibilityDomain import CompatibilityDomainWithDictionary
 from src.CMiner.Ordering import Ordering
+import ray
+
 
 
 class Solution:
@@ -15,6 +17,8 @@ class Solution:
 
     def edges_mapping(self):
         return self.g
+
+
 
     def __str__(self):
         str = "------------------------------------------\n"
@@ -88,6 +92,7 @@ class MultiGraphMatch:
         else:
             self.br_cond_edge = breaking_conditions_edges
 
+
     def match(self,
               query,
               query_bit_matrix=None,
@@ -101,6 +106,7 @@ class MultiGraphMatch:
                             ordering,
                             breaking_conditions_nodes,
                             breaking_conditions_edges)
+
         self.ordering.compute()
         forceBack = False
         i = 0
@@ -161,6 +167,8 @@ class MultiGraphMatch:
                 else:
                     # shift the index to the next candidate
                     self.cand_index[query_edge] += 1
+
+
 
     def _find_candidates(self, query_edge):
         q_i, q_j, query_key = query_edge
@@ -235,3 +243,15 @@ class MultiGraphMatch:
 
     def get_solutions(self):
         return self.solutions
+
+
+@ray.remote
+def match_parallel_worker(target, query, worker_id):
+
+    matcher = MultiGraphMatch(target, query)
+    matcher.match(query)
+    solutions = matcher.solutions()
+    return solutions
+
+
+
