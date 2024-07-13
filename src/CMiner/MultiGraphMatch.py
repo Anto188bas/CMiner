@@ -2,6 +2,7 @@ from src.CMiner.BitMatrix import QueryBitMatrixOptimized, TargetBitMatrixOptimiz
 from src.CMiner.BreakingConditions import BreakingConditionsNodes, BreakingConditionsEdges
 from src.CMiner.CompatibilityDomain import CompatibilityDomainWithDictionary
 from src.CMiner.Ordering import Ordering
+import time
 
 
 class Solution:
@@ -10,11 +11,35 @@ class Solution:
         self.f = f
         self.g = g
 
+    def copy(self):
+        return Solution(self.f.copy(), self.g.copy())
+
+    def query_nodes(self):
+        return self.f.keys()
+
+    def query_edges(self):
+        return self.g.keys()
+
+    def target_nodes(self):
+        return self.f.values()
+
+    def target_edges(self):
+        return self.g.values()
+
     def nodes_mapping(self):
         return self.f
 
-    def edges_mapping(self):
-        return self.g
+    def add_node_mapping(self, node, target_node):
+        self.f[node] = target_node
+
+    def add_edge_mapping(self, edge, target_edge):
+        self.g[edge] = target_edge
+
+    def get_node_mapping(self, node):
+        return self.f[node]
+
+    def is_edge_mapped(self, edge):
+        return edge in self.g.values()
 
     def __str__(self):
         str = "------------------------------------------\n"
@@ -66,7 +91,6 @@ class MultiGraphMatch:
         self.g = {edge: None for edge in query.get_all_edges()}
         self.cand = {edge: [] for edge in self.query.get_all_edges()}
         self.cand_index = {edge: 0 for edge in self.query.get_all_edges()}
-        self.solutions = []
         if query_bit_matrix is None:
             self.qbm = QueryBitMatrixOptimized(query, BitMatrixStrategy2())
         else:
@@ -116,7 +140,7 @@ class MultiGraphMatch:
                     break
                 q_i, q_j, q_key = query_edge = self.ordering.get(i)
 
-                # backtraking
+                # backtracking
                 # RESET THE MAPPING OF THE QUERY EDGE
                 self.g[query_edge] = None
                 # RESET THE MAPPING OF THE QUERY NODES
@@ -147,8 +171,6 @@ class MultiGraphMatch:
                         # SOLUTION FOUND
                         # save the mapping
                         self.solutions.append(Solution(self.f.copy(), self.g.copy()))
-                        # shift the index to the next candidate
-                        # self.cand_index[query_edge] += 1
                     else:
                         # shift the index to the next query edge in the ordering
                         i += 1
@@ -198,8 +220,8 @@ class MultiGraphMatch:
                         ) and
                         self.target.edge_contains_attributes(target_edge, self.query.get_edge_attributes(query_edge))
                 ):
-                    if self.br_cond_edge.check(query_edge, target_edge):
-                        self.cand[query_edge].append(target_edge)
+                    # if self.br_cond_edge.check(query_edge, target_edge):
+                    self.cand[query_edge].append(target_edge)
         elif self.f[q_i] is not None:
             for t_i, t_j in self.domain.get_domain((q_i, q_j)):
                 if t_i == self.f[q_i]:
@@ -216,8 +238,8 @@ class MultiGraphMatch:
                                 self.target.edge_contains_attributes(target_edge,
                                                                      self.query.get_edge_attributes(query_edge))
                         ):
-                            if self.br_cond_node.check(q_j, t_j):
-                                self.cand[query_edge].append(target_edge)
+                            # if self.br_cond_node.check(q_j, t_j):
+                            self.cand[query_edge].append(target_edge)
         else:
             for t_i, t_j in self.domain.get_domain((q_i, q_j)):
                 if t_j == self.f[q_j]:
@@ -230,8 +252,8 @@ class MultiGraphMatch:
                                 self.target.edge_contains_attributes(target_edge,
                                                                      self.query.get_edge_attributes(query_edge))
                         ):
-                            if self.br_cond_node.check(q_i, t_i):
-                                self.cand[query_edge].append(target_edge)
+                            # if self.br_cond_node.check(q_i, t_i):
+                            self.cand[query_edge].append(target_edge)
 
     def get_solutions(self):
         return self.solutions

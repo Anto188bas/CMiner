@@ -1,5 +1,6 @@
 from abc import ABC, abstractmethod
 
+
 class CompatibilityDomain(ABC):
 
     def __init__(self, query_bit_matrix, target_bit_matrix):
@@ -138,7 +139,6 @@ class CompatibilityDomainWithDictionary(CompatibilityDomain):
             if self._check_conditions(query_edge, target_edge):
                 # if the conditions are satisfied we add the target edge to the domain
                 self.domain[query_edge].append(target_edge)
-
 
     def get_all_query_edges(self):
         return list(self.domain.keys())
