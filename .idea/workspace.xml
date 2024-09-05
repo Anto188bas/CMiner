@@ -4,7 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="885e033e-b91e-4400-9019-c6fa06afc07b" name="Changes" comment="" />
+    <list default="true" id="885e033e-b91e-4400-9019-c6fa06afc07b" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/src/CMiner/MultiGraphMatch.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/CMiner/MultiGraphMatch.py" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -30,22 +32,35 @@
     &quot;Python.2.executor&quot;: &quot;Run&quot;,
     &quot;Python.BitMatrix.executor&quot;: &quot;Run&quot;,
     &quot;Python.CMiner.executor&quot;: &quot;Run&quot;,
+    &quot;Python.CMinerSketch.executor&quot;: &quot;Run&quot;,
+    &quot;Python.CMiner_example.executor&quot;: &quot;Run&quot;,
+    &quot;Python.CMiner_usage.executor&quot;: &quot;Run&quot;,
     &quot;Python.CompatibilityDomain.executor&quot;: &quot;Run&quot;,
     &quot;Python.Graph.executor&quot;: &quot;Run&quot;,
     &quot;Python.Matching.executor&quot;: &quot;Run&quot;,
     &quot;Python.a.executor&quot;: &quot;Run&quot;,
     &quot;Python.auto_matrix.executor&quot;: &quot;Run&quot;,
     &quot;Python.automorfismi.executor&quot;: &quot;Run&quot;,
+    &quot;Python.check_graph.executor&quot;: &quot;Run&quot;,
+    &quot;Python.check_graph_multigraphmatch.executor&quot;: &quot;Run&quot;,
+    &quot;Python.check_graph_vf.executor&quot;: &quot;Run&quot;,
+    &quot;Python.check_mining_solutions.executor&quot;: &quot;Run&quot;,
+    &quot;Python.check_mining_solutions_multigraphmatch.executor&quot;: &quot;Run&quot;,
+    &quot;Python.check_mining_solutions_vf.executor&quot;: &quot;Run&quot;,
     &quot;Python.comparisons.executor&quot;: &quot;Run&quot;,
+    &quot;Python.dataset_example.executor&quot;: &quot;Run&quot;,
     &quot;Python.deleteme.executor&quot;: &quot;Run&quot;,
     &quot;Python.domain.executor&quot;: &quot;Run&quot;,
     &quot;Python.domain_paper.executor&quot;: &quot;Run&quot;,
+    &quot;Python.find_mapping_differences.executor&quot;: &quot;Run&quot;,
     &quot;Python.graph_infos.executor&quot;: &quot;Run&quot;,
     &quot;Python.leleCode.executor&quot;: &quot;Run&quot;,
     &quot;Python.lotsOfSimmetries.executor&quot;: &quot;Run&quot;,
     &quot;Python.main.executor&quot;: &quot;Run&quot;,
     &quot;Python.matchExample.executor&quot;: &quot;Run&quot;,
     &quot;Python.matchRotated.executor&quot;: &quot;Run&quot;,
+    &quot;Python.match_example.executor&quot;: &quot;Run&quot;,
+    &quot;Python.match_usage.executor&quot;: &quot;Run&quot;,
     &quot;Python.matching.executor&quot;: &quot;Run&quot;,
     &quot;Python.matching2.executor&quot;: &quot;Run&quot;,
     &quot;Python.matchingEdgeSwap.executor&quot;: &quot;Run&quot;,
@@ -55,6 +70,7 @@
     &quot;Python.matchingProf.executor&quot;: &quot;Run&quot;,
     &quot;Python.matchingSimple.executor&quot;: &quot;Run&quot;,
     &quot;Python.mining.executor&quot;: &quot;Run&quot;,
+    &quot;Python.mining_example.executor&quot;: &quot;Run&quot;,
     &quot;Python.obj_size.executor&quot;: &quot;Run&quot;,
     &quot;Python.onDatabase.executor&quot;: &quot;Run&quot;,
     &quot;Python.orbits_number.executor&quot;: &quot;Run&quot;,
@@ -66,25 +82,28 @@
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/Users/simoneavellino/Desktop/Tesi/CMiner/BM&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/simoneavellino/Desktop/CMiner/src/CMiner&quot;,
     &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;
   }
 }</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/BM" />
+      <recent name="$PROJECT_DIR$/src/CMiner" />
       <recent name="$PROJECT_DIR$" />
+      <recent name="$PROJECT_DIR$/BM" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/_CMiner_debug" />
+      <recent name="$PROJECT_DIR$/debug" />
+      <recent name="$PROJECT_DIR$" />
       <recent name="$PROJECT_DIR$/CMiner" />
       <recent name="$PROJECT_DIR$/_test_codes/matchingExamples" />
-      <recent name="$PROJECT_DIR$/_test_codes" />
     </key>
   </component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-python-sdk-09665e90c3a7-d3b881c8e49f-com.jetbrains.pycharm.community.sharedIndexes.bundled-PC-233.15026.15" />
+        <option value="bundled-python-sdk-8336bb23522e-31b6be0877a2-com.jetbrains.pycharm.community.sharedIndexes.bundled-PC-241.19072.16" />
       </set>
     </attachedChunks>
   </component>

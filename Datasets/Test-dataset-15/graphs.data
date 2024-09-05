@@ -1,0 +1,39 @@
+t # 0 0.json
+v 1 Black
+v 2 Red
+v 3 Green
+v 4 Green
+v 5 Blue
+v 6 Blue
+e 1 2 Pink
+e 2 3 Blue
+e 2 4 Blue
+e 5 3 Purple
+e 5 4 Purple
+e 6 5 Purple
+t # 1 1.json
+v 1 Black
+v 2 Red
+v 3 Green
+v 4 Green
+v 5 Blue
+v 6 Black
+e 1 2 Pink
+e 2 3 Blue
+e 2 4 Blue
+e 5 3 Purple
+e 5 4 Purple
+e 6 1 Pink
+t # 2 2.json
+v 1 Black
+v 2 Red
+v 3 Green
+v 4 Green
+v 5 Blue
+v 6 Green
+e 1 2 Pink
+e 2 3 Blue
+e 2 4 Blue
+e 5 3 Purple
+e 5 4 Purple
+e 6 3 Blue

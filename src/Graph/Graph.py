@@ -71,7 +71,6 @@ class MultiDiGraph(nx.MultiDiGraph):
 
     def get_edge_label(self, edge):
         source, destination, key = edge
-        label = self[source][destination][key]['type']
         return self[source][destination][key]['type']
 
     def get_node_labels(self, id):
@@ -533,3 +532,26 @@ class MultiDiGraph(nx.MultiDiGraph):
                     new_graph.add_edge(src, dest, type=random.choice(new_graph.get_all_edge_labels()))
 
         return new_graph
+
+    def code(self):
+        # sort nodes by out degree
+        nodes = sorted(self.nodes(), key=lambda n: self.out_deg(n))
+        # group nodes by out degree
+        groups = {}
+        for n in nodes:
+            deg = self.out_deg(n)
+            if deg not in groups:
+                groups[deg] = []
+            groups[deg].append(n)
+        # sort nodes within each group by node labels
+        for deg in groups:
+            groups[deg] = sorted(groups[deg], key=lambda n: "".join(self.get_node_labels(n)))
+        # compute code
+        code = ""
+        for deg in sorted(groups.keys()):
+            for n in groups[deg]:
+                # for each node of the group
+                code += "".join(self.get_node_labels(n)) # concatenate all labels
+                for v in self.successors(n):
+                    code += "".join(self.get_edge_labels(n, v))
+        return code

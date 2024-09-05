@@ -2,3 +2,7 @@ data
 build
 CMiner.egg-info
 dist
+_test_codes
+Datasets
+_CMiner_debug
+.idea

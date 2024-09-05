@@ -2,13 +2,8 @@ from src.CMiner.BitMatrix import QueryBitMatrixOptimized, TargetBitMatrixOptimiz
 from src.CMiner.BreakingConditions import BreakingConditionsNodes, BreakingConditionsEdges
 from src.CMiner.CompatibilityDomain import CompatibilityDomainWithDictionary
 from src.CMiner.Ordering import Ordering
-<<<<<<< HEAD
 import time
-=======
 import ray
-
->>>>>>> a5aebab156e565b1281d899a10ba7aa0f3777f21
-
 
 class Solution:
 
@@ -168,9 +163,15 @@ class MultiGraphMatch:
                 if all(self.g[q_e] != target_edge for q_e in self.query.get_all_edges() if self.g[q_e] is not None):
                     # if the mapping for the source is not already set, set it
                     if self.f[q_i] is None:
+                        if t_i in self.f.values():
+                            self.cand_index[query_edge] += 1
+                            continue
                         self.f[q_i] = t_i
                     # if the mapping for the destination is not already set, set it
                     if self.f[q_j] is None:
+                        if t_j in self.f.values():
+                            self.cand_index[query_edge] += 1
+                            continue
                         self.f[q_j] = t_j
                     # set the mapping for the query edge
                     self.g[query_edge] = target_edge
