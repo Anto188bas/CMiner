@@ -2,7 +2,6 @@ from src.CMiner.BitMatrix import QueryBitMatrixOptimized, TargetBitMatrixOptimiz
 from src.CMiner.BreakingConditions import BreakingConditionsNodes, BreakingConditionsEdges
 from src.CMiner.CompatibilityDomain import CompatibilityDomainWithDictionary
 from src.CMiner.Ordering import Ordering
-import time
 import ray
 
 class Solution:
