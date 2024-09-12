@@ -1,4 +1,7 @@
 import os
+
+from markdown.extensions.extra import extensions
+
 from src.NetworkX.NetworkConfigurator import NetworkConfigurator
 from src.NetworkX.NetworksLoading import NetworksLoading
 from src.CMiner.MultiGraphMatch import MultiGraphMatch
@@ -224,7 +227,7 @@ class PatternMappings:
 
 class Pattern(MultiDiGraph):
 
-    def __init__(self, pattern_mappings, extended_pattern: 'Pattern' = None, **attr):
+    def __init__(self, pattern_mappings, extension_applied: Extension = None, extended_pattern: 'Pattern' = None, **attr):
 
         if extended_pattern is not None:
             # Copia i nodi e gli archi dal pattern esteso
@@ -234,6 +237,8 @@ class Pattern(MultiDiGraph):
 
         self.extended_pattern = extended_pattern
         self.pattern_mappings = pattern_mappings
+        self.extension_applied = extension_applied
+
 
     def extend(self, support) -> list['Pattern']:
 
@@ -255,7 +260,7 @@ class Pattern(MultiDiGraph):
         pattern_node_id = extension.pattern_node_id
 
         # Apply extension to the pattern (add node and edges)
-        new_pattern = Pattern(extended_pattern=self, pattern_mappings=new_pattern_mappings)
+        new_pattern = Pattern(extended_pattern=self, pattern_mappings=new_pattern_mappings, extension_applied=extension)
         new_pattern_new_node_id = max(new_pattern.nodes()) + 1
         new_pattern.add_node(new_pattern_new_node_id, labels=extension.target_node_labels)
         for target_edge_label in extension.target_edge_labels:
@@ -419,14 +424,31 @@ class Pattern(MultiDiGraph):
                 debug_message("                - Node Mapping", node_mapping)
                 # retrieve nodes mapped in the DB graph
                 mapped_target_nodes = set(node_mapping.values())
-                # node_p  := node pattern
+                # node_p  := last node added to the pattern
                 # node_db := node in the DB graph mapped to node_p
-                for node_p, node_db in node_mapping.items():
-                    # for each node of the pattern search a possible extension
+                node_p = max(self.nodes())
+                node_db = node_mapping[node_p]
+                for neigh in set(g.successors(node_db)).difference(mapped_target_nodes):
+                    extension_manager.add_extension(node_p, node_db, neigh, True, g, _map)
+                for neigh in set(g.predecessors(node_db)).difference(mapped_target_nodes):
+                    extension_manager.add_extension(node_p, neigh, node_db, False, g, _map)
+                if self.extension_applied is not None:
+                    node_p = self.extension_applied.pattern_node_id
+                    node_db = node_mapping[node_p]
                     for neigh in set(g.successors(node_db)).difference(mapped_target_nodes):
                         extension_manager.add_extension(node_p, node_db, neigh, True, g, _map)
                     for neigh in set(g.predecessors(node_db)).difference(mapped_target_nodes):
                         extension_manager.add_extension(node_p, neigh, node_db, False, g, _map)
+
+
+                # # node_p  := node pattern
+                # # node_db := node in the DB graph mapped to node_p
+                # for node_p, node_db in node_mapping.items():
+                #     # for each node of the pattern search a possible extension
+                #     for neigh in set(g.successors(node_db)).difference(mapped_target_nodes):
+                #         extension_manager.add_extension(node_p, node_db, neigh, True, g, _map)
+                #     for neigh in set(g.predecessors(node_db)).difference(mapped_target_nodes):
+                #         extension_manager.add_extension(node_p, neigh, node_db, False, g, _map)
 
         return extension_manager.get_extensions()
 
@@ -518,7 +540,7 @@ class CMiner:
             # Check if the pattern is already at the max number of nodes
             if len(pattern_to_extend.nodes()) == self._max_num_nodes:
                 del pattern_to_extend
-                continue 
+                continue
 
             # Find extensions
             extensions = pattern_to_extend._find_extensions(ExtensionManager(self.support))
@@ -536,14 +558,14 @@ class CMiner:
 
                 # Ensure no duplicate patterns are processed
                 if new_pattern_code not in pattern_codes:
-                    stack.append(new_pattern)
-                    pattern_codes.add(new_pattern_code)
                     # # Find cycles
                     # new_pattern.find_cycles(self.support)
                     # new_pattern_code = new_pattern.code()
                     # if new_pattern_code not in pattern_codes:
                     #     stack.append(new_pattern)
                     #     pattern_codes.add(new_pattern_code)
+                    stack.append(new_pattern)
+                    pattern_codes.add(new_pattern_code)
 
         # Close the file if it was opened
         if output_file is not None:
@@ -630,7 +652,7 @@ class CMiner:
 
     def _read_graphs_from_file(self):
         type_file = "data"
-        configurator = NetworkConfigurator(self.graph_db_path, type_file)
+        configurator = NetworkConfigurator(type_file)
         for name, network in NetworksLoading(type_file, configurator.config).Networks.items():
             self.db.append(DBGraph(network, name))
 

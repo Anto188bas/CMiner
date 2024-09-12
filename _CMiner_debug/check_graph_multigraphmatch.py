@@ -57,21 +57,21 @@ def parse_solution(solution):
 
 
 solution_str = """
-t # 212
-v 1 gen
-v 2 kind
-v 3 gen
-v 4 category
-v 5 gen
-v 6 gen
-e 2 1 general
-e 2 3 specific
-e 4 3 general
-e 4 5 general
-e 4 6 general
-x (digitaldoctor2022.json, 392) (van-ee2021modular.json, 24) (ppo-o2021.json, 2) (silveira2021oap.json, 8) (qam.json, 6) (alpinebits2022.json, 300) (srro-ontology.json, 84) (aguiar2018rdbs-o.json, 60) (aires2022valuenetworks-geo.json, 12) (goncalves2011ecg.json, 320) (fonseca2022incorporating.json, 36) (guizzardi2005ontological.json, 20) (bernasconi2021ontovcm.json, 24) (bernasconi2023fair-principles.json, 20) (aristotle-ontology2019.json, 18) (sikora2021online-education.json, 2) (mgic-antt2011.json, 18350) (barcelos2015transport-networks.json, 6434) (albuquerque2011ontobio.json, 48) (cmpo2017.json, 336) (silva2012itarchitecture.json, 454) (lindeberg2022full-ontorights.json, 72) (dpo2017.json, 210) (kritz2020ontobg.json, 76) (derave2019dpo.json, 78) (spo2017.json, 60) (abrahao2018agriculture-operations.json, 12) (tourbo2021.json, 20) (lindeberg2022simple-ontorights.json, 30) (aguiar2019ooco.json, 30)
+t # 30
+v 0 Access
+v 1 BusinessProcess
+v 2 BusinessObject
+v 3 Access
+v 4 BusinessProcess
+v 5 Triggering
+e 1 0 source
+e 2 0 target
+e 2 3 target
+e 4 3 source
+e 4 5 source
+x (id-00ae4f79280548e4bf87f2d9999d727d, 2) (id-82442a4c03634d388a1bc2a24ed05a99, 692) (70ff1122-82b9-4d13-a15c-6cdc858dd4b3, 1) (id-c874bd6f-c66d-4b19-82bb-909e4f300ead, 30) (fa7c7a16-1338-4eae-97e2-7b9aed26799c, 5) (25eb1d65-b2a2-4123-ad8c-6578b468097d, 15) (id-cff0d7556f654881afbe90d896d2c969, 2) (id-ea12c7b9ede84a8dae334d9752053744, 21) (4d1d1da3-23ba-4562-a6c8-bca223c644fb, 3) (d35b7b41-b41e-417f-8f0b-4b46b25609b7, 442) (id-91edb5e7-9903-4a2c-867e-40db2b10cb5a, 271) (id-ee2bba95, 4) (54e87e47-f01c-49fe-af55-2068f4564bd2, 10) (c04bba8d-5b28-4f7d-957a-d0921f0d3142, 4) (265214de, 12) (id-723b6dc3-1c32-41a5-a02b-6d27b40c34d8, 64) (466b1e76, 9) (id-8d57243ff9f94eaeaad5033a98122432, 22) (d6c69f6a, 6) (id-316838d5-7351-46de-9071-f4ba8175825c, 16) (723b6dc3-1c32-41a5-a02b-6d27b40c34d8, 64) (b7b20375-d803-4baa-a59d-712acb1eae41, 92) (54525ee5, 255)
 
-Support: 30
+Support: 23
 """
 
 Q = parse_solution(solution_str)[0]

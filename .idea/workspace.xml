@@ -5,7 +5,19 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="885e033e-b91e-4400-9019-c6fa06afc07b" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/src/CMiner/MultiGraphMatch.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/CMiner/MultiGraphMatch.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Configurations/LoadingFiles/data_conf.json" beforeDir="false" afterPath="$PROJECT_DIR$/Configurations/LoadingFiles/data_conf.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Datasets/Test-dataset-15/graphs.data" beforeDir="false" afterPath="$PROJECT_DIR$/Datasets/Test-dataset-15/graphs.data" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_CMiner_debug/CMiner_usage.py" beforeDir="false" afterPath="$PROJECT_DIR$/_CMiner_debug/CMiner_usage.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_CMiner_debug/check_graph_multigraphmatch.py" beforeDir="false" afterPath="$PROJECT_DIR$/_CMiner_debug/check_graph_multigraphmatch.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_CMiner_debug/check_mining_solutions_multigraphmatch.py" beforeDir="false" afterPath="$PROJECT_DIR$/_CMiner_debug/check_mining_solutions_multigraphmatch.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_CMiner_debug/mining_solutions.txt" beforeDir="false" afterPath="$PROJECT_DIR$/_CMiner_debug/mining_solutions.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_CMiner_debug/output.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/CMiner/CMiner.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/CMiner/CMiner.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Graph/Graph.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/Graph/Graph.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/NetworkX/NetworkConfigurator.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/NetworkX/NetworkConfigurator.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -26,66 +38,67 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Python.1.executor&quot;: &quot;Run&quot;,
-    &quot;Python.2.executor&quot;: &quot;Run&quot;,
-    &quot;Python.BitMatrix.executor&quot;: &quot;Run&quot;,
-    &quot;Python.CMiner.executor&quot;: &quot;Run&quot;,
-    &quot;Python.CMinerSketch.executor&quot;: &quot;Run&quot;,
-    &quot;Python.CMiner_example.executor&quot;: &quot;Run&quot;,
-    &quot;Python.CMiner_usage.executor&quot;: &quot;Run&quot;,
-    &quot;Python.CompatibilityDomain.executor&quot;: &quot;Run&quot;,
-    &quot;Python.Graph.executor&quot;: &quot;Run&quot;,
-    &quot;Python.Matching.executor&quot;: &quot;Run&quot;,
-    &quot;Python.a.executor&quot;: &quot;Run&quot;,
-    &quot;Python.auto_matrix.executor&quot;: &quot;Run&quot;,
-    &quot;Python.automorfismi.executor&quot;: &quot;Run&quot;,
-    &quot;Python.check_graph.executor&quot;: &quot;Run&quot;,
-    &quot;Python.check_graph_multigraphmatch.executor&quot;: &quot;Run&quot;,
-    &quot;Python.check_graph_vf.executor&quot;: &quot;Run&quot;,
-    &quot;Python.check_mining_solutions.executor&quot;: &quot;Run&quot;,
-    &quot;Python.check_mining_solutions_multigraphmatch.executor&quot;: &quot;Run&quot;,
-    &quot;Python.check_mining_solutions_vf.executor&quot;: &quot;Run&quot;,
-    &quot;Python.comparisons.executor&quot;: &quot;Run&quot;,
-    &quot;Python.dataset_example.executor&quot;: &quot;Run&quot;,
-    &quot;Python.deleteme.executor&quot;: &quot;Run&quot;,
-    &quot;Python.domain.executor&quot;: &quot;Run&quot;,
-    &quot;Python.domain_paper.executor&quot;: &quot;Run&quot;,
-    &quot;Python.find_mapping_differences.executor&quot;: &quot;Run&quot;,
-    &quot;Python.graph_infos.executor&quot;: &quot;Run&quot;,
-    &quot;Python.leleCode.executor&quot;: &quot;Run&quot;,
-    &quot;Python.lotsOfSimmetries.executor&quot;: &quot;Run&quot;,
-    &quot;Python.main.executor&quot;: &quot;Run&quot;,
-    &quot;Python.matchExample.executor&quot;: &quot;Run&quot;,
-    &quot;Python.matchRotated.executor&quot;: &quot;Run&quot;,
-    &quot;Python.match_example.executor&quot;: &quot;Run&quot;,
-    &quot;Python.match_usage.executor&quot;: &quot;Run&quot;,
-    &quot;Python.matching.executor&quot;: &quot;Run&quot;,
-    &quot;Python.matching2.executor&quot;: &quot;Run&quot;,
-    &quot;Python.matchingEdgeSwap.executor&quot;: &quot;Run&quot;,
-    &quot;Python.matchingMultiRiPaper.executor&quot;: &quot;Run&quot;,
-    &quot;Python.matchingNodeSwap.executor&quot;: &quot;Run&quot;,
-    &quot;Python.matchingPaper.executor&quot;: &quot;Run&quot;,
-    &quot;Python.matchingProf.executor&quot;: &quot;Run&quot;,
-    &quot;Python.matchingSimple.executor&quot;: &quot;Run&quot;,
-    &quot;Python.mining.executor&quot;: &quot;Run&quot;,
-    &quot;Python.mining_example.executor&quot;: &quot;Run&quot;,
-    &quot;Python.obj_size.executor&quot;: &quot;Run&quot;,
-    &quot;Python.onDatabase.executor&quot;: &quot;Run&quot;,
-    &quot;Python.orbits_number.executor&quot;: &quot;Run&quot;,
-    &quot;Python.orbits_test.executor&quot;: &quot;Run&quot;,
-    &quot;Python.prova.executor&quot;: &quot;Run&quot;,
-    &quot;Python.query_speed_comparison.executor&quot;: &quot;Run&quot;,
-    &quot;Python.size.executor&quot;: &quot;Run&quot;,
-    &quot;Python.test.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/Users/simoneavellino/Desktop/CMiner/src/CMiner&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Python.1.executor": "Run",
+    "Python.2.executor": "Run",
+    "Python.BitMatrix.executor": "Run",
+    "Python.CMiner.executor": "Run",
+    "Python.CMinerSketch.executor": "Run",
+    "Python.CMiner_example.executor": "Run",
+    "Python.CMiner_usage.executor": "Run",
+    "Python.CompatibilityDomain.executor": "Run",
+    "Python.Graph.executor": "Run",
+    "Python.Matching.executor": "Run",
+    "Python.a.executor": "Run",
+    "Python.auto_matrix.executor": "Run",
+    "Python.automorfismi.executor": "Run",
+    "Python.check_graph.executor": "Run",
+    "Python.check_graph_multigraphmatch.executor": "Run",
+    "Python.check_graph_vf.executor": "Run",
+    "Python.check_mining_solutions.executor": "Run",
+    "Python.check_mining_solutions_multigraphmatch.executor": "Run",
+    "Python.check_mining_solutions_vf.executor": "Run",
+    "Python.comparisons.executor": "Run",
+    "Python.dataset_example.executor": "Run",
+    "Python.deleteme.executor": "Run",
+    "Python.domain.executor": "Run",
+    "Python.domain_paper.executor": "Run",
+    "Python.find_isomorphic_graphs.executor": "Run",
+    "Python.find_mapping_differences.executor": "Run",
+    "Python.graph_infos.executor": "Run",
+    "Python.leleCode.executor": "Run",
+    "Python.lotsOfSimmetries.executor": "Run",
+    "Python.main.executor": "Run",
+    "Python.matchExample.executor": "Run",
+    "Python.matchRotated.executor": "Run",
+    "Python.match_example.executor": "Run",
+    "Python.match_usage.executor": "Run",
+    "Python.matching.executor": "Run",
+    "Python.matching2.executor": "Run",
+    "Python.matchingEdgeSwap.executor": "Run",
+    "Python.matchingMultiRiPaper.executor": "Run",
+    "Python.matchingNodeSwap.executor": "Run",
+    "Python.matchingPaper.executor": "Run",
+    "Python.matchingProf.executor": "Run",
+    "Python.matchingSimple.executor": "Run",
+    "Python.mining.executor": "Run",
+    "Python.mining_example.executor": "Run",
+    "Python.obj_size.executor": "Run",
+    "Python.onDatabase.executor": "Run",
+    "Python.orbits_number.executor": "Run",
+    "Python.orbits_test.executor": "Run",
+    "Python.prova.executor": "Run",
+    "Python.query_speed_comparison.executor": "Run",
+    "Python.size.executor": "Run",
+    "Python.test.executor": "Run",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "main",
+    "last_opened_file_path": "/Users/simoneavellino/Desktop/CMiner/src/CMiner",
+    "settings.editor.selected.configurable": "preferences.pluginManager"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/src/CMiner" />
@@ -103,7 +116,7 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-python-sdk-8336bb23522e-31b6be0877a2-com.jetbrains.pycharm.community.sharedIndexes.bundled-PC-241.19072.16" />
+        <option value="bundled-python-sdk-98f27166c754-ba05f1cad1b1-com.jetbrains.pycharm.community.sharedIndexes.bundled-PC-242.21829.153" />
       </set>
     </attachedChunks>
   </component>

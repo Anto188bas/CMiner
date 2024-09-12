@@ -96,11 +96,8 @@ class SolutionChecker:
 
                 # if (idx_db_graph in graphs_to_consider and frequency != frequencies[graphs_to_consider.index(idx_db_graph)]) or (idx_db_graph not in graphs_to_consider and frequency > 0):
 
-                if (idx_db_graph in graphs_to_consider and frequency != frequencies[graphs_to_consider.index(idx_db_graph)]) or (idx_db_graph not in graphs_to_consider and frequency > 0):
-                    # print(graphs_to_consider)
-                    # print(frequencies)
-                    # print("aaaa", frequency, frequencies[idx_db_graph])
-                    print("    - Wrong solution for graph", self.db_graphs_names[idx_db_graph])
+                if (idx_db_graph in graphs_to_consider and frequency > frequencies[graphs_to_consider.index(idx_db_graph)]) or (idx_db_graph not in graphs_to_consider and frequency > 0):
+                    print("    - Wrong solution for graph", self.db_graphs_names[idx_db_graph], "Expected:", frequencies[graphs_to_consider.index(idx_db_graph)] if idx_db_graph in graphs_to_consider else 0, "Found:", frequency)
                     wrong += 1
                     break
 
