@@ -4,22 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="885e033e-b91e-4400-9019-c6fa06afc07b" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.ignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Test_codes/auto_matrix.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Test_codes/automorfismi.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Test_codes/comparisons.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Test_codes/es1.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Test_codes/graph_infos.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Test_codes/leleCode.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Test_codes/mining.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Test_codes/orbits_number.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Test_codes/par2.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Test_codes/query_speed_comparison.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Test_codes/result.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Test_codes/test1.py" beforeDir="false" />
-    </list>
+    <list default="true" id="885e033e-b91e-4400-9019-c6fa06afc07b" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -95,7 +80,7 @@
     "Python.test.executor": "Run",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "main",
+    "git-widget-placeholder": "Merging main",
     "last_opened_file_path": "/Users/simoneavellino/Desktop/CMiner/src/CMiner",
     "settings.editor.selected.configurable": "preferences.pluginManager"
   }
