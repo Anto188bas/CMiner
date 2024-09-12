@@ -1,0 +1,8 @@
+data
+build
+CMiner.egg-info
+dist
+Datasets
+_CMiner_debug
+.idea
+debug
