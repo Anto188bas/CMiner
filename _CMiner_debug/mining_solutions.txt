@@ -1,600 +1,234 @@
 t # 0
-v 0 Serving
-v 1 ApplicationService
-v 2 BusinessProcess
-v 3 Serving
-v 4 ApplicationService
-e 1 0 source
-e 2 0 target
-e 2 3 target
-e 4 3 source
-s 24
-x (10bfe7c2-74e3-4204-aa1d-a3cfe52e3ba9, 6) (id-1af2944d-77b2-4f6a-b0ec-06cf89d9043e, 14) (id-312e4521e6944ae29fa321c79477f552, 8) (c4d7f98f-555b-4bda-aa37-d2516a2e0aae, 24) (fa7c7a16-1338-4eae-97e2-7b9aed26799c, 2) (811a44f0, 42) (id-cff0d7556f654881afbe90d896d2c969, 6) (4d1d1da3-23ba-4562-a6c8-bca223c644fb, 4) (id-91edb5e7-9903-4a2c-867e-40db2b10cb5a, 14) (id-ee2bba95, 2) (e807f038-d05d-4aaf-8588-97ce18ce994e, 476) (66213410-6cc2-4e6c-8bd4-ee6865ba4895, 2) (id-901a675253624057b623142286b24b41, 8) (c04bba8d-5b28-4f7d-957a-d0921f0d3142, 200) (265214de, 6) (_GWZcQKmoEeqEM7mFKilpXw, 420) (id-679fbf4e-44af-4c56-aaf5-f36a601ed1c0, 2) (88f977a5-f39f-4491-9eb8-0ca26da61a8d, 26) (id-34b271d20e4d4b848671f4e6c994f50a, 2) (b7b20375-d803-4baa-a59d-712acb1eae41, 288) (54525ee5, 14) (38e69c5d-0a5b-4cc8-8bec-b6f9f1d39910, 56) (EAPK_DC0FE43C_E8E3_4b6e_ACD8_B7A3AB655837, 38) (1d1b3ca7-0530-4f63-8cdc-bafaf7ece2f6, 2)
+v 0 gen-set
+s 90
+x (oliveira2022rose.json, 8) (silva2012itarchitecture.json, 18) (quality-assurance-process-ontology2017.json, 3) (music-ontology.json, 6) (unimatch-ontology2022.json, 5) (sikora2021online-education.json, 7) (cmpo2017.json, 2) (recommendation-ontology.json, 1) (silveira2021oap.json, 3) (sales2018cover.json, 20) (bernasconi2021ontovcm.json, 2) (duarte2021ross.json, 1) (fonseca2022incorporating.json, 6) (maddalena2021ontocovid.json, 9) (public-tender.json, 4) (andrade2023integracao.json, 8) (barcelos2015transport-networks.json, 78) (fumagalli2022criminal-investigation.json, 2) (buchtela2020connection.json, 6) (mgic-antt2011.json, 181) (albuquerque2011ontobio.json, 22) (weigand2021artifact.json, 5) (lindeberg2022simple-ontorights.json, 2) (fischer2018ontorea.json, 4) (castro2012cloudvulnerability.json, 4) (buridan-ontology2021.json, 4) (brazilian-governmental-organizational-structures.json, 5) (falduci2022non-consensual-pornography.json, 2) (duarte2018osdef.json, 4) (gi2mo.json, 7) (digitaldoctor2022.json, 8) (guizzardi2022ufo.json, 8) (dpo2017.json, 3) (zanetti2019orm-o.json, 2) (lindeberg2022full-ontorights.json, 29) (martinez2013human-genome.json, 1) (qam.json, 5) (health-organizations.json, 3) (internal-affairs2013.json, 9) (alpinebits2022.json, 10) (sportbooking2021.json, 8) (freshbz2023.json, 12) (bernasconi2023fair-principles.json, 2) (sales2018competition.json, 3) (amaral2019rot.json, 5) (abrahao2018agriculture-operations.json, 3) (duarte2018reqon.json, 3) (aguiar2018rdbs-o.json, 3) (fernandez-cejas2022curie-o.json, 3) (romanenko2023what.json, 11) (g809-2015.json, 4) (eu-rent-refactored2022.json, 11) (guizzardi2014nfr.json, 2) (project-management-ontology.json, 3) (spmo2017.json, 1) (junior2018o4c.json, 2) (plato-ontology2019.json, 1) (tourbo2021.json, 10) (internship.json, 4) (goncalves2011ecg.json, 14) (van-ee2021modular.json, 6) (clergy-ontology.json, 1) (derave2019dpo.json, 18) (ferreira2015ontoemergeplan.json, 19) (public-expense-ontology2020.json, 9) (pereira2015doacao-orgaos.json, 3) (saleme2019mulseonto.json, 14) (amaral2020game-theory.json, 2) (stock-broker2021.json, 3) (mello2022monotheism.json, 2) (guizzardi2005ontological.json, 1) (fraller2019abc.json, 8) (online-mentoring.json, 6) (barcelos2013normative-acts.json, 10) (sousa2022triponto.json, 7) (aires2022valuenetworks-geo.json, 3) (rodrigues2019ontocrime.json, 9) (richetti2019tdecision.json, 1) (ppo-o2021.json, 11) (amaral2020rome.json, 5) (swo2016.json, 2) (rodrigues2019turbidite.json, 3) (core-o2023.json, 6) (spo2017.json, 4) (franco2018rpg.json, 2) (aristotle-ontology2019.json, 1) (it-infrastructure.json, 6) (ramirez2015userfeedback.json, 1) (aguiar2019ooco.json, 13) (guarino2018rea.json, 1)
 -------------
 
 t # 1
-v 0 Serving
-v 1 ApplicationService
-v 2 BusinessProcess
-v 3 Serving
-v 4 ApplicationService
-v 5 Serving
-e 1 0 source
-e 2 0 target
-e 2 3 target
-e 4 3 source
-e 4 5 source
-s 20
-x (id-1af2944d-77b2-4f6a-b0ec-06cf89d9043e, 11) (10bfe7c2-74e3-4204-aa1d-a3cfe52e3ba9, 6) (id-312e4521e6944ae29fa321c79477f552, 26) (fa7c7a16-1338-4eae-97e2-7b9aed26799c, 5) (c4d7f98f-555b-4bda-aa37-d2516a2e0aae, 40) (id-cff0d7556f654881afbe90d896d2c969, 5) (4d1d1da3-23ba-4562-a6c8-bca223c644fb, 1) (id-91edb5e7-9903-4a2c-867e-40db2b10cb5a, 27) (e807f038-d05d-4aaf-8588-97ce18ce994e, 668) (66213410-6cc2-4e6c-8bd4-ee6865ba4895, 2) (id-901a675253624057b623142286b24b41, 9) (c04bba8d-5b28-4f7d-957a-d0921f0d3142, 589) (265214de, 2) (88f977a5-f39f-4491-9eb8-0ca26da61a8d, 37) (id-34b271d20e4d4b848671f4e6c994f50a, 2) (b7b20375-d803-4baa-a59d-712acb1eae41, 349) (54525ee5, 27) (38e69c5d-0a5b-4cc8-8bec-b6f9f1d39910, 63) (EAPK_DC0FE43C_E8E3_4b6e_ACD8_B7A3AB655837, 45) (1d1b3ca7-0530-4f63-8cdc-bafaf7ece2f6, 1)
+v 0 gen-set
+v 1 gen
+e 1 0 generalization
+s 90
+x (quality-assurance-process-ontology2017.json, 9) (silva2012itarchitecture.json, 66) (oliveira2022rose.json, 18) (music-ontology.json, 17) (unimatch-ontology2022.json, 14) (sikora2021online-education.json, 20) (cmpo2017.json, 7) (silveira2021oap.json, 7) (recommendation-ontology.json, 2) (sales2018cover.json, 40) (bernasconi2021ontovcm.json, 9) (duarte2021ross.json, 2) (fonseca2022incorporating.json, 13) (maddalena2021ontocovid.json, 43) (public-tender.json, 20) (andrade2023integracao.json, 18) (barcelos2015transport-networks.json, 281) (fumagalli2022criminal-investigation.json, 5) (buchtela2020connection.json, 13) (mgic-antt2011.json, 545) (albuquerque2011ontobio.json, 96) (weigand2021artifact.json, 14) (lindeberg2022simple-ontorights.json, 4) (castro2012cloudvulnerability.json, 7) (fischer2018ontorea.json, 12) (falduci2022non-consensual-pornography.json, 5) (brazilian-governmental-organizational-structures.json, 11) (buridan-ontology2021.json, 9) (duarte2018osdef.json, 8) (gi2mo.json, 18) (digitaldoctor2022.json, 19) (guizzardi2022ufo.json, 16) (dpo2017.json, 9) (zanetti2019orm-o.json, 5) (lindeberg2022full-ontorights.json, 62) (martinez2013human-genome.json, 2) (qam.json, 15) (health-organizations.json, 11) (internal-affairs2013.json, 20) (alpinebits2022.json, 27) (sportbooking2021.json, 14) (freshbz2023.json, 35) (bernasconi2023fair-principles.json, 4) (sales2018competition.json, 6) (amaral2019rot.json, 12) (abrahao2018agriculture-operations.json, 10) (duarte2018reqon.json, 6) (aguiar2018rdbs-o.json, 8) (fernandez-cejas2022curie-o.json, 14) (romanenko2023what.json, 28) (g809-2015.json, 8) (eu-rent-refactored2022.json, 27) (guizzardi2014nfr.json, 5) (project-management-ontology.json, 6) (spmo2017.json, 2) (junior2018o4c.json, 5) (plato-ontology2019.json, 5) (tourbo2021.json, 28) (internship.json, 9) (goncalves2011ecg.json, 39) (van-ee2021modular.json, 16) (clergy-ontology.json, 2) (derave2019dpo.json, 38) (ferreira2015ontoemergeplan.json, 38) (public-expense-ontology2020.json, 21) (pereira2015doacao-orgaos.json, 3) (saleme2019mulseonto.json, 42) (amaral2020game-theory.json, 4) (stock-broker2021.json, 7) (mello2022monotheism.json, 5) (guizzardi2005ontological.json, 2) (fraller2019abc.json, 22) (online-mentoring.json, 12) (barcelos2013normative-acts.json, 21) (sousa2022triponto.json, 19) (aires2022valuenetworks-geo.json, 10) (rodrigues2019ontocrime.json, 21) (richetti2019tdecision.json, 2) (ppo-o2021.json, 22) (amaral2020rome.json, 10) (swo2016.json, 7) (rodrigues2019turbidite.json, 6) (core-o2023.json, 11) (spo2017.json, 11) (franco2018rpg.json, 4) (aristotle-ontology2019.json, 1) (it-infrastructure.json, 15) (ramirez2015userfeedback.json, 2) (aguiar2019ooco.json, 25) (guarino2018rea.json, 2)
 -------------
 
 t # 2
-v 0 Serving
-v 1 ApplicationService
-v 2 Serving
-v 3 BusinessProcess
-v 4 Serving
-e 1 0 source
-e 1 2 source
-e 3 2 target
-e 3 4 target
-s 22
-x (10bfe7c2-74e3-4204-aa1d-a3cfe52e3ba9, 8) (id-1af2944d-77b2-4f6a-b0ec-06cf89d9043e, 11) (id-312e4521e6944ae29fa321c79477f552, 26) (id-c874bd6f-c66d-4b19-82bb-909e4f300ead, 24) (c4d7f98f-555b-4bda-aa37-d2516a2e0aae, 40) (fa7c7a16-1338-4eae-97e2-7b9aed26799c, 15) (id-cff0d7556f654881afbe90d896d2c969, 7) (4d1d1da3-23ba-4562-a6c8-bca223c644fb, 1) (id-91edb5e7-9903-4a2c-867e-40db2b10cb5a, 29) (e807f038-d05d-4aaf-8588-97ce18ce994e, 668) (66213410-6cc2-4e6c-8bd4-ee6865ba4895, 7) (id-901a675253624057b623142286b24b41, 9) (c04bba8d-5b28-4f7d-957a-d0921f0d3142, 589) (265214de, 2) (88f977a5-f39f-4491-9eb8-0ca26da61a8d, 81) (id-316838d5-7351-46de-9071-f4ba8175825c, 3) (id-34b271d20e4d4b848671f4e6c994f50a, 8) (b7b20375-d803-4baa-a59d-712acb1eae41, 349) (54525ee5, 29) (38e69c5d-0a5b-4cc8-8bec-b6f9f1d39910, 72) (EAPK_DC0FE43C_E8E3_4b6e_ACD8_B7A3AB655837, 45) (1d1b3ca7-0530-4f63-8cdc-bafaf7ece2f6, 1)
+v 0 gen-set
+v 1 gen
+v 2 gen
+e 1 0 generalization
+e 2 0 generalization
+s 88
+x (oliveira2022rose.json, 26) (silva2012itarchitecture.json, 212) (quality-assurance-process-ontology2017.json, 24) (music-ontology.json, 34) (unimatch-ontology2022.json, 28) (sikora2021online-education.json, 68) (cmpo2017.json, 22) (recommendation-ontology.json, 2) (silveira2021oap.json, 10) (sales2018cover.json, 40) (bernasconi2021ontovcm.json, 32) (duarte2021ross.json, 2) (fonseca2022incorporating.json, 16) (maddalena2021ontocovid.json, 282) (public-tender.json, 118) (andrade2023integracao.json, 24) (barcelos2015transport-networks.json, 1428) (fumagalli2022criminal-investigation.json, 8) (buchtela2020connection.json, 16) (mgic-antt2011.json, 1764) (albuquerque2011ontobio.json, 424) (weigand2021artifact.json, 28) (lindeberg2022simple-ontorights.json, 4) (fischer2018ontorea.json, 28) (castro2012cloudvulnerability.json, 6) (buridan-ontology2021.json, 12) (brazilian-governmental-organizational-structures.json, 14) (falduci2022non-consensual-pornography.json, 8) (duarte2018osdef.json, 8) (gi2mo.json, 42) (digitaldoctor2022.json, 34) (guizzardi2022ufo.json, 16) (dpo2017.json, 24) (zanetti2019orm-o.json, 8) (lindeberg2022full-ontorights.json, 74) (martinez2013human-genome.json, 2) (qam.json, 30) (health-organizations.json, 34) (internal-affairs2013.json, 28) (alpinebits2022.json, 60) (sportbooking2021.json, 14) (freshbz2023.json, 74) (bernasconi2023fair-principles.json, 4) (sales2018competition.json, 6) (amaral2019rot.json, 20) (abrahao2018agriculture-operations.json, 28) (duarte2018reqon.json, 8) (aguiar2018rdbs-o.json, 16) (fernandez-cejas2022curie-o.json, 62) (romanenko2023what.json, 58) (g809-2015.json, 8) (eu-rent-refactored2022.json, 44) (guizzardi2014nfr.json, 8) (project-management-ontology.json, 6) (spmo2017.json, 2) (junior2018o4c.json, 8) (plato-ontology2019.json, 20) (tourbo2021.json, 58) (internship.json, 12) (goncalves2011ecg.json, 88) (van-ee2021modular.json, 30) (clergy-ontology.json, 2) (derave2019dpo.json, 56) (ferreira2015ontoemergeplan.json, 38) (public-expense-ontology2020.json, 30) (saleme2019mulseonto.json, 138) (amaral2020game-theory.json, 4) (stock-broker2021.json, 10) (mello2022monotheism.json, 8) (guizzardi2005ontological.json, 2) (fraller2019abc.json, 48) (online-mentoring.json, 12) (barcelos2013normative-acts.json, 24) (sousa2022triponto.json, 42) (aires2022valuenetworks-geo.json, 28) (rodrigues2019ontocrime.json, 30) (richetti2019tdecision.json, 2) (ppo-o2021.json, 34) (amaral2020rome.json, 10) (swo2016.json, 22) (rodrigues2019turbidite.json, 6) (core-o2023.json, 16) (spo2017.json, 26) (franco2018rpg.json, 6) (it-infrastructure.json, 24) (ramirez2015userfeedback.json, 2) (aguiar2019ooco.json, 28) (guarino2018rea.json, 2)
 -------------
 
 t # 3
-v 0 Serving
-v 1 ApplicationService
-v 2 Serving
-v 3 Realization
-v 4 ApplicationComponent
-e 1 0 source
-e 1 2 source
-e 1 3 target
-e 4 3 source
-s 25
-x (id-1af2944d-77b2-4f6a-b0ec-06cf89d9043e, 16) (id-312e4521e6944ae29fa321c79477f552, 76) (id-c874bd6f-c66d-4b19-82bb-909e4f300ead, 16) (c4d7f98f-555b-4bda-aa37-d2516a2e0aae, 6) (fa7c7a16-1338-4eae-97e2-7b9aed26799c, 26) (id-cff0d7556f654881afbe90d896d2c969, 8) (4d1d1da3-23ba-4562-a6c8-bca223c644fb, 2) (id-91edb5e7-9903-4a2c-867e-40db2b10cb5a, 70) (id-ee2bba95, 8) (66213410-6cc2-4e6c-8bd4-ee6865ba4895, 8) (id-901a675253624057b623142286b24b41, 8) (706502fc-f537-48f3-90d5-6f7943ff08e0, 2) (265214de, 4) (id-e3d6649534b64f8da8c514e786865589, 22) (466b1e76, 20) (88f977a5-f39f-4491-9eb8-0ca26da61a8d, 36) (id-9d0b0599-adfb-4f31-ad5e-c5f833182484, 2) (d6c69f6a, 184) (id-316838d5-7351-46de-9071-f4ba8175825c, 12) (id-34b271d20e4d4b848671f4e6c994f50a, 68) (id-3d54d4b1, 2) (b7b20375-d803-4baa-a59d-712acb1eae41, 468) (54525ee5, 68) (id-a34d3c77bf494e9cb58ff74b9c7038c2, 12) (1d1b3ca7-0530-4f63-8cdc-bafaf7ece2f6, 2)
+v 0 True
+s 81
+x (oliveira2022rose.json, 9) (silva2012itarchitecture.json, 32) (quality-assurance-process-ontology2017.json, 6) (music-ontology.json, 12) (sikora2021online-education.json, 10) (cmpo2017.json, 4) (recommendation-ontology.json, 2) (silveira2021oap.json, 6) (sales2018cover.json, 17) (bernasconi2021ontovcm.json, 3) (duarte2021ross.json, 2) (fonseca2022incorporating.json, 9) (public-tender.json, 8) (andrade2023integracao.json, 2) (barcelos2015transport-networks.json, 142) (fumagalli2022criminal-investigation.json, 2) (buchtela2020connection.json, 11) (mgic-antt2011.json, 327) (albuquerque2011ontobio.json, 22) (weigand2021artifact.json, 7) (lindeberg2022simple-ontorights.json, 4) (fischer2018ontorea.json, 8) (castro2012cloudvulnerability.json, 7) (brazilian-governmental-organizational-structures.json, 9) (falduci2022non-consensual-pornography.json, 1) (duarte2018osdef.json, 6) (gi2mo.json, 10) (digitaldoctor2022.json, 10) (guizzardi2022ufo.json, 12) (dpo2017.json, 6) (zanetti2019orm-o.json, 3) (lindeberg2022full-ontorights.json, 55) (martinez2013human-genome.json, 2) (qam.json, 10) (health-organizations.json, 3) (internal-affairs2013.json, 7) (alpinebits2022.json, 17) (sportbooking2021.json, 7) (freshbz2023.json, 13) (bernasconi2023fair-principles.json, 4) (sales2018competition.json, 5) (amaral2019rot.json, 8) (abrahao2018agriculture-operations.json, 3) (duarte2018reqon.json, 3) (aguiar2018rdbs-o.json, 4) (fernandez-cejas2022curie-o.json, 5) (romanenko2023what.json, 18) (g809-2015.json, 8) (eu-rent-refactored2022.json, 18) (guizzardi2014nfr.json, 2) (project-management-ontology.json, 6) (spmo2017.json, 2) (junior2018o4c.json, 4) (plato-ontology2019.json, 1) (tourbo2021.json, 15) (internship.json, 8) (goncalves2011ecg.json, 18) (van-ee2021modular.json, 6) (clergy-ontology.json, 2) (derave2019dpo.json, 17) (ferreira2015ontoemergeplan.json, 34) (public-expense-ontology2020.json, 15) (saleme2019mulseonto.json, 19) (amaral2020game-theory.json, 2) (stock-broker2021.json, 3) (guizzardi2005ontological.json, 2) (fraller2019abc.json, 16) (online-mentoring.json, 11) (barcelos2013normative-acts.json, 18) (sousa2022triponto.json, 10) (aires2022valuenetworks-geo.json, 3) (rodrigues2019ontocrime.json, 14) (ppo-o2021.json, 13) (amaral2020rome.json, 9) (swo2016.json, 2) (rodrigues2019turbidite.json, 6) (spo2017.json, 7) (franco2018rpg.json, 4) (it-infrastructure.json, 9) (aguiar2019ooco.json, 19) (guarino2018rea.json, 2)
 -------------
 
 t # 4
-v 0 Serving
-v 1 ApplicationService
-v 2 Serving
-v 3 Realization
-v 4 Serving
-e 1 0 source
-e 1 2 source
-e 1 3 target
-e 1 4 source
-s 21
-x (id-1af2944d-77b2-4f6a-b0ec-06cf89d9043e, 6) (id-312e4521e6944ae29fa321c79477f552, 504) (id-c874bd6f-c66d-4b19-82bb-909e4f300ead, 24) (c4d7f98f-555b-4bda-aa37-d2516a2e0aae, 6) (25eb1d65-b2a2-4123-ad8c-6578b468097d, 360) (fa7c7a16-1338-4eae-97e2-7b9aed26799c, 30) (id-cff0d7556f654881afbe90d896d2c969, 6) (id-91edb5e7-9903-4a2c-867e-40db2b10cb5a, 90) (id-ee2bba95, 6) (54e87e47-f01c-49fe-af55-2068f4564bd2, 126) (id-901a675253624057b623142286b24b41, 6) (706502fc-f537-48f3-90d5-6f7943ff08e0, 18) (id-e3d6649534b64f8da8c514e786865589, 60) (466b1e76, 60) (88f977a5-f39f-4491-9eb8-0ca26da61a8d, 48) (d6c69f6a, 450) (id-316838d5-7351-46de-9071-f4ba8175825c, 24) (id-34b271d20e4d4b848671f4e6c994f50a, 156) (b7b20375-d803-4baa-a59d-712acb1eae41, 876) (54525ee5, 90) (id-a34d3c77bf494e9cb58ff74b9c7038c2, 24)
+v 0 1*_1*
+s 87
+x (oliveira2022rose.json, 8) (silva2012itarchitecture.json, 7) (music-ontology.json, 2) (unimatch-ontology2022.json, 5) (sikora2021online-education.json, 6) (kritz2020ontobg.json, 9) (porello2020coex.json, 4) (recommendation-ontology.json, 4) (silveira2021oap.json, 4) (sales2018cover.json, 6) (bernasconi2021ontovcm.json, 9) (duarte2021ross.json, 7) (idaf2013.json, 2) (andrade2023integracao.json, 3) (carolla2014campus-management.json, 5) (barcelos2015transport-networks.json, 64) (fumagalli2022criminal-investigation.json, 3) (buchtela2020connection.json, 2) (debbech2020dysfunction-analysis.json, 8) (mgic-antt2011.json, 95) (albuquerque2011ontobio.json, 4) (weigand2021artifact.json, 17) (dcat-mlt-ufo2023.json, 2) (elghosh2020cargos.json, 1) (fischer2018ontorea.json, 2) (castro2012cloudvulnerability.json, 6) (falduci2022non-consensual-pornography.json, 6) (buridan-ontology2021.json, 1) (duarte2018osdef.json, 4) (gi2mo.json, 17) (digitaldoctor2022.json, 3) (guizzardi2022ufo.json, 3) (zanetti2019orm-o.json, 2) (debbech2019gosmo.json, 3) (lindeberg2022full-ontorights.json, 7) (qam.json, 2) (health-organizations.json, 1) (santos2020valuenetworks.json, 2) (internal-affairs2013.json, 4) (alpinebits2022.json, 7) (sportbooking2021.json, 3) (freshbz2023.json, 10) (bernasconi2023fair-principles.json, 3) (sales2018competition.json, 2) (amaral2019rot.json, 3) (abrahao2018agriculture-operations.json, 8) (rodrigues2017urinary-profiles.json, 7) (duarte2018reqon.json, 3) (social-contract.json, 5) (aguiar2018rdbs-o.json, 1) (nardi2015ufo-s.json, 3) (amaral2022ethical-requirements.json, 4) (repa2021public-administration.json, 1) (guizzardi2014nfr.json, 1) (zhou2017hazard.json, 1) (spmo2017.json, 1) (plato-ontology2019.json, 2) (tourbo2021.json, 3) (internship.json, 3) (oliveira2007collaboration.json, 2) (goncalves2011ecg.json, 2) (van-ee2021modular.json, 2) (derave2019dpo.json, 24) (ferreira2015ontoemergeplan.json, 12) (gomes2022digital-technology.json, 1) (pereira2015doacao-orgaos.json, 1) (saleme2019mulseonto.json, 1) (amaral2020game-theory.json, 2) (mello2022monotheism.json, 3) (guizzardi2005ontological.json, 3) (fraller2019abc.json, 5) (online-mentoring.json, 4) (photography.json, 2) (sousa2022triponto.json, 8) (aires2022valuenetworks-geo.json, 8) (bank-model.json, 3) (rodrigues2019ontocrime.json, 33) (richetti2019tdecision.json, 1) (van-wingerde2020smart-contracts.json, 1) (niederkofler2019dssapple.json, 3) (amaral2020rome.json, 1) (valaski2020medical-appointment_.json, 2) (aristotle-ontology2019.json, 3) (it-infrastructure.json, 2) (ramirez2015userfeedback.json, 2) (elikan2018brand-identity.json, 4) (aguiar2019ooco.json, 1)
 -------------
 
 t # 5
-v 0 Serving
-v 1 ApplicationService
-v 2 Realization
-v 3 ApplicationComponent
-v 4 Serving
-e 1 0 source
-e 1 2 target
-e 3 2 source
-e 3 4 target
-s 25
-x (id-1af2944d-77b2-4f6a-b0ec-06cf89d9043e, 3) (id-312e4521e6944ae29fa321c79477f552, 95) (id-c874bd6f-c66d-4b19-82bb-909e4f300ead, 12) (c4d7f98f-555b-4bda-aa37-d2516a2e0aae, 28) (25eb1d65-b2a2-4123-ad8c-6578b468097d, 1) (fa7c7a16-1338-4eae-97e2-7b9aed26799c, 23) (811a44f0, 5) (9b56e3eb-a43f-4545-8554-67ad2952bb58, 1) (4d1d1da3-23ba-4562-a6c8-bca223c644fb, 13) (id-91edb5e7-9903-4a2c-867e-40db2b10cb5a, 52) (id-ee2bba95, 18) (66213410-6cc2-4e6c-8bd4-ee6865ba4895, 8) (id-901a675253624057b623142286b24b41, 11) (_GWZcQKmoEeqEM7mFKilpXw, 16) (265214de, 8) (id-e3d6649534b64f8da8c514e786865589, 3) (id-723b6dc3-1c32-41a5-a02b-6d27b40c34d8, 1) (466b1e76, 22) (88f977a5-f39f-4491-9eb8-0ca26da61a8d, 46) (id-9d0b0599-adfb-4f31-ad5e-c5f833182484, 4) (d6c69f6a, 527) (id-316838d5-7351-46de-9071-f4ba8175825c, 3) (id-3d54d4b1, 4) (54525ee5, 51) (1d1b3ca7-0530-4f63-8cdc-bafaf7ece2f6, 8)
+v 0 subkind
+s 99
+x (university-ontology.json, 3) (oliveira2022rose.json, 4) (silva2012itarchitecture.json, 32) (srro-ontology.json, 4) (quality-assurance-process-ontology2017.json, 3) (music-ontology.json, 16) (unimatch-ontology2022.json, 10) (sikora2021online-education.json, 16) (moreira2018saref4health.json, 4) (kritz2020ontobg.json, 47) (cmpo2017.json, 5) (recommendation-ontology.json, 11) (silveira2021oap.json, 2) (sales2018cover.json, 12) (bernasconi2021ontovcm.json, 17) (fonseca2022incorporating.json, 5) (maddalena2021ontocovid.json, 27) (idaf2013.json, 21) (public-tender.json, 9) (andrade2023integracao.json, 7) (khantong2020ontology.json, 4) (barcelos2015transport-networks.json, 71) (neves2020nwpontology.json, 11) (mgic-antt2011.json, 348) (albuquerque2011ontobio.json, 41) (dcat-mlt-ufo2023.json, 4) (elghosh2020cargos.json, 1) (jacobs2022sdpontology.json, 1) (lindeberg2022simple-ontorights.json, 2) (fischer2018ontorea.json, 4) (castro2012cloudvulnerability.json, 10) (buridan-ontology2021.json, 26) (brazilian-governmental-organizational-structures.json, 3) (construction-model.json, 2) (digitaldoctor2022.json, 12) (guizzardi2022ufo.json, 7) (dpo2017.json, 11) (zanetti2019orm-o.json, 2) (lindeberg2022full-ontorights.json, 68) (qam.json, 5) (kostov2017towards.json, 1) (health-organizations.json, 2) (santos2020valuenetworks.json, 6) (internal-affairs2013.json, 17) (alpinebits2022.json, 22) (freshbz2023.json, 30) (bernasconi2023fair-principles.json, 17) (sales2018competition.json, 2) (haridy2021egyptian-e-government.json, 14) (ramos2021bias.json, 4) (amaral2019rot.json, 8) (abrahao2018agriculture-operations.json, 2) (rodrigues2017urinary-profiles.json, 1) (social-contract.json, 7) (aguiar2018rdbs-o.json, 21) (fernandez-cejas2022curie-o.json, 2) (romanenko2023what.json, 18) (g809-2015.json, 4) (eu-rent-refactored2022.json, 10) (repa2021public-administration.json, 2) (project-management-ontology.json, 2) (spmo2017.json, 1) (junior2018o4c.json, 2) (plato-ontology2019.json, 24) (tourbo2021.json, 16) (internship.json, 2) (oliveira2007collaboration.json, 4) (goncalves2011ecg.json, 24) (van-ee2021modular.json, 25) (barros2020programming.json, 11) (derave2019dpo.json, 79) (ferreira2015ontoemergeplan.json, 2) (pereira2015doacao-orgaos.json, 2) (stock-broker2021.json, 2) (guizzardi2005ontological.json, 3) (fraller2019abc.json, 19) (online-mentoring.json, 3) (barcelos2013normative-acts.json, 27) (photography.json, 2) (sousa2022triponto.json, 8) (aires2022valuenetworks-geo.json, 2) (bank-model.json, 5) (van-wingerde2020smart-contracts.json, 1) (ppo-o2021.json, 30) (niederkofler2019dssapple.json, 4) (library.json, 4) (amaral2020rome.json, 3) (neves2021grain-production.json, 2) (rodrigues2019turbidite.json, 2) (core-o2023.json, 2) (cgts2021sebim.json, 15) (spo2017.json, 2) (franco2018rpg.json, 1) (aristotle-ontology2019.json, 69) (it-infrastructure.json, 8) (ramirez2015userfeedback.json, 3) (elikan2018brand-identity.json, 2) (aguiar2019ooco.json, 29) (guarino2018rea.json, 2)
 -------------
 
 t # 6
-v 0 Serving
-v 1 ApplicationService
-v 2 Realization
-v 3 ApplicationComponent
-v 4 Realization
-e 1 0 source
-e 1 2 target
-e 3 2 source
-e 3 4 source
-s 27
-x (id-1af2944d-77b2-4f6a-b0ec-06cf89d9043e, 22) (id-312e4521e6944ae29fa321c79477f552, 48) (id-c874bd6f-c66d-4b19-82bb-909e4f300ead, 25) (c4d7f98f-555b-4bda-aa37-d2516a2e0aae, 12) (25eb1d65-b2a2-4123-ad8c-6578b468097d, 2) (fa7c7a16-1338-4eae-97e2-7b9aed26799c, 4) (811a44f0, 8) (id-cff0d7556f654881afbe90d896d2c969, 1) (4d1d1da3-23ba-4562-a6c8-bca223c644fb, 11) (d35b7b41-b41e-417f-8f0b-4b46b25609b7, 5) (id-91edb5e7-9903-4a2c-867e-40db2b10cb5a, 218) (id-ee2bba95, 5) (66213410-6cc2-4e6c-8bd4-ee6865ba4895, 12) (id-901a675253624057b623142286b24b41, 2) (265214de, 3) (id-f89e5c031f397811f6aa0fac0dbac5bc, 5) (id-e3d6649534b64f8da8c514e786865589, 25) (466b1e76, 8) (88f977a5-f39f-4491-9eb8-0ca26da61a8d, 4) (id-9d0b0599-adfb-4f31-ad5e-c5f833182484, 5) (id-8d57243ff9f94eaeaad5033a98122432, 1) (d6c69f6a, 1139) (id-34b271d20e4d4b848671f4e6c994f50a, 62) (id-3d54d4b1, 10) (b7b20375-d803-4baa-a59d-712acb1eae41, 776) (54525ee5, 188) (1d1b3ca7-0530-4f63-8cdc-bafaf7ece2f6, 32)
+v 0 subkind
+v 1 gen
+e 0 1 specific
+s 95
+x (university-ontology.json, 3) (quality-assurance-process-ontology2017.json, 3) (silva2012itarchitecture.json, 32) (srro-ontology.json, 4) (oliveira2022rose.json, 4) (music-ontology.json, 17) (unimatch-ontology2022.json, 10) (sikora2021online-education.json, 21) (moreira2018saref4health.json, 4) (kritz2020ontobg.json, 47) (cmpo2017.json, 5) (silveira2021oap.json, 2) (recommendation-ontology.json, 11) (sales2018cover.json, 14) (bernasconi2021ontovcm.json, 17) (fonseca2022incorporating.json, 5) (maddalena2021ontocovid.json, 42) (idaf2013.json, 21) (public-tender.json, 7) (andrade2023integracao.json, 7) (khantong2020ontology.json, 4) (barcelos2015transport-networks.json, 71) (neves2020nwpontology.json, 11) (mgic-antt2011.json, 387) (albuquerque2011ontobio.json, 43) (dcat-mlt-ufo2023.json, 4) (jacobs2022sdpontology.json, 1) (lindeberg2022simple-ontorights.json, 2) (castro2012cloudvulnerability.json, 10) (fischer2018ontorea.json, 4) (construction-model.json, 2) (brazilian-governmental-organizational-structures.json, 4) (buridan-ontology2021.json, 42) (digitaldoctor2022.json, 16) (guizzardi2022ufo.json, 7) (dpo2017.json, 10) (zanetti2019orm-o.json, 1) (lindeberg2022full-ontorights.json, 70) (qam.json, 5) (kostov2017towards.json, 1) (health-organizations.json, 2) (santos2020valuenetworks.json, 6) (internal-affairs2013.json, 17) (alpinebits2022.json, 25) (freshbz2023.json, 31) (bernasconi2023fair-principles.json, 19) (sales2018competition.json, 2) (haridy2021egyptian-e-government.json, 14) (ramos2021bias.json, 6) (amaral2019rot.json, 8) (abrahao2018agriculture-operations.json, 2) (rodrigues2017urinary-profiles.json, 1) (social-contract.json, 7) (aguiar2018rdbs-o.json, 23) (fernandez-cejas2022curie-o.json, 2) (romanenko2023what.json, 18) (g809-2015.json, 4) (eu-rent-refactored2022.json, 10) (repa2021public-administration.json, 2) (project-management-ontology.json, 2) (junior2018o4c.json, 2) (plato-ontology2019.json, 25) (tourbo2021.json, 16) (internship.json, 2) (oliveira2007collaboration.json, 4) (goncalves2011ecg.json, 24) (van-ee2021modular.json, 30) (barros2020programming.json, 11) (derave2019dpo.json, 82) (ferreira2015ontoemergeplan.json, 2) (pereira2015doacao-orgaos.json, 2) (stock-broker2021.json, 2) (guizzardi2005ontological.json, 4) (fraller2019abc.json, 19) (online-mentoring.json, 3) (barcelos2013normative-acts.json, 27) (photography.json, 2) (sousa2022triponto.json, 8) (aires2022valuenetworks-geo.json, 2) (bank-model.json, 5) (ppo-o2021.json, 30) (niederkofler2019dssapple.json, 4) (library.json, 4) (amaral2020rome.json, 3) (neves2021grain-production.json, 2) (rodrigues2019turbidite.json, 2) (core-o2023.json, 2) (cgts2021sebim.json, 15) (spo2017.json, 2) (franco2018rpg.json, 1) (aristotle-ontology2019.json, 70) (it-infrastructure.json, 8) (ramirez2015userfeedback.json, 3) (aguiar2019ooco.json, 34) (guarino2018rea.json, 2)
 -------------
 
 t # 7
-v 0 Serving
-v 1 ApplicationService
-v 2 Realization
-v 3 ApplicationComponent
-v 4 Realization
-v 5 ApplicationService
-e 1 0 source
-e 1 2 target
-e 3 2 source
-e 3 4 source
-e 5 4 target
-s 26
-x (id-1af2944d-77b2-4f6a-b0ec-06cf89d9043e, 22) (id-c874bd6f-c66d-4b19-82bb-909e4f300ead, 3) (id-312e4521e6944ae29fa321c79477f552, 48) (fa7c7a16-1338-4eae-97e2-7b9aed26799c, 4) (25eb1d65-b2a2-4123-ad8c-6578b468097d, 1) (c4d7f98f-555b-4bda-aa37-d2516a2e0aae, 2) (811a44f0, 8) (id-cff0d7556f654881afbe90d896d2c969, 1) (4d1d1da3-23ba-4562-a6c8-bca223c644fb, 11) (d35b7b41-b41e-417f-8f0b-4b46b25609b7, 3) (id-91edb5e7-9903-4a2c-867e-40db2b10cb5a, 188) (id-ee2bba95, 5) (66213410-6cc2-4e6c-8bd4-ee6865ba4895, 12) (id-901a675253624057b623142286b24b41, 2) (265214de, 3) (id-f89e5c031f397811f6aa0fac0dbac5bc, 3) (466b1e76, 8) (88f977a5-f39f-4491-9eb8-0ca26da61a8d, 4) (id-9d0b0599-adfb-4f31-ad5e-c5f833182484, 3) (id-8d57243ff9f94eaeaad5033a98122432, 1) (d6c69f6a, 923) (id-34b271d20e4d4b848671f4e6c994f50a, 62) (id-3d54d4b1, 6) (b7b20375-d803-4baa-a59d-712acb1eae41, 776) (54525ee5, 188) (1d1b3ca7-0530-4f63-8cdc-bafaf7ece2f6, 30)
+v 0 subkind
+v 1 gen
+v 2 kind
+e 0 1 specific
+e 2 1 general
+s 82
+x (university-ontology.json, 3) (srro-ontology.json, 4) (silva2012itarchitecture.json, 32) (music-ontology.json, 6) (unimatch-ontology2022.json, 10) (sikora2021online-education.json, 15) (moreira2018saref4health.json, 3) (kritz2020ontobg.json, 47) (cmpo2017.json, 5) (recommendation-ontology.json, 8) (silveira2021oap.json, 2) (bernasconi2021ontovcm.json, 13) (fonseca2022incorporating.json, 4) (maddalena2021ontocovid.json, 6) (idaf2013.json, 11) (public-tender.json, 7) (khantong2020ontology.json, 4) (andrade2023integracao.json, 1) (barcelos2015transport-networks.json, 36) (neves2020nwpontology.json, 11) (mgic-antt2011.json, 176) (albuquerque2011ontobio.json, 18) (dcat-mlt-ufo2023.json, 2) (jacobs2022sdpontology.json, 1) (lindeberg2022simple-ontorights.json, 2) (fischer2018ontorea.json, 2) (castro2012cloudvulnerability.json, 10) (buridan-ontology2021.json, 14) (brazilian-governmental-organizational-structures.json, 3) (construction-model.json, 2) (digitaldoctor2022.json, 3) (guizzardi2022ufo.json, 5) (dpo2017.json, 7) (zanetti2019orm-o.json, 1) (lindeberg2022full-ontorights.json, 18) (qam.json, 5) (kostov2017towards.json, 1) (health-organizations.json, 2) (internal-affairs2013.json, 10) (alpinebits2022.json, 4) (freshbz2023.json, 14) (bernasconi2023fair-principles.json, 8) (haridy2021egyptian-e-government.json, 12) (abrahao2018agriculture-operations.json, 2) (social-contract.json, 7) (aguiar2018rdbs-o.json, 11) (fernandez-cejas2022curie-o.json, 2) (romanenko2023what.json, 6) (g809-2015.json, 4) (eu-rent-refactored2022.json, 7) (repa2021public-administration.json, 2) (project-management-ontology.json, 2) (junior2018o4c.json, 2) (plato-ontology2019.json, 12) (tourbo2021.json, 12) (internship.json, 2) (oliveira2007collaboration.json, 4) (goncalves2011ecg.json, 4) (van-ee2021modular.json, 17) (derave2019dpo.json, 9) (ferreira2015ontoemergeplan.json, 2) (pereira2015doacao-orgaos.json, 2) (stock-broker2021.json, 2) (guizzardi2005ontological.json, 3) (fraller2019abc.json, 14) (online-mentoring.json, 2) (barcelos2013normative-acts.json, 12) (photography.json, 2) (aires2022valuenetworks-geo.json, 2) (bank-model.json, 5) (ppo-o2021.json, 7) (niederkofler2019dssapple.json, 2) (library.json, 4) (neves2021grain-production.json, 2) (rodrigues2019turbidite.json, 2) (cgts2021sebim.json, 8) (spo2017.json, 1) (franco2018rpg.json, 1) (aristotle-ontology2019.json, 36) (it-infrastructure.json, 8) (ramirez2015userfeedback.json, 3) (aguiar2019ooco.json, 16)
 -------------
 
 t # 8
-v 0 Serving
-v 1 BusinessProcess
-v 2 Composition
-v 3 Composition
-v 4 BusinessProcess
-e 1 0 target
-e 1 2 source
-e 1 3 source
-e 4 3 target
-s 20
-x (10bfe7c2-74e3-4204-aa1d-a3cfe52e3ba9, 12) (id-1af2944d-77b2-4f6a-b0ec-06cf89d9043e, 66) (id-c874bd6f-c66d-4b19-82bb-909e4f300ead, 10) (505d4fe5-b205-465c-82c7-cf1da708c789, 12) (id-b38298279bf9403ca2b84a5d73c9eedb, 15) (25eb1d65-b2a2-4123-ad8c-6578b468097d, 20) (c4d7f98f-555b-4bda-aa37-d2516a2e0aae, 104) (fa7c7a16-1338-4eae-97e2-7b9aed26799c, 80) (4d1d1da3-23ba-4562-a6c8-bca223c644fb, 44) (id-901a675253624057b623142286b24b41, 6) (706502fc-f537-48f3-90d5-6f7943ff08e0, 2106) (id-723b6dc3-1c32-41a5-a02b-6d27b40c34d8, 2) (id-4da38437d83c4d98b09c62de6cd34d15, 18) (88f977a5-f39f-4491-9eb8-0ca26da61a8d, 90) (id-316838d5-7351-46de-9071-f4ba8175825c, 2) (723b6dc3-1c32-41a5-a02b-6d27b40c34d8, 2) (b7b20375-d803-4baa-a59d-712acb1eae41, 844) (id-be4886b4de5c4cb1a74d8211804b93ff, 12) (EAPK_DC0FE43C_E8E3_4b6e_ACD8_B7A3AB655837, 60) (1d1b3ca7-0530-4f63-8cdc-bafaf7ece2f6, 44)
+v 0 subkind
+v 1 gen
+v 2 kind
+v 3 gen
+e 0 1 specific
+e 2 1 general
+e 2 3 general
+s 75
+x (university-ontology.json, 6) (ppo-o2021.json, 2) (silva2012itarchitecture.json, 108) (srro-ontology.json, 6) (construction-model.json, 2) (niederkofler2019dssapple.json, 2) (music-ontology.json, 8) (fernandez-cejas2022curie-o.json, 2) (romanenko2023what.json, 16) (library.json, 12) (unimatch-ontology2022.json, 42) (sikora2021online-education.json, 94) (moreira2018saref4health.json, 3) (kritz2020ontobg.json, 432) (cmpo2017.json, 6) (digitaldoctor2022.json, 2) (g809-2015.json, 4) (recommendation-ontology.json, 26) (eu-rent-refactored2022.json, 41) (guizzardi2022ufo.json, 6) (dpo2017.json, 10) (repa2021public-administration.json, 2) (rodrigues2019turbidite.json, 2) (bernasconi2021ontovcm.json, 36) (zanetti2019orm-o.json, 2) (project-management-ontology.json, 6) (fonseca2022incorporating.json, 10) (maddalena2021ontocovid.json, 8) (idaf2013.json, 83) (junior2018o4c.json, 2) (lindeberg2022full-ontorights.json, 32) (public-tender.json, 63) (qam.json, 23) (plato-ontology2019.json, 22) (cgts2021sebim.json, 22) (khantong2020ontology.json, 12) (barcelos2015transport-networks.json, 116) (health-organizations.json, 14) (tourbo2021.json, 28) (spo2017.json, 1) (internal-affairs2013.json, 24) (internship.json, 2) (oliveira2007collaboration.json, 4) (goncalves2011ecg.json, 4) (van-ee2021modular.json, 112) (alpinebits2022.json, 4) (aristotle-ontology2019.json, 94) (neves2020nwpontology.json, 38) (castro2012cloudvulnerability.json, 20) (derave2019dpo.json, 15) (freshbz2023.json, 34) (bernasconi2023fair-principles.json, 6) (ferreira2015ontoemergeplan.json, 4) (mgic-antt2011.json, 1143) (albuquerque2011ontobio.json, 104) (haridy2021egyptian-e-government.json, 50) (pereira2015doacao-orgaos.json, 14) (it-infrastructure.json, 14) (stock-broker2021.json, 6) (ramirez2015userfeedback.json, 6) (guizzardi2005ontological.json, 14) (fraller2019abc.json, 52) (online-mentoring.json, 2) (aguiar2019ooco.json, 54) (abrahao2018agriculture-operations.json, 2) (barcelos2013normative-acts.json, 50) (photography.json, 1) (lindeberg2022simple-ontorights.json, 1) (brazilian-governmental-organizational-structures.json, 2) (social-contract.json, 18) (aguiar2018rdbs-o.json, 12) (fischer2018ontorea.json, 2) (aires2022valuenetworks-geo.json, 2) (bank-model.json, 13) (buridan-ontology2021.json, 70)
 -------------
 
 t # 9
-v 0 Serving
-v 1 BusinessProcess
-v 2 Access
-v 3 BusinessObject
-v 4 Access
-e 1 0 target
-e 1 2 source
-e 3 2 target
-e 3 4 target
-s 20
-x (id-82442a4c03634d388a1bc2a24ed05a99, 3694) (id-c874bd6f-c66d-4b19-82bb-909e4f300ead, 82) (c4d7f98f-555b-4bda-aa37-d2516a2e0aae, 1) (25eb1d65-b2a2-4123-ad8c-6578b468097d, 32) (4d1d1da3-23ba-4562-a6c8-bca223c644fb, 1) (id-91edb5e7-9903-4a2c-867e-40db2b10cb5a, 288) (id-ee2bba95, 9) (54e87e47-f01c-49fe-af55-2068f4564bd2, 5) (265214de, 41) (id-723b6dc3-1c32-41a5-a02b-6d27b40c34d8, 56) (466b1e76, 3) (id-322369a4-b2ad-4c96-8d58-a5d264295809, 10) (88f977a5-f39f-4491-9eb8-0ca26da61a8d, 6) (id-316838d5-7351-46de-9071-f4ba8175825c, 325) (723b6dc3-1c32-41a5-a02b-6d27b40c34d8, 56) (b7b20375-d803-4baa-a59d-712acb1eae41, 102) (id-be4886b4de5c4cb1a74d8211804b93ff, 2) (54525ee5, 271) (38e69c5d-0a5b-4cc8-8bec-b6f9f1d39910, 1) (1d1b3ca7-0530-4f63-8cdc-bafaf7ece2f6, 1)
+v 0 subkind
+v 1 gen
+v 2 kind
+v 3 gen
+v 4 subkind
+e 0 1 specific
+e 2 1 general
+e 2 3 general
+e 4 3 specific
+s 70
+x (university-ontology.json, 6) (ppo-o2021.json, 2) (srro-ontology.json, 6) (silva2012itarchitecture.json, 108) (niederkofler2019dssapple.json, 2) (library.json, 12) (music-ontology.json, 8) (fernandez-cejas2022curie-o.json, 2) (romanenko2023what.json, 6) (unimatch-ontology2022.json, 42) (sikora2021online-education.json, 94) (moreira2018saref4health.json, 2) (fischer2018ontorea.json, 2) (kritz2020ontobg.json, 432) (cmpo2017.json, 4) (g809-2015.json, 4) (recommendation-ontology.json, 26) (eu-rent-refactored2022.json, 10) (guizzardi2022ufo.json, 4) (dpo2017.json, 10) (repa2021public-administration.json, 2) (rodrigues2019turbidite.json, 2) (buridan-ontology2021.json, 38) (bernasconi2021ontovcm.json, 36) (project-management-ontology.json, 2) (fonseca2022incorporating.json, 4) (maddalena2021ontocovid.json, 8) (idaf2013.json, 74) (junior2018o4c.json, 2) (lindeberg2022full-ontorights.json, 32) (public-tender.json, 42) (qam.json, 8) (plato-ontology2019.json, 22) (cgts2021sebim.json, 18) (khantong2020ontology.json, 12) (barcelos2015transport-networks.json, 76) (health-organizations.json, 2) (tourbo2021.json, 28) (internal-affairs2013.json, 18) (internship.json, 2) (oliveira2007collaboration.json, 4) (goncalves2011ecg.json, 4) (van-ee2021modular.json, 112) (alpinebits2022.json, 4) (aristotle-ontology2019.json, 78) (neves2020nwpontology.json, 38) (derave2019dpo.json, 4) (freshbz2023.json, 28) (bernasconi2023fair-principles.json, 6) (ferreira2015ontoemergeplan.json, 2) (mgic-antt2011.json, 874) (albuquerque2011ontobio.json, 104) (haridy2021egyptian-e-government.json, 50) (pereira2015doacao-orgaos.json, 2) (it-infrastructure.json, 14) (stock-broker2021.json, 2) (ramirez2015userfeedback.json, 6) (guizzardi2005ontological.json, 2) (fraller2019abc.json, 40) (online-mentoring.json, 2) (aguiar2019ooco.json, 44) (abrahao2018agriculture-operations.json, 2) (barcelos2013normative-acts.json, 50) (brazilian-governmental-organizational-structures.json, 2) (social-contract.json, 18) (aguiar2018rdbs-o.json, 12) (aires2022valuenetworks-geo.json, 2) (castro2012cloudvulnerability.json, 18) (bank-model.json, 8) (construction-model.json, 2)
 -------------
 
 t # 10
-v 0 Serving
-v 1 BusinessProcess
-v 2 Triggering
-v 3 BusinessProcess
-v 4 Serving
-e 1 0 target
-e 1 2 target
-e 3 2 source
-e 3 4 target
-s 20
-x (id-1af2944d-77b2-4f6a-b0ec-06cf89d9043e, 11) (id-c874bd6f-c66d-4b19-82bb-909e4f300ead, 26) (70ff1122-82b9-4d13-a15c-6cdc858dd4b3, 4) (fa7c7a16-1338-4eae-97e2-7b9aed26799c, 3) (c4d7f98f-555b-4bda-aa37-d2516a2e0aae, 4) (811a44f0, 13) (4d1d1da3-23ba-4562-a6c8-bca223c644fb, 7) (id-91edb5e7-9903-4a2c-867e-40db2b10cb5a, 45) (id-ee2bba95, 4) (66213410-6cc2-4e6c-8bd4-ee6865ba4895, 2) (c04bba8d-5b28-4f7d-957a-d0921f0d3142, 101) (265214de, 5) (id-679fbf4e-44af-4c56-aaf5-f36a601ed1c0, 3) (id-723b6dc3-1c32-41a5-a02b-6d27b40c34d8, 7) (466b1e76, 3) (88f977a5-f39f-4491-9eb8-0ca26da61a8d, 27) (d6c69f6a, 1) (723b6dc3-1c32-41a5-a02b-6d27b40c34d8, 7) (b7b20375-d803-4baa-a59d-712acb1eae41, 169) (54525ee5, 43)
+v 0 kind
+s 111
+x (university-ontology.json, 5) (guizzardi2020decision-making.json, 3) (silva2012itarchitecture.json, 27) (srro-ontology.json, 7) (music-ontology.json, 6) (unimatch-ontology2022.json, 16) (sikora2021online-education.json, 25) (moreira2018saref4health.json, 4) (kritz2020ontobg.json, 126) (cmpo2017.json, 5) (recommendation-ontology.json, 3) (silveira2021oap.json, 8) (bernasconi2021ontovcm.json, 13) (fonseca2022incorporating.json, 10) (maddalena2021ontocovid.json, 8) (idaf2013.json, 5) (public-tender.json, 8) (andrade2023integracao.json, 9) (khantong2020ontology.json, 13) (carolla2014campus-management.json, 7) (barcelos2015transport-networks.json, 79) (fumagalli2022criminal-investigation.json, 1) (buchtela2020connection.json, 6) (neves2020nwpontology.json, 13) (mgic-antt2011.json, 153) (albuquerque2011ontobio.json, 9) (dcat-mlt-ufo2023.json, 3) (elghosh2020cargos.json, 1) (jacobs2022sdpontology.json, 14) (lindeberg2022simple-ontorights.json, 10) (fischer2018ontorea.json, 5) (castro2012cloudvulnerability.json, 11) (brazilian-governmental-organizational-structures.json, 5) (falduci2022non-consensual-pornography.json, 2) (buridan-ontology2021.json, 11) (construction-model.json, 3) (laurier2018rea.json, 2) (gi2mo.json, 4) (digitaldoctor2022.json, 5) (guizzardi2022ufo.json, 11) (dpo2017.json, 5) (zanetti2019orm-o.json, 3) (lindeberg2022full-ontorights.json, 20) (martinez2013human-genome.json, 1) (qam.json, 11) (kostov2017towards.json, 7) (health-organizations.json, 6) (santos2020valuenetworks.json, 5) (internal-affairs2013.json, 13) (alpinebits2022.json, 9) (duarte2020jogabilidade.json, 5) (sportbooking2021.json, 8) (freshbz2023.json, 19) (bernasconi2023fair-principles.json, 9) (haridy2021egyptian-e-government.json, 6) (ramos2021bias.json, 1) (amaral2019rot.json, 1) (abrahao2018agriculture-operations.json, 9) (rodrigues2017urinary-profiles.json, 1) (social-contract.json, 12) (aguiar2018rdbs-o.json, 12) (fernandez-cejas2022curie-o.json, 4) (romanenko2023what.json, 4) (zhou2017hazard-ontology-train-control.json, 10) (g809-2015.json, 11) (eu-rent-refactored2022.json, 4) (abel2015petroleum-system.json, 4) (repa2021public-administration.json, 1) (project-management-ontology.json, 4) (junior2018o4c.json, 3) (plato-ontology2019.json, 27) (tourbo2021.json, 7) (internship.json, 3) (oliveira2007collaboration.json, 4) (goncalves2011ecg.json, 33) (van-ee2021modular.json, 15) (clergy-ontology.json, 1) (zhou2017hazard-ontology-robotic-strolling.json, 4) (derave2019dpo.json, 10) (ferreira2015ontoemergeplan.json, 9) (public-expense-ontology2020.json, 16) (pereira2015doacao-orgaos.json, 4) (stock-broker2021.json, 2) (guizzardi2005ontological.json, 9) (fraller2019abc.json, 10) (online-mentoring.json, 6) (barcelos2013normative-acts.json, 10) (photography.json, 8) (sousa2022triponto.json, 9) (aires2022valuenetworks-geo.json, 9) (bank-model.json, 3) (rodrigues2019ontocrime.json, 6) (experiment2013.json, 15) (van-wingerde2020smart-contracts.json, 15) (ppo-o2021.json, 15) (niederkofler2019dssapple.json, 5) (library.json, 7) (amaral2020rome.json, 6) (neves2021grain-production.json, 4) (rodrigues2019turbidite.json, 2) (core-o2023.json, 1) (cgts2021sebim.json, 5) (valaski2020medical-appointment_.json, 4) (spo2017.json, 11) (franco2018rpg.json, 8) (aristotle-ontology2019.json, 53) (it-infrastructure.json, 13) (ramirez2015userfeedback.json, 9) (elikan2018brand-identity.json, 10) (real-estate-ontology.json, 3) (aguiar2019ooco.json, 11)
 -------------
 
 t # 11
-v 0 Serving
-v 1 BusinessProcess
-v 2 Triggering
-v 3 BusinessProcess
-v 4 Serving
-v 5 Triggering
-e 1 0 target
-e 1 2 target
-e 3 2 source
-e 3 4 target
-e 3 5 target
-s 20
-x (id-1af2944d-77b2-4f6a-b0ec-06cf89d9043e, 11) (70ff1122-82b9-4d13-a15c-6cdc858dd4b3, 2) (id-c874bd6f-c66d-4b19-82bb-909e4f300ead, 34) (c4d7f98f-555b-4bda-aa37-d2516a2e0aae, 2) (fa7c7a16-1338-4eae-97e2-7b9aed26799c, 2) (811a44f0, 13) (4d1d1da3-23ba-4562-a6c8-bca223c644fb, 4) (id-91edb5e7-9903-4a2c-867e-40db2b10cb5a, 45) (id-ee2bba95, 2) (66213410-6cc2-4e6c-8bd4-ee6865ba4895, 2) (c04bba8d-5b28-4f7d-957a-d0921f0d3142, 53) (265214de, 5) (id-679fbf4e-44af-4c56-aaf5-f36a601ed1c0, 2) (id-723b6dc3-1c32-41a5-a02b-6d27b40c34d8, 9) (466b1e76, 5) (88f977a5-f39f-4491-9eb8-0ca26da61a8d, 15) (d6c69f6a, 1) (723b6dc3-1c32-41a5-a02b-6d27b40c34d8, 9) (b7b20375-d803-4baa-a59d-712acb1eae41, 252) (54525ee5, 43)
+v 0 kind
+v 1 gen
+e 0 1 general
+s 102
+x (university-ontology.json, 7) (silva2012itarchitecture.json, 38) (srro-ontology.json, 9) (guizzardi2020decision-making.json, 2) (music-ontology.json, 9) (unimatch-ontology2022.json, 15) (sikora2021online-education.json, 15) (moreira2018saref4health.json, 5) (kritz2020ontobg.json, 123) (cmpo2017.json, 6) (silveira2021oap.json, 6) (recommendation-ontology.json, 8) (bernasconi2021ontovcm.json, 16) (fonseca2022incorporating.json, 12) (maddalena2021ontocovid.json, 21) (idaf2013.json, 13) (public-tender.json, 17) (khantong2020ontology.json, 8) (andrade2023integracao.json, 6) (carolla2014campus-management.json, 5) (barcelos2015transport-networks.json, 164) (fumagalli2022criminal-investigation.json, 3) (buchtela2020connection.json, 13) (neves2020nwpontology.json, 15) (mgic-antt2011.json, 272) (albuquerque2011ontobio.json, 23) (dcat-mlt-ufo2023.json, 2) (jacobs2022sdpontology.json, 3) (lindeberg2022simple-ontorights.json, 6) (castro2012cloudvulnerability.json, 13) (fischer2018ontorea.json, 6) (falduci2022non-consensual-pornography.json, 4) (construction-model.json, 2) (buridan-ontology2021.json, 15) (brazilian-governmental-organizational-structures.json, 4) (laurier2018rea.json, 4) (gi2mo.json, 31) (digitaldoctor2022.json, 7) (guizzardi2022ufo.json, 12) (dpo2017.json, 7) (zanetti2019orm-o.json, 7) (lindeberg2022full-ontorights.json, 26) (martinez2013human-genome.json, 1) (qam.json, 15) (kostov2017towards.json, 4) (health-organizations.json, 8) (internal-affairs2013.json, 15) (alpinebits2022.json, 4) (duarte2020jogabilidade.json, 2) (sportbooking2021.json, 3) (freshbz2023.json, 23) (bernasconi2023fair-principles.json, 8) (haridy2021egyptian-e-government.json, 12) (ramos2021bias.json, 1) (amaral2019rot.json, 1) (abrahao2018agriculture-operations.json, 2) (rodrigues2017urinary-profiles.json, 2) (social-contract.json, 9) (aguiar2018rdbs-o.json, 13) (fernandez-cejas2022curie-o.json, 8) (romanenko2023what.json, 11) (g809-2015.json, 10) (eu-rent-refactored2022.json, 23) (abel2015petroleum-system.json, 5) (repa2021public-administration.json, 2) (project-management-ontology.json, 6) (junior2018o4c.json, 2) (plato-ontology2019.json, 12) (tourbo2021.json, 14) (internship.json, 2) (oliveira2007collaboration.json, 4) (goncalves2011ecg.json, 27) (van-ee2021modular.json, 17) (clergy-ontology.json, 1) (derave2019dpo.json, 20) (ferreira2015ontoemergeplan.json, 8) (public-expense-ontology2020.json, 7) (pereira2015doacao-orgaos.json, 8) (stock-broker2021.json, 5) (guizzardi2005ontological.json, 11) (fraller2019abc.json, 18) (online-mentoring.json, 10) (barcelos2013normative-acts.json, 12) (photography.json, 5) (sousa2022triponto.json, 4) (aires2022valuenetworks-geo.json, 2) (bank-model.json, 8) (rodrigues2019ontocrime.json, 16) (ppo-o2021.json, 8) (niederkofler2019dssapple.json, 4) (library.json, 8) (neves2021grain-production.json, 2) (rodrigues2019turbidite.json, 4) (cgts2021sebim.json, 12) (valaski2020medical-appointment_.json, 2) (spo2017.json, 4) (franco2018rpg.json, 2) (aristotle-ontology2019.json, 47) (it-infrastructure.json, 17) (ramirez2015userfeedback.json, 7) (real-estate-ontology.json, 5) (aguiar2019ooco.json, 18)
 -------------
 
 t # 12
-v 0 Serving
-v 1 BusinessProcess
-v 2 Triggering
-v 3 BusinessProcess
-v 4 Triggering
-e 1 0 target
-e 1 2 target
-e 3 2 source
-e 3 4 target
-s 23
-x (id-1af2944d-77b2-4f6a-b0ec-06cf89d9043e, 8) (id-c874bd6f-c66d-4b19-82bb-909e4f300ead, 11) (70ff1122-82b9-4d13-a15c-6cdc858dd4b3, 2) (25eb1d65-b2a2-4123-ad8c-6578b468097d, 3) (fa7c7a16-1338-4eae-97e2-7b9aed26799c, 6) (c4d7f98f-555b-4bda-aa37-d2516a2e0aae, 1) (811a44f0, 16) (4d1d1da3-23ba-4562-a6c8-bca223c644fb, 5) (id-91edb5e7-9903-4a2c-867e-40db2b10cb5a, 25) (id-ee2bba95, 1) (66213410-6cc2-4e6c-8bd4-ee6865ba4895, 5) (c04bba8d-5b28-4f7d-957a-d0921f0d3142, 40) (265214de, 4) (id-679fbf4e-44af-4c56-aaf5-f36a601ed1c0, 2) (id-723b6dc3-1c32-41a5-a02b-6d27b40c34d8, 15) (466b1e76, 8) (88f977a5-f39f-4491-9eb8-0ca26da61a8d, 5) (d6c69f6a, 7) (723b6dc3-1c32-41a5-a02b-6d27b40c34d8, 15) (b7b20375-d803-4baa-a59d-712acb1eae41, 249) (54525ee5, 26) (38e69c5d-0a5b-4cc8-8bec-b6f9f1d39910, 2) (id-e2024c7995ba41d2b431cc7e5513d111, 3)
+v 0 kind
+v 1 gen
+v 2 role
+e 0 1 general
+e 2 1 specific
+s 74
+x (university-ontology.json, 2) (laurier2018rea.json, 4) (guizzardi2020decision-making.json, 1) (srro-ontology.json, 5) (silva2012itarchitecture.json, 6) (niederkofler2019dssapple.json, 2) (music-ontology.json, 3) (romanenko2023what.json, 5) (library.json, 2) (gi2mo.json, 25) (digitaldoctor2022.json, 2) (g809-2015.json, 6) (silveira2021oap.json, 4) (eu-rent-refactored2022.json, 9) (abel2015petroleum-system.json, 3) (guizzardi2022ufo.json, 7) (rodrigues2019turbidite.json, 1) (buridan-ontology2021.json, 1) (bernasconi2021ontovcm.json, 3) (zanetti2019orm-o.json, 6) (project-management-ontology.json, 2) (fonseca2022incorporating.json, 5) (maddalena2021ontocovid.json, 13) (idaf2013.json, 2) (lindeberg2022full-ontorights.json, 4) (public-tender.json, 10) (martinez2013human-genome.json, 1) (qam.json, 4) (cgts2021sebim.json, 4) (andrade2023integracao.json, 5) (khantong2020ontology.json, 1) (kostov2017towards.json, 1) (valaski2020medical-appointment_.json, 2) (carolla2014campus-management.json, 5) (barcelos2015transport-networks.json, 125) (health-organizations.json, 2) (tourbo2021.json, 2) (spo2017.json, 3) (fumagalli2022criminal-investigation.json, 3) (internal-affairs2013.json, 3) (goncalves2011ecg.json, 20) (buchtela2020connection.json, 2) (duarte2020jogabilidade.json, 2) (clergy-ontology.json, 1) (franco2018rpg.json, 1) (neves2020nwpontology.json, 4) (derave2019dpo.json, 9) (aristotle-ontology2019.json, 11) (sportbooking2021.json, 3) (freshbz2023.json, 7) (ferreira2015ontoemergeplan.json, 5) (mgic-antt2011.json, 58) (albuquerque2011ontobio.json, 5) (public-expense-ontology2020.json, 7) (pereira2015doacao-orgaos.json, 4) (it-infrastructure.json, 5) (stock-broker2021.json, 3) (ramirez2015userfeedback.json, 4) (ramos2021bias.json, 1) (real-estate-ontology.json, 5) (amaral2019rot.json, 1) (guizzardi2005ontological.json, 4) (online-mentoring.json, 8) (aguiar2019ooco.json, 2) (photography.json, 2) (jacobs2022sdpontology.json, 2) (lindeberg2022simple-ontorights.json, 4) (social-contract.json, 2) (aguiar2018rdbs-o.json, 2) (castro2012cloudvulnerability.json, 1) (sousa2022triponto.json, 2) (bank-model.json, 3) (rodrigues2019ontocrime.json, 8) (falduci2022non-consensual-pornography.json, 4)
 -------------
 
 t # 13
-v 0 Serving
-v 1 BusinessProcess
-v 2 Triggering
-v 3 BusinessProcess
-v 4 Triggering
-v 5 BusinessProcess
-e 1 0 target
-e 1 2 target
-e 3 2 source
-e 3 4 target
-e 5 4 source
-s 23
-x (id-1af2944d-77b2-4f6a-b0ec-06cf89d9043e, 6) (70ff1122-82b9-4d13-a15c-6cdc858dd4b3, 2) (id-c874bd6f-c66d-4b19-82bb-909e4f300ead, 9) (c4d7f98f-555b-4bda-aa37-d2516a2e0aae, 1) (fa7c7a16-1338-4eae-97e2-7b9aed26799c, 6) (25eb1d65-b2a2-4123-ad8c-6578b468097d, 2) (811a44f0, 10) (4d1d1da3-23ba-4562-a6c8-bca223c644fb, 4) (id-91edb5e7-9903-4a2c-867e-40db2b10cb5a, 19) (id-ee2bba95, 1) (66213410-6cc2-4e6c-8bd4-ee6865ba4895, 3) (c04bba8d-5b28-4f7d-957a-d0921f0d3142, 34) (265214de, 3) (id-679fbf4e-44af-4c56-aaf5-f36a601ed1c0, 2) (id-723b6dc3-1c32-41a5-a02b-6d27b40c34d8, 15) (466b1e76, 6) (88f977a5-f39f-4491-9eb8-0ca26da61a8d, 5) (d6c69f6a, 6) (723b6dc3-1c32-41a5-a02b-6d27b40c34d8, 15) (b7b20375-d803-4baa-a59d-712acb1eae41, 244) (54525ee5, 19) (38e69c5d-0a5b-4cc8-8bec-b6f9f1d39910, 1) (id-e2024c7995ba41d2b431cc7e5513d111, 1)
+v 0 kind
+v 1 gen
+v 2 gen
+e 0 1 general
+e 0 2 general
+s 92
+x (university-ontology.json, 10) (srro-ontology.json, 14) (silva2012itarchitecture.json, 138) (music-ontology.json, 14) (unimatch-ontology2022.json, 62) (sikora2021online-education.json, 94) (moreira2018saref4health.json, 4) (kritz2020ontobg.json, 864) (cmpo2017.json, 8) (recommendation-ontology.json, 26) (silveira2021oap.json, 12) (bernasconi2021ontovcm.json, 38) (fonseca2022incorporating.json, 28) (maddalena2021ontocovid.json, 92) (idaf2013.json, 92) (public-tender.json, 90) (andrade2023integracao.json, 8) (khantong2020ontology.json, 18) (carolla2014campus-management.json, 8) (barcelos2015transport-networks.json, 368) (fumagalli2022criminal-investigation.json, 6) (buchtela2020connection.json, 16) (neves2020nwpontology.json, 40) (mgic-antt2011.json, 1734) (albuquerque2011ontobio.json, 110) (lindeberg2022simple-ontorights.json, 8) (fischer2018ontorea.json, 14) (castro2012cloudvulnerability.json, 24) (construction-model.json, 2) (buridan-ontology2021.json, 78) (brazilian-governmental-organizational-structures.json, 2) (falduci2022non-consensual-pornography.json, 6) (laurier2018rea.json, 4) (gi2mo.json, 390) (digitaldoctor2022.json, 6) (guizzardi2022ufo.json, 10) (dpo2017.json, 10) (zanetti2019orm-o.json, 10) (lindeberg2022full-ontorights.json, 74) (qam.json, 64) (kostov2017towards.json, 6) (health-organizations.json, 56) (internal-affairs2013.json, 32) (alpinebits2022.json, 4) (sportbooking2021.json, 2) (freshbz2023.json, 84) (bernasconi2023fair-principles.json, 6) (haridy2021egyptian-e-government.json, 50) (abrahao2018agriculture-operations.json, 2) (rodrigues2017urinary-profiles.json, 2) (social-contract.json, 20) (aguiar2018rdbs-o.json, 14) (fernandez-cejas2022curie-o.json, 32) (romanenko2023what.json, 38) (g809-2015.json, 6) (eu-rent-refactored2022.json, 130) (abel2015petroleum-system.json, 4) (repa2021public-administration.json, 2) (project-management-ontology.json, 12) (junior2018o4c.json, 2) (plato-ontology2019.json, 22) (tourbo2021.json, 30) (internship.json, 2) (oliveira2007collaboration.json, 4) (goncalves2011ecg.json, 22) (van-ee2021modular.json, 112) (derave2019dpo.json, 80) (ferreira2015ontoemergeplan.json, 12) (public-expense-ontology2020.json, 6) (pereira2015doacao-orgaos.json, 56) (stock-broker2021.json, 12) (guizzardi2005ontological.json, 48) (fraller2019abc.json, 76) (online-mentoring.json, 18) (barcelos2013normative-acts.json, 50) (photography.json, 4) (sousa2022triponto.json, 12) (aires2022valuenetworks-geo.json, 2) (bank-model.json, 18) (rodrigues2019ontocrime.json, 78) (ppo-o2021.json, 2) (niederkofler2019dssapple.json, 2) (library.json, 16) (rodrigues2019turbidite.json, 4) (cgts2021sebim.json, 38) (valaski2020medical-appointment_.json, 2) (spo2017.json, 2) (aristotle-ontology2019.json, 118) (it-infrastructure.json, 26) (ramirez2015userfeedback.json, 8) (real-estate-ontology.json, 4) (aguiar2019ooco.json, 66)
 -------------
 
 t # 14
-v 0 Serving
-v 1 BusinessProcess
-v 2 Triggering
-v 3 Triggering
-v 4 BusinessProcess
-e 1 0 target
-e 1 2 target
-e 1 3 source
-e 4 3 target
-s 24
-x (id-00ae4f79280548e4bf87f2d9999d727d, 1) (id-1af2944d-77b2-4f6a-b0ec-06cf89d9043e, 9) (id-c874bd6f-c66d-4b19-82bb-909e4f300ead, 14) (70ff1122-82b9-4d13-a15c-6cdc858dd4b3, 2) (25eb1d65-b2a2-4123-ad8c-6578b468097d, 5) (fa7c7a16-1338-4eae-97e2-7b9aed26799c, 6) (c4d7f98f-555b-4bda-aa37-d2516a2e0aae, 2) (811a44f0, 17) (4d1d1da3-23ba-4562-a6c8-bca223c644fb, 5) (id-91edb5e7-9903-4a2c-867e-40db2b10cb5a, 33) (id-ee2bba95, 2) (66213410-6cc2-4e6c-8bd4-ee6865ba4895, 4) (c04bba8d-5b28-4f7d-957a-d0921f0d3142, 35) (265214de, 4) (id-679fbf4e-44af-4c56-aaf5-f36a601ed1c0, 1) (id-723b6dc3-1c32-41a5-a02b-6d27b40c34d8, 10) (466b1e76, 7) (88f977a5-f39f-4491-9eb8-0ca26da61a8d, 3) (d6c69f6a, 4) (723b6dc3-1c32-41a5-a02b-6d27b40c34d8, 10) (b7b20375-d803-4baa-a59d-712acb1eae41, 254) (54525ee5, 32) (38e69c5d-0a5b-4cc8-8bec-b6f9f1d39910, 1) (id-e2024c7995ba41d2b431cc7e5513d111, 4)
+v 0 _functionalcomplex_
+s 128
+x (university-ontology.json, 19) (oliveira2022rose.json, 14) (guizzardi2020decision-making.json, 8) (silva2012itarchitecture.json, 74) (srro-ontology.json, 17) (music-ontology.json, 32) (unimatch-ontology2022.json, 31) (sikora2021online-education.json, 53) (moreira2018saref4health.json, 8) (kritz2020ontobg.json, 179) (cmpo2017.json, 23) (andersson2018value-ascription.json, 1) (porello2020coex.json, 3) (recommendation-ontology.json, 14) (silveira2021oap.json, 23) (sales2018cover.json, 14) (bernasconi2021ontovcm.json, 44) (fonseca2022incorporating.json, 18) (maddalena2021ontocovid.json, 35) (idaf2013.json, 39) (chartered-service.json, 2) (public-tender.json, 43) (andrade2023integracao.json, 25) (khantong2020ontology.json, 30) (pereira2020ontotrans.json, 35) (carolla2014campus-management.json, 12) (barcelos2015transport-networks.json, 443) (fumagalli2022criminal-investigation.json, 8) (buchtela2020connection.json, 19) (neves2020nwpontology.json, 29) (mgic-antt2011.json, 794) (albuquerque2011ontobio.json, 89) (weigand2021artifact.json, 24) (dcat-mlt-ufo2023.json, 12) (elghosh2020cargos.json, 3) (jacobs2022sdpontology.json, 18) (lindeberg2022simple-ontorights.json, 20) (fischer2018ontorea.json, 11) (castro2012cloudvulnerability.json, 24) (brazilian-governmental-organizational-structures.json, 15) (falduci2022non-consensual-pornography.json, 11) (buridan-ontology2021.json, 34) (construction-model.json, 9) (laurier2018rea.json, 12) (gi2mo.json, 35) (digitaldoctor2022.json, 20) (guizzardi2022ufo.json, 32) (dpo2017.json, 17) (zanetti2019orm-o.json, 15) (lindeberg2022full-ontorights.json, 85) (martinez2013human-genome.json, 2) (qam.json, 33) (kostov2017towards.json, 13) (health-organizations.json, 16) (santos2020valuenetworks.json, 9) (internal-affairs2013.json, 46) (alpinebits2022.json, 32) (duarte2020jogabilidade.json, 7) (sportbooking2021.json, 17) (freshbz2023.json, 50) (bernasconi2023fair-principles.json, 28) (sales2018competition.json, 11) (haridy2021egyptian-e-government.json, 18) (ramos2021bias.json, 10) (amaral2019rot.json, 13) (abrahao2018agriculture-operations.json, 13) (rodrigues2017urinary-profiles.json, 8) (social-contract.json, 21) (aguiar2018rdbs-o.json, 35) (nardi2015ufo-s.json, 11) (fernandez-cejas2022curie-o.json, 12) (romanenko2023what.json, 27) (zhou2017hazard-ontology-train-control.json, 10) (amaral2022ethical-requirements.json, 17) (g809-2015.json, 22) (eu-rent-refactored2022.json, 46) (abel2015petroleum-system.json, 8) (repa2021public-administration.json, 10) (project-management-ontology.json, 11) (spmo2017.json, 1) (junior2018o4c.json, 5) (plato-ontology2019.json, 50) (tourbo2021.json, 24) (internship.json, 17) (oliveira2007collaboration.json, 12) (goncalves2011ecg.json, 81) (van-ee2021modular.json, 42) (clergy-ontology.json, 17) (zhou2017hazard-ontology-robotic-strolling.json, 4) (derave2019dpo.json, 85) (ferreira2015ontoemergeplan.json, 71) (gomes2022digital-technology.json, 15) (public-expense-ontology2020.json, 25) (pereira2015doacao-orgaos.json, 21) (saleme2019mulseonto.json, 2) (amaral2020game-theory.json, 2) (stock-broker2021.json, 12) (guarino2016value.json, 5) (guizzardi2005ontological.json, 32) (fraller2019abc.json, 33) (online-mentoring.json, 24) (barcelos2013normative-acts.json, 24) (photography.json, 13) (sousa2022triponto.json, 25) (aires2022valuenetworks-geo.json, 13) (bank-model.json, 14) (rodrigues2019ontocrime.json, 35) (garcia2022human-genome-events.json, 7) (experiment2013.json, 15) (van-wingerde2020smart-contracts.json, 20) (ppo-o2021.json, 48) (niederkofler2019dssapple.json, 25) (library.json, 21) (amaral2020rome.json, 24) (neves2021grain-production.json, 13) (rodrigues2019turbidite.json, 20) (core-o2023.json, 6) (cgts2021sebim.json, 25) (valaski2020medical-appointment_.json, 6) (spo2017.json, 25) (franco2018rpg.json, 14) (aristotle-ontology2019.json, 119) (it-infrastructure.json, 30) (ramirez2015userfeedback.json, 20) (elikan2018brand-identity.json, 13) (real-estate-ontology.json, 13) (aguiar2019ooco.json, 47) (guarino2018rea.json, 4)
 -------------
 
 t # 15
-v 0 Serving
-v 1 BusinessProcess
-v 2 Triggering
-v 3 BusinessProcess
-v 4 Triggering
-e 1 0 target
-e 1 2 source
-e 3 2 target
-e 3 4 source
-s 24
-x (id-00ae4f79280548e4bf87f2d9999d727d, 3) (id-1af2944d-77b2-4f6a-b0ec-06cf89d9043e, 9) (id-c874bd6f-c66d-4b19-82bb-909e4f300ead, 2) (70ff1122-82b9-4d13-a15c-6cdc858dd4b3, 2) (505d4fe5-b205-465c-82c7-cf1da708c789, 1) (25eb1d65-b2a2-4123-ad8c-6578b468097d, 4) (fa7c7a16-1338-4eae-97e2-7b9aed26799c, 2) (c4d7f98f-555b-4bda-aa37-d2516a2e0aae, 1) (811a44f0, 17) (4d1d1da3-23ba-4562-a6c8-bca223c644fb, 8) (id-91edb5e7-9903-4a2c-867e-40db2b10cb5a, 32) (id-ee2bba95, 3) (66213410-6cc2-4e6c-8bd4-ee6865ba4895, 7) (c04bba8d-5b28-4f7d-957a-d0921f0d3142, 49) (265214de, 3) (id-679fbf4e-44af-4c56-aaf5-f36a601ed1c0, 1) (id-723b6dc3-1c32-41a5-a02b-6d27b40c34d8, 7) (466b1e76, 6) (88f977a5-f39f-4491-9eb8-0ca26da61a8d, 2) (d6c69f6a, 3) (723b6dc3-1c32-41a5-a02b-6d27b40c34d8, 7) (b7b20375-d803-4baa-a59d-712acb1eae41, 252) (54525ee5, 32) (id-e2024c7995ba41d2b431cc7e5513d111, 2)
+v 0 _relator_
+s 104
+x (university-ontology.json, 4) (oliveira2022rose.json, 6) (guizzardi2020decision-making.json, 4) (silva2012itarchitecture.json, 10) (music-ontology.json, 3) (unimatch-ontology2022.json, 2) (sikora2021online-education.json, 2) (porello2020coex.json, 2) (recommendation-ontology.json, 2) (silveira2021oap.json, 1) (sales2018cover.json, 15) (bernasconi2021ontovcm.json, 10) (fonseca2022incorporating.json, 4) (maddalena2021ontocovid.json, 4) (idaf2013.json, 3) (chartered-service.json, 2) (public-tender.json, 17) (andrade2023integracao.json, 4) (carolla2014campus-management.json, 5) (barcelos2015transport-networks.json, 42) (fumagalli2022criminal-investigation.json, 2) (mgic-antt2011.json, 242) (albuquerque2011ontobio.json, 10) (weigand2021artifact.json, 1) (dcat-mlt-ufo2023.json, 3) (elghosh2020cargos.json, 1) (jacobs2022sdpontology.json, 1) (lindeberg2022simple-ontorights.json, 6) (fischer2018ontorea.json, 2) (castro2012cloudvulnerability.json, 8) (falduci2022non-consensual-pornography.json, 4) (buridan-ontology2021.json, 14) (construction-model.json, 1) (laurier2018rea.json, 11) (gi2mo.json, 17) (digitaldoctor2022.json, 17) (guizzardi2022ufo.json, 7) (zanetti2019orm-o.json, 14) (lindeberg2022full-ontorights.json, 35) (martinez2013human-genome.json, 2) (qam.json, 6) (health-organizations.json, 1) (internal-affairs2013.json, 10) (alpinebits2022.json, 8) (duarte2020jogabilidade.json, 1) (sportbooking2021.json, 11) (freshbz2023.json, 20) (bernasconi2023fair-principles.json, 5) (sales2018competition.json, 6) (haridy2021egyptian-e-government.json, 10) (amaral2019rot.json, 8) (abrahao2018agriculture-operations.json, 7) (rodrigues2017urinary-profiles.json, 6) (social-contract.json, 3) (nardi2015ufo-s.json, 3) (fernandez-cejas2022curie-o.json, 8) (romanenko2023what.json, 9) (zhou2017hazard-ontology-train-control.json, 5) (g809-2015.json, 2) (eu-rent-refactored2022.json, 20) (repa2021public-administration.json, 1) (project-management-ontology.json, 1) (spmo2017.json, 1) (junior2018o4c.json, 4) (plato-ontology2019.json, 3) (tourbo2021.json, 9) (internship.json, 8) (goncalves2011ecg.json, 12) (van-ee2021modular.json, 4) (clergy-ontology.json, 7) (zhou2017hazard-ontology-robotic-strolling.json, 3) (barros2020programming.json, 12) (derave2019dpo.json, 35) (ferreira2015ontoemergeplan.json, 9) (gomes2022digital-technology.json, 1) (public-expense-ontology2020.json, 17) (pereira2015doacao-orgaos.json, 2) (amaral2020game-theory.json, 1) (stock-broker2021.json, 2) (guarino2016value.json, 4) (guizzardi2005ontological.json, 3) (fraller2019abc.json, 6) (online-mentoring.json, 3) (photography.json, 3) (sousa2022triponto.json, 13) (aires2022valuenetworks-geo.json, 7) (bank-model.json, 7) (gailly2016value.json, 2) (van-wingerde2020smart-contracts.json, 2) (ppo-o2021.json, 1) (niederkofler2019dssapple.json, 4) (library.json, 14) (amaral2020rome.json, 8) (rodrigues2019turbidite.json, 6) (cgts2021sebim.json, 1) (valaski2020medical-appointment_.json, 1) (spo2017.json, 1) (franco2018rpg.json, 1) (aristotle-ontology2019.json, 10) (ramirez2015userfeedback.json, 4) (elikan2018brand-identity.json, 1) (real-estate-ontology.json, 2) (aguiar2019ooco.json, 2) (guarino2018rea.json, 1)
 -------------
 
 t # 16
-v 0 Serving
-v 1 BusinessProcess
-v 2 Triggering
-v 3 BusinessProcess
-v 4 Triggering
-v 5 BusinessProcess
-e 1 0 target
-e 1 2 source
-e 3 2 target
-e 3 4 source
-e 5 4 target
-s 23
-x (id-00ae4f79280548e4bf87f2d9999d727d, 3) (id-1af2944d-77b2-4f6a-b0ec-06cf89d9043e, 7) (70ff1122-82b9-4d13-a15c-6cdc858dd4b3, 2) (id-c874bd6f-c66d-4b19-82bb-909e4f300ead, 2) (505d4fe5-b205-465c-82c7-cf1da708c789, 1) (c4d7f98f-555b-4bda-aa37-d2516a2e0aae, 1) (fa7c7a16-1338-4eae-97e2-7b9aed26799c, 2) (25eb1d65-b2a2-4123-ad8c-6578b468097d, 2) (811a44f0, 17) (4d1d1da3-23ba-4562-a6c8-bca223c644fb, 4) (id-91edb5e7-9903-4a2c-867e-40db2b10cb5a, 26) (id-ee2bba95, 1) (66213410-6cc2-4e6c-8bd4-ee6865ba4895, 6) (c04bba8d-5b28-4f7d-957a-d0921f0d3142, 38) (265214de, 3) (id-679fbf4e-44af-4c56-aaf5-f36a601ed1c0, 1) (id-723b6dc3-1c32-41a5-a02b-6d27b40c34d8, 7) (466b1e76, 6) (88f977a5-f39f-4491-9eb8-0ca26da61a8d, 2) (d6c69f6a, 3) (723b6dc3-1c32-41a5-a02b-6d27b40c34d8, 7) (b7b20375-d803-4baa-a59d-712acb1eae41, 247) (54525ee5, 26)
+v 0 relation
+s 110
+x (university-ontology.json, 14) (oliveira2022rose.json, 32) (guizzardi2020decision-making.json, 31) (silva2012itarchitecture.json, 27) (srro-ontology.json, 15) (music-ontology.json, 1) (quality-assurance-process-ontology2017.json, 24) (unimatch-ontology2022.json, 4) (sikora2021online-education.json, 13) (moreira2018saref4health.json, 1) (kritz2020ontobg.json, 1) (cmpo2017.json, 58) (andersson2018value-ascription.json, 14) (porello2020coex.json, 9) (silveira2021oap.json, 5) (sales2018cover.json, 13) (bernasconi2021ontovcm.json, 5) (duarte2021ross.json, 22) (maddalena2021ontocovid.json, 58) (idaf2013.json, 3) (chartered-service.json, 1) (khantong2020ontology.json, 22) (pereira2020ontotrans.json, 67) (carolla2014campus-management.json, 10) (buchtela2020connection.json, 13) (debbech2020dysfunction-analysis.json, 24) (neves2020nwpontology.json, 20) (mgic-antt2011.json, 81) (albuquerque2011ontobio.json, 5) (weigand2021artifact.json, 2) (dcat-mlt-ufo2023.json, 22) (elghosh2020cargos.json, 5) (jacobs2022sdpontology.json, 6) (lindeberg2022simple-ontorights.json, 7) (fischer2018ontorea.json, 4) (castro2012cloudvulnerability.json, 1) (falduci2022non-consensual-pornography.json, 7) (buridan-ontology2021.json, 18) (laurier2018rea.json, 17) (grueau2013towards.json, 3) (ahmad2018aviation.json, 9) (duarte2018osdef.json, 19) (gi2mo.json, 9) (guizzardi2022ufo.json, 3) (dpo2017.json, 40) (zanetti2019orm-o.json, 4) (debbech2019gosmo.json, 25) (lindeberg2022full-ontorights.json, 4) (kostov2017towards.json, 30) (santos2020valuenetworks.json, 6) (alpinebits2022.json, 3) (duarte2020jogabilidade.json, 6) (sportbooking2021.json, 8) (sales2018competition.json, 14) (ramos2021bias.json, 6) (amaral2019rot.json, 15) (abrahao2018agriculture-operations.json, 29) (rodrigues2017urinary-profiles.json, 21) (duarte2018reqon.json, 33) (aguiar2018rdbs-o.json, 29) (fernandez-cejas2022curie-o.json, 3) (romanenko2023what.json, 5) (zhou2017hazard-ontology-train-control.json, 30) (amaral2022ethical-requirements.json, 14) (eu-rent-refactored2022.json, 2) (abel2015petroleum-system.json, 9) (repa2021public-administration.json, 7) (guizzardi2014nfr.json, 11) (zhou2017hazard.json, 16) (spmo2017.json, 24) (plato-ontology2019.json, 26) (tourbo2021.json, 7) (oliveira2007collaboration.json, 20) (goncalves2011ecg.json, 58) (van-ee2021modular.json, 3) (zhou2017hazard-ontology-robotic-strolling.json, 14) (derave2019dpo.json, 144) (ferreira2015ontoemergeplan.json, 14) (gomes2022digital-technology.json, 11) (public-expense-ontology2020.json, 20) (pereira2015doacao-orgaos.json, 3) (saleme2019mulseonto.json, 34) (amaral2020game-theory.json, 7) (guarino2016value.json, 12) (mello2022monotheism.json, 22) (guizzardi2005ontological.json, 4) (fraller2019abc.json, 12) (sousa2022triponto.json, 1) (aires2022valuenetworks-geo.json, 29) (rodrigues2019ontocrime.json, 34) (richetti2019tdecision.json, 10) (gailly2016value.json, 14) (garcia2022human-genome-events.json, 1) (van-wingerde2020smart-contracts.json, 42) (ppo-o2021.json, 29) (niederkofler2019dssapple.json, 4) (library.json, 1) (amaral2020rome.json, 20) (neves2021grain-production.json, 16) (swo2016.json, 9) (rodrigues2019turbidite.json, 42) (core-o2023.json, 28) (cgts2021sebim.json, 8) (spo2017.json, 80) (franco2018rpg.json, 12) (aristotle-ontology2019.json, 44) (ramirez2015userfeedback.json, 8) (elikan2018brand-identity.json, 7) (aguiar2019ooco.json, 14) (guarino2018rea.json, 8)
 -------------
 
 t # 17
-v 0 Serving
-v 1 BusinessProcess
-v 2 Triggering
-v 3 BusinessProcess
-v 4 Triggering
-v 5 Serving
-e 1 0 target
-e 1 2 source
-e 3 2 target
-e 3 4 source
-e 3 5 target
-s 20
-x (id-1af2944d-77b2-4f6a-b0ec-06cf89d9043e, 10) (70ff1122-82b9-4d13-a15c-6cdc858dd4b3, 2) (id-c874bd6f-c66d-4b19-82bb-909e4f300ead, 10) (c4d7f98f-555b-4bda-aa37-d2516a2e0aae, 2) (fa7c7a16-1338-4eae-97e2-7b9aed26799c, 2) (811a44f0, 17) (4d1d1da3-23ba-4562-a6c8-bca223c644fb, 6) (id-91edb5e7-9903-4a2c-867e-40db2b10cb5a, 50) (id-ee2bba95, 4) (66213410-6cc2-4e6c-8bd4-ee6865ba4895, 2) (c04bba8d-5b28-4f7d-957a-d0921f0d3142, 60) (265214de, 3) (id-679fbf4e-44af-4c56-aaf5-f36a601ed1c0, 1) (id-723b6dc3-1c32-41a5-a02b-6d27b40c34d8, 7) (466b1e76, 4) (88f977a5-f39f-4491-9eb8-0ca26da61a8d, 6) (d6c69f6a, 1) (723b6dc3-1c32-41a5-a02b-6d27b40c34d8, 7) (b7b20375-d803-4baa-a59d-712acb1eae41, 250) (54525ee5, 50)
+v 0 mediation
+s 92
+x (university-ontology.json, 8) (oliveira2022rose.json, 5) (guizzardi2020decision-making.json, 8) (silva2012itarchitecture.json, 4) (music-ontology.json, 6) (unimatch-ontology2022.json, 5) (sikora2021online-education.json, 4) (porello2020coex.json, 4) (recommendation-ontology.json, 4) (silveira2021oap.json, 2) (sales2018cover.json, 6) (bernasconi2021ontovcm.json, 19) (fonseca2022incorporating.json, 12) (idaf2013.json, 7) (chartered-service.json, 5) (public-tender.json, 36) (andrade2023integracao.json, 9) (barcelos2015transport-networks.json, 129) (fumagalli2022criminal-investigation.json, 7) (mgic-antt2011.json, 251) (albuquerque2011ontobio.json, 11) (dcat-mlt-ufo2023.json, 6) (elghosh2020cargos.json, 2) (lindeberg2022simple-ontorights.json, 16) (fischer2018ontorea.json, 4) (castro2012cloudvulnerability.json, 13) (falduci2022non-consensual-pornography.json, 11) (buridan-ontology2021.json, 17) (construction-model.json, 2) (gi2mo.json, 27) (digitaldoctor2022.json, 8) (guizzardi2022ufo.json, 14) (zanetti2019orm-o.json, 17) (lindeberg2022full-ontorights.json, 23) (martinez2013human-genome.json, 4) (qam.json, 13) (health-organizations.json, 2) (internal-affairs2013.json, 22) (alpinebits2022.json, 6) (duarte2020jogabilidade.json, 2) (sportbooking2021.json, 21) (freshbz2023.json, 25) (bernasconi2023fair-principles.json, 8) (sales2018competition.json, 10) (haridy2021egyptian-e-government.json, 14) (amaral2019rot.json, 5) (abrahao2018agriculture-operations.json, 2) (rodrigues2017urinary-profiles.json, 11) (social-contract.json, 9) (nardi2015ufo-s.json, 6) (fernandez-cejas2022curie-o.json, 4) (romanenko2023what.json, 8) (g809-2015.json, 6) (eu-rent-refactored2022.json, 26) (repa2021public-administration.json, 2) (project-management-ontology.json, 2) (spmo2017.json, 2) (junior2018o4c.json, 2) (plato-ontology2019.json, 6) (tourbo2021.json, 7) (internship.json, 13) (goncalves2011ecg.json, 24) (van-ee2021modular.json, 2) (clergy-ontology.json, 14) (derave2019dpo.json, 42) (ferreira2015ontoemergeplan.json, 16) (gomes2022digital-technology.json, 2) (pereira2015doacao-orgaos.json, 6) (amaral2020game-theory.json, 1) (stock-broker2021.json, 6) (guarino2016value.json, 8) (guizzardi2005ontological.json, 6) (fraller2019abc.json, 12) (online-mentoring.json, 6) (photography.json, 4) (sousa2022triponto.json, 24) (aires2022valuenetworks-geo.json, 2) (bank-model.json, 6) (rodrigues2019ontocrime.json, 12) (richetti2019tdecision.json, 3) (niederkofler2019dssapple.json, 8) (library.json, 37) (amaral2020rome.json, 12) (rodrigues2019turbidite.json, 14) (cgts2021sebim.json, 2) (valaski2020medical-appointment_.json, 2) (franco2018rpg.json, 2) (aristotle-ontology2019.json, 32) (ramirez2015userfeedback.json, 12) (elikan2018brand-identity.json, 2) (real-estate-ontology.json, 5) (guarino2018rea.json, 2)
 -------------
 
 t # 18
-v 0 Serving
-v 1 BusinessProcess
-v 2 Composition
-v 3 BusinessProcess
-v 4 Composition
-e 1 0 target
-e 1 2 target
-e 3 2 source
-e 3 4 source
-s 25
-x (id-00ae4f79280548e4bf87f2d9999d727d, 10) (aca88cf8-5a36-4685-a6c6-2070943609d4, 9) (id-82442a4c03634d388a1bc2a24ed05a99, 1468) (10bfe7c2-74e3-4204-aa1d-a3cfe52e3ba9, 37) (id-1af2944d-77b2-4f6a-b0ec-06cf89d9043e, 40) (id-312e4521e6944ae29fa321c79477f552, 43) (70ff1122-82b9-4d13-a15c-6cdc858dd4b3, 12) (505d4fe5-b205-465c-82c7-cf1da708c789, 10) (id-b38298279bf9403ca2b84a5d73c9eedb, 10) (25eb1d65-b2a2-4123-ad8c-6578b468097d, 2) (c4d7f98f-555b-4bda-aa37-d2516a2e0aae, 11) (fa7c7a16-1338-4eae-97e2-7b9aed26799c, 20) (4d1d1da3-23ba-4562-a6c8-bca223c644fb, 50) (id-ee2bba95, 8) (54e87e47-f01c-49fe-af55-2068f4564bd2, 2) (id-901a675253624057b623142286b24b41, 12) (706502fc-f537-48f3-90d5-6f7943ff08e0, 728) (id-723b6dc3-1c32-41a5-a02b-6d27b40c34d8, 80) (id-322369a4-b2ad-4c96-8d58-a5d264295809, 15) (id-4da38437d83c4d98b09c62de6cd34d15, 16) (88f977a5-f39f-4491-9eb8-0ca26da61a8d, 85) (723b6dc3-1c32-41a5-a02b-6d27b40c34d8, 80) (b7b20375-d803-4baa-a59d-712acb1eae41, 830) (id-be4886b4de5c4cb1a74d8211804b93ff, 3) (1d1b3ca7-0530-4f63-8cdc-bafaf7ece2f6, 3)
+v 0 mediation
+v 1 relator
+e 1 0 source
+s 90
+x (university-ontology.json, 8) (guizzardi2020decision-making.json, 6) (silva2012itarchitecture.json, 4) (oliveira2022rose.json, 2) (music-ontology.json, 6) (unimatch-ontology2022.json, 1) (sikora2021online-education.json, 4) (porello2020coex.json, 4) (silveira2021oap.json, 1) (recommendation-ontology.json, 4) (sales2018cover.json, 1) (bernasconi2021ontovcm.json, 13) (fonseca2022incorporating.json, 12) (idaf2013.json, 4) (chartered-service.json, 2) (public-tender.json, 31) (andrade2023integracao.json, 6) (barcelos2015transport-networks.json, 129) (fumagalli2022criminal-investigation.json, 7) (mgic-antt2011.json, 237) (albuquerque2011ontobio.json, 5) (dcat-mlt-ufo2023.json, 6) (elghosh2020cargos.json, 2) (lindeberg2022simple-ontorights.json, 10) (castro2012cloudvulnerability.json, 13) (fischer2018ontorea.json, 4) (construction-model.json, 2) (buridan-ontology2021.json, 10) (falduci2022non-consensual-pornography.json, 11) (gi2mo.json, 27) (digitaldoctor2022.json, 4) (guizzardi2022ufo.json, 12) (zanetti2019orm-o.json, 17) (lindeberg2022full-ontorights.json, 18) (martinez2013human-genome.json, 4) (qam.json, 13) (health-organizations.json, 2) (internal-affairs2013.json, 22) (alpinebits2022.json, 6) (duarte2020jogabilidade.json, 2) (sportbooking2021.json, 21) (freshbz2023.json, 9) (bernasconi2023fair-principles.json, 8) (sales2018competition.json, 8) (haridy2021egyptian-e-government.json, 9) (amaral2019rot.json, 1) (abrahao2018agriculture-operations.json, 2) (rodrigues2017urinary-profiles.json, 11) (social-contract.json, 7) (nardi2015ufo-s.json, 6) (fernandez-cejas2022curie-o.json, 4) (romanenko2023what.json, 8) (g809-2015.json, 5) (eu-rent-refactored2022.json, 26) (repa2021public-administration.json, 2) (project-management-ontology.json, 2) (spmo2017.json, 1) (junior2018o4c.json, 2) (plato-ontology2019.json, 6) (tourbo2021.json, 5) (internship.json, 12) (goncalves2011ecg.json, 12) (van-ee2021modular.json, 2) (clergy-ontology.json, 14) (derave2019dpo.json, 5) (ferreira2015ontoemergeplan.json, 15) (gomes2022digital-technology.json, 2) (pereira2015doacao-orgaos.json, 6) (amaral2020game-theory.json, 1) (stock-broker2021.json, 6) (guarino2016value.json, 8) (guizzardi2005ontological.json, 6) (fraller2019abc.json, 10) (online-mentoring.json, 6) (photography.json, 4) (sousa2022triponto.json, 13) (aires2022valuenetworks-geo.json, 2) (bank-model.json, 6) (niederkofler2019dssapple.json, 8) (library.json, 23) (amaral2020rome.json, 9) (rodrigues2019turbidite.json, 12) (cgts2021sebim.json, 2) (valaski2020medical-appointment_.json, 2) (franco2018rpg.json, 2) (aristotle-ontology2019.json, 30) (ramirez2015userfeedback.json, 11) (elikan2018brand-identity.json, 2) (real-estate-ontology.json, 5) (guarino2018rea.json, 2)
 -------------
 
 t # 19
-v 0 Serving
-v 1 BusinessProcess
-v 2 Composition
-v 3 BusinessProcess
-v 4 Composition
-v 5 BusinessProcess
-e 1 0 target
-e 1 2 target
-e 3 2 source
-e 3 4 source
-e 5 4 target
-s 24
-x (id-00ae4f79280548e4bf87f2d9999d727d, 10) (aca88cf8-5a36-4685-a6c6-2070943609d4, 9) (id-82442a4c03634d388a1bc2a24ed05a99, 1468) (id-1af2944d-77b2-4f6a-b0ec-06cf89d9043e, 40) (10bfe7c2-74e3-4204-aa1d-a3cfe52e3ba9, 37) (id-312e4521e6944ae29fa321c79477f552, 43) (70ff1122-82b9-4d13-a15c-6cdc858dd4b3, 12) (505d4fe5-b205-465c-82c7-cf1da708c789, 10) (c4d7f98f-555b-4bda-aa37-d2516a2e0aae, 11) (fa7c7a16-1338-4eae-97e2-7b9aed26799c, 20) (25eb1d65-b2a2-4123-ad8c-6578b468097d, 2) (4d1d1da3-23ba-4562-a6c8-bca223c644fb, 50) (id-ee2bba95, 8) (54e87e47-f01c-49fe-af55-2068f4564bd2, 2) (id-901a675253624057b623142286b24b41, 12) (706502fc-f537-48f3-90d5-6f7943ff08e0, 728) (id-723b6dc3-1c32-41a5-a02b-6d27b40c34d8, 72) (id-322369a4-b2ad-4c96-8d58-a5d264295809, 15) (id-4da38437d83c4d98b09c62de6cd34d15, 16) (88f977a5-f39f-4491-9eb8-0ca26da61a8d, 85) (723b6dc3-1c32-41a5-a02b-6d27b40c34d8, 72) (b7b20375-d803-4baa-a59d-712acb1eae41, 830) (id-be4886b4de5c4cb1a74d8211804b93ff, 3) (1d1b3ca7-0530-4f63-8cdc-bafaf7ece2f6, 3)
+v 0 mediation
+v 1 relator
+v 2 mediation
+e 1 0 source
+e 1 2 source
+s 82
+x (university-ontology.json, 8) (silva2012itarchitecture.json, 4) (guizzardi2020decision-making.json, 8) (music-ontology.json, 8) (sikora2021online-education.json, 4) (porello2020coex.json, 4) (recommendation-ontology.json, 4) (bernasconi2021ontovcm.json, 8) (fonseca2022incorporating.json, 12) (idaf2013.json, 4) (public-tender.json, 44) (andrade2023integracao.json, 8) (barcelos2015transport-networks.json, 290) (fumagalli2022criminal-investigation.json, 18) (mgic-antt2011.json, 302) (albuquerque2011ontobio.json, 4) (dcat-mlt-ufo2023.json, 6) (elghosh2020cargos.json, 2) (lindeberg2022simple-ontorights.json, 10) (fischer2018ontorea.json, 4) (castro2012cloudvulnerability.json, 20) (falduci2022non-consensual-pornography.json, 20) (buridan-ontology2021.json, 18) (construction-model.json, 2) (gi2mo.json, 30) (digitaldoctor2022.json, 2) (guizzardi2022ufo.json, 14) (zanetti2019orm-o.json, 12) (lindeberg2022full-ontorights.json, 20) (martinez2013human-genome.json, 4) (qam.json, 16) (health-organizations.json, 2) (internal-affairs2013.json, 28) (alpinebits2022.json, 14) (duarte2020jogabilidade.json, 2) (sportbooking2021.json, 30) (freshbz2023.json, 2) (bernasconi2023fair-principles.json, 8) (sales2018competition.json, 8) (haridy2021egyptian-e-government.json, 4) (abrahao2018agriculture-operations.json, 2) (rodrigues2017urinary-profiles.json, 10) (social-contract.json, 22) (nardi2015ufo-s.json, 6) (fernandez-cejas2022curie-o.json, 4) (romanenko2023what.json, 8) (g809-2015.json, 8) (eu-rent-refactored2022.json, 28) (repa2021public-administration.json, 2) (project-management-ontology.json, 2) (junior2018o4c.json, 2) (plato-ontology2019.json, 6) (tourbo2021.json, 2) (internship.json, 30) (goncalves2011ecg.json, 6) (van-ee2021modular.json, 2) (clergy-ontology.json, 14) (derave2019dpo.json, 12) (ferreira2015ontoemergeplan.json, 12) (gomes2022digital-technology.json, 2) (pereira2015doacao-orgaos.json, 12) (stock-broker2021.json, 14) (guarino2016value.json, 8) (guizzardi2005ontological.json, 6) (fraller2019abc.json, 10) (online-mentoring.json, 6) (photography.json, 2) (sousa2022triponto.json, 34) (aires2022valuenetworks-geo.json, 2) (bank-model.json, 6) (niederkofler2019dssapple.json, 8) (library.json, 20) (amaral2020rome.json, 10) (rodrigues2019turbidite.json, 16) (cgts2021sebim.json, 2) (valaski2020medical-appointment_.json, 2) (franco2018rpg.json, 2) (aristotle-ontology2019.json, 136) (ramirez2015userfeedback.json, 20) (elikan2018brand-identity.json, 2) (real-estate-ontology.json, 8) (guarino2018rea.json, 2)
 -------------
 
 t # 20
-v 0 Serving
-v 1 BusinessProcess
-v 2 Composition
-v 3 BusinessProcess
-v 4 Composition
-v 5 Composition
-e 1 0 target
-e 1 2 target
-e 3 2 source
-e 3 4 source
-e 3 5 source
-s 24
-x (id-00ae4f79280548e4bf87f2d9999d727d, 28) (aca88cf8-5a36-4685-a6c6-2070943609d4, 18) (id-82442a4c03634d388a1bc2a24ed05a99, 15542) (id-1af2944d-77b2-4f6a-b0ec-06cf89d9043e, 104) (10bfe7c2-74e3-4204-aa1d-a3cfe52e3ba9, 142) (id-312e4521e6944ae29fa321c79477f552, 160) (70ff1122-82b9-4d13-a15c-6cdc858dd4b3, 12) (505d4fe5-b205-465c-82c7-cf1da708c789, 18) (id-b38298279bf9403ca2b84a5d73c9eedb, 40) (fa7c7a16-1338-4eae-97e2-7b9aed26799c, 60) (c4d7f98f-555b-4bda-aa37-d2516a2e0aae, 6) (4d1d1da3-23ba-4562-a6c8-bca223c644fb, 146) (id-ee2bba95, 8) (54e87e47-f01c-49fe-af55-2068f4564bd2, 2) (id-901a675253624057b623142286b24b41, 12) (706502fc-f537-48f3-90d5-6f7943ff08e0, 18200) (id-723b6dc3-1c32-41a5-a02b-6d27b40c34d8, 720) (id-322369a4-b2ad-4c96-8d58-a5d264295809, 98) (id-4da38437d83c4d98b09c62de6cd34d15, 112) (88f977a5-f39f-4491-9eb8-0ca26da61a8d, 340) (723b6dc3-1c32-41a5-a02b-6d27b40c34d8, 720) (b7b20375-d803-4baa-a59d-712acb1eae41, 4340) (id-be4886b4de5c4cb1a74d8211804b93ff, 6) (1d1b3ca7-0530-4f63-8cdc-bafaf7ece2f6, 6)
+v 0 characterization
+s 74
+x (university-ontology.json, 2) (experiment2013.json, 1) (ppo-o2021.json, 1) (nardi2015ufo-s.json, 6) (oliveira2022rose.json, 14) (niederkofler2019dssapple.json, 4) (guizzardi2020decision-making.json, 7) (amaral2020rome.json, 12) (fernandez-cejas2022curie-o.json, 1) (romanenko2023what.json, 7) (ahmad2018aviation.json, 1) (unimatch-ontology2022.json, 1) (duarte2018osdef.json, 6) (amaral2022ethical-requirements.json, 1) (sikora2021online-education.json, 9) (moreira2018saref4health.json, 2) (gi2mo.json, 3) (porello2020coex.json, 5) (silveira2021oap.json, 3) (abel2015petroleum-system.json, 3) (sales2018cover.json, 11) (guizzardi2022ufo.json, 4) (core-o2023.json, 4) (buridan-ontology2021.json, 6) (project-management-ontology.json, 2) (duarte2021ross.json, 1) (zanetti2019orm-o.json, 1) (fonseca2022incorporating.json, 3) (maddalena2021ontocovid.json, 12) (chartered-service.json, 2) (lindeberg2022full-ontorights.json, 22) (qam.json, 1) (plato-ontology2019.json, 4) (andrade2023integracao.json, 4) (kostov2017towards.json, 2) (richetti2019tdecision.json, 1) (tourbo2021.json, 1) (goncalves2011ecg.json, 5) (van-ee2021modular.json, 1) (franco2018rpg.json, 4) (gailly2016value.json, 1) (aristotle-ontology2019.json, 23) (alpinebits2022.json, 2) (derave2019dpo.json, 4) (duarte2020jogabilidade.json, 4) (debbech2020dysfunction-analysis.json, 5) (ferreira2015ontoemergeplan.json, 7) (freshbz2023.json, 18) (bernasconi2023fair-principles.json, 2) (sales2018competition.json, 6) (mgic-antt2011.json, 37) (gomes2022digital-technology.json, 1) (haridy2021egyptian-e-government.json, 2) (albuquerque2011ontobio.json, 3) (ramirez2015userfeedback.json, 7) (weigand2021artifact.json, 4) (saleme2019mulseonto.json, 3) (amaral2020game-theory.json, 4) (elikan2018brand-identity.json, 8) (guarino2016value.json, 8) (ramos2021bias.json, 8) (aguiar2019ooco.json, 6) (guizzardi2005ontological.json, 1) (amaral2019rot.json, 10) (guarino2018rea.json, 2) (dcat-mlt-ufo2023.json, 3) (abrahao2018agriculture-operations.json, 1) (rodrigues2017urinary-profiles.json, 3) (duarte2018reqon.json, 6) (elghosh2020cargos.json, 4) (aires2022valuenetworks-geo.json, 1) (bank-model.json, 1) (rodrigues2019ontocrime.json, 2) (falduci2022non-consensual-pornography.json, 8)
 -------------
 
 t # 21
-v 0 Serving
-v 1 ApplicationComponent
-v 2 ApplicationComponent
-v 3 Serving
-v 4 ApplicationComponent
-e 1 0 source
-e 2 0 target
-e 2 3 target
-e 4 3 source
-s 23
-x (_nXlR0NV_Ee2rYP8-S09m2Q, 12) (id-82442a4c03634d388a1bc2a24ed05a99, 40) (id-1af2944d-77b2-4f6a-b0ec-06cf89d9043e, 6) (fc634b15-5d93-4578-acbb-ceb09c11dfe7, 4) (id-c874bd6f-c66d-4b19-82bb-909e4f300ead, 24) (70ff1122-82b9-4d13-a15c-6cdc858dd4b3, 2) (c4d7f98f-555b-4bda-aa37-d2516a2e0aae, 24) (id-e2024c7995ba41d2b431cc7e5513d111, 2) (id-4bf46705-aa42-480c-8f92-ebfc45eef027, 92) (id-ee2bba95, 4) (e807f038-d05d-4aaf-8588-97ce18ce994e, 6) (id-901a675253624057b623142286b24b41, 24) (265214de, 12) (id-6a18db2b, 2) (235fba2d, 2) (id-723b6dc3-1c32-41a5-a02b-6d27b40c34d8, 6) (466b1e76, 2) (6a18db2b, 2) (f4212a30-53d0-4c27-a682-4f88d6c692c8, 8) (d6c69f6a, 2) (723b6dc3-1c32-41a5-a02b-6d27b40c34d8, 6) (EAPK_DC0FE43C_E8E3_4b6e_ACD8_B7A3AB655837, 20) (id-8fd1f70c, 2)
+v 0 gen
+s 137
+x (university-ontology.json, 16) (oliveira2022rose.json, 23) (guizzardi2020decision-making.json, 15) (silva2012itarchitecture.json, 70) (srro-ontology.json, 16) (music-ontology.json, 36) (quality-assurance-process-ontology2017.json, 33) (unimatch-ontology2022.json, 15) (sikora2021online-education.json, 47) (moreira2018saref4health.json, 11) (kritz2020ontobg.json, 150) (cmpo2017.json, 50) (andersson2018value-ascription.json, 2) (porello2020coex.json, 2) (recommendation-ontology.json, 11) (silveira2021oap.json, 15) (sales2018cover.json, 59) (bernasconi2021ontovcm.json, 40) (duarte2021ross.json, 24) (fonseca2022incorporating.json, 37) (maddalena2021ontocovid.json, 61) (idaf2013.json, 37) (public-tender.json, 44) (andrade2023integracao.json, 31) (khantong2020ontology.json, 17) (carolla2014campus-management.json, 5) (barcelos2015transport-networks.json, 608) (fumagalli2022criminal-investigation.json, 8) (buchtela2020connection.json, 13) (debbech2020dysfunction-analysis.json, 27) (neves2020nwpontology.json, 19) (mgic-antt2011.json, 1119) (albuquerque2011ontobio.json, 126) (weigand2021artifact.json, 29) (dcat-mlt-ufo2023.json, 17) (elghosh2020cargos.json, 2) (jacobs2022sdpontology.json, 5) (lindeberg2022simple-ontorights.json, 11) (fischer2018ontorea.json, 12) (castro2012cloudvulnerability.json, 21) (brazilian-governmental-organizational-structures.json, 15) (falduci2022non-consensual-pornography.json, 13) (buridan-ontology2021.json, 48) (construction-model.json, 7) (laurier2018rea.json, 18) (grueau2013towards.json, 10) (ahmad2018aviation.json, 19) (duarte2018osdef.json, 26) (gi2mo.json, 42) (digitaldoctor2022.json, 43) (guizzardi2022ufo.json, 36) (dpo2017.json, 35) (zanetti2019orm-o.json, 24) (debbech2019gosmo.json, 12) (lindeberg2022full-ontorights.json, 155) (martinez2013human-genome.json, 3) (qam.json, 24) (kostov2017towards.json, 45) (health-organizations.json, 14) (santos2020valuenetworks.json, 10) (internal-affairs2013.json, 35) (alpinebits2022.json, 59) (duarte2020jogabilidade.json, 2) (sportbooking2021.json, 17) (freshbz2023.json, 56) (bernasconi2023fair-principles.json, 38) (sales2018competition.json, 16) (haridy2021egyptian-e-government.json, 14) (ramos2021bias.json, 34) (amaral2019rot.json, 35) (abrahao2018agriculture-operations.json, 14) (rodrigues2017urinary-profiles.json, 51) (duarte2018reqon.json, 51) (social-contract.json, 9) (aguiar2018rdbs-o.json, 37) (nardi2015ufo-s.json, 9) (fernandez-cejas2022curie-o.json, 14) (romanenko2023what.json, 37) (amaral2022ethical-requirements.json, 14) (g809-2015.json, 12) (eu-rent-refactored2022.json, 53) (abel2015petroleum-system.json, 9) (repa2021public-administration.json, 22) (guizzardi2014nfr.json, 9) (project-management-ontology.json, 8) (zhou2017hazard.json, 8) (spmo2017.json, 32) (junior2018o4c.json, 5) (plato-ontology2019.json, 36) (tourbo2021.json, 30) (internship.json, 19) (oliveira2007collaboration.json, 9) (goncalves2011ecg.json, 70) (van-ee2021modular.json, 78) (clergy-ontology.json, 16) (barros2020programming.json, 11) (derave2019dpo.json, 250) (ferreira2015ontoemergeplan.json, 117) (gomes2022digital-technology.json, 13) (public-expense-ontology2020.json, 25) (pereira2015doacao-orgaos.json, 20) (saleme2019mulseonto.json, 75) (amaral2020game-theory.json, 13) (stock-broker2021.json, 11) (guarino2016value.json, 2) (mello2022monotheism.json, 18) (guizzardi2005ontological.json, 35) (fraller2019abc.json, 23) (online-mentoring.json, 18) (barcelos2013normative-acts.json, 27) (photography.json, 8) (sousa2022triponto.json, 25) (aires2022valuenetworks-geo.json, 14) (bank-model.json, 16) (rodrigues2019ontocrime.json, 123) (richetti2019tdecision.json, 22) (garcia2022human-genome-events.json, 10) (van-wingerde2020smart-contracts.json, 7) (ppo-o2021.json, 35) (niederkofler2019dssapple.json, 51) (library.json, 14) (amaral2020rome.json, 25) (neves2021grain-production.json, 2) (swo2016.json, 15) (rodrigues2019turbidite.json, 36) (core-o2023.json, 17) (cgts2021sebim.json, 19) (valaski2020medical-appointment_.json, 2) (spo2017.json, 118) (franco2018rpg.json, 9) (aristotle-ontology2019.json, 105) (it-infrastructure.json, 17) (ramirez2015userfeedback.json, 26) (elikan2018brand-identity.json, 6) (real-estate-ontology.json, 13) (aguiar2019ooco.json, 46) (guarino2018rea.json, 5)
 -------------
 
 t # 22
-v 0 Serving
-v 1 ApplicationComponent
-v 2 Serving
-v 3 Serving
-v 4 Serving
-e 1 0 source
-e 1 2 target
-e 1 3 target
-e 1 4 target
-s 21
-x (id-82442a4c03634d388a1bc2a24ed05a99, 486) (id-c874bd6f-c66d-4b19-82bb-909e4f300ead, 204) (c4d7f98f-555b-4bda-aa37-d2516a2e0aae, 24546) (9b56e3eb-a43f-4545-8554-67ad2952bb58, 24) (id-4bf46705-aa42-480c-8f92-ebfc45eef027, 180) (id-91edb5e7-9903-4a2c-867e-40db2b10cb5a, 24) (id-ee2bba95, 426) (e807f038-d05d-4aaf-8588-97ce18ce994e, 16464) (id-901a675253624057b623142286b24b41, 18) (265214de, 24) (id-ceae47297ac048f6965cf594e1e7f7f4, 12) (id-723b6dc3-1c32-41a5-a02b-6d27b40c34d8, 6) (466b1e76, 6) (f4212a30-53d0-4c27-a682-4f88d6c692c8, 18) (88f977a5-f39f-4491-9eb8-0ca26da61a8d, 36) (id-8d57243ff9f94eaeaad5033a98122432, 24) (d6c69f6a, 14898) (id-3d54d4b1, 6) (723b6dc3-1c32-41a5-a02b-6d27b40c34d8, 6) (54525ee5, 24) (EAPK_DC0FE43C_E8E3_4b6e_ACD8_B7A3AB655837, 720)
+v 0 gen
+v 1 category
+e 1 0 general
+s 77
+x (silva2012itarchitecture.json, 28) (srro-ontology.json, 5) (oliveira2022rose.json, 6) (sikora2021online-education.json, 29) (moreira2018saref4health.json, 1) (kritz2020ontobg.json, 27) (cmpo2017.json, 9) (porello2020coex.json, 2) (silveira2021oap.json, 6) (sales2018cover.json, 21) (bernasconi2021ontovcm.json, 10) (fonseca2022incorporating.json, 11) (maddalena2021ontocovid.json, 1) (idaf2013.json, 4) (andrade2023integracao.json, 5) (barcelos2015transport-networks.json, 127) (neves2020nwpontology.json, 2) (mgic-antt2011.json, 152) (albuquerque2011ontobio.json, 43) (weigand2021artifact.json, 9) (dcat-mlt-ufo2023.json, 4) (jacobs2022sdpontology.json, 2) (lindeberg2022simple-ontorights.json, 4) (castro2012cloudvulnerability.json, 3) (falduci2022non-consensual-pornography.json, 4) (buridan-ontology2021.json, 2) (brazilian-governmental-organizational-structures.json, 9) (digitaldoctor2022.json, 9) (dpo2017.json, 7) (lindeberg2022full-ontorights.json, 35) (qam.json, 3) (kostov2017towards.json, 6) (health-organizations.json, 5) (santos2020valuenetworks.json, 10) (alpinebits2022.json, 32) (sportbooking2021.json, 3) (freshbz2023.json, 13) (bernasconi2023fair-principles.json, 10) (sales2018competition.json, 3) (ramos2021bias.json, 4) (amaral2019rot.json, 20) (abrahao2018agriculture-operations.json, 12) (rodrigues2017urinary-profiles.json, 6) (aguiar2018rdbs-o.json, 13) (nardi2015ufo-s.json, 2) (amaral2022ethical-requirements.json, 12) (g809-2015.json, 2) (plato-ontology2019.json, 5) (tourbo2021.json, 4) (oliveira2007collaboration.json, 2) (goncalves2011ecg.json, 12) (van-ee2021modular.json, 20) (derave2019dpo.json, 4) (ferreira2015ontoemergeplan.json, 44) (gomes2022digital-technology.json, 12) (public-expense-ontology2020.json, 3) (pereira2015doacao-orgaos.json, 5) (amaral2020game-theory.json, 1) (guizzardi2005ontological.json, 12) (sousa2022triponto.json, 7) (aires2022valuenetworks-geo.json, 12) (bank-model.json, 1) (rodrigues2019ontocrime.json, 7) (garcia2022human-genome-events.json, 3) (van-wingerde2020smart-contracts.json, 3) (ppo-o2021.json, 4) (niederkofler2019dssapple.json, 29) (amaral2020rome.json, 12) (rodrigues2019turbidite.json, 2) (core-o2023.json, 11) (spo2017.json, 17) (franco2018rpg.json, 6) (aristotle-ontology2019.json, 3) (ramirez2015userfeedback.json, 2) (elikan2018brand-identity.json, 6) (aguiar2019ooco.json, 11) (guarino2018rea.json, 1)
 -------------
 
 t # 23
-v 0 Serving
-v 1 ApplicationComponent
-v 2 Access
-v 3 DataObject
-v 4 Access
-e 1 0 target
-e 1 2 source
-e 3 2 target
-e 3 4 target
-s 20
-x (id-82442a4c03634d388a1bc2a24ed05a99, 50) (10bfe7c2-74e3-4204-aa1d-a3cfe52e3ba9, 6) (id-312e4521e6944ae29fa321c79477f552, 11) (id-c874bd6f-c66d-4b19-82bb-909e4f300ead, 3) (c4d7f98f-555b-4bda-aa37-d2516a2e0aae, 84) (25eb1d65-b2a2-4123-ad8c-6578b468097d, 5) (9b56e3eb-a43f-4545-8554-67ad2952bb58, 2) (id-ee2bba95, 14) (id-a38bdc19622f419196e1f096879b2a00, 1) (b573d635, 2) (id-901a675253624057b623142286b24b41, 8) (265214de, 2) (id-ceae47297ac048f6965cf594e1e7f7f4, 2) (id-723b6dc3-1c32-41a5-a02b-6d27b40c34d8, 8) (88f977a5-f39f-4491-9eb8-0ca26da61a8d, 3) (id-9d0b0599-adfb-4f31-ad5e-c5f833182484, 2) (723b6dc3-1c32-41a5-a02b-6d27b40c34d8, 4) (EAPK_DC0FE43C_E8E3_4b6e_ACD8_B7A3AB655837, 5) (id-8fd1f70c, 48) (1d1b3ca7-0530-4f63-8cdc-bafaf7ece2f6, 20)
+v 0 gen
+v 1 category
+v 2 gen
+e 1 0 general
+e 1 2 general
+s 71
+x (nardi2015ufo-s.json, 2) (van-wingerde2020smart-contracts.json, 2) (ppo-o2021.json, 6) (oliveira2022rose.json, 14) (srro-ontology.json, 20) (silva2012itarchitecture.json, 110) (niederkofler2019dssapple.json, 54) (amaral2020rome.json, 30) (sikora2021online-education.json, 102) (amaral2022ethical-requirements.json, 32) (kritz2020ontobg.json, 112) (cmpo2017.json, 72) (porello2020coex.json, 2) (digitaldoctor2022.json, 72) (g809-2015.json, 2) (silveira2021oap.json, 6) (sales2018cover.json, 26) (dpo2017.json, 42) (rodrigues2019turbidite.json, 2) (buridan-ontology2021.json, 2) (core-o2023.json, 16) (bernasconi2021ontovcm.json, 26) (fonseca2022incorporating.json, 50) (idaf2013.json, 4) (lindeberg2022full-ontorights.json, 70) (qam.json, 6) (plato-ontology2019.json, 8) (andrade2023integracao.json, 8) (kostov2017towards.json, 30) (barcelos2015transport-networks.json, 642) (health-organizations.json, 20) (tourbo2021.json, 6) (spo2017.json, 56) (santos2020valuenetworks.json, 26) (goncalves2011ecg.json, 50) (van-ee2021modular.json, 32) (alpinebits2022.json, 232) (garcia2022human-genome-events.json, 6) (franco2018rpg.json, 8) (aristotle-ontology2019.json, 6) (neves2020nwpontology.json, 2) (derave2019dpo.json, 12) (sportbooking2021.json, 6) (freshbz2023.json, 32) (bernasconi2023fair-principles.json, 34) (sales2018competition.json, 2) (mgic-antt2011.json, 1248) (ferreira2015ontoemergeplan.json, 66) (gomes2022digital-technology.json, 32) (albuquerque2011ontobio.json, 192) (public-expense-ontology2020.json, 6) (pereira2015doacao-orgaos.json, 6) (ramirez2015userfeedback.json, 2) (weigand2021artifact.json, 10) (elikan2018brand-identity.json, 8) (ramos2021bias.json, 6) (amaral2019rot.json, 36) (guizzardi2005ontological.json, 14) (aguiar2019ooco.json, 16) (dcat-mlt-ufo2023.json, 4) (abrahao2018agriculture-operations.json, 38) (rodrigues2017urinary-profiles.json, 20) (jacobs2022sdpontology.json, 2) (lindeberg2022simple-ontorights.json, 12) (brazilian-governmental-organizational-structures.json, 12) (aguiar2018rdbs-o.json, 38) (castro2012cloudvulnerability.json, 2) (sousa2022triponto.json, 22) (aires2022valuenetworks-geo.json, 38) (rodrigues2019ontocrime.json, 6) (falduci2022non-consensual-pornography.json, 4)
 -------------
 
 t # 24
-v 0 Serving
-v 1 ApplicationComponent
-v 2 Serving
-v 3 Realization
-v 4 ApplicationService
-e 1 0 target
-e 1 2 target
-e 1 3 source
-e 4 3 target
-s 20
-x (fc634b15-5d93-4578-acbb-ceb09c11dfe7, 2) (id-c874bd6f-c66d-4b19-82bb-909e4f300ead, 4) (id-312e4521e6944ae29fa321c79477f552, 356) (c4d7f98f-555b-4bda-aa37-d2516a2e0aae, 280) (fa7c7a16-1338-4eae-97e2-7b9aed26799c, 16) (4d1d1da3-23ba-4562-a6c8-bca223c644fb, 42) (id-91edb5e7-9903-4a2c-867e-40db2b10cb5a, 44) (id-ee2bba95, 12) (id-901a675253624057b623142286b24b41, 48) (265214de, 20) (id-e3d6649534b64f8da8c514e786865589, 6) (id-723b6dc3-1c32-41a5-a02b-6d27b40c34d8, 14) (466b1e76, 24) (88f977a5-f39f-4491-9eb8-0ca26da61a8d, 20) (id-9d0b0599-adfb-4f31-ad5e-c5f833182484, 4) (id-8d57243ff9f94eaeaad5033a98122432, 30) (d6c69f6a, 1418) (id-3d54d4b1, 2) (54525ee5, 44) (id-8fd1f70c, 6)
+v 0 gen
+v 1 role
+e 1 0 specific
+s 90
+x (university-ontology.json, 4) (silva2012itarchitecture.json, 10) (srro-ontology.json, 5) (guizzardi2020decision-making.json, 3) (quality-assurance-process-ontology2017.json, 4) (music-ontology.json, 12) (moreira2018saref4health.json, 1) (cmpo2017.json, 8) (silveira2021oap.json, 11) (bernasconi2021ontovcm.json, 6) (fonseca2022incorporating.json, 10) (maddalena2021ontocovid.json, 14) (idaf2013.json, 4) (public-tender.json, 31) (khantong2020ontology.json, 10) (andrade2023integracao.json, 16) (carolla2014campus-management.json, 5) (barcelos2015transport-networks.json, 359) (fumagalli2022criminal-investigation.json, 8) (buchtela2020connection.json, 2) (neves2020nwpontology.json, 4) (mgic-antt2011.json, 260) (albuquerque2011ontobio.json, 13) (dcat-mlt-ufo2023.json, 1) (elghosh2020cargos.json, 2) (jacobs2022sdpontology.json, 2) (lindeberg2022simple-ontorights.json, 5) (castro2012cloudvulnerability.json, 5) (construction-model.json, 5) (buridan-ontology2021.json, 5) (falduci2022non-consensual-pornography.json, 9) (laurier2018rea.json, 8) (gi2mo.json, 26) (digitaldoctor2022.json, 9) (guizzardi2022ufo.json, 19) (dpo2017.json, 2) (zanetti2019orm-o.json, 14) (lindeberg2022full-ontorights.json, 14) (martinez2013human-genome.json, 3) (qam.json, 8) (kostov2017towards.json, 8) (health-organizations.json, 2) (internal-affairs2013.json, 14) (duarte2020jogabilidade.json, 2) (sportbooking2021.json, 10) (freshbz2023.json, 10) (bernasconi2023fair-principles.json, 11) (sales2018competition.json, 2) (ramos2021bias.json, 2) (amaral2019rot.json, 4) (rodrigues2017urinary-profiles.json, 15) (social-contract.json, 2) (aguiar2018rdbs-o.json, 2) (romanenko2023what.json, 9) (amaral2022ethical-requirements.json, 2) (g809-2015.json, 6) (eu-rent-refactored2022.json, 24) (abel2015petroleum-system.json, 3) (repa2021public-administration.json, 7) (project-management-ontology.json, 4) (plato-ontology2019.json, 5) (tourbo2021.json, 5) (internship.json, 13) (goncalves2011ecg.json, 25) (clergy-ontology.json, 16) (derave2019dpo.json, 21) (ferreira2015ontoemergeplan.json, 23) (public-expense-ontology2020.json, 9) (pereira2015doacao-orgaos.json, 4) (stock-broker2021.json, 9) (guarino2016value.json, 2) (guizzardi2005ontological.json, 10) (online-mentoring.json, 15) (photography.json, 3) (sousa2022triponto.json, 6) (bank-model.json, 6) (rodrigues2019ontocrime.json, 32) (van-wingerde2020smart-contracts.json, 4) (niederkofler2019dssapple.json, 6) (library.json, 8) (rodrigues2019turbidite.json, 10) (cgts2021sebim.json, 4) (valaski2020medical-appointment_.json, 2) (spo2017.json, 10) (franco2018rpg.json, 1) (aristotle-ontology2019.json, 19) (it-infrastructure.json, 5) (ramirez2015userfeedback.json, 7) (real-estate-ontology.json, 13) (aguiar2019ooco.json, 3)
 -------------
 
 t # 25
-v 0 Serving
-v 1 ApplicationComponent
-v 2 Serving
-v 3 Serving
-v 4 Serving
-e 1 0 target
-e 1 2 target
-e 1 3 target
-e 1 4 target
-s 20
-x (_nXlR0NV_Ee2rYP8-S09m2Q, 360) (id-82442a4c03634d388a1bc2a24ed05a99, 1008) (id-c874bd6f-c66d-4b19-82bb-909e4f300ead, 144) (id-312e4521e6944ae29fa321c79477f552, 984) (c4d7f98f-555b-4bda-aa37-d2516a2e0aae, 57168) (811a44f0, 24) (id-4bf46705-aa42-480c-8f92-ebfc45eef027, 1008) (9b56e3eb-a43f-4545-8554-67ad2952bb58, 24) (4d1d1da3-23ba-4562-a6c8-bca223c644fb, 864) (id-91edb5e7-9903-4a2c-867e-40db2b10cb5a, 24) (id-ee2bba95, 864) (e807f038-d05d-4aaf-8588-97ce18ce994e, 226008) (id-901a675253624057b623142286b24b41, 840) (265214de, 48) (466b1e76, 48) (id-8d57243ff9f94eaeaad5033a98122432, 48) (d6c69f6a, 12096) (bffe40fc-f500-46c2-a306-f207899f3ed2, 24) (54525ee5, 24) (EAPK_DC0FE43C_E8E3_4b6e_ACD8_B7A3AB655837, 120)
+v 0 role
+s 94
+x (university-ontology.json, 6) (guizzardi2020decision-making.json, 3) (silva2012itarchitecture.json, 6) (srro-ontology.json, 5) (quality-assurance-process-ontology2017.json, 4) (music-ontology.json, 9) (moreira2018saref4health.json, 1) (cmpo2017.json, 7) (silveira2021oap.json, 9) (bernasconi2021ontovcm.json, 5) (fonseca2022incorporating.json, 7) (maddalena2021ontocovid.json, 14) (idaf2013.json, 5) (chartered-service.json, 4) (public-tender.json, 29) (andrade2023integracao.json, 13) (khantong2020ontology.json, 10) (carolla2014campus-management.json, 5) (barcelos2015transport-networks.json, 235) (fumagalli2022criminal-investigation.json, 7) (buchtela2020connection.json, 2) (neves2020nwpontology.json, 4) (mgic-antt2011.json, 201) (albuquerque2011ontobio.json, 12) (dcat-mlt-ufo2023.json, 1) (elghosh2020cargos.json, 2) (jacobs2022sdpontology.json, 2) (lindeberg2022simple-ontorights.json, 5) (castro2012cloudvulnerability.json, 3) (buridan-ontology2021.json, 5) (falduci2022non-consensual-pornography.json, 9) (construction-model.json, 3) (laurier2018rea.json, 4) (gi2mo.json, 26) (digitaldoctor2022.json, 9) (guizzardi2022ufo.json, 17) (dpo2017.json, 2) (zanetti2019orm-o.json, 14) (lindeberg2022full-ontorights.json, 12) (qam.json, 8) (martinez2013human-genome.json, 3) (kostov2017towards.json, 8) (health-organizations.json, 2) (internal-affairs2013.json, 14) (duarte2020jogabilidade.json, 2) (sportbooking2021.json, 10) (freshbz2023.json, 10) (bernasconi2023fair-principles.json, 9) (sales2018competition.json, 2) (haridy2021egyptian-e-government.json, 2) (ramos2021bias.json, 2) (amaral2019rot.json, 3) (rodrigues2017urinary-profiles.json, 10) (social-contract.json, 2) (aguiar2018rdbs-o.json, 2) (romanenko2023what.json, 7) (zhou2017hazard-ontology-train-control.json, 10) (amaral2022ethical-requirements.json, 2) (g809-2015.json, 6) (eu-rent-refactored2022.json, 21) (abel2015petroleum-system.json, 3) (repa2021public-administration.json, 7) (project-management-ontology.json, 2) (plato-ontology2019.json, 5) (tourbo2021.json, 5) (internship.json, 13) (goncalves2011ecg.json, 20) (clergy-ontology.json, 16) (zhou2017hazard-ontology-robotic-strolling.json, 6) (derave2019dpo.json, 9) (ferreira2015ontoemergeplan.json, 15) (public-expense-ontology2020.json, 7) (pereira2015doacao-orgaos.json, 4) (stock-broker2021.json, 7) (guarino2016value.json, 2) (guizzardi2005ontological.json, 7) (online-mentoring.json, 15) (photography.json, 3) (sousa2022triponto.json, 6) (bank-model.json, 4) (rodrigues2019ontocrime.json, 21) (van-wingerde2020smart-contracts.json, 4) (niederkofler2019dssapple.json, 5) (library.json, 15) (rodrigues2019turbidite.json, 9) (cgts2021sebim.json, 4) (valaski2020medical-appointment_.json, 2) (spo2017.json, 5) (franco2018rpg.json, 1) (aristotle-ontology2019.json, 18) (it-infrastructure.json, 5) (ramirez2015userfeedback.json, 6) (real-estate-ontology.json, 7) (aguiar2019ooco.json, 3)
 -------------
 
 t # 26
-v 0 Specialization
-v 1 BusinessObject
-v 2 BusinessObject
-v 3 Specialization
-v 4 BusinessObject
-e 1 0 specific
-e 2 0 general
-e 2 3 general
-e 4 3 specific
-s 21
-x (id-1af2944d-77b2-4f6a-b0ec-06cf89d9043e, 12) (id-c874bd6f-c66d-4b19-82bb-909e4f300ead, 50) (id-b38298279bf9403ca2b84a5d73c9eedb, 2) (25eb1d65-b2a2-4123-ad8c-6578b468097d, 2) (fa7c7a16-1338-4eae-97e2-7b9aed26799c, 8) (d35b7b41-b41e-417f-8f0b-4b46b25609b7, 192) (1610da6f-218b-4f90-84b2-666872984b24, 2) (54e87e47-f01c-49fe-af55-2068f4564bd2, 336) (id-901a675253624057b623142286b24b41, 42) (c04bba8d-5b28-4f7d-957a-d0921f0d3142, 402) (265214de, 20) (id-f89e5c031f397811f6aa0fac0dbac5bc, 50) (id-679fbf4e-44af-4c56-aaf5-f36a601ed1c0, 40) (id-723b6dc3-1c32-41a5-a02b-6d27b40c34d8, 6) (id-5c84c74cb5bf4fe49486952ef88c98b6, 2) (id-9d0b0599-adfb-4f31-ad5e-c5f833182484, 20) (d6c69f6a, 6) (id-3d54d4b1, 96) (723b6dc3-1c32-41a5-a02b-6d27b40c34d8, 6) (b7b20375-d803-4baa-a59d-712acb1eae41, 44) (id-a34d3c77bf494e9cb58ff74b9c7038c2, 4)
+v 0 category
+s 82
+x (oliveira2022rose.json, 5) (silva2012itarchitecture.json, 9) (srro-ontology.json, 1) (sikora2021online-education.json, 12) (moreira2018saref4health.json, 1) (kritz2020ontobg.json, 6) (cmpo2017.json, 4) (andersson2018value-ascription.json, 1) (porello2020coex.json, 1) (silveira2021oap.json, 7) (sales2018cover.json, 12) (bernasconi2021ontovcm.json, 3) (fonseca2022incorporating.json, 2) (maddalena2021ontocovid.json, 1) (idaf2013.json, 3) (chartered-service.json, 2) (andrade2023integracao.json, 2) (barcelos2015transport-networks.json, 32) (neves2020nwpontology.json, 1) (mgic-antt2011.json, 36) (albuquerque2011ontobio.json, 35) (weigand2021artifact.json, 9) (dcat-mlt-ufo2023.json, 5) (jacobs2022sdpontology.json, 1) (lindeberg2022simple-ontorights.json, 1) (castro2012cloudvulnerability.json, 2) (buridan-ontology2021.json, 1) (brazilian-governmental-organizational-structures.json, 4) (falduci2022non-consensual-pornography.json, 3) (digitaldoctor2022.json, 1) (dpo2017.json, 3) (lindeberg2022full-ontorights.json, 17) (qam.json, 1) (kostov2017towards.json, 1) (health-organizations.json, 1) (santos2020valuenetworks.json, 4) (alpinebits2022.json, 5) (sportbooking2021.json, 2) (freshbz2023.json, 5) (bernasconi2023fair-principles.json, 3) (sales2018competition.json, 2) (ramos2021bias.json, 3) (amaral2019rot.json, 14) (abrahao2018agriculture-operations.json, 3) (rodrigues2017urinary-profiles.json, 2) (aguiar2018rdbs-o.json, 4) (nardi2015ufo-s.json, 3) (amaral2022ethical-requirements.json, 17) (g809-2015.json, 1) (plato-ontology2019.json, 2) (tourbo2021.json, 3) (oliveira2007collaboration.json, 3) (goncalves2011ecg.json, 3) (van-ee2021modular.json, 12) (derave2019dpo.json, 3) (ferreira2015ontoemergeplan.json, 32) (gomes2022digital-technology.json, 15) (public-expense-ontology2020.json, 1) (pereira2015doacao-orgaos.json, 3) (amaral2020game-theory.json, 1) (guarino2016value.json, 3) (guizzardi2005ontological.json, 7) (sousa2022triponto.json, 2) (aires2022valuenetworks-geo.json, 3) (bank-model.json, 1) (rodrigues2019ontocrime.json, 4) (garcia2022human-genome-events.json, 1) (van-wingerde2020smart-contracts.json, 2) (ppo-o2021.json, 2) (niederkofler2019dssapple.json, 13) (amaral2020rome.json, 6) (neves2021grain-production.json, 7) (rodrigues2019turbidite.json, 1) (core-o2023.json, 8) (cgts2021sebim.json, 1) (spo2017.json, 7) (franco2018rpg.json, 4) (aristotle-ontology2019.json, 1) (ramirez2015userfeedback.json, 1) (elikan2018brand-identity.json, 3) (aguiar2019ooco.json, 5) (guarino2018rea.json, 1)
 -------------
 
 t # 27
-v 0 Access
-v 1 DataObject
-v 2 Access
-v 3 Access
-v 4 Access
-e 1 0 target
-e 1 2 target
-e 1 3 target
-e 1 4 target
-s 20
-x (id-82442a4c03634d388a1bc2a24ed05a99, 360) (10bfe7c2-74e3-4204-aa1d-a3cfe52e3ba9, 48) (c4d7f98f-555b-4bda-aa37-d2516a2e0aae, 2856) (25eb1d65-b2a2-4123-ad8c-6578b468097d, 9624) (id-cff0d7556f654881afbe90d896d2c969, 120) (d35b7b41-b41e-417f-8f0b-4b46b25609b7, 48) (id-a38bdc19622f419196e1f096879b2a00, 1896) (b573d635, 48) (id-901a675253624057b623142286b24b41, 24) (265214de, 840) (9033ffad-8183-4b91-ae1e-d5f5c6108ccc, 24) (id-f89e5c031f397811f6aa0fac0dbac5bc, 48) (id-ceae47297ac048f6965cf594e1e7f7f4, 24) (id-679fbf4e-44af-4c56-aaf5-f36a601ed1c0, 24) (id-3d54d4b1, 7944) (id-cf89295323f94dfab6aedc29df7b9bf4, 5040) (EAPK_DC0FE43C_E8E3_4b6e_ACD8_B7A3AB655837, 24) (id-8fd1f70c, 240) (id-bd02ddb59fa646a5a82c1dd1a6af8b4c, 1680) (1d1b3ca7-0530-4f63-8cdc-bafaf7ece2f6, 8064)
+v 0 relator
+s 103
+x (university-ontology.json, 4) (oliveira2022rose.json, 2) (guizzardi2020decision-making.json, 4) (silva2012itarchitecture.json, 10) (music-ontology.json, 3) (unimatch-ontology2022.json, 2) (sikora2021online-education.json, 2) (porello2020coex.json, 2) (recommendation-ontology.json, 2) (silveira2021oap.json, 1) (sales2018cover.json, 2) (bernasconi2021ontovcm.json, 9) (fonseca2022incorporating.json, 6) (maddalena2021ontocovid.json, 3) (idaf2013.json, 3) (chartered-service.json, 2) (public-tender.json, 17) (andrade2023integracao.json, 4) (carolla2014campus-management.json, 5) (barcelos2015transport-networks.json, 42) (fumagalli2022criminal-investigation.json, 2) (mgic-antt2011.json, 241) (albuquerque2011ontobio.json, 10) (dcat-mlt-ufo2023.json, 3) (elghosh2020cargos.json, 1) (jacobs2022sdpontology.json, 1) (lindeberg2022simple-ontorights.json, 5) (fischer2018ontorea.json, 2) (castro2012cloudvulnerability.json, 6) (falduci2022non-consensual-pornography.json, 4) (buridan-ontology2021.json, 4) (construction-model.json, 1) (laurier2018rea.json, 11) (gi2mo.json, 17) (digitaldoctor2022.json, 3) (guizzardi2022ufo.json, 6) (zanetti2019orm-o.json, 14) (lindeberg2022full-ontorights.json, 10) (martinez2013human-genome.json, 2) (qam.json, 6) (health-organizations.json, 1) (internal-affairs2013.json, 10) (alpinebits2022.json, 2) (duarte2020jogabilidade.json, 1) (sportbooking2021.json, 9) (freshbz2023.json, 8) (bernasconi2023fair-principles.json, 4) (sales2018competition.json, 4) (haridy2021egyptian-e-government.json, 8) (amaral2019rot.json, 1) (abrahao2018agriculture-operations.json, 6) (rodrigues2017urinary-profiles.json, 6) (social-contract.json, 3) (nardi2015ufo-s.json, 3) (fernandez-cejas2022curie-o.json, 2) (romanenko2023what.json, 5) (zhou2017hazard-ontology-train-control.json, 5) (g809-2015.json, 2) (eu-rent-refactored2022.json, 14) (repa2021public-administration.json, 1) (project-management-ontology.json, 1) (spmo2017.json, 1) (junior2018o4c.json, 4) (plato-ontology2019.json, 3) (tourbo2021.json, 4) (internship.json, 8) (goncalves2011ecg.json, 12) (van-ee2021modular.json, 2) (clergy-ontology.json, 7) (zhou2017hazard-ontology-robotic-strolling.json, 3) (barros2020programming.json, 1) (derave2019dpo.json, 5) (ferreira2015ontoemergeplan.json, 9) (gomes2022digital-technology.json, 1) (public-expense-ontology2020.json, 17) (pereira2015doacao-orgaos.json, 2) (amaral2020game-theory.json, 1) (stock-broker2021.json, 2) (guarino2016value.json, 4) (guizzardi2005ontological.json, 3) (fraller2019abc.json, 6) (online-mentoring.json, 3) (photography.json, 3) (sousa2022triponto.json, 5) (aires2022valuenetworks-geo.json, 6) (bank-model.json, 7) (gailly2016value.json, 2) (van-wingerde2020smart-contracts.json, 2) (ppo-o2021.json, 1) (niederkofler2019dssapple.json, 4) (library.json, 14) (amaral2020rome.json, 5) (rodrigues2019turbidite.json, 6) (cgts2021sebim.json, 1) (valaski2020medical-appointment_.json, 1) (spo2017.json, 1) (franco2018rpg.json, 1) (aristotle-ontology2019.json, 8) (ramirez2015userfeedback.json, 4) (elikan2018brand-identity.json, 1) (real-estate-ontology.json, 2) (aguiar2019ooco.json, 2) (guarino2018rea.json, 1)
 -------------
 
 t # 28
-v 0 Access
-v 1 BusinessProcess
-v 2 BusinessObject
-v 3 Access
-v 4 BusinessProcess
-e 1 0 source
-e 2 0 target
-e 2 3 target
-e 4 3 source
-s 28
-x (id-00ae4f79280548e4bf87f2d9999d727d, 14) (id-82442a4c03634d388a1bc2a24ed05a99, 980) (id-c874bd6f-c66d-4b19-82bb-909e4f300ead, 66) (70ff1122-82b9-4d13-a15c-6cdc858dd4b3, 2) (25eb1d65-b2a2-4123-ad8c-6578b468097d, 54) (fa7c7a16-1338-4eae-97e2-7b9aed26799c, 12) (id-cff0d7556f654881afbe90d896d2c969, 4) (id-ea12c7b9ede84a8dae334d9752053744, 10) (4d1d1da3-23ba-4562-a6c8-bca223c644fb, 4) (d35b7b41-b41e-417f-8f0b-4b46b25609b7, 370) (id-91edb5e7-9903-4a2c-867e-40db2b10cb5a, 276) (id-ee2bba95, 4) (54e87e47-f01c-49fe-af55-2068f4564bd2, 12) (c04bba8d-5b28-4f7d-957a-d0921f0d3142, 14) (265214de, 74) (id-723b6dc3-1c32-41a5-a02b-6d27b40c34d8, 60) (466b1e76, 12) (id-322369a4-b2ad-4c96-8d58-a5d264295809, 1262) (id-8d57243ff9f94eaeaad5033a98122432, 38) (d6c69f6a, 6) (id-316838d5-7351-46de-9071-f4ba8175825c, 230) (723b6dc3-1c32-41a5-a02b-6d27b40c34d8, 60) (b7b20375-d803-4baa-a59d-712acb1eae41, 84) (id-be4886b4de5c4cb1a74d8211804b93ff, 2) (54525ee5, 262) (38e69c5d-0a5b-4cc8-8bec-b6f9f1d39910, 2) (id-bd02ddb59fa646a5a82c1dd1a6af8b4c, 2) (1d1b3ca7-0530-4f63-8cdc-bafaf7ece2f6, 4)
+v 0 1_1*
+s 96
+x (guizzardi2020decision-making.json, 8) (silva2012itarchitecture.json, 8) (srro-ontology.json, 2) (music-ontology.json, 1) (unimatch-ontology2022.json, 1) (moreira2018saref4health.json, 1) (kritz2020ontobg.json, 2) (cmpo2017.json, 1) (andersson2018value-ascription.json, 1) (porello2020coex.json, 2) (recommendation-ontology.json, 1) (silveira2021oap.json, 4) (bernasconi2021ontovcm.json, 10) (maddalena2021ontocovid.json, 1) (idaf2013.json, 2) (chartered-service.json, 2) (public-tender.json, 6) (andrade2023integracao.json, 4) (carolla2014campus-management.json, 5) (barcelos2015transport-networks.json, 11) (buchtela2020connection.json, 3) (neves2020nwpontology.json, 2) (mgic-antt2011.json, 80) (albuquerque2011ontobio.json, 5) (weigand2021artifact.json, 1) (dcat-mlt-ufo2023.json, 1) (elghosh2020cargos.json, 1) (lindeberg2022simple-ontorights.json, 3) (fischer2018ontorea.json, 4) (brazilian-governmental-organizational-structures.json, 2) (falduci2022non-consensual-pornography.json, 4) (buridan-ontology2021.json, 2) (duarte2018osdef.json, 1) (digitaldoctor2022.json, 4) (guizzardi2022ufo.json, 4) (dpo2017.json, 1) (zanetti2019orm-o.json, 5) (debbech2019gosmo.json, 4) (lindeberg2022full-ontorights.json, 1) (martinez2013human-genome.json, 3) (health-organizations.json, 2) (duarte2020jogabilidade.json, 3) (sportbooking2021.json, 2) (freshbz2023.json, 7) (sales2018competition.json, 8) (haridy2021egyptian-e-government.json, 1) (ramos2021bias.json, 1) (abrahao2018agriculture-operations.json, 10) (rodrigues2017urinary-profiles.json, 2) (duarte2018reqon.json, 7) (social-contract.json, 6) (aguiar2018rdbs-o.json, 8) (nardi2015ufo-s.json, 7) (fernandez-cejas2022curie-o.json, 4) (romanenko2023what.json, 2) (amaral2022ethical-requirements.json, 1) (eu-rent-refactored2022.json, 2) (repa2021public-administration.json, 1) (guizzardi2014nfr.json, 2) (project-management-ontology.json, 2) (zhou2017hazard.json, 6) (spmo2017.json, 1) (plato-ontology2019.json, 5) (tourbo2021.json, 7) (internship.json, 1) (oliveira2007collaboration.json, 2) (goncalves2011ecg.json, 9) (clergy-ontology.json, 3) (derave2019dpo.json, 27) (ferreira2015ontoemergeplan.json, 18) (gomes2022digital-technology.json, 2) (public-expense-ontology2020.json, 5) (pereira2015doacao-orgaos.json, 2) (saleme2019mulseonto.json, 4) (amaral2020game-theory.json, 2) (guarino2016value.json, 5) (mello2022monotheism.json, 3) (fraller2019abc.json, 7) (online-mentoring.json, 2) (photography.json, 1) (aires2022valuenetworks-geo.json, 10) (rodrigues2019ontocrime.json, 2) (richetti2019tdecision.json, 3) (garcia2022human-genome-events.json, 1) (van-wingerde2020smart-contracts.json, 4) (ppo-o2021.json, 4) (niederkofler2019dssapple.json, 7) (amaral2020rome.json, 1) (rodrigues2019turbidite.json, 3) (cgts2021sebim.json, 1) (spo2017.json, 4) (franco2018rpg.json, 2) (aristotle-ontology2019.json, 12) (it-infrastructure.json, 1) (ramirez2015userfeedback.json, 7) (elikan2018brand-identity.json, 1)
 -------------
 
 t # 29
-v 0 Access
-v 1 BusinessProcess
-v 2 BusinessObject
-v 3 Access
-v 4 BusinessProcess
-v 5 Access
-e 1 0 source
-e 2 0 target
-e 2 3 target
-e 4 3 source
-e 4 5 source
-s 22
-x (id-82442a4c03634d388a1bc2a24ed05a99, 590) (70ff1122-82b9-4d13-a15c-6cdc858dd4b3, 2) (id-c874bd6f-c66d-4b19-82bb-909e4f300ead, 21) (fa7c7a16-1338-4eae-97e2-7b9aed26799c, 2) (25eb1d65-b2a2-4123-ad8c-6578b468097d, 91) (id-ea12c7b9ede84a8dae334d9752053744, 21) (4d1d1da3-23ba-4562-a6c8-bca223c644fb, 3) (d35b7b41-b41e-417f-8f0b-4b46b25609b7, 945) (id-91edb5e7-9903-4a2c-867e-40db2b10cb5a, 328) (id-ee2bba95, 2) (54e87e47-f01c-49fe-af55-2068f4564bd2, 6) (c04bba8d-5b28-4f7d-957a-d0921f0d3142, 60) (265214de, 98) (id-723b6dc3-1c32-41a5-a02b-6d27b40c34d8, 116) (466b1e76, 3) (id-322369a4-b2ad-4c96-8d58-a5d264295809, 4299) (id-8d57243ff9f94eaeaad5033a98122432, 28) (id-316838d5-7351-46de-9071-f4ba8175825c, 715) (723b6dc3-1c32-41a5-a02b-6d27b40c34d8, 116) (b7b20375-d803-4baa-a59d-712acb1eae41, 19) (54525ee5, 289) (id-bd02ddb59fa646a5a82c1dd1a6af8b4c, 1)
+v 0 1*_1
+s 106
+x (university-ontology.json, 10) (oliveira2022rose.json, 10) (guizzardi2020decision-making.json, 3) (silva2012itarchitecture.json, 5) (music-ontology.json, 1) (unimatch-ontology2022.json, 2) (kritz2020ontobg.json, 3) (andersson2018value-ascription.json, 1) (porello2020coex.json, 10) (recommendation-ontology.json, 2) (silveira2021oap.json, 1) (sales2018cover.json, 7) (bernasconi2021ontovcm.json, 12) (duarte2021ross.json, 1) (fonseca2022incorporating.json, 7) (maddalena2021ontocovid.json, 8) (idaf2013.json, 16) (chartered-service.json, 3) (public-tender.json, 4) (andrade2023integracao.json, 8) (carolla2014campus-management.json, 7) (barcelos2015transport-networks.json, 59) (fumagalli2022criminal-investigation.json, 1) (buchtela2020connection.json, 2) (debbech2020dysfunction-analysis.json, 2) (mgic-antt2011.json, 170) (albuquerque2011ontobio.json, 8) (weigand2021artifact.json, 7) (dcat-mlt-ufo2023.json, 6) (elghosh2020cargos.json, 7) (jacobs2022sdpontology.json, 1) (lindeberg2022simple-ontorights.json, 2) (fischer2018ontorea.json, 5) (castro2012cloudvulnerability.json, 2) (brazilian-governmental-organizational-structures.json, 1) (falduci2022non-consensual-pornography.json, 21) (buridan-ontology2021.json, 13) (gi2mo.json, 20) (digitaldoctor2022.json, 6) (guizzardi2022ufo.json, 3) (zanetti2019orm-o.json, 3) (debbech2019gosmo.json, 2) (lindeberg2022full-ontorights.json, 12) (qam.json, 13) (kostov2017towards.json, 1) (health-organizations.json, 4) (internal-affairs2013.json, 23) (alpinebits2022.json, 2) (sportbooking2021.json, 7) (freshbz2023.json, 7) (bernasconi2023fair-principles.json, 7) (ramos2021bias.json, 2) (amaral2019rot.json, 4) (abrahao2018agriculture-operations.json, 14) (rodrigues2017urinary-profiles.json, 6) (duarte2018reqon.json, 1) (social-contract.json, 4) (aguiar2018rdbs-o.json, 4) (nardi2015ufo-s.json, 16) (fernandez-cejas2022curie-o.json, 4) (romanenko2023what.json, 9) (amaral2022ethical-requirements.json, 1) (eu-rent-refactored2022.json, 14) (guizzardi2014nfr.json, 1) (project-management-ontology.json, 2) (zhou2017hazard.json, 5) (plato-ontology2019.json, 16) (tourbo2021.json, 3) (internship.json, 9) (goncalves2011ecg.json, 19) (van-ee2021modular.json, 6) (clergy-ontology.json, 7) (derave2019dpo.json, 51) (ferreira2015ontoemergeplan.json, 17) (gomes2022digital-technology.json, 2) (public-expense-ontology2020.json, 6) (pereira2015doacao-orgaos.json, 3) (amaral2020game-theory.json, 3) (guarino2016value.json, 5) (guizzardi2005ontological.json, 1) (fraller2019abc.json, 6) (online-mentoring.json, 6) (barcelos2013normative-acts.json, 2) (photography.json, 3) (sousa2022triponto.json, 9) (aires2022valuenetworks-geo.json, 14) (bank-model.json, 6) (rodrigues2019ontocrime.json, 7) (richetti2019tdecision.json, 3) (garcia2022human-genome-events.json, 1) (experiment2013.json, 3) (van-wingerde2020smart-contracts.json, 2) (ppo-o2021.json, 1) (niederkofler2019dssapple.json, 6) (amaral2020rome.json, 6) (rodrigues2019turbidite.json, 11) (valaski2020medical-appointment_.json, 3) (spo2017.json, 2) (franco2018rpg.json, 2) (aristotle-ontology2019.json, 12) (it-infrastructure.json, 9) (ramirez2015userfeedback.json, 8) (elikan2018brand-identity.json, 8) (real-estate-ontology.json, 4) (aguiar2019ooco.json, 3) (guarino2018rea.json, 4)
 -------------
 
 t # 30
-v 0 Access
-v 1 BusinessProcess
-v 2 BusinessObject
-v 3 Access
-v 4 BusinessProcess
-v 5 Triggering
-e 1 0 source
-e 2 0 target
-e 2 3 target
-e 4 3 source
-e 4 5 source
-s 23
-x (id-00ae4f79280548e4bf87f2d9999d727d, 2) (id-82442a4c03634d388a1bc2a24ed05a99, 692) (70ff1122-82b9-4d13-a15c-6cdc858dd4b3, 1) (id-c874bd6f-c66d-4b19-82bb-909e4f300ead, 30) (fa7c7a16-1338-4eae-97e2-7b9aed26799c, 5) (25eb1d65-b2a2-4123-ad8c-6578b468097d, 15) (id-cff0d7556f654881afbe90d896d2c969, 2) (id-ea12c7b9ede84a8dae334d9752053744, 21) (4d1d1da3-23ba-4562-a6c8-bca223c644fb, 3) (d35b7b41-b41e-417f-8f0b-4b46b25609b7, 442) (id-91edb5e7-9903-4a2c-867e-40db2b10cb5a, 271) (id-ee2bba95, 4) (54e87e47-f01c-49fe-af55-2068f4564bd2, 10) (c04bba8d-5b28-4f7d-957a-d0921f0d3142, 4) (265214de, 12) (id-723b6dc3-1c32-41a5-a02b-6d27b40c34d8, 64) (466b1e76, 9) (id-8d57243ff9f94eaeaad5033a98122432, 22) (d6c69f6a, 6) (id-316838d5-7351-46de-9071-f4ba8175825c, 16) (723b6dc3-1c32-41a5-a02b-6d27b40c34d8, 64) (b7b20375-d803-4baa-a59d-712acb1eae41, 92) (54525ee5, 255)
--------------
-
-t # 31
-v 0 Access
-v 1 BusinessProcess
-v 2 BusinessObject
-v 3 Access
-v 4 BusinessProcess
-v 5 Triggering
-e 1 0 source
-e 2 0 target
-e 2 3 target
-e 4 3 source
-e 4 5 target
-s 23
-x (id-00ae4f79280548e4bf87f2d9999d727d, 14) (id-82442a4c03634d388a1bc2a24ed05a99, 29) (id-c874bd6f-c66d-4b19-82bb-909e4f300ead, 24) (25eb1d65-b2a2-4123-ad8c-6578b468097d, 19) (fa7c7a16-1338-4eae-97e2-7b9aed26799c, 5) (id-cff0d7556f654881afbe90d896d2c969, 4) (id-ea12c7b9ede84a8dae334d9752053744, 23) (4d1d1da3-23ba-4562-a6c8-bca223c644fb, 6) (d35b7b41-b41e-417f-8f0b-4b46b25609b7, 535) (id-91edb5e7-9903-4a2c-867e-40db2b10cb5a, 280) (id-ee2bba95, 3) (54e87e47-f01c-49fe-af55-2068f4564bd2, 6) (c04bba8d-5b28-4f7d-957a-d0921f0d3142, 2) (265214de, 32) (id-723b6dc3-1c32-41a5-a02b-6d27b40c34d8, 81) (466b1e76, 12) (id-8d57243ff9f94eaeaad5033a98122432, 30) (d6c69f6a, 6) (723b6dc3-1c32-41a5-a02b-6d27b40c34d8, 81) (b7b20375-d803-4baa-a59d-712acb1eae41, 107) (54525ee5, 275) (38e69c5d-0a5b-4cc8-8bec-b6f9f1d39910, 2) (id-bd02ddb59fa646a5a82c1dd1a6af8b4c, 2)
--------------
-
-t # 32
-v 0 Access
-v 1 BusinessProcess
-v 2 BusinessObject
-v 3 Access
-v 4 Access
-e 1 0 source
-e 2 0 target
-e 2 3 target
-e 2 4 target
-s 23
-x (id-00ae4f79280548e4bf87f2d9999d727d, 12) (id-82442a4c03634d388a1bc2a24ed05a99, 24780) (id-c874bd6f-c66d-4b19-82bb-909e4f300ead, 340) (fa7c7a16-1338-4eae-97e2-7b9aed26799c, 18) (25eb1d65-b2a2-4123-ad8c-6578b468097d, 444) (id-ea12c7b9ede84a8dae334d9752053744, 96) (d35b7b41-b41e-417f-8f0b-4b46b25609b7, 3234) (id-91edb5e7-9903-4a2c-867e-40db2b10cb5a, 2612) (id-ee2bba95, 4) (54e87e47-f01c-49fe-af55-2068f4564bd2, 26) (c04bba8d-5b28-4f7d-957a-d0921f0d3142, 6) (265214de, 822) (id-723b6dc3-1c32-41a5-a02b-6d27b40c34d8, 204) (466b1e76, 24) (id-322369a4-b2ad-4c96-8d58-a5d264295809, 19926) (88f977a5-f39f-4491-9eb8-0ca26da61a8d, 2) (id-8d57243ff9f94eaeaad5033a98122432, 84) (d6c69f6a, 2) (id-316838d5-7351-46de-9071-f4ba8175825c, 2584) (723b6dc3-1c32-41a5-a02b-6d27b40c34d8, 204) (b7b20375-d803-4baa-a59d-712acb1eae41, 102) (54525ee5, 2472) (id-bd02ddb59fa646a5a82c1dd1a6af8b4c, 4)
--------------
-
-t # 33
-v 0 Access
-v 1 BusinessProcess
-v 2 BusinessObject
-v 3 Access
-v 4 Access
-v 5 BusinessProcess
-e 1 0 source
-e 2 0 target
-e 2 3 target
-e 2 4 target
-e 5 4 source
-s 21
-x (id-00ae4f79280548e4bf87f2d9999d727d, 12) (id-82442a4c03634d388a1bc2a24ed05a99, 24772) (id-c874bd6f-c66d-4b19-82bb-909e4f300ead, 276) (fa7c7a16-1338-4eae-97e2-7b9aed26799c, 12) (25eb1d65-b2a2-4123-ad8c-6578b468097d, 222) (id-ea12c7b9ede84a8dae334d9752053744, 28) (d35b7b41-b41e-417f-8f0b-4b46b25609b7, 1812) (id-91edb5e7-9903-4a2c-867e-40db2b10cb5a, 2358) (id-ee2bba95, 2) (54e87e47-f01c-49fe-af55-2068f4564bd2, 12) (c04bba8d-5b28-4f7d-957a-d0921f0d3142, 6) (265214de, 552) (id-723b6dc3-1c32-41a5-a02b-6d27b40c34d8, 126) (466b1e76, 24) (id-322369a4-b2ad-4c96-8d58-a5d264295809, 18160) (id-8d57243ff9f94eaeaad5033a98122432, 84) (id-316838d5-7351-46de-9071-f4ba8175825c, 1600) (723b6dc3-1c32-41a5-a02b-6d27b40c34d8, 126) (b7b20375-d803-4baa-a59d-712acb1eae41, 102) (54525ee5, 2244) (id-bd02ddb59fa646a5a82c1dd1a6af8b4c, 2)
--------------
-
-t # 34
-v 0 Access
-v 1 BusinessProcess
-v 2 Triggering
-v 3 BusinessProcess
-v 4 Triggering
-e 1 0 source
-e 1 2 source
-e 3 2 target
-e 3 4 source
-s 20
-x (id-00ae4f79280548e4bf87f2d9999d727d, 1) (fc634b15-5d93-4578-acbb-ceb09c11dfe7, 4) (id-c874bd6f-c66d-4b19-82bb-909e4f300ead, 4) (70ff1122-82b9-4d13-a15c-6cdc858dd4b3, 1) (25eb1d65-b2a2-4123-ad8c-6578b468097d, 17) (fa7c7a16-1338-4eae-97e2-7b9aed26799c, 2) (id-cff0d7556f654881afbe90d896d2c969, 2) (id-ea12c7b9ede84a8dae334d9752053744, 32) (4d1d1da3-23ba-4562-a6c8-bca223c644fb, 2) (d35b7b41-b41e-417f-8f0b-4b46b25609b7, 126) (id-91edb5e7-9903-4a2c-867e-40db2b10cb5a, 50) (id-ee2bba95, 3) (c04bba8d-5b28-4f7d-957a-d0921f0d3142, 176) (265214de, 6) (id-723b6dc3-1c32-41a5-a02b-6d27b40c34d8, 48) (466b1e76, 6) (d6c69f6a, 13) (723b6dc3-1c32-41a5-a02b-6d27b40c34d8, 48) (b7b20375-d803-4baa-a59d-712acb1eae41, 117) (54525ee5, 46)
--------------
-
-t # 35
-v 0 Access
-v 1 BusinessProcess
-v 2 Triggering
-v 3 Access
-v 4 BusinessObject
-e 1 0 source
-e 1 2 source
-e 1 3 source
-e 4 3 target
-s 20
-x (id-82442a4c03634d388a1bc2a24ed05a99, 22) (id-c874bd6f-c66d-4b19-82bb-909e4f300ead, 1) (25eb1d65-b2a2-4123-ad8c-6578b468097d, 120) (fa7c7a16-1338-4eae-97e2-7b9aed26799c, 2) (811a44f0, 6) (id-ea12c7b9ede84a8dae334d9752053744, 90) (4d1d1da3-23ba-4562-a6c8-bca223c644fb, 2) (d35b7b41-b41e-417f-8f0b-4b46b25609b7, 600) (id-91edb5e7-9903-4a2c-867e-40db2b10cb5a, 86) (id-ee2bba95, 2) (54e87e47-f01c-49fe-af55-2068f4564bd2, 12) (c04bba8d-5b28-4f7d-957a-d0921f0d3142, 26) (265214de, 12) (id-723b6dc3-1c32-41a5-a02b-6d27b40c34d8, 56) (466b1e76, 1) (id-8d57243ff9f94eaeaad5033a98122432, 10) (id-316838d5-7351-46de-9071-f4ba8175825c, 6) (723b6dc3-1c32-41a5-a02b-6d27b40c34d8, 56) (b7b20375-d803-4baa-a59d-712acb1eae41, 18) (54525ee5, 74)
--------------
-
-t # 36
-v 0 Access
-v 1 BusinessProcess
-v 2 Access
-v 3 BusinessObject
-v 4 Access
-e 1 0 source
-e 1 2 source
-e 3 2 target
-e 3 4 target
-s 23
-x (id-82442a4c03634d388a1bc2a24ed05a99, 592) (id-c874bd6f-c66d-4b19-82bb-909e4f300ead, 25) (70ff1122-82b9-4d13-a15c-6cdc858dd4b3, 2) (25eb1d65-b2a2-4123-ad8c-6578b468097d, 185) (fa7c7a16-1338-4eae-97e2-7b9aed26799c, 4) (id-ea12c7b9ede84a8dae334d9752053744, 96) (4d1d1da3-23ba-4562-a6c8-bca223c644fb, 3) (d35b7b41-b41e-417f-8f0b-4b46b25609b7, 1334) (id-91edb5e7-9903-4a2c-867e-40db2b10cb5a, 362) (id-ee2bba95, 3) (54e87e47-f01c-49fe-af55-2068f4564bd2, 12) (c04bba8d-5b28-4f7d-957a-d0921f0d3142, 60) (265214de, 128) (id-723b6dc3-1c32-41a5-a02b-6d27b40c34d8, 172) (466b1e76, 3) (id-322369a4-b2ad-4c96-8d58-a5d264295809, 4790) (88f977a5-f39f-4491-9eb8-0ca26da61a8d, 2) (id-8d57243ff9f94eaeaad5033a98122432, 28) (id-316838d5-7351-46de-9071-f4ba8175825c, 1189) (723b6dc3-1c32-41a5-a02b-6d27b40c34d8, 172) (b7b20375-d803-4baa-a59d-712acb1eae41, 19) (54525ee5, 318) (id-bd02ddb59fa646a5a82c1dd1a6af8b4c, 2)
--------------
-
-t # 37
-v 0 Access
-v 1 BusinessProcess
-v 2 Access
-v 3 BusinessObject
-v 4 Access
-v 5 Access
-e 1 0 source
-e 1 2 source
-e 3 2 target
-e 3 4 target
-e 3 5 target
-s 21
-x (id-82442a4c03634d388a1bc2a24ed05a99, 12724) (id-c874bd6f-c66d-4b19-82bb-909e4f300ead, 96) (fa7c7a16-1338-4eae-97e2-7b9aed26799c, 6) (25eb1d65-b2a2-4123-ad8c-6578b468097d, 788) (id-ea12c7b9ede84a8dae334d9752053744, 220) (d35b7b41-b41e-417f-8f0b-4b46b25609b7, 8130) (id-91edb5e7-9903-4a2c-867e-40db2b10cb5a, 2870) (id-ee2bba95, 2) (54e87e47-f01c-49fe-af55-2068f4564bd2, 14) (c04bba8d-5b28-4f7d-957a-d0921f0d3142, 20) (265214de, 880) (id-723b6dc3-1c32-41a5-a02b-6d27b40c34d8, 534) (466b1e76, 6) (id-322369a4-b2ad-4c96-8d58-a5d264295809, 67782) (88f977a5-f39f-4491-9eb8-0ca26da61a8d, 2) (id-8d57243ff9f94eaeaad5033a98122432, 60) (id-316838d5-7351-46de-9071-f4ba8175825c, 8216) (723b6dc3-1c32-41a5-a02b-6d27b40c34d8, 534) (b7b20375-d803-4baa-a59d-712acb1eae41, 24) (54525ee5, 2484) (id-bd02ddb59fa646a5a82c1dd1a6af8b4c, 2)
--------------
-
-t # 38
-v 0 Access
-v 1 BusinessProcess
-v 2 Triggering
-v 3 BusinessProcess
-v 4 Triggering
-e 1 0 source
-e 1 2 target
-e 3 2 source
-e 3 4 target
-s 22
-x (id-00ae4f79280548e4bf87f2d9999d727d, 16) (fc634b15-5d93-4578-acbb-ceb09c11dfe7, 12) (id-c874bd6f-c66d-4b19-82bb-909e4f300ead, 1) (70ff1122-82b9-4d13-a15c-6cdc858dd4b3, 1) (25eb1d65-b2a2-4123-ad8c-6578b468097d, 9) (fa7c7a16-1338-4eae-97e2-7b9aed26799c, 1) (c4d7f98f-555b-4bda-aa37-d2516a2e0aae, 1) (id-cff0d7556f654881afbe90d896d2c969, 3) (id-ea12c7b9ede84a8dae334d9752053744, 38) (4d1d1da3-23ba-4562-a6c8-bca223c644fb, 3) (d35b7b41-b41e-417f-8f0b-4b46b25609b7, 149) (id-91edb5e7-9903-4a2c-867e-40db2b10cb5a, 40) (id-ee2bba95, 1) (c04bba8d-5b28-4f7d-957a-d0921f0d3142, 97) (265214de, 5) (id-723b6dc3-1c32-41a5-a02b-6d27b40c34d8, 55) (466b1e76, 7) (d6c69f6a, 12) (723b6dc3-1c32-41a5-a02b-6d27b40c34d8, 55) (b7b20375-d803-4baa-a59d-712acb1eae41, 145) (54525ee5, 42) (38e69c5d-0a5b-4cc8-8bec-b6f9f1d39910, 1)
--------------
-
-t # 39
-v 0 Access
-v 1 BusinessProcess
-v 2 Triggering
-v 3 BusinessProcess
-v 4 Triggering
-v 5 BusinessProcess
-e 1 0 source
-e 1 2 target
-e 3 2 source
-e 3 4 target
-e 5 4 source
-s 20
-x (id-00ae4f79280548e4bf87f2d9999d727d, 15) (fc634b15-5d93-4578-acbb-ceb09c11dfe7, 12) (70ff1122-82b9-4d13-a15c-6cdc858dd4b3, 1) (id-c874bd6f-c66d-4b19-82bb-909e4f300ead, 1) (c4d7f98f-555b-4bda-aa37-d2516a2e0aae, 1) (25eb1d65-b2a2-4123-ad8c-6578b468097d, 4) (id-cff0d7556f654881afbe90d896d2c969, 2) (id-ea12c7b9ede84a8dae334d9752053744, 6) (4d1d1da3-23ba-4562-a6c8-bca223c644fb, 2) (d35b7b41-b41e-417f-8f0b-4b46b25609b7, 37) (id-91edb5e7-9903-4a2c-867e-40db2b10cb5a, 36) (id-ee2bba95, 1) (c04bba8d-5b28-4f7d-957a-d0921f0d3142, 82) (265214de, 2) (id-723b6dc3-1c32-41a5-a02b-6d27b40c34d8, 55) (466b1e76, 5) (d6c69f6a, 11) (723b6dc3-1c32-41a5-a02b-6d27b40c34d8, 55) (b7b20375-d803-4baa-a59d-712acb1eae41, 142) (54525ee5, 35)
--------------
-
-t # 40
-v 0 Access
-v 1 BusinessObject
-v 2 Access
-v 3 Access
-v 4 Access
-e 1 0 target
-e 1 2 target
-e 1 3 target
-e 1 4 target
-s 23
-x (id-82442a4c03634d388a1bc2a24ed05a99, 659064) (70ff1122-82b9-4d13-a15c-6cdc858dd4b3, 120) (id-c874bd6f-c66d-4b19-82bb-909e4f300ead, 1728) (25eb1d65-b2a2-4123-ad8c-6578b468097d, 2904) (fa7c7a16-1338-4eae-97e2-7b9aed26799c, 24) (id-ea12c7b9ede84a8dae334d9752053744, 648) (d35b7b41-b41e-417f-8f0b-4b46b25609b7, 314184) (id-91edb5e7-9903-4a2c-867e-40db2b10cb5a, 29160) (54e87e47-f01c-49fe-af55-2068f4564bd2, 24) (265214de, 7920) (id-f89e5c031f397811f6aa0fac0dbac5bc, 137520) (id-723b6dc3-1c32-41a5-a02b-6d27b40c34d8, 1056) (910d7207-bc6c-4df3-812c-17365ac27a98, 888) (466b1e76, 144) (id-322369a4-b2ad-4c96-8d58-a5d264295809, 377280) (d939a040-238b-4789-8d88-4ac8e2426366, 3024) (id-8d57243ff9f94eaeaad5033a98122432, 144) (d6c69f6a, 4488) (id-316838d5-7351-46de-9071-f4ba8175825c, 27576) (723b6dc3-1c32-41a5-a02b-6d27b40c34d8, 1056) (b7b20375-d803-4baa-a59d-712acb1eae41, 144) (54525ee5, 27816) (0c6fbcf4-57de-4e25-a1b4-d9a0fa460c16, 275640)
+v 0 1_1
+s 106
+x (university-ontology.json, 10) (oliveira2022rose.json, 2) (guizzardi2020decision-making.json, 3) (silva2012itarchitecture.json, 9) (music-ontology.json, 4) (sikora2021online-education.json, 9) (moreira2018saref4health.json, 1) (kritz2020ontobg.json, 34) (porello2020coex.json, 3) (recommendation-ontology.json, 3) (silveira2021oap.json, 6) (sales2018cover.json, 2) (bernasconi2021ontovcm.json, 5) (fonseca2022incorporating.json, 1) (maddalena2021ontocovid.json, 7) (idaf2013.json, 4) (chartered-service.json, 8) (public-tender.json, 26) (andrade2023integracao.json, 2) (carolla2014campus-management.json, 5) (barcelos2015transport-networks.json, 188) (fumagalli2022criminal-investigation.json, 1) (mgic-antt2011.json, 126) (albuquerque2011ontobio.json, 10) (weigand2021artifact.json, 4) (dcat-mlt-ufo2023.json, 1) (elghosh2020cargos.json, 6) (jacobs2022sdpontology.json, 1) (lindeberg2022simple-ontorights.json, 3) (fischer2018ontorea.json, 2) (castro2012cloudvulnerability.json, 8) (falduci2022non-consensual-pornography.json, 7) (buridan-ontology2021.json, 27) (construction-model.json, 3) (gi2mo.json, 12) (digitaldoctor2022.json, 5) (guizzardi2022ufo.json, 12) (zanetti2019orm-o.json, 5) (lindeberg2022full-ontorights.json, 26) (martinez2013human-genome.json, 4) (qam.json, 1) (health-organizations.json, 3) (santos2020valuenetworks.json, 3) (internal-affairs2013.json, 18) (alpinebits2022.json, 1) (duarte2020jogabilidade.json, 13) (sportbooking2021.json, 3) (freshbz2023.json, 20) (bernasconi2023fair-principles.json, 3) (sales2018competition.json, 1) (haridy2021egyptian-e-government.json, 13) (ramos2021bias.json, 9) (amaral2019rot.json, 5) (abrahao2018agriculture-operations.json, 9) (rodrigues2017urinary-profiles.json, 20) (duarte2018reqon.json, 1) (social-contract.json, 18) (aguiar2018rdbs-o.json, 2) (nardi2015ufo-s.json, 5) (romanenko2023what.json, 15) (g809-2015.json, 18) (eu-rent-refactored2022.json, 17) (abel2015petroleum-system.json, 3) (guizzardi2014nfr.json, 2) (project-management-ontology.json, 2) (plato-ontology2019.json, 32) (tourbo2021.json, 6) (internship.json, 4) (goncalves2011ecg.json, 60) (van-ee2021modular.json, 4) (clergy-ontology.json, 19) (derave2019dpo.json, 46) (ferreira2015ontoemergeplan.json, 8) (public-expense-ontology2020.json, 4) (saleme2019mulseonto.json, 1) (amaral2020game-theory.json, 1) (stock-broker2021.json, 6) (guarino2016value.json, 4) (guizzardi2005ontological.json, 6) (fraller2019abc.json, 1) (online-mentoring.json, 4) (barcelos2013normative-acts.json, 5) (photography.json, 4) (sousa2022triponto.json, 5) (aires2022valuenetworks-geo.json, 9) (bank-model.json, 4) (rodrigues2019ontocrime.json, 10) (richetti2019tdecision.json, 1) (experiment2013.json, 11) (van-wingerde2020smart-contracts.json, 9) (ppo-o2021.json, 7) (niederkofler2019dssapple.json, 2) (library.json, 44) (amaral2020rome.json, 25) (rodrigues2019turbidite.json, 13) (core-o2023.json, 6) (cgts2021sebim.json, 5) (valaski2020medical-appointment_.json, 2) (franco2018rpg.json, 12) (aristotle-ontology2019.json, 92) (it-infrastructure.json, 1) (ramirez2015userfeedback.json, 10) (elikan2018brand-identity.json, 3) (real-estate-ontology.json, 1) (aguiar2019ooco.json, 5) (guarino2018rea.json, 6)

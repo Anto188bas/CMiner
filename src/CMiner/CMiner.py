@@ -629,7 +629,7 @@ class CMiner:
         return patterns
 
     def _read_graphs_from_file(self):
-        type_file = "data"
+        type_file = self.graph_db_path.split('.')[-1]
         configurator = NetworkConfigurator(self.graph_db_path, type_file)
         for name, network in NetworksLoading(type_file, configurator.config).Networks.items():
             self.db.append(DBGraph(network, name))

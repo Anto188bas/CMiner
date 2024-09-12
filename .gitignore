@@ -1,8 +1,7 @@
-data
-build
-CMiner.egg-info
-dist
-Datasets
-_CMiner_debug
-.idea
-debug
+data/
+build/
+CMiner.egg-info/
+dist/
+Datasets/
+_CMiner_debug/
+debug/
