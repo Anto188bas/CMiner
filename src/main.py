@@ -1,6 +1,6 @@
 import time
 import argparse
-from src.CMiner.CMiner import CMiner
+from src.CMiner.CMiner_optimized import CMiner
 
 def main_function():
     parser = argparse.ArgumentParser(description="CMiner algorithm")
