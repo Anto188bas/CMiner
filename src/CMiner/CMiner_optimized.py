@@ -573,13 +573,13 @@ class CMiner:
                 # Ensure no duplicate patterns are processed
                 if new_pattern_code not in pattern_codes:
                     # Find cycles
-                    new_pattern.find_cycles(self.support)
-                    new_pattern_code = new_pattern.code()
-                    if new_pattern_code not in pattern_codes:
-                        stack.append(new_pattern)
-                        pattern_codes.add(new_pattern_code)
-                    # stack.append(new_pattern)
-                    # pattern_codes.add(new_pattern_code)
+                    # new_pattern.find_cycles(self.support)
+                    # new_pattern_code = new_pattern.code()
+                    # if new_pattern_code not in pattern_codes:
+                    #     stack.append(new_pattern)
+                    #     pattern_codes.add(new_pattern_code)
+                    stack.append(new_pattern)
+                    pattern_codes.add(new_pattern_code)
 
         # Close the file if it was opened
         if output_file is not None:
