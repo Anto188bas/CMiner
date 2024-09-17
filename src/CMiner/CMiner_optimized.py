@@ -410,18 +410,18 @@ class Pattern(MultiDiGraph):
 class CMiner:
 
     def __init__(self,
-                 graph_db_path,
-                 min_num_nodes=1,
-                 max_num_nodes=float('inf'),
-                 support=0.5,
+                 db_file,
+                 support,
+                 min_nodes=1,
+                 max_nodes=float('inf'),
                  start_pattern=None, # implement
                  show_mappings=False,
                  output_path=None,
                  approach='dfs'
                  ):
-        self.graph_db_path = graph_db_path
-        self._min_num_nodes = min_num_nodes
-        self._max_num_nodes = max_num_nodes
+        self.db_file = db_file
+        self._min_nodes = min_nodes
+        self._max_nodes = max_nodes
         self.support = support
         self._start_pattern = start_pattern
         self.db = []
@@ -455,14 +455,14 @@ class CMiner:
             pattern_to_extend = stack.pop()
 
             # Print pattern to console and file if it meets the min node requirement
-            if len(pattern_to_extend.nodes()) >= self._min_num_nodes:
+            if len(pattern_to_extend.nodes()) >= self._min_nodes:
                 if self.output_path is not None:
                     print(pattern_to_extend.__str__(self.show_mappings), file=output_file)
                 else:
                     print(pattern_to_extend.__str__(self.show_mappings))
 
             # Check if the pattern is already at the max number of nodes
-            if len(pattern_to_extend.nodes()) == self._max_num_nodes:
+            if len(pattern_to_extend.nodes()) == self._max_nodes:
                 del pattern_to_extend
                 continue
 
@@ -503,7 +503,7 @@ class CMiner:
         curr_nodes = 1
         # count the number of patterns found
         pattern_count = 0
-        while curr_nodes <= self._max_num_nodes:
+        while curr_nodes <= self._max_nodes:
             # mine patterns
             patterns = self._mine_patterns(curr_nodes)
 
@@ -513,7 +513,7 @@ class CMiner:
             if self.output_path is not None:
                 output_file = open(self.output_path, "a")
 
-            if curr_nodes >= self._min_num_nodes:
+            if curr_nodes >= self._min_nodes:
                 # print results only if the current number of nodes is at least the min number of nodes
                 for pattern in patterns:
                     if self.output_path is not None:
@@ -575,8 +575,8 @@ class CMiner:
         return patterns
 
     def _read_graphs_from_file(self):
-        type_file = self.graph_db_path.split('.')[-1]
-        configurator = NetworkConfigurator(self.graph_db_path, type_file)
+        type_file = self.db_file.split('.')[-1]
+        configurator = NetworkConfigurator(self.db_file, type_file)
         for name, network in NetworksLoading(type_file, configurator.config).Networks.items():
             self.db.append(DBGraph(network, name))
 
