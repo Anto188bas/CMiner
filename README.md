@@ -32,15 +32,44 @@ Make sure the `requirements.txt` file lists all necessary dependencies for runni
 
 ## Usage
 
-Once installed, you can run CMiner directly from the command line using:
+Once installed, CMiner can be used in three different ways:
+
+1. **Command Line Interface (CLI)**:
+    Run directly from the command line with the following syntax:
 
 ```bash
 CMiner <db_file> <support> [options]
  ```
 
+2. **Using Python's `-m` flag**:
+   Alternatively, you can execute CMiner as a Python module:
+```bash
+python -m CMiner <db_file> <support> [options]
+ ```
+
+2. **As a Python module**:
+   You can also import CMiner into your Python code and use it programmatically:
+   
+```python
+from CMiner import CMiner
+
+miner = CMiner(
+    db_file='/path/to/your/db/graph', # required
+    support, # required
+    min_nodes=1,
+    max_nodes=float('inf'),
+    show_mappings=False,
+    output_path=None
+)
+ ```
+
+
+
+
 ### Required arguments:
 - `db_file`: Absolute path to the graph database file.
-- `support`: Minimum support for pattern extraction: values between 0 and 1 for percentage, or specify an absolute value.
+- `support`: **Minimum support for pattern extraction**: Specify a value between `0` and `1` for percentage (e.g., `0.2` for 20%) or an absolute number (e.g., `20` for at least 20 graphs).
+
 
 ### Additional options:
 - `-l`, `--min_nodes`: Minimum number of nodes in the pattern (default: 1).
