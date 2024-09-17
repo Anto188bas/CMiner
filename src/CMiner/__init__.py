@@ -1,1 +1,1 @@
-from .CMiner_optimized import CMiner
+from .CMiner import CMiner

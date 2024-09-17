@@ -5,3 +5,4 @@ dist/*
 Datasets/*
 _CMiner_debug/*
 debug/*
+src/CMiner.egg-info/*

@@ -1,10 +1,8 @@
-import os
-from src.NetworkX.NetworkConfigurator import NetworkConfigurator
-from src.NetworkX.NetworksLoading import NetworksLoading
-from src.CMiner.MultiGraphMatch import MultiGraphMatch
-from src.Graph.Graph import MultiDiGraph
-from src.CMiner.BitMatrix import TargetBitMatrixOptimized, BitMatrixStrategy2
-import copy
+from NetworkX.NetworkConfigurator import NetworkConfigurator
+from NetworkX.NetworksLoading import NetworksLoading
+from CMiner.MultiGraphMatch import MultiGraphMatch
+from Graph.Graph import MultiDiGraph
+from CMiner.BitMatrix import TargetBitMatrixOptimized, BitMatrixStrategy2
 import time
 
 # TO-DO: handle multiple edges map in _apply_mappings
@@ -165,11 +163,11 @@ class Mapping:
         edge_mapping.update(self.edge_mapping)
         return edge_mapping
 
-    def get_target_nodes(self):
-        return self.node_mapping.values()
-
-    def get_target_edges(self):
-        return self.edge_mapping.values()
+    # def get_target_nodes(self):
+    #     return self.node_mapping.values()
+    #
+    # def get_target_edges(self):
+    #     return self.edge_mapping.values()
 
     def get_pattern_nodes(self):
         return self.node_mapping.keys()
@@ -224,7 +222,7 @@ class PatternMappings:
 
 class Pattern(MultiDiGraph):
 
-    def __init__(self, pattern_mappings, extended_pattern: 'Pattern' = None, **attr):
+    def __init__(self, pattern_mappings, extension_applied: Extension = None, extended_pattern: 'Pattern' = None, **attr):
 
         if extended_pattern is not None:
             # Copia i nodi e gli archi dal pattern esteso
@@ -234,6 +232,8 @@ class Pattern(MultiDiGraph):
 
         self.extended_pattern = extended_pattern
         self.pattern_mappings = pattern_mappings
+        self.extension_applied = extension_applied
+
 
     def extend(self, support) -> list['Pattern']:
 
@@ -255,7 +255,7 @@ class Pattern(MultiDiGraph):
         pattern_node_id = extension.pattern_node_id
 
         # Apply extension to the pattern (add node and edges)
-        new_pattern = Pattern(extended_pattern=self, pattern_mappings=new_pattern_mappings)
+        new_pattern = Pattern(extended_pattern=self, pattern_mappings=new_pattern_mappings, extension_applied=extension)
         new_pattern_new_node_id = max(new_pattern.nodes()) + 1
         new_pattern.add_node(new_pattern_new_node_id, labels=extension.target_node_labels)
         for target_edge_label in extension.target_edge_labels:
@@ -291,112 +291,52 @@ class Pattern(MultiDiGraph):
             new_pattern_mappings.set_mapping(target, new_mappings)
         return new_pattern
 
-    # def find_cycles(self, support) -> list['Pattern']:
-    #     candidate_edges_to_extend_count = {}
-    #
-    #     inverse_mappings = {}
-    #     for g in self.pattern_mappings.get_graphs():
-    #         for _map in self.pattern_mappings.get_mappings(g):
-    #             if g not in inverse_mappings:
-    #                 inverse_mappings[g] = {}
-    #             inverse_mappings[g][_map] = {v: k for k, v in _map.nodes_mapping().items()}
-    #
-    #     # Processa ogni grafo una volta e calcola il sottografo solo una volta
-    #     for g in self.pattern_mappings.get_graphs():
-    #         for _map in self.pattern_mappings.get_mappings(g):
-    #             mapped_nodes = set(_map.get_target_nodes())
-    #             mapped_edges = set(_map.get_target_edges())
-    #
-    #             # Ottieni il sottografo solo una volta per ogni grafo
-    #             projection = g.subgraph(mapped_nodes)
-    #             candidate_target_edges_to_extend = set(projection.edges(keys=True)).difference(mapped_edges)
-    #
-    #             # Itera solo sui bordi non mappati
-    #             for target_edge in candidate_target_edges_to_extend:
-    #                 target_edge_label = g.get_edge_label(target_edge)
-    #                 target_edge_src, target_edge_dst = target_edge[0], target_edge[1]
-    #
-    #                 # Trova rapidamente i nodi nel pattern usando la mappatura inversa
-    #                 pattern_node_src = inverse_mappings[g][_map].get(target_edge_src)
-    #                 pattern_node_dst = inverse_mappings[g][_map].get(target_edge_dst)
-    #
-    #                 if pattern_node_src is None or pattern_node_dst is None:
-    #                     continue  # Se non sono mappati, salta
-    #
-    #                 ext = (pattern_node_src, pattern_node_dst, target_edge_label)
-    #
-    #                 if ext not in candidate_edges_to_extend_count:
-    #                     candidate_edges_to_extend_count[ext] = set()
-    #
-    #                 # Aggiungi il grafo al set di grafi che contiene questo bordo
-    #                 candidate_edges_to_extend_count[ext].add(g)
-    #
-    #     # Filtro per gli archi frequenti
-    #     frequent_edges = {edge: graphs for edge, graphs in candidate_edges_to_extend_count.items() if
-    #                       len(graphs) >= support}
-    #
-    #     # Estendi il pattern solo per gli archi frequenti
-    #     for edge, graphs in frequent_edges.items():
-    #         self.add_edge(edge[0], edge[1], type=edge[2])
-    #         self.pattern_mappings.set_graphs(graphs)
-
     def find_cycles(self, support) -> list['Pattern']:
-        print("Find cycles")
-        # debug_message("Find cycles")
-        # debug_message(self)
-        # debug_message("Find cycles for pattern")
-        # debug_message(self)
+        start = time.time()
+
+        inverse_mappings = {}
+        for g in self.pattern_mappings.get_graphs():
+            for _map in self.pattern_mappings.get_mappings(g):
+                if g not in inverse_mappings:
+                    inverse_mappings[g] = {}
+                inverse_mappings[g][_map] = {int(v): k for k, v in _map.nodes_mapping().items()}
+
         candidate_edges_to_extend_count = {}
         for g in self.pattern_mappings.get_graphs():
             for _map in self.pattern_mappings.get_mappings(g):
-                # all nodes in g that are mapped with the pattern
-                mapped_nodes = set(_map.get_target_nodes())
-                # all edges in g that are mapped with the pattern
-                mapped_edges = set(_map.get_target_edges())
-                # projection of pattern in g
-                # containing all edges between nodes that are mapped
-                projection = g.subgraph(mapped_nodes)
-                # the edge candidates to extend are all edges in the projection
-                # that are not already mapped
-                candidate_target_edges_to_extend = set(projection.edges(keys=True)).difference(mapped_edges)
-                # debug_message("Candidate target edges to extend", candidate_target_edges_to_extend)
-                for target_edge in candidate_target_edges_to_extend:
-                    # get the edge labels of the target edge
-                    target_edge_label = g.get_edge_label(target_edge)
-                    target_edge_src = target_edge[0]
-                    target_edge_dst = target_edge[1]
-                    # get the pattern node that is mapped to the source of the target edge
-                    for n in self.nodes():
-                        if _map.get_node_mapping(n) == target_edge_src:
-                            pattern_node_src = n
-                            break
-                    # get the pattern node that is mapped to the destination of the target edge
-                    for n in self.nodes():
-                        if _map.get_node_mapping(n) == target_edge_dst:
-                            pattern_node_dst = n
-                            break
-                    ext = (pattern_node_src, pattern_node_dst, target_edge_label)
+
+                # extension node in pattern
+                ext_node_p = max(self.nodes())
+                # ext_node in g
+                ext_node_g = _map.nodes_mapping()[ext_node_p]
+                # neighbors of ext_node_g that are mapped with the neighbors of the extension node
+                out_neighs_m_ext_node = set([inverse_mappings[g][_map][node] for node in g.successors(ext_node_g) if node in inverse_mappings[g][_map]])
+                in_neighs_m_ext_node = set([inverse_mappings[g][_map][node] for node in g.predecessors(ext_node_g) if node in inverse_mappings[g][_map]])
+                # remove the node who's adjacent to the extension node
+                adjacent_ext_node_p = self.neighbors(ext_node_p) # the extension node has only one neighbor
+                out_neighs_m_ext_node.discard(adjacent_ext_node_p)
+                in_neighs_m_ext_node.discard(adjacent_ext_node_p)
+                # for each node in (in or out) neighs_m_ext_node add to candidate_edges_to_extend_count the extension
+                for neigh in out_neighs_m_ext_node:
+                    ext = (ext_node_p, inverse_mappings[g][_map][neigh], g.get_edge_labels(ext_node_g, neigh))
                     if ext not in candidate_edges_to_extend_count:
                         candidate_edges_to_extend_count[ext] = set()
-                    # add the graph to the set of graphs that contains the edge
                     candidate_edges_to_extend_count[ext].add(g)
-        frequent_edges = {edge: graphs for edge, graphs in candidate_edges_to_extend_count.items() if
+                for neigh in in_neighs_m_ext_node:
+                    ext = (inverse_mappings[g][_map][neigh], ext_node_p, g.get_edge_labels(neigh, ext_node_g))
+                    if ext not in candidate_edges_to_extend_count:
+                        candidate_edges_to_extend_count[ext] = set()
+                    candidate_edges_to_extend_count[ext].add(g)
+        # count frequent extensions
+        frequent_extensions = {ext: graphs for ext, graphs in candidate_edges_to_extend_count.items() if
                           len(graphs) >= support}
-        # The pattern we try to extend adding a cycle, for a specific graph,
-        # can contain or not contain the edge that we want to add.
-        # If the edge is contained in the pattern for a specific graph,
-        # then the extension is made and a cycle is created.
-        # If the edge is not contained in the pattern for a specific graph,
-        # then the extension is not made and the pattern remains the same.
+        # apply all extensions to the pattern
+        if len(frequent_extensions) >= 0:
+            print("Cycles found")
 
-        # debug_message("ccc", frequent_edges.items())
-        if len(frequent_edges.items()) > 0:
-            print("trovato ciclo")
-        for edge, graphs in frequent_edges.items():
-            self.add_edge(edge[0], edge[1], type=edge[2])
-            self.pattern_mappings.set_graphs(graphs)
-        # debug_message("New pattern")
-        # debug_message(self)
+        time_spend = time.time() - start
+        if time_spend > 2:
+            print("Time spend:", time_spend)
 
     def _find_extensions(self, extension_manager: ExtensionManager) -> list[Extension]:
         """
@@ -419,15 +359,21 @@ class Pattern(MultiDiGraph):
                 debug_message("                - Node Mapping", node_mapping)
                 # retrieve nodes mapped in the DB graph
                 mapped_target_nodes = set(node_mapping.values())
-                # node_p  := node pattern
+                # node_p  := last node added to the pattern
                 # node_db := node in the DB graph mapped to node_p
-                for node_p, node_db in node_mapping.items():
-                    # for each node of the pattern search a possible extension
+                node_p = max(self.nodes())
+                node_db = node_mapping[node_p]
+                for neigh in set(g.successors(node_db)).difference(mapped_target_nodes):
+                    extension_manager.add_extension(node_p, node_db, neigh, True, g, _map)
+                for neigh in set(g.predecessors(node_db)).difference(mapped_target_nodes):
+                    extension_manager.add_extension(node_p, neigh, node_db, False, g, _map)
+                if self.extension_applied is not None:
+                    node_p = self.extension_applied.pattern_node_id
+                    node_db = node_mapping[node_p]
                     for neigh in set(g.successors(node_db)).difference(mapped_target_nodes):
                         extension_manager.add_extension(node_p, node_db, neigh, True, g, _map)
                     for neigh in set(g.predecessors(node_db)).difference(mapped_target_nodes):
                         extension_manager.add_extension(node_p, neigh, node_db, False, g, _map)
-
         return extension_manager.get_extensions()
 
     def __str__(self, show_mappings=False):
@@ -441,8 +387,7 @@ class Pattern(MultiDiGraph):
             output += f"e {edge[0]} {edge[1]} {edge[2]['type']}\n"
         # support
         output += f"s {self.pattern_mappings.support()}\n"
-
-
+        output += f"f {sum(len(self.pattern_mappings.get_mappings(g)) for g in self.pattern_mappings.get_graphs())}\n"
 
         if show_mappings:
             for g in self.pattern_mappings.get_graphs():
@@ -464,18 +409,18 @@ class Pattern(MultiDiGraph):
 class CMiner:
 
     def __init__(self,
-                 graph_db_path,
-                 min_num_nodes=1,
-                 max_num_nodes=float('inf'),
-                 support=0.5,
+                 db_file,
+                 support,
+                 min_nodes=1,
+                 max_nodes=float('inf'),
                  start_pattern=None, # implement
                  show_mappings=False,
                  output_path=None,
                  approach='dfs'
                  ):
-        self.graph_db_path = graph_db_path
-        self._min_num_nodes = min_num_nodes
-        self._max_num_nodes = max_num_nodes
+        self.db_file = db_file
+        self._min_nodes = min_nodes
+        self._max_nodes = max_nodes
         self.support = support
         self._start_pattern = start_pattern
         self.db = []
@@ -492,7 +437,7 @@ class CMiner:
             raise Exception("Invalid approach [dfs, bfs]")
 
     def dfs_mine(self):
-        print("DFS Mining")
+        # print("DFS Mining")
         self._read_graphs_from_file()
         self._parse_support()
         pattern_codes = set()
@@ -509,16 +454,16 @@ class CMiner:
             pattern_to_extend = stack.pop()
 
             # Print pattern to console and file if it meets the min node requirement
-            if len(pattern_to_extend.nodes()) >= self._min_num_nodes:
+            if len(pattern_to_extend.nodes()) >= self._min_nodes:
                 if self.output_path is not None:
                     print(pattern_to_extend.__str__(self.show_mappings), file=output_file)
                 else:
                     print(pattern_to_extend.__str__(self.show_mappings))
 
             # Check if the pattern is already at the max number of nodes
-            if len(pattern_to_extend.nodes()) == self._max_num_nodes:
+            if len(pattern_to_extend.nodes()) == self._max_nodes:
                 del pattern_to_extend
-                continue 
+                continue
 
             # Find extensions
             extensions = pattern_to_extend._find_extensions(ExtensionManager(self.support))
@@ -536,14 +481,14 @@ class CMiner:
 
                 # Ensure no duplicate patterns are processed
                 if new_pattern_code not in pattern_codes:
-                    stack.append(new_pattern)
-                    pattern_codes.add(new_pattern_code)
-                    # # Find cycles
+                    # Find cycles
                     # new_pattern.find_cycles(self.support)
                     # new_pattern_code = new_pattern.code()
                     # if new_pattern_code not in pattern_codes:
                     #     stack.append(new_pattern)
                     #     pattern_codes.add(new_pattern_code)
+                    stack.append(new_pattern)
+                    pattern_codes.add(new_pattern_code)
 
         # Close the file if it was opened
         if output_file is not None:
@@ -557,7 +502,7 @@ class CMiner:
         curr_nodes = 1
         # count the number of patterns found
         pattern_count = 0
-        while curr_nodes <= self._max_num_nodes:
+        while curr_nodes <= self._max_nodes:
             # mine patterns
             patterns = self._mine_patterns(curr_nodes)
 
@@ -567,7 +512,7 @@ class CMiner:
             if self.output_path is not None:
                 output_file = open(self.output_path, "a")
 
-            if curr_nodes >= self._min_num_nodes:
+            if curr_nodes >= self._min_nodes:
                 # print results only if the current number of nodes is at least the min number of nodes
                 for pattern in patterns:
                     if self.output_path is not None:
@@ -629,8 +574,8 @@ class CMiner:
         return patterns
 
     def _read_graphs_from_file(self):
-        type_file = self.graph_db_path.split('.')[-1]
-        configurator = NetworkConfigurator(self.graph_db_path, type_file)
+        type_file = self.db_file.split('.')[-1]
+        configurator = NetworkConfigurator(self.db_file, type_file)
         for name, network in NetworksLoading(type_file, configurator.config).Networks.items():
             self.db.append(DBGraph(network, name))
 

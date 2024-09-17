@@ -15,7 +15,7 @@ def main_function():
 
     args = parser.parse_args()
 
-    miner = CMiner(args.db_file, min_num_nodes=args.min_nodes, max_num_nodes=args.max_nodes, support=args.support,
+    miner = CMiner(args.db_file, min_nodes=args.min_nodes, max_nodes=args.max_nodes, support=args.support,
                    show_mappings=args.show_mappings, output_path=args.output_path, approach=args.approach)
 
     start_time = time.time()
