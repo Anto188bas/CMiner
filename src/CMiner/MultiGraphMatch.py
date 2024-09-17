@@ -1,7 +1,7 @@
-from src.CMiner.BitMatrix import QueryBitMatrixOptimized, TargetBitMatrixOptimized, BitMatrixStrategy2
-from src.CMiner.BreakingConditions import BreakingConditionsNodes, BreakingConditionsEdges
-from src.CMiner.CompatibilityDomain import CompatibilityDomainWithDictionary
-from src.CMiner.Ordering import Ordering
+from CMiner.BitMatrix import QueryBitMatrixOptimized, TargetBitMatrixOptimized, BitMatrixStrategy2
+from CMiner.BreakingConditions import BreakingConditionsNodes, BreakingConditionsEdges
+from CMiner.CompatibilityDomain import CompatibilityDomainWithDictionary
+from CMiner.Ordering import Ordering
 import ray
 
 class Solution:

@@ -1,0 +1,2 @@
+[console_scripts]
+CMiner = CMiner.main:main_function

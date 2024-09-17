@@ -1,6 +1,7 @@
 import time
 import argparse
-from src.CMiner.CMiner_optimized import CMiner
+from CMiner import CMiner
+# from src.CMiner.CMiner_optimized import CMiner
 
 def main_function():
     parser = argparse.ArgumentParser(description="CMiner algorithm")
@@ -10,8 +11,7 @@ def main_function():
     parser.add_argument('-u', '--max_nodes', type=int, help="Maximum number of nodes", default=float('inf'))
     parser.add_argument('-m', '--show_mappings', type=int, help="Show pattern mappings", default=0)
     parser.add_argument('-o', '--output_path', type=str, help="Output file", default=None)
-    parser.add_argument('-a', '--approach', type=str, help="Support", default='dfs')
-
+    parser.add_argument('-a', '--approach', type=str, help="Approach", default='dfs')
 
     args = parser.parse_args()
 
@@ -22,8 +22,3 @@ def main_function():
     miner.mine()
     end_time = time.time()
     print(f"\n-> Execution time: {end_time - start_time} seconds")
-
-
-
-# pipreqs .
-# pip install -e .

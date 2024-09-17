@@ -7,11 +7,12 @@ def parse_requirements(file):
 setup(
     name='CMiner',
     version='0.1',
-    packages=find_packages(),
+    packages=find_packages(where='src'),
+    package_dir={'': 'src'},
     install_requires=parse_requirements('requirements.txt'),
     entry_points={
         'console_scripts': [
-            'CMiner=src.main:main_function',
+            'CMiner = CMiner.main:main_function',
         ],
     },
 )

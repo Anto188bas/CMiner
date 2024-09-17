@@ -102,7 +102,11 @@ class NetworksLoading:
                 if nodes_dict is not None:
                     self.Networks[last_net_id].add_nodes_from([(k, {"labels": v}) for k, v in nodes_dict.items()])
                     self.Networks[last_net_id].add_edges_from(edges_vect)
-                last_net_id = components[3]
+                try:
+                    last_net_id = components[3]
+                except:
+                    # if the name is not set use the index of the graph as the name
+                    last_net_id = components[2]
                 # print(last_net_id + " LOADING")
                 self.Networks[last_net_id] = self._graph_type(metadata[IDR], metadata[IMG])
                 nodes_dict  = {}
