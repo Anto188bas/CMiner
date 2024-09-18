@@ -337,7 +337,7 @@ class Pattern(MultiDiGraph):
         time_spend = time.time() - start
         if time_spend > 2:
             print("Time spend:", time_spend)
-
+    
     def _find_extensions(self, extension_manager: ExtensionManager) -> list[Extension]:
         """
         Generate all possible extension that if applied to the pattern, it still remains frequent.
@@ -359,22 +359,54 @@ class Pattern(MultiDiGraph):
                 debug_message("                - Node Mapping", node_mapping)
                 # retrieve nodes mapped in the DB graph
                 mapped_target_nodes = set(node_mapping.values())
-                # node_p  := last node added to the pattern
+                # node_p  := node pattern
                 # node_db := node in the DB graph mapped to node_p
-                node_p = max(self.nodes())
-                node_db = node_mapping[node_p]
-                for neigh in set(g.successors(node_db)).difference(mapped_target_nodes):
-                    extension_manager.add_extension(node_p, node_db, neigh, True, g, _map)
-                for neigh in set(g.predecessors(node_db)).difference(mapped_target_nodes):
-                    extension_manager.add_extension(node_p, neigh, node_db, False, g, _map)
-                if self.extension_applied is not None:
-                    node_p = self.extension_applied.pattern_node_id
-                    node_db = node_mapping[node_p]
+                for node_p, node_db in node_mapping.items():
+                    # for each node of the pattern search a possible extension
                     for neigh in set(g.successors(node_db)).difference(mapped_target_nodes):
                         extension_manager.add_extension(node_p, node_db, neigh, True, g, _map)
                     for neigh in set(g.predecessors(node_db)).difference(mapped_target_nodes):
                         extension_manager.add_extension(node_p, neigh, node_db, False, g, _map)
+
         return extension_manager.get_extensions()
+
+    # def _find_extensions(self, extension_manager: ExtensionManager) -> list[Extension]:
+    #     """
+    #     Generate all possible extension that if applied to the pattern, it still remains frequent.
+
+    #     :param extension_manager: Object that manage the extensions
+    #     :return: List of all possible extensions
+    #     """
+    #     debug_message("        - Searching extensions in", len(self.pattern_mappings.get_graphs()), "graphs")
+    #     # for all graph in the database that contains the current extension
+    #     for g in self.pattern_mappings.get_graphs():
+    #         # obtain where the current extension is located in the graph
+    #         mappings = self.pattern_mappings.get_mappings(g)
+    #         debug_message("            - Checking in", len(mappings), "mappings for graph", g.get_name())
+    #         # For each map we know one place where the extension is located in the graph.
+    #         # We search all nodes that are neighbors of the current pattern and create a new extension.
+    #         for _map in mappings:
+    #             # get where the nodes of the extension are located in the DB graph
+    #             node_mapping = _map.nodes_mapping()
+    #             debug_message("                - Node Mapping", node_mapping)
+    #             # retrieve nodes mapped in the DB graph
+    #             mapped_target_nodes = set(node_mapping.values())
+    #             # node_p  := last node added to the pattern
+    #             # node_db := node in the DB graph mapped to node_p
+    #             node_p = max(self.nodes())
+    #             node_db = node_mapping[node_p]
+    #             for neigh in set(g.successors(node_db)).difference(mapped_target_nodes):
+    #                 extension_manager.add_extension(node_p, node_db, neigh, True, g, _map)
+    #             for neigh in set(g.predecessors(node_db)).difference(mapped_target_nodes):
+    #                 extension_manager.add_extension(node_p, neigh, node_db, False, g, _map)
+    #             if self.extension_applied is not None:
+    #                 node_p = self.extension_applied.pattern_node_id
+    #                 node_db = node_mapping[node_p]
+    #                 for neigh in set(g.successors(node_db)).difference(mapped_target_nodes):
+    #                     extension_manager.add_extension(node_p, node_db, neigh, True, g, _map)
+    #                 for neigh in set(g.predecessors(node_db)).difference(mapped_target_nodes):
+    #                     extension_manager.add_extension(node_p, neigh, node_db, False, g, _map)
+    #     return extension_manager.get_extensions()
 
     def __str__(self, show_mappings=False):
         global count_pattern
