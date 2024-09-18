@@ -75,7 +75,7 @@ class NetworksLoading:
         :param nodes_dict: nodes to load into the graph
         :return:
         """
-        nodes_dict[components[1]] = components[2].split(sep)
+        nodes_dict[components[1]] = components[2:]
 
     # CASE 1: .data LOADING
     def _load_data_file(self, metadata):
