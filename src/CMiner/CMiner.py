@@ -4,16 +4,24 @@ from CMiner.MultiGraphMatch import MultiGraphMatch
 from Graph.Graph import MultiDiGraph
 from CMiner.BitMatrix import TargetBitMatrixOptimized, BitMatrixStrategy2
 import time
+import shutil
 
-# TO-DO: handle multiple edges map in _apply_mappings
+# TO-DO: handle multiple edges map in apply_node_extensions
+# TO-DO: handle multiple edges map in apply_edge_extensions
+
+count_pattern = 0
 
 def debug_message(*args, **kwargs):
     if False:
         print(*args, **kwargs)
 
+def get_terminal_width():
+    # Restituisce la larghezza del terminale o 80 come default
+    return shutil.get_terminal_size().columns
 
-count_pattern = 0
-
+def generate_separator():
+    width = get_terminal_width()
+    return '-' * width
 
 def remove_redundant_patterns(patterns):
     """
@@ -27,6 +35,8 @@ def remove_redundant_patterns(patterns):
             already_seen.add(code)
             new_patterns.append(pattern)
     return new_patterns
+
+
 
 
 class DBGraph(MultiDiGraph):
@@ -60,11 +70,166 @@ class DBGraph(MultiDiGraph):
     def get_name(self):
         return self.name
 
+class Mapping:
 
-class ExtensionManager:
+    def __init__(self, node_mapping=None, edge_mapping=None, extended_mapping: 'Mapping' = None):
+        if edge_mapping is None:
+            edge_mapping = {}
+        if node_mapping is None:
+            node_mapping = {}
+        self.extended_mapping = extended_mapping
+        self.node_mapping = node_mapping
+        self.edge_mapping = edge_mapping
+
+    def nodes_mapping(self) -> dict:
+        node_mapping = {}
+        if self.extended_mapping is not None:
+            node_mapping.update(self.extended_mapping.nodes_mapping())
+        node_mapping.update(self.node_mapping)
+        return node_mapping
+
+    def edges_mapping(self) -> dict:
+        edge_mapping = {}
+        if self.extended_mapping is not None:
+            edge_mapping.update(self.extended_mapping.edges_mapping())
+        edge_mapping.update(self.edge_mapping)
+        return edge_mapping
+
+    # def get_target_nodes(self):
+    #     return self.node_mapping.values()
+    #
+    def get_target_edges(self) -> list:
+        if self.extended_mapping is not None:
+            edges = list(self.extended_mapping.get_target_edges())
+            edges.extend(self.edge_mapping.values())
+            return edges
+        return list(self.edge_mapping.values())
+
+    def get_pattern_nodes(self):
+        return self.node_mapping.keys()
+
+    def get_pattern_edges(self):
+        return self.edge_mapping.keys()
+
+    def __str__(self):
+        return f"({{{self.get_node_mapping_str()}}}, {{{self.get_edge_mapping_str()}}})"
+
+    def get_node_mapping_str(self):
+        node_mapping_str = ""
+        if self.extended_mapping is not None:
+            node_mapping_str += self.extended_mapping.get_node_mapping_str() + ", "
+        node_mapping_str += " ".join([f"{k}->{v}" for k, v in self.node_mapping.items()])
+        return node_mapping_str
+
+    def get_edge_mapping_str(self):
+        if len(self.edge_mapping) == 0:
+            return ""
+        edge_mapping_str = ""
+        if self.extended_mapping is not None:
+            previous_edge_mapping_str = self.extended_mapping.get_edge_mapping_str()
+            edge_mapping_str += previous_edge_mapping_str + (", " if len(previous_edge_mapping_str) > 0 else "")
+        edge_mapping_str += " ".join([f"{k}->{v}" for k, v in self.edge_mapping.items()])
+        return edge_mapping_str
+
+class PatternMappings:
+
+    def __init__(self, graphs, patterns_mappings=None):
+        self.graphs = graphs
+        if patterns_mappings is None:
+            patterns_mappings = {}
+        self.patterns_mappings = patterns_mappings
+
+    def get_graphs(self) -> list[DBGraph]:
+        return self.graphs
+
+    def set_graphs(self, graphs):
+        self.graphs = graphs
+
+    def get_mappings(self, graph) -> list[Mapping]:
+        return self.patterns_mappings[graph]
+
+    def set_mapping(self, graph, mappings: [Mapping]):
+        self.patterns_mappings[graph] = mappings
+
+    def support(self):
+        return len(self.graphs)
+
+
+
+
+
+class EdgeExtension:
+    def __init__(self, pattern_node_src, pattern_node_dest, edge_labels, db_graphs, extension_edge_ids):
+        self.pattern_node_src = pattern_node_src
+        self.pattern_node_dest = pattern_node_dest
+        self.edge_labels = edge_labels
+        self.db_graphs = db_graphs
+        self.extension_edge_ids = extension_edge_ids
+
+    def __str__(self):
+        output = f"({self.pattern_node_src} -- {self.edge_labels} --> {self.pattern_node_dest}) "
+        output += str(self.extension_edge_ids)
+        return output
+
+class EdgeExtensionManager:
 
     def __init__(self, support):
-        self.support = support
+        self.min_support = support
+        self.extensions = {}
+        self.extensions_node_ids = {}
+
+    def add_extension(self, pattern_node_src, pattern_node_dest, db_graph, _map):
+        target_src_node_id = _map.nodes_mapping()[pattern_node_src]
+        target_dst_node_id = _map.nodes_mapping()[pattern_node_dest]
+        target_edge_labels_code = " ".join(db_graph.get_edge_labels(target_src_node_id, target_dst_node_id))
+        
+        extension_code = (pattern_node_src, pattern_node_dest, target_edge_labels_code)
+        if extension_code not in self.extensions:
+            self.extensions[extension_code] = set()
+        self.extensions[extension_code].add(db_graph)
+
+        if extension_code not in self.extensions_node_ids:
+            self.extensions_node_ids[extension_code] = {}
+        if db_graph not in self.extensions_node_ids[extension_code]:
+            self.extensions_node_ids[extension_code][db_graph] = {}
+        if _map not in self.extensions_node_ids[extension_code][db_graph]:
+            self.extensions_node_ids[extension_code][db_graph][_map] = set()
+        self.extensions_node_ids[extension_code][db_graph][_map].add((target_src_node_id, target_dst_node_id))
+
+    def get_extensions(self) -> list['EdgeExtension']:
+        filtered_extensions = []
+        for (pattern_node_src, pattern_node_dest, target_edge_labels), db_graphs in self.extensions.items():
+            if len(db_graphs) >= self.min_support:
+                extensions_edge_ids = self.extensions_node_ids[(pattern_node_src, pattern_node_dest, target_edge_labels)]
+                target_edge_labels = target_edge_labels.split(" ")
+                ext = EdgeExtension(pattern_node_src, pattern_node_dest, target_edge_labels, db_graphs, extensions_edge_ids)
+                debug_message("                - EdgeExtension", ext)
+                filtered_extensions.append(ext)
+        return filtered_extensions
+
+class NodeExtension:
+
+    def __init__(self, pattern_node_id, target_node_labels, target_edge_labels, is_outgoing, db_graphs,
+                 extension_node_ids):
+        self.pattern_node_id = pattern_node_id
+        self.target_node_labels = target_node_labels
+        self.target_edge_labels = target_edge_labels
+        self.is_outgoing = is_outgoing
+        self.db_graphs = db_graphs
+        self.extension_node_ids = extension_node_ids
+
+    def __str__(self):
+        if self.is_outgoing:
+            output = f"({self.pattern_node_id} -- {self.target_edge_labels} --> {self.target_node_labels}) "
+        else:
+            output = f"({self.pattern_node_id} <-- {self.target_edge_labels} -- {self.target_node_labels}) "
+        output += str(self.extension_node_ids)
+        return output
+    
+class NodeExtensionManager:
+
+    def __init__(self, support):
+        self.min_support = support
         self.out_extensions = {}
         self.in_extensions = {}
         self.out_extensions_node_ids = {}
@@ -94,12 +259,12 @@ class ExtensionManager:
             extensions_node_ids[extension_code][db_graph][_map] = set()
         extensions_node_ids[extension_code][db_graph][_map].add(target_node_id)
 
-    def get_extensions(self) -> list['Extension']:
+    def get_extensions(self) -> list['NodeExtension']:
         out_extensions = self._filter_extensions(self.out_extensions, self.out_extensions_node_ids, True)
         in_extensions = self._filter_extensions(self.in_extensions, self.in_extensions_node_ids, False)
         return out_extensions + in_extensions
 
-    def _filter_extensions(self, extensions, extensions_node_ids, is_outgoing) -> list['Extension']:
+    def _filter_extensions(self, extensions, extensions_node_ids, is_outgoing) -> list['NodeExtension']:
         """
         Return a list of Extensions that are frequent
         :param extensions:
@@ -108,121 +273,22 @@ class ExtensionManager:
         filtered_extensions = []
         for (pattern_node_id, target_node_labels, target_edge_labels), db_graphs in extensions.items():
 
-            if len(db_graphs) >= self.support:
+            if len(db_graphs) >= self.min_support:
                 extensions_node_id = extensions_node_ids[(pattern_node_id, target_node_labels, target_edge_labels)]
                 target_node_labels = target_node_labels.split(" ")
                 target_edge_labels = target_edge_labels.split(" ")
-                ext = Extension(pattern_node_id, target_node_labels, target_edge_labels, is_outgoing, db_graphs,
+                ext = NodeExtension(pattern_node_id, target_node_labels, target_edge_labels, is_outgoing, db_graphs,
                                 extensions_node_id)
-                debug_message("                - Extension", ext)
+                debug_message("                - NodeExtension", ext)
                 filtered_extensions.append(ext)
         return filtered_extensions
 
 
-class Extension:
-    def __init__(self, pattern_node_id, target_node_labels, target_edge_labels, is_outgoing, db_graphs,
-                 extension_node_ids):
-        self.pattern_node_id = pattern_node_id
-        self.target_node_labels = target_node_labels
-        self.target_edge_labels = target_edge_labels
-        self.is_outgoing = is_outgoing
-        self.db_graphs = db_graphs
-        self.extension_node_ids = extension_node_ids
-
-    def __str__(self):
-        if self.is_outgoing:
-            output = f"({self.pattern_node_id} -- {self.target_edge_labels} --> {self.target_node_labels}) "
-        else:
-            output = f"({self.pattern_node_id} <-- {self.target_edge_labels} -- {self.target_node_labels}) "
-        output += str(self.extension_node_ids)
-        return output
-
-
-class Mapping:
-
-    def __init__(self, node_mapping=None, edge_mapping=None, extended_mapping: 'Mapping' = None):
-        if edge_mapping is None:
-            edge_mapping = {}
-        if node_mapping is None:
-            node_mapping = {}
-        self.extended_mapping = extended_mapping
-        self.node_mapping = node_mapping
-        self.edge_mapping = edge_mapping
-
-    def nodes_mapping(self) -> dict:
-        node_mapping = {}
-        if self.extended_mapping is not None:
-            node_mapping.update(self.extended_mapping.nodes_mapping())
-        node_mapping.update(self.node_mapping)
-        return node_mapping
-
-    def edges_mapping(self) -> dict:
-        edge_mapping = {}
-        if self.extended_mapping is not None:
-            edge_mapping.update(self.extended_mapping.edges_mapping())
-        edge_mapping.update(self.edge_mapping)
-        return edge_mapping
-
-    # def get_target_nodes(self):
-    #     return self.node_mapping.values()
-    #
-    # def get_target_edges(self):
-    #     return self.edge_mapping.values()
-
-    def get_pattern_nodes(self):
-        return self.node_mapping.keys()
-
-    def get_pattern_edges(self):
-        return self.edge_mapping.keys()
-
-    def __str__(self):
-        return f"({{{self.get_node_mapping_str()}}}, {{{self.get_edge_mapping_str()}}})"
-
-    def get_node_mapping_str(self):
-        node_mapping_str = ""
-        if self.extended_mapping is not None:
-            node_mapping_str += self.extended_mapping.get_node_mapping_str() + ", "
-        node_mapping_str += " ".join([f"{k}->{v}" for k, v in self.node_mapping.items()])
-        return node_mapping_str
-
-    def get_edge_mapping_str(self):
-        if len(self.edge_mapping) == 0:
-            return ""
-        edge_mapping_str = ""
-        if self.extended_mapping is not None:
-            previous_edge_mapping_str = self.extended_mapping.get_edge_mapping_str()
-            edge_mapping_str += previous_edge_mapping_str + (", " if len(previous_edge_mapping_str) > 0 else "")
-        edge_mapping_str += " ".join([f"{k}->{v}" for k, v in self.edge_mapping.items()])
-        return edge_mapping_str
-
-
-class PatternMappings:
-
-    def __init__(self, graphs, patterns_mappings=None):
-        self.graphs = graphs
-        if patterns_mappings is None:
-            patterns_mappings = {}
-        self.patterns_mappings = patterns_mappings
-
-    def get_graphs(self) -> list[DBGraph]:
-        return self.graphs
-
-    def set_graphs(self, graphs):
-        self.graphs = graphs
-
-    def get_mappings(self, graph) -> list[Mapping]:
-        return self.patterns_mappings[graph]
-
-    def set_mapping(self, graph, mappings: [Mapping]):
-        self.patterns_mappings[graph] = mappings
-
-    def support(self):
-        return len(self.graphs)
 
 
 class Pattern(MultiDiGraph):
 
-    def __init__(self, pattern_mappings, extension_applied: Extension = None, extended_pattern: 'Pattern' = None, **attr):
+    def __init__(self, pattern_mappings, extension_applied: NodeExtension = None, extended_pattern: 'Pattern' = None, **attr):
 
         if extended_pattern is not None:
             # Copia i nodi e gli archi dal pattern esteso
@@ -234,20 +300,84 @@ class Pattern(MultiDiGraph):
         self.pattern_mappings = pattern_mappings
         self.extension_applied = extension_applied
 
+    def graphs(self) -> list[DBGraph]:
+        """
+        Return the graphs that contains the pattern
+        """
+        return self.pattern_mappings.get_graphs()
 
-    def extend(self, support) -> list['Pattern']:
+    def support(self):
+        """
+        Return the support of the pattern
+        """
+        return len(self.graphs())
+    
+    def find_node_extensions(self, extension_manager: NodeExtensionManager) -> list[NodeExtension]:
+        """
+        Generate all possible extension that if applied to the pattern, it still remains frequent.
 
-        extension_manager = ExtensionManager(support)
-        new_patterns = []
-        extensions = self._find_extensions(extension_manager)
-        debug_message("        - Found", len(extensions), "extensions")
+        :param extension_manager: Object that manage the extensions
+        :return: List of all possible extensions
+        """
+        debug_message("        - Searching extensions in", len(self.graphs()), "graphs")
+        # for all graph in the database that contains the current extension
+        for g in self.graphs():
+            # obtain where the current extension is located in the graph
+            mappings = self.pattern_mappings.get_mappings(g)
+            debug_message("            - Checking in", len(mappings), "mappings for graph", g.get_name())
+            # For each map we know one place where the extension is located in the graph.
+            # We search all nodes that are neighbors of the current pattern and create a new extension.
+            for _map in mappings:
+                # get where the nodes of the extension are located in the DB graph
+                node_mapping = _map.nodes_mapping()
+                debug_message("                - Node Mapping", node_mapping)
+                # retrieve nodes mapped in the DB graph
+                mapped_target_nodes = set(node_mapping.values())
+                # node_p  := node pattern
+                # node_db := node in the DB graph mapped to node_p
+                for node_p, node_db in node_mapping.items():
+                    # for each node of the pattern search a possible extension
+                    for neigh in set(g.successors(node_db)).difference(mapped_target_nodes):
+                        extension_manager.add_extension(node_p, node_db, neigh, True, g, _map)
+                    for neigh in set(g.predecessors(node_db)).difference(mapped_target_nodes):
+                        extension_manager.add_extension(node_p, neigh, node_db, False, g, _map)
+
+        return extension_manager.get_extensions()
+    
+    def find_edge_extensions(self, extension_manager: EdgeExtensionManager) -> list[list['EdgeExtension']]:
+
+        inverse_mappings_nodes = {}
+        for g in self.graphs():
+            for _map in self.pattern_mappings.get_mappings(g):
+                if g not in inverse_mappings_nodes:
+                    inverse_mappings_nodes[g] = {}
+                inverse_mappings_nodes[g][_map] = {v: k for k, v in _map.nodes_mapping().items()}
+
+        for g in self.graphs():
+            for _map in self.pattern_mappings.get_mappings(g):
+                # subgraph of the projected pattern (include also edges not mapped with the patten)
+                mapped_pattern_complete_graph = g.subgraph([_map.nodes_mapping()[node] for node in self.nodes()])
+                mapped_pattern_complete_graph_edges = set(mapped_pattern_complete_graph.edges(keys=True))
+                mapped_pattern_edges = set(_map.get_target_edges())
+                candidate_edges = mapped_pattern_complete_graph_edges.difference(mapped_pattern_edges)
+                for edge in candidate_edges:
+                    pattern_node_src = inverse_mappings_nodes[g][_map][edge[0]]
+                    pattern_node_dest = inverse_mappings_nodes[g][_map][edge[1]]
+                    extension_manager.add_extension(pattern_node_src, pattern_node_dest, g, _map)
+
+        extensions = extension_manager.get_extensions()
+
+        # group all extensions by the graphs in which they are contained
+        grouped_extensions = {}
         for ext in extensions:
-            new_patterns.append(self._apply_extension(ext))
+            db_graphs_names = " ".join(sorted([g.get_name() for g in ext.db_graphs]))
+            if db_graphs_names not in grouped_extensions:
+                grouped_extensions[db_graphs_names] = []
+            grouped_extensions[db_graphs_names].append(ext)
 
-        new_patterns = remove_redundant_patterns(new_patterns)
-        return new_patterns
-
-    def _apply_extension(self, extension) -> 'Pattern':
+        return list(grouped_extensions.values())
+    
+    def apply_node_extension(self, extension) -> 'Pattern':
         debug_message("            - Applying extension", extension)
         # Object to keep track of the new pattern mappings
         new_pattern_mappings = PatternMappings(extension.db_graphs)
@@ -281,133 +411,48 @@ class Pattern(MultiDiGraph):
                     # edge mapping
                     if extension.is_outgoing:
                         new_pattern_edge = (pattern_node_id, new_pattern_new_node_id, 0)
-                        target_edge = (target_map.nodes_mapping()[pattern_node_id], target_node_id, 0)
+                        target_edge_src = target_map.nodes_mapping()[pattern_node_id]
+                        target_edge_dest = target_node_id
+                        target_edge = (target_edge_src, target_edge_dest, target.edge_keys(target_edge_src, target_edge_dest)[0]) # change
                     else:
                         new_pattern_edge = (new_pattern_new_node_id, pattern_node_id, 0)
-                        target_edge = (target_node_id, target_map.nodes_mapping()[pattern_node_id], 0)
+                        target_edge_src = target_node_id
+                        target_edge_dest = target_map.nodes_mapping()[pattern_node_id]
+                        target_edge = (target_edge_src, target_edge_dest, target.edge_keys(target_edge_src, target_edge_dest)[0]) # change
                     edge_mapping = {new_pattern_edge: target_edge}
                     new_mapping = Mapping(node_mapping=node_mapping, edge_mapping=edge_mapping, extended_mapping=target_map)
                     new_mappings.append(new_mapping)
             new_pattern_mappings.set_mapping(target, new_mappings)
         return new_pattern
 
-    def find_cycles(self, support) -> list['Pattern']:
-        start = time.time()
+    def apply_edge_extension(self, extensions: list[EdgeExtension]) -> 'Pattern':
+        # NOTE: all extensions are in the same graphs
+        new_pattern_mappings = PatternMappings(extensions[0].db_graphs)
 
-        inverse_mappings = {}
-        for g in self.pattern_mappings.get_graphs():
-            for _map in self.pattern_mappings.get_mappings(g):
-                if g not in inverse_mappings:
-                    inverse_mappings[g] = {}
-                inverse_mappings[g][_map] = {int(v): k for k, v in _map.nodes_mapping().items()}
+        new_pattern = Pattern(extended_pattern=self, pattern_mappings=new_pattern_mappings)
+        for ext in extensions:
+            new_pattern.add_edge(ext.pattern_node_src, ext.pattern_node_dest, type=ext.edge_labels[0]) # FIX ext.edge_labels[0]
 
-        candidate_edges_to_extend_count = {}
-        for g in self.pattern_mappings.get_graphs():
-            for _map in self.pattern_mappings.get_mappings(g):
+            for target in ext.db_graphs:
+                new_mappings = []
+                for target_map in self.pattern_mappings.get_mappings(target):
+                    if target_map not in ext.extension_edge_ids[target]:
+                        continue
+                    target_edge_ids = ext.extension_edge_ids[target][target_map]
+                    for target_edge_src, target_edge_dest in target_edge_ids:
+                        new_pattern_edge = (ext.pattern_node_src, ext.pattern_node_dest, 0) # TO-DO: SET A KEY
+                        target_edge = (target_edge_src, target_edge_dest, target.edge_keys(target_edge_src, target_edge_dest)[0])
+                        edge_mapping = {new_pattern_edge: target_edge}
+                        new_mapping = Mapping(edge_mapping=edge_mapping, extended_mapping=target_map)
+                        new_mappings.append(new_mapping)
+                new_pattern_mappings.set_mapping(target, new_mappings)
 
-                # extension node in pattern
-                ext_node_p = max(self.nodes())
-                # ext_node in g
-                ext_node_g = _map.nodes_mapping()[ext_node_p]
-                # neighbors of ext_node_g that are mapped with the neighbors of the extension node
-                out_neighs_m_ext_node = set([inverse_mappings[g][_map][node] for node in g.successors(ext_node_g) if node in inverse_mappings[g][_map]])
-                in_neighs_m_ext_node = set([inverse_mappings[g][_map][node] for node in g.predecessors(ext_node_g) if node in inverse_mappings[g][_map]])
-                # remove the node who's adjacent to the extension node
-                adjacent_ext_node_p = self.neighbors(ext_node_p) # the extension node has only one neighbor
-                out_neighs_m_ext_node.discard(adjacent_ext_node_p)
-                in_neighs_m_ext_node.discard(adjacent_ext_node_p)
-                # for each node in (in or out) neighs_m_ext_node add to candidate_edges_to_extend_count the extension
-                for neigh in out_neighs_m_ext_node:
-                    ext = (ext_node_p, inverse_mappings[g][_map][neigh], g.get_edge_labels(ext_node_g, neigh))
-                    if ext not in candidate_edges_to_extend_count:
-                        candidate_edges_to_extend_count[ext] = set()
-                    candidate_edges_to_extend_count[ext].add(g)
-                for neigh in in_neighs_m_ext_node:
-                    ext = (inverse_mappings[g][_map][neigh], ext_node_p, g.get_edge_labels(neigh, ext_node_g))
-                    if ext not in candidate_edges_to_extend_count:
-                        candidate_edges_to_extend_count[ext] = set()
-                    candidate_edges_to_extend_count[ext].add(g)
-        # count frequent extensions
-        frequent_extensions = {ext: graphs for ext, graphs in candidate_edges_to_extend_count.items() if
-                          len(graphs) >= support}
-        # apply all extensions to the pattern
-        if len(frequent_extensions) >= 0:
-            print("Cycles found")
+        return new_pattern
 
-        time_spend = time.time() - start
-        if time_spend > 2:
-            print("Time spend:", time_spend)
     
-    def _find_extensions(self, extension_manager: ExtensionManager) -> list[Extension]:
-        """
-        Generate all possible extension that if applied to the pattern, it still remains frequent.
 
-        :param extension_manager: Object that manage the extensions
-        :return: List of all possible extensions
-        """
-        debug_message("        - Searching extensions in", len(self.pattern_mappings.get_graphs()), "graphs")
-        # for all graph in the database that contains the current extension
-        for g in self.pattern_mappings.get_graphs():
-            # obtain where the current extension is located in the graph
-            mappings = self.pattern_mappings.get_mappings(g)
-            debug_message("            - Checking in", len(mappings), "mappings for graph", g.get_name())
-            # For each map we know one place where the extension is located in the graph.
-            # We search all nodes that are neighbors of the current pattern and create a new extension.
-            for _map in mappings:
-                # get where the nodes of the extension are located in the DB graph
-                node_mapping = _map.nodes_mapping()
-                debug_message("                - Node Mapping", node_mapping)
-                # retrieve nodes mapped in the DB graph
-                mapped_target_nodes = set(node_mapping.values())
-                # node_p  := node pattern
-                # node_db := node in the DB graph mapped to node_p
-                for node_p, node_db in node_mapping.items():
-                    # for each node of the pattern search a possible extension
-                    for neigh in set(g.successors(node_db)).difference(mapped_target_nodes):
-                        extension_manager.add_extension(node_p, node_db, neigh, True, g, _map)
-                    for neigh in set(g.predecessors(node_db)).difference(mapped_target_nodes):
-                        extension_manager.add_extension(node_p, neigh, node_db, False, g, _map)
-
-        return extension_manager.get_extensions()
-
-    # def _find_extensions(self, extension_manager: ExtensionManager) -> list[Extension]:
-    #     """
-    #     Generate all possible extension that if applied to the pattern, it still remains frequent.
-
-    #     :param extension_manager: Object that manage the extensions
-    #     :return: List of all possible extensions
-    #     """
-    #     debug_message("        - Searching extensions in", len(self.pattern_mappings.get_graphs()), "graphs")
-    #     # for all graph in the database that contains the current extension
-    #     for g in self.pattern_mappings.get_graphs():
-    #         # obtain where the current extension is located in the graph
-    #         mappings = self.pattern_mappings.get_mappings(g)
-    #         debug_message("            - Checking in", len(mappings), "mappings for graph", g.get_name())
-    #         # For each map we know one place where the extension is located in the graph.
-    #         # We search all nodes that are neighbors of the current pattern and create a new extension.
-    #         for _map in mappings:
-    #             # get where the nodes of the extension are located in the DB graph
-    #             node_mapping = _map.nodes_mapping()
-    #             debug_message("                - Node Mapping", node_mapping)
-    #             # retrieve nodes mapped in the DB graph
-    #             mapped_target_nodes = set(node_mapping.values())
-    #             # node_p  := last node added to the pattern
-    #             # node_db := node in the DB graph mapped to node_p
-    #             node_p = max(self.nodes())
-    #             node_db = node_mapping[node_p]
-    #             for neigh in set(g.successors(node_db)).difference(mapped_target_nodes):
-    #                 extension_manager.add_extension(node_p, node_db, neigh, True, g, _map)
-    #             for neigh in set(g.predecessors(node_db)).difference(mapped_target_nodes):
-    #                 extension_manager.add_extension(node_p, neigh, node_db, False, g, _map)
-    #             if self.extension_applied is not None:
-    #                 node_p = self.extension_applied.pattern_node_id
-    #                 node_db = node_mapping[node_p]
-    #                 for neigh in set(g.successors(node_db)).difference(mapped_target_nodes):
-    #                     extension_manager.add_extension(node_p, node_db, neigh, True, g, _map)
-    #                 for neigh in set(g.predecessors(node_db)).difference(mapped_target_nodes):
-    #                     extension_manager.add_extension(node_p, neigh, node_db, False, g, _map)
-    #     return extension_manager.get_extensions()
-
+    
+    
     def __str__(self, show_mappings=False):
         global count_pattern
         output = ""
@@ -419,23 +464,24 @@ class Pattern(MultiDiGraph):
             output += f"e {edge[0]} {edge[1]} {edge[2]['type']}\n"
         # support
         output += f"s {self.pattern_mappings.support()}\n"
-        output += f"f {sum(len(self.pattern_mappings.get_mappings(g)) for g in self.pattern_mappings.get_graphs())}\n"
+        output += f"f {sum(len(self.pattern_mappings.get_mappings(g)) for g in self.graphs())}\n"
 
         if show_mappings:
-            for g in self.pattern_mappings.get_graphs():
+            for g in self.graphs():
                 # graph_name frequency
                 output += g.get_name() + " " + str(len(self.pattern_mappings.get_mappings(g))) + " "
                 # ({nodes map}, {edges map}), ...
                 output += " ".join(
                     [str(_map) for _map in self.pattern_mappings.get_mappings(g)])
                 output += "\n"
-        else:
-            #frequency info
-            frequencies = ["(" + g.get_name() + ", " + str(len(self.pattern_mappings.get_mappings(g))) + ")" for g in self.pattern_mappings.get_graphs()]
-            output += "x " + " ".join(frequencies) + "\n"
-        output += "-------------\n"
+        # else:
+        #     #frequency info
+        #     frequencies = ["(" + g.get_name() + ", " + str(len(self.pattern_mappings.get_mappings(g))) + ")" for g in self.graphs()]
+        #     output += "x " + " ".join(frequencies) + "\n"
+        output += generate_separator() + "\n"
         count_pattern += 1
         return output
+
 
 
 class CMiner:
@@ -447,29 +493,18 @@ class CMiner:
                  max_nodes=float('inf'),
                  start_pattern=None, # implement
                  show_mappings=False,
-                 output_path=None,
-                 approach='dfs'
+                 output_path=None
                  ):
         self.db_file = db_file
         self._min_nodes = min_nodes
         self._max_nodes = max_nodes
-        self.support = support
+        self.min_support = support
         self._start_pattern = start_pattern
         self.db = []
         self.show_mappings = show_mappings
         self.output_path = output_path
-        self.approach = approach
 
     def mine(self):
-        if self.approach.lower() == 'dfs':
-            self.dfs_mine()
-        elif self.approach.lower() == 'bfs':
-            self.bfs_mine()
-        else:
-            raise Exception("Invalid approach [dfs, bfs]")
-
-    def dfs_mine(self):
-        # print("DFS Mining")
         self._read_graphs_from_file()
         self._parse_support()
         pattern_codes = set()
@@ -498,8 +533,8 @@ class CMiner:
                 continue
 
             # Find extensions
-            extensions = pattern_to_extend._find_extensions(ExtensionManager(self.support))
-            if len(extensions) == 0:
+            node_extensions = pattern_to_extend.find_node_extensions(NodeExtensionManager(self.min_support))
+            if len(node_extensions) == 0:
                 del pattern_to_extend
                 # Backtracking occurs when no more extensions are found
                 if self.output_path is not None:
@@ -507,79 +542,43 @@ class CMiner:
                     output_file = open(self.output_path, "a")  # Reopen the file
                 continue
 
-            for ext in extensions:
-                new_pattern = pattern_to_extend._apply_extension(ext)
-                new_pattern_code = new_pattern.code()
+            for node_ext in node_extensions:
+                new_tree_pattern = pattern_to_extend.apply_node_extension(node_ext)
+                new_pattern_code = new_tree_pattern.code()
 
                 # Ensure no duplicate patterns are processed
                 if new_pattern_code not in pattern_codes:
-                    # Find cycles
-                    # new_pattern.find_cycles(self.support)
-                    # new_pattern_code = new_pattern.code()
-                    # if new_pattern_code not in pattern_codes:
-                    #     stack.append(new_pattern)
-                    #     pattern_codes.add(new_pattern_code)
-                    stack.append(new_pattern)
-                    pattern_codes.add(new_pattern_code)
+
+                    tree_pattern_added = False
+
+                    edge_extensions = new_tree_pattern.find_edge_extensions(EdgeExtensionManager(self.min_support))
+
+                    for edge_ext in edge_extensions:
+                        new_cycle_pattern = new_tree_pattern.apply_edge_extension(edge_ext)
+                        # If the support of the tree pattern is greater than the cycle pattern
+                        # it means that the tree cannot be closed in a cycle for all of his
+                        # occurrence in each graph, so it's considered the tree pattern and added to the stack.
+                        # Also check if the pattern is not already in the stack, because the same tree can be
+                        # considered with more than one edge extension.
+                        if (not tree_pattern_added) and (new_tree_pattern.support() > new_cycle_pattern.support()):
+                            stack.append(new_tree_pattern)
+                            pattern_codes.add(new_pattern_code)
+                            tree_pattern_added = True
+
+                        new_cycle_pattern_code = new_cycle_pattern.code()
+                        if new_cycle_pattern_code not in pattern_codes:
+                            stack.append(new_cycle_pattern)
+                            pattern_codes.add(new_cycle_pattern_code)
+
+                    # If no edge extensions are found, add the tree pattern to the stack
+                    if len(edge_extensions) == 0:
+                        stack.append(new_tree_pattern)
+                        pattern_codes.add(new_pattern_code)
+
 
         # Close the file if it was opened
         if output_file is not None:
             output_file.close()
-
-    def bfs_mine(self):
-        print("BFS Mining")
-        self._read_graphs_from_file()
-        self._parse_support()
-        # define the number of nodes to start mining
-        curr_nodes = 1
-        # count the number of patterns found
-        pattern_count = 0
-        while curr_nodes <= self._max_nodes:
-            # mine patterns
-            patterns = self._mine_patterns(curr_nodes)
-
-            if len(patterns) == 0:
-                break
-
-            if self.output_path is not None:
-                output_file = open(self.output_path, "a")
-
-            if curr_nodes >= self._min_nodes:
-                # print results only if the current number of nodes is at least the min number of nodes
-                for pattern in patterns:
-                    if self.output_path is not None:
-                        print(pattern.__str__(self.show_mappings), file=output_file)
-                    else:
-                        print(pattern.__str__(self.show_mappings))
-                    pattern_count += 1
-            if self.output_path is not None:
-                output_file.close()
-            # increment the number of nodes
-            curr_nodes += 1
-
-    def _mine_patterns(self, num_nodes) -> list[Pattern]:
-        print("Mine patterns with", num_nodes, "nodes")
-        if num_nodes == 1:
-            patterns = self._mine_1node_patterns()
-        else:
-            patterns = self._mine_next_patterns()
-        self.last_mined_patterns = patterns
-        return patterns
-
-    def _mine_next_patterns(self) -> list[Pattern]:
-        """
-        Extends existing patterns by adding new nodes and edges based on the support threshold.
-        """
-        debug_message("EXTENDING", len(self.last_mined_patterns), "DIFFERENT MAPPINGS")
-        patterns = []
-
-        for i, pattern in enumerate(self.last_mined_patterns):
-            debug_message("- EXTENDING PATTERN", i + 1)
-            patterns.extend(pattern.extend(self.support))
-
-        patterns = remove_redundant_patterns(patterns)
-
-        return patterns
 
     def _mine_1node_patterns(self) -> list[Pattern]:
         counter = {}
@@ -595,7 +594,7 @@ class CMiner:
         # update the mappings
         patterns = []
         for sorted_labels_str, graphs in counter.items():
-            if len(graphs) >= self.support:
+            if len(graphs) >= self.min_support:
                 pattern_mappings = PatternMappings(graphs)
                 p = Pattern(pattern_mappings)
                 p.add_node(0, labels=sorted_labels_str.split(" "))
@@ -620,9 +619,9 @@ class CMiner:
         graphs that are present in a certain percentage of
         df graphs.
         """
-        if self.support <= 1:
+        if self.min_support <= 1:
             db_len = len(self.db)
-            self.support = int(self.support * db_len)
+            self.min_support = int(self.min_support * db_len)
 
     def _init_matcher(self):
         for g in self.db:
