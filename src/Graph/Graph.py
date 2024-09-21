@@ -87,6 +87,14 @@ class MultiDiGraph(nx.MultiDiGraph):
                 set([self.get_edge_data(edge[0], edge[1], edge[2])['type'] for edge in self.edges if self.get_edge_data(edge[0], edge[1], edge[2])['type'] != NULL_LABEL]))
         return self.edge_labels
 
+    def edge_keys(self, src, dest):
+        """
+        Each edge is a triple (src, dest, key).
+
+        In a multigraph it is possible to have multiple edges between the same pair of nodes.
+        This method returns the keys of all edges between the same pair of nodes.
+        """
+        return [key for key in self[src][dest]]
 
     def get_edges_consider_no_direction(self, edge):
         """
@@ -584,3 +592,21 @@ class MultiDiGraph(nx.MultiDiGraph):
                 code += "".join(self.get_node_labels(node)) + edge_code
 
         return code
+
+    def subgraph(self, nodes):
+        """
+        Returns a subgraph induced by the given nodes.
+
+        Args:
+            nodes: A list of node IDs.
+
+        Returns:
+            A MultiDiGraph object representing the subgraph induced by the given nodes.
+        """
+        subgraph = MultiDiGraph()
+        for node in nodes:
+            subgraph.add_node(node, **self.nodes[node])
+        for u, v, key, data in self.edges(keys=True, data=True):
+            if u in nodes and v in nodes:
+                subgraph.add_edge(u, v, key, **data)
+        return subgraph
