@@ -184,7 +184,8 @@ class NodeExtensionManager:
             self._add_helper(self.in_extensions, self.in_extensions_node_ids, pattern_node_id,
                                        target_src_node_id, target_edge_labels_code, db_graph, _map)
 
-    def _add_helper(self, extensions, extensions_node_ids, pattern_node_id, target_node_id,
+    @staticmethod
+    def _add_helper(extensions, extensions_node_ids, pattern_node_id, target_node_id,
                               target_edge_labels_code, db_graph, _map):
         """
         Helper function to add an extension to the manager. It is used to avoid code duplication.
@@ -471,18 +472,6 @@ class CMiner:
         if self._start_patterns is None:
             return self._mine_1node_patterns()
 
-        # uniforming all bit matrices
-        # all_node_labels = set()
-        # all_edge_labels = set()
-        # for g in self.db:
-        #     all_node_labels = all_node_labels.union(g.get_all_node_labels())
-        #     all_edge_labels = all_edge_labels.union(g.get_all_edge_labels())
-        #
-        # for p in self._start_patterns:
-        #     p.add_node('dummy', labels=all_node_labels)
-        #     for label in all_edge_labels:
-        #         p.add_edge('dummy', 'dummy', type=label)
-
         start_patterns = []
         found_mappings = {}
 
@@ -497,33 +486,6 @@ class CMiner:
             for g, mappings in found_mappings.items():
                 pattern_mappings.set_mapping(g, mappings)
             start_patterns.append(Pattern(extended_pattern=p, pattern_mappings=pattern_mappings))
-
-        return start_patterns
-
-        pattern_mappings = PatternMappings()
-        for g, mappings in found_mappings.items():
-            pattern_mappings.set_mapping(g, mappings)
-
-        new_tree_pattern = Pattern(extended_pattern=self._start_patterns, pattern_mappings=pattern_mappings)
-
-        pattern_codes = set()
-        tree_pattern_added = False
-
-        edge_extensions = new_tree_pattern.find_edge_extensions(EdgeExtensionManager(self.min_support))
-
-        for edge_ext in edge_extensions:
-            new_cycle_pattern = new_tree_pattern.apply_edge_extension(edge_ext)
-            if (not tree_pattern_added) and (new_tree_pattern.support() > new_cycle_pattern.support()):
-                pattern_codes.add(new_tree_pattern.code())
-                tree_pattern_added = True
-
-            new_cycle_pattern_code = new_cycle_pattern.code()
-            if new_cycle_pattern_code not in pattern_codes:
-                pattern_codes.add(new_cycle_pattern_code)
-                start_patterns.append(new_cycle_pattern)
-
-        if len(edge_extensions) == 0:
-            start_patterns.append(new_tree_pattern)
 
         return start_patterns
 
