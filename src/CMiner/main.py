@@ -1,7 +1,31 @@
 import time
 import argparse
 from CMiner import CMiner
-# from src.CMiner.CMiner_optimized import CMiner
+from Graph.Graph import MultiDiGraph
+
+def parse_graph_str(str):
+    graph = MultiDiGraph()
+    nodes, edges = [], []
+
+    for line in str.strip().split("\n"):
+        parts = line.split()
+        if line.startswith("v"):
+            node_id = parts[1]
+            labels = parts[2:]
+            nodes.append((int(node_id), labels))
+        elif line.startswith("e"):
+            src = parts[1]
+            tgt = parts[2]
+            labels = parts[3:]
+            edges.append((int(src), int(tgt), labels))
+
+    for node_id, labels in nodes:
+        graph.add_node(node_id, labels=labels)
+    for src, tgt, labels in edges:
+        for label in labels:
+            graph.add_edge(src, tgt, type=label)
+
+    return graph
 
 def main_function():
     parser = argparse.ArgumentParser(description="CMiner algorithm")
@@ -11,11 +35,26 @@ def main_function():
     parser.add_argument('-u', '--max_nodes', type=int, help="Maximum number of nodes", default=float('inf'))
     parser.add_argument('-m', '--show_mappings', type=int, help="Show pattern mappings", default=0)
     parser.add_argument('-o', '--output_path', type=str, help="Output file", default=None)
+    parser.add_argument('-p', '--patterns_path', type=str, help="Starting patterns file", default=None)
+
 
     args = parser.parse_args()
 
-    miner = CMiner(args.db_file, min_nodes=args.min_nodes, max_nodes=args.max_nodes, support=args.support,
-                   show_mappings=args.show_mappings, output_path=args.output_path)
+    start_patterns = None
+    if args.patterns_path is not None:
+        with open(args.patterns_path, 'r') as f:
+            patterns = f.read().split("-")
+            start_patterns = [parse_graph_str(pattern) for pattern in patterns]
+
+    miner = CMiner(
+        args.db_file,
+        support=args.support,
+        min_nodes=args.min_nodes,
+        max_nodes=args.max_nodes,
+        show_mappings=args.show_mappings,
+        output_path=args.output_path,
+        start_patterns=start_patterns
+    )
 
     start_time = time.time()
     miner.mine()

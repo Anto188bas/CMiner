@@ -4,54 +4,152 @@ from CMiner.CompatibilityDomain import CompatibilityDomainWithDictionary
 from CMiner.Ordering import Ordering
 import ray
 
-class Solution:
+class Mapping:
 
-    def __init__(self, f, g):
-        self.f = f
-        self.g = g
+    def __init__(self, node_mapping=None, edge_mapping=None, extended_mapping: 'Mapping' = None):
+        # extended_mapping is used to keep track of the previous mapping
+        # when a new mapping that extends the previous one
+        # it saves memory instead of copying the entire mapping
+        self.extended_mapping = extended_mapping
+        self.node_mapping = {} if node_mapping is None else node_mapping
+        self.edge_mapping = {} if edge_mapping is None else edge_mapping
 
-    def copy(self):
-        return Solution(self.f.copy(), self.g.copy())
+    def nodes_mapping(self) -> dict:
+        node_mapping = {}
+        if self.extended_mapping is not None:
+            node_mapping.update(self.extended_mapping.nodes_mapping())
+        node_mapping.update(self.node_mapping)
+        return node_mapping
 
-    def query_nodes(self):
-        return self.f.keys()
+    def _retrieve_node_mapping(self):
+        node_mapping = {}
+        if self.extended_mapping is not None:
+            node_mapping.update(self.extended_mapping._retrieve_node_mapping())
+        node_mapping.update(self.node_mapping)
+        return node_mapping
 
-    def query_edges(self):
-        return self.g.keys()
+    def _retrieve_edge_mapping(self):
+        edge_mapping = {}
+        if self.extended_mapping is not None:
+            edge_mapping.update(self.extended_mapping._retrieve_edge_mapping())
+        edge_mapping.update(self.edge_mapping)
+        return edge_mapping
 
-    def target_nodes(self):
-        return self.f.values()
+    def node_pairs(self):
+        """
+        Returns the pairs of pattern nodes and target nodes
+        """
+        return self._retrieve_node_mapping().items()
 
-    def target_edges(self):
-        return self.g.values()
+    def node(self, pattern_node):
+        """
+        Returns the target node that corresponds to the pattern node
+        """
+        return self._retrieve_node_mapping()[pattern_node]
 
-    def nodes_mapping(self):
-        return self.f
+    def nodes(self):
+        """
+        Returns the target nodes that correspond to the pattern nodes
+        """
+        return self._retrieve_node_mapping().values()
 
-    def add_node_mapping(self, node, target_node):
-        self.f[node] = target_node
+    def inverse(self, with_nodes=True, with_edges=True) -> 'Mapping':
+        """
+        Returns the inverse mapping
+        """
+        inverse_mapping = Mapping()
+        if with_nodes:
+            for k, v in self._retrieve_node_mapping().items():
+                inverse_mapping.node_mapping[v] = k
+        if with_edges:
+            for k, v in self._retrieve_edge_mapping().items():
+                inverse_mapping.edge_mapping[v] = k
+        return inverse_mapping
 
-    def add_edge_mapping(self, edge, target_edge):
-        self.g[edge] = target_edge
+    def get_target_edges(self) -> list:
+        if self.extended_mapping is not None:
+            edges = list(self.extended_mapping.get_target_edges())
+            edges.extend(self.edge_mapping.values())
+            return edges
+        return list(self.edge_mapping.values())
 
-    def get_node_mapping(self, node):
-        return self.f[node]
+    def get_pattern_nodes(self):
+        return self.node_mapping.keys()
 
-    def is_edge_mapped(self, edge):
-        return edge in self.g.values()
-
-
+    def get_pattern_edges(self):
+        return self.edge_mapping.keys()
 
     def __str__(self):
-        str = "------------------------------------------\n"
-        str += "Query node mapping:\n"
-        for key in self.f.keys():
-            str += f"{key} -> {self.f[key]}\n"
-        str += "\nQuery edge mapping:\n"
-        for key in self.g.keys():
-            str += f"{key} -> {self.g[key]}\n"
-        str += "------------------------------------------\n"
-        return str
+        return f"({{{self.get_node_mapping_str()}}}, {{{self.get_edge_mapping_str()}}})"
+
+    def get_node_mapping_str(self):
+        node_mapping_str = ""
+        if self.extended_mapping is not None:
+            node_mapping_str += self.extended_mapping.get_node_mapping_str() + ", "
+        node_mapping_str += " ".join([f"{k}->{v}" for k, v in self.node_mapping.items()])
+        return node_mapping_str
+
+    def get_edge_mapping_str(self):
+        if len(self.edge_mapping) == 0:
+            return ""
+        edge_mapping_str = ""
+        if self.extended_mapping is not None:
+            previous_edge_mapping_str = self.extended_mapping.get_edge_mapping_str()
+            edge_mapping_str += previous_edge_mapping_str + (", " if len(previous_edge_mapping_str) > 0 else "")
+        edge_mapping_str += " ".join([f"{k}->{v}" for k, v in self.edge_mapping.items()])
+        return edge_mapping_str
+
+    def set_edge(self, pattern_edge, target_edge):
+        self.edge_mapping[pattern_edge] = target_edge
+
+# class Solution:
+#
+#     def __init__(self, f, g):
+#         self.f = f
+#         self.g = g
+#
+#     def copy(self):
+#         return Solution(self.f.copy(), self.g.copy())
+#
+#     def query_nodes(self):
+#         return self.f.keys()
+#
+#     def query_edges(self):
+#         return self.g.keys()
+#
+#     def target_nodes(self):
+#         return self.f.values()
+#
+#     def target_edges(self):
+#         return self.g.values()
+#
+#     def nodes_mapping(self):
+#         return self.f
+#
+#     def add_node_mapping(self, node, target_node):
+#         self.f[node] = target_node
+#
+#     def add_edge_mapping(self, edge, target_edge):
+#         self.g[edge] = target_edge
+#
+#     def get_node_mapping(self, node):
+#         return self.f[node]
+#
+#     def is_edge_mapped(self, edge):
+#         return edge in self.g.values()
+#
+#
+#
+#     def __str__(self):
+#         str = "------------------------------------------\n"
+#         str += "Query node mapping:\n"
+#         for key in self.f.keys():
+#             str += f"{key} -> {self.f[key]}\n"
+#         str += "\nQuery edge mapping:\n"
+#         for key in self.g.keys():
+#             str += f"{key} -> {self.g[key]}\n"
+#         str += "------------------------------------------\n"
+#         return str
 
 
 class MultiGraphMatch:
@@ -179,7 +277,7 @@ class MultiGraphMatch:
                         forceBack = True
                         # SOLUTION FOUND
                         # save the mapping
-                        self.solutions.append(Solution(self.f.copy(), self.g.copy()))
+                        self.solutions.append(Mapping(node_mapping=self.f.copy(), edge_mapping=self.g.copy()))
                     else:
                         # shift the index to the next query edge in the ordering
                         i += 1
