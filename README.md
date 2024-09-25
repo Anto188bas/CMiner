@@ -76,18 +76,39 @@ miner = CMiner(
 - `-u`, `--max_nodes`: Maximum number of nodes in the pattern (default: infinite).
 - `-m`, `--show_mappings`: Display mappings of found patterns (default: 0).
 - `-o`, `--output_path`: File path to save results, if not set the results are shown in the console.
+- `-p`, `--patterns_path`: File paths to start the search.
 
 ### Usage example
 
-Mining patterns from 4 up to 8 nodes, present in at least 50% of graphs in the database.
+- Mining patterns from 4 up to 8 nodes, present in at least 50% of graphs in the database.
 
 ```bash
 CMiner /path/to/the/graph.data 0.5 -l 4 -u 8
  ```
 
-Mining all patterns present in at least 50 graphs in the database.
+- Mining all patterns present in at least 50 graphs in the database.
 
 ```bash
 CMiner /path/to/the/graph.data 50
  ```
+
+- Mining all patterns present in at least 50 graphs in the database that have the pattern inside the file `patterns.txt`
+
+```bash
+CMiner /path/to/the/graph.data 50 -p patterns.txt
+ ```
+Content of `patterns.txt`
+```bash
+v 1 purple
+v 2 yellow
+e 2 1 white
+-
+v 1 blue
+v 2 yellow
+v 3 red
+e 1 2 white
+e 1 3 white
+ ```
+
+
 
