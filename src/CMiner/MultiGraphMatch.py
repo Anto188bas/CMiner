@@ -185,7 +185,6 @@ class MultiGraphMatch:
                        breaking_conditions_edges=None
                        ):
         self.solutions = []
-        self.query = query
         self.f = {node: None for node in query.nodes()}
         self.g = {edge: None for edge in query.get_all_edges()}
         self.cand = {edge: [] for edge in self.query.get_all_edges()}
@@ -211,6 +210,16 @@ class MultiGraphMatch:
         else:
             self.br_cond_edge = breaking_conditions_edges
 
+    def _match_1node_query(self) -> list[Mapping]:
+        mappings = []
+        q_node_id = list(self.query.nodes())[0]
+        q_node_labels = self.query.get_node_labels(q_node_id)
+        for node in self.target.nodes():
+            t_node_labels = self.target.get_node_labels(node)
+            if all(label in t_node_labels for label in q_node_labels):
+                mappings.append(Mapping(node_mapping={q_node_id: node}))
+
+        return mappings
 
     def match(self,
               query,
@@ -221,8 +230,6 @@ class MultiGraphMatch:
               breaking_conditions_edges=None):
 
         # check if all the labels that have the query are also inside the target
-        # print(query.get_all_node_labels())
-
         query_node_labels = query.get_all_node_labels()
         target_node_labels = self.target.get_all_node_labels()
         query_edge_labels = query.get_all_edge_labels()
@@ -231,6 +238,14 @@ class MultiGraphMatch:
             return []
         if not all(label in target_edge_labels for label in query_edge_labels):
             return []
+
+        self.query = query
+
+        # if the query has no edge (so it is a single node) the matching is trivial
+        if len(query.get_all_edges()) == 0:
+            if len(query.nodes()) != 1:
+                raise ValueError("The query has no edges but it has more than one node")
+            return self._match_1node_query()
 
         self._init_matching(query,
                             query_bit_matrix,
@@ -378,10 +393,6 @@ class MultiGraphMatch:
                         ):
                             # if self.br_cond_node.check(q_i, t_i):
                             self.cand[query_edge].append(target_edge)
-
-    def get_solutions(self):
-        return self.solutions
-
 
 @ray.remote
 def match_parallel_worker(target, query, worker_id):
