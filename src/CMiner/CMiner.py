@@ -51,8 +51,7 @@ class DBGraph(MultiDiGraph):
         """
         if self.matcher is None:
             self._init_matcher()
-        self.matcher.match(pattern)
-        return self.matcher.get_solutions()
+        return self.matcher.match(pattern)
 
     def get_name(self):
         """
@@ -476,6 +475,7 @@ class CMiner:
         found_mappings = {}
 
         for p in self._start_patterns:
+            print(p)
             for g in self.db:
                 matching = g.localize(p)
                 if len(matching) > 0:
@@ -506,7 +506,6 @@ class CMiner:
 
         while len(stack) > 0:
             pattern_to_extend = stack.pop()
-
 
             # print pattern to console and file if it meets the min node requirement
             if len(pattern_to_extend.nodes()) >= self._min_nodes:
