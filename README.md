@@ -54,14 +54,17 @@ python -m CMiner <db_file> <support> [options]
 from CMiner import CMiner
 
 miner = CMiner(
-    db_file='/path/to/your/db/graph', # required
-    support, # required
+    db_file='/path/to/your/db/graphs.data', # required
+    support=0.5,                            # required
     min_nodes=1,
     max_nodes=float('inf'),
     show_mappings=False,
-    output_path=None
+    output_path=None,
+    start_patterns=None
 )
- ```
+
+miner.mine()
+```
 
 
 
@@ -92,23 +95,14 @@ CMiner /path/to/the/graph.data 0.5 -l 4 -u 8
 CMiner /path/to/the/graph.data 50
  ```
 
-- Mining all patterns present in at least 50 graphs in the database that have the pattern inside the file `patterns.txt`
+- Mining all patterns present in at least 50 graphs in the database that have the pattern inside the file `pattern.txt`
 
 ```bash
-CMiner /path/to/the/graph.data 50 -p patterns.txt
+CMiner /path/to/the/graph.data 50 -p /path/to/the/pattern.txt
  ```
-Content of `patterns.txt`
+Content of `/path/to/the/pattern.txt`
 ```bash
 v 1 purple
 v 2 yellow
 e 2 1 white
--
-v 1 blue
-v 2 yellow
-v 3 red
-e 1 2 white
-e 1 3 white
  ```
-
-
-
