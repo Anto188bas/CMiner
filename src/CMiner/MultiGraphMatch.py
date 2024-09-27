@@ -172,7 +172,7 @@ class MultiGraphMatch:
         self.br_cond_edge = None
         self.domain = None
         self.ordering = None
-        self.solutions = None
+        self.solutions = []
         self.f = None
         self.g = None
 
@@ -219,6 +219,19 @@ class MultiGraphMatch:
               ordering=None,
               breaking_conditions_nodes=None,
               breaking_conditions_edges=None):
+
+        # check if all the labels that have the query are also inside the target
+        # print(query.get_all_node_labels())
+
+        query_node_labels = query.get_all_node_labels()
+        target_node_labels = self.target.get_all_node_labels()
+        query_edge_labels = query.get_all_edge_labels()
+        target_edge_labels = self.target.get_all_edge_labels()
+        if not all(label in target_node_labels for label in query_node_labels):
+            return []
+        if not all(label in target_edge_labels for label in query_edge_labels):
+            return []
+
         self._init_matching(query,
                             query_bit_matrix,
                             compatibility_domain,
@@ -290,6 +303,8 @@ class MultiGraphMatch:
                 else:
                     # shift the index to the next candidate
                     self.cand_index[query_edge] += 1
+
+        return self.solutions
 
 
 

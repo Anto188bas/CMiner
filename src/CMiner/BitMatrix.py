@@ -327,9 +327,10 @@ class QueryBitMatrix(BitMatrix):
         for label in target_graph.get_all_edge_labels():
             self.graph.add_edge('dummy', 'dummy', type=label)
 
+
     def _undo_adapt_query_to_target(self):
-        self.graph.remove_node('dummy')
-        self.graph.remove_edges_from(self.graph.edges('dummy'))
+        self.graph.remove_nodes(['dummy'])
+        self.graph.remove_edges(self.graph.edges('dummy'))
 
     def find_candidates(self, target_bitmatrix):
         """ Find the candidate target edges

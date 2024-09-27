@@ -59,6 +59,17 @@ class MultiDiGraph(nx.MultiDiGraph):
             attr['labels'] = []
         super().add_node(node_for_adding, **attr)
 
+    def remove_nodes(self, n):
+        self.node_labels = None
+        for node in n:
+            self.remove_node(node)
+
+    def remove_edges(self, edges):
+        self.edge_labels = None
+        for edge in edges:
+            self.remove_edge(edge[0], edge[1], edge[2])
+
+
     def edge_has_label(self, edge):
         source, target, key = edge
         return self[source][target][key]['type'] != NULL_LABEL

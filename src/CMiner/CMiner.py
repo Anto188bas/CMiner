@@ -441,7 +441,7 @@ class Pattern(MultiDiGraph):
             #frequency info
             frequencies = ["(" + g.get_name() + ", " + str(len(self.pattern_mappings.mappings(g))) + ")" for g in self.graphs()]
             output += "x " + " ".join(frequencies) + "\n"
-        output += "--------------" + "\n"
+        output += "-" + "\n"
 
         count_pattern += 1
         return output
