@@ -31,16 +31,6 @@ class Solution:
         self.support = support
         self.id = _id
 
-    def __str__(self):
-        out = ""
-        out += f"id: {self.id}\n"
-        for n in self.graph.nodes(data=True):
-            out += f"v {n[0]} {n[1]['labels'][0]}\n"
-        for e in self.graph.edges(data=True):
-            out += f"e {e[0]} {e[1]} {e[2]['type']}\n"
-        out += f"Support: {self.support}\n"
-        return out
-
     def get_support(self):
         return self.support
 
@@ -58,10 +48,36 @@ class CMinerSolution(Solution):
         self.graph_ids = graph_ids
         self.frequencies = frequencies
 
+    def __str__(self):
+        out = ""
+        out += f"t # {self.id}\n"
+        for n in self.graph.nodes(data=True):
+            labels = " ".join(n[1]['labels'])
+            out += f"v {n[0]} {labels}\n"
+        for e in self.graph.edges(data=True):
+            out += f"e {e[0]} {e[1]} {e[2]['type']}\n"
+        out += f"s {self.support}\n"
+        out += "-\n"
+        return out
+
+    def __eq__(self, other):
+        return nx.is_isomorphic(self.graph, other.graph, node_match=node_match, edge_match=edge_match)
+
 class gSpanSolution(Solution):
 
         def __init__(self, graph: MultiDiGraph, support: int, _id: int):
             super().__init__(graph, support, _id)
+
+        def __str__(self):
+            out = ""
+            out += f"t # {self.id}\n"
+            for n in self.graph.nodes(data=True):
+                out += f"v {n[0]} {n[1]['labels'][0]}\n"
+            for e in self.graph.edges(data=True):
+                out += f"e {e[0]} {e[1]} {e[2]['type']}\n"
+            out += f"Support: {self.support}\n"
+            out += "-----------------\n"
+            return out
 
 class Parser(FileReader):
 
@@ -73,8 +89,8 @@ class Parser(FileReader):
         Read the solutions from the file and return them as a list of strings
         """
         strings = self.read().split(sep)
-        if len(strings[-1]) < 3:
-            return strings[:-1]
+        if not strings[-1].__contains__("e"):
+            strings.pop()
         return strings
 
     def all_solutions(self) -> ['Solution']:
@@ -98,6 +114,7 @@ class CMinerParser(Parser):
         graph = MultiDiGraph()
         nodes, edges, graphs_to_consider, frequencies = [], [], [], []
         solution_id = None
+        support = 0
 
         for line in solution.strip().split("\n"):
             parts = line.split()

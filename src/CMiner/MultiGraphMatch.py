@@ -155,6 +155,7 @@ class Mapping:
 class MultiGraphMatch:
 
     def __init__(self, target, target_bit_matrix=None):
+
         self.target = target
         if target_bit_matrix is None:
             self.tbm = TargetBitMatrixOptimized(self.target, BitMatrixStrategy2())

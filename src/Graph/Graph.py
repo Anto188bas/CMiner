@@ -85,7 +85,7 @@ class MultiDiGraph(nx.MultiDiGraph):
         return self[source][destination][key]['type']
 
     def get_node_labels(self, _id):
-        return sorted(set(self.nodes[_id]["labels"]))
+        return sorted(list(self.nodes[_id]["labels"]))
 
     def get_all_node_labels(self):
         if self.node_labels is None:

@@ -69,8 +69,7 @@ class DBGraph(MultiDiGraph):
         self.matcher = MultiGraphMatch(self, target_bit_matrix=bit_matrix)
 
     def localize(self, pattern):
-        self.matcher.match(pattern)
-        return self.matcher.get_solutions()
+        return self.matcher.match(pattern)
 
     def get_name(self):
         return self.name

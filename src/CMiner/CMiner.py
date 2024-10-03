@@ -612,6 +612,7 @@ class CMiner:
         for name, network in NetworksLoading(type_file, configurator.config).Networks.items():
             self.db.append(DBGraph(network, name))
 
+
     def _parse_support(self):
         """
         If the support is > 1, then the user want common
