@@ -124,3 +124,16 @@ class Checker:
 
         print("Accuracy:", (len(solutions) - len(table_data)) / len(solutions) * 100, "%")
 
+    def isomorphic_solutions(self):
+        """
+        Check if there are isomorphic solutions.
+        """
+        print(f"Checking isomorphic solutions with {self.matching_algorithm} algorithm.")
+        self._read_graphs_from_file()
+        solutions = self.parser.all_solutions()
+        for i in range(len(solutions)):
+            for j in range(i+1, len(solutions)):
+                if solutions[i] == solutions[j]:
+                    print(f"Solution {solutions[i].get_id()} is isomorphic to solution {solutions[j].get_id()}")
+
+

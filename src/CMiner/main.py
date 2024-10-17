@@ -33,6 +33,7 @@ def main_function():
     parser.add_argument('support', type=float, help="Support")
     parser.add_argument('-l', '--min_nodes', type=int, help="Minimum number of nodes", default=1)
     parser.add_argument('-u', '--max_nodes', type=int, help="Maximum number of nodes", default=float('inf'))
+    parser.add_argument('-n', '--num_nodes', type=int, help="Number of nodes", default=None)
     parser.add_argument('-m', '--show_mappings', type=int, help="Show pattern mappings", default=0)
     parser.add_argument('-o', '--output_path', type=str, help="Output file", default=None)
     parser.add_argument('-p', '--patterns_path', type=str, help="Starting patterns file", default=None)
@@ -45,6 +46,10 @@ def main_function():
         with open(args.patterns_path, 'r') as f:
             patterns = f.read().split("-")
             start_patterns = [parse_graph_str(pattern) for pattern in patterns]
+
+    if args.num_nodes is not None:
+        args.min_nodes = args.num_nodes
+        args.max_nodes = args.num_nodes
 
     miner = CMiner(
         args.db_file,

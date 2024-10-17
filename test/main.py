@@ -2,10 +2,10 @@ from parser import CMinerParser, gSpanParser
 from comparator import *
 from checker import Checker
 
-db_path = ("/Users/simoneavellino/Desktop/Datasets/cycles-db/db1.data")
-solutions_path = "/Users/simoneavellino/Desktop/sol_cycles1_s_2/cminer.txt"
+db_path = ("/Users/simoneavellino/Desktop/CMiner/test/Datasets/OntoUML-db/graphs.data")
+solutions_path = "/Users/simoneavellino/Desktop/sol_onto_20.txt"
 
-checker = Checker(db_path, CMinerParser(solutions_path), "VF2")
+checker = Checker(db_path, CMinerParser(solutions_path))
 
 checker.run()
 

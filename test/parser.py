@@ -11,7 +11,7 @@ def node_match(n1, n2):
 
 
 def edge_match(e1, e2):
-    return e1.get('type', None) == e2.get('type', None)
+    return e1[0].get('type', None) == e2[0].get('type', None)
 
 class FileReader:
         """
@@ -158,7 +158,7 @@ class CMinerParser(Parser):
         """
         Read all the solutions from the file
         """
-        solutions_str = super().solutions_str("-")
+        solutions_str = super().solutions_str("----------")
         return [CMinerSolution(*self._parse_solution(solution)) for solution in solutions_str]
 
 class gSpanParser(Parser):

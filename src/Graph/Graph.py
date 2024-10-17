@@ -80,6 +80,12 @@ class MultiDiGraph(nx.MultiDiGraph):
             labels.extend([edge_data.get('type') for edge_data in self[source][destination].values() if edge_data.get('type') != NULL_LABEL])
         return sorted(set(labels))
 
+    def get_edge_labels_with_duplicate(self, source, destination):
+        labels = []
+        if self.has_edge(source, destination):
+            labels.extend([edge_data.get('type') for edge_data in self[source][destination].values() if edge_data.get('type') != NULL_LABEL])
+        return sorted(labels)
+
     def get_edge_label(self, edge):
         source, destination, key = edge
         return self[source][destination][key]['type']
@@ -106,6 +112,15 @@ class MultiDiGraph(nx.MultiDiGraph):
         This method returns the keys of all edges between the same pair of nodes.
         """
         return [key for key in self[src][dest]]
+
+    def edge_keys_by_type(self, src, dest, type):
+        """
+        Each edge is a triple (src, dest, key).
+
+        In a multigraph it is possible to have multiple edges between the same pair of nodes.
+        This method returns the keys of all edges between the same pair of nodes.
+        """
+        return [key for key in self[src][dest] if self[src][dest][key]['type'] == type]
 
     def get_edges_consider_no_direction(self, edge):
         """
@@ -596,7 +611,7 @@ class MultiDiGraph(nx.MultiDiGraph):
                 # for each node of the group
                 edge_labels = []
                 for v in self.successors(n):
-                    edge_labels.extend(self.get_edge_labels(n, v))
+                    edge_labels.extend(self.get_edge_labels_with_duplicate(n, v))
                 edge_codes[n] = "".join(sorted(edge_labels)) # concatenate all edge labels
             # create the code by grouping by keys and sort each group
             for node, edge_code in sorted(edge_codes.items(), key=lambda x: x[1]):
