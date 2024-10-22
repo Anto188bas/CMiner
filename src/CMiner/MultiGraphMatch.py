@@ -47,6 +47,12 @@ class Mapping:
         """
         return self._retrieve_node_mapping()[pattern_node]
 
+    def edge(self, pattern_edge):
+        """
+        Returns the target edge that corresponds to the pattern edge
+        """
+        return self._retrieve_edge_mapping()[pattern_edge]
+
     def nodes(self):
         """
         Returns the target nodes that correspond to the pattern nodes
