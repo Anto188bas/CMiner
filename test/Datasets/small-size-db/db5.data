@@ -17,10 +17,10 @@ e 2 1 subclassOf
 e 3 1 subclassOf
 e 2 3 relatesTo
 t # 0 G3
-v 0 EntityA
-v 1 EntityB
-v 2 EntityC
-v 3 EntityD
+v 0 ObjectA
+v 1 ObjectB
+v 2 ObjectC
+v 3 ObjectD
 e 0 1 relatesTo
 e 2 1 subclassOf
 e 3 1 subclassOf

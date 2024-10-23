@@ -325,19 +325,20 @@ class NodeExtension(Extension):
         self.pattern_node_id = pattern_node_id
         self.node_labels = node_labels
 
-    def target_node_id(self, graph, _map):
+    def target_node_ids(self, graph, _map):
         """
-        Return the target node id from which the extension is found.
+        Return the target node ids from which the extension is found.
         """
+        ids = []
         for m, target_node_id in self.location[graph]:
             if _map == m:
-                return target_node_id
-        return None
+                ids.append(target_node_id)
+        return ids
 
     def __str__(self):
         g_names = sorted([g.name for g in self.location.keys()])
         graphs = ", ".join(g_names)
-        return f"NodeExt: (\n   PatternNodeId: {self.pattern_node_id}\n   NewNodeLabels: {self.node_labels}\n   OutEdgeLabels: {self.out_edge_labels}\n   InEdgeLabels: {self.in_edge_labels}\n   Location: {graphs}\n)"
+        return f"NodeExt: (\n   PatternNodeId: {self.pattern_node_id}\n   NewNodeLabels: {self.node_labels}\n   OutEdgeLabels: {self.out_edge_labels}\n   InEdgeLabels: {self.in_edge_labels}\n   Location: {graphs}\nObjLocation: {self.location}\n)"
 
 class EdgeExtension(Extension):
 
@@ -632,7 +633,7 @@ class Pattern(MultiDiGraph):
 
         extensions = extension_manager.frequent_extensions()
         # DELETE THIS ONLY FOR TESTING
-        extensions = sorted(extensions, key=lambda x: x.__str__())
+        # extensions = sorted(extensions, key=lambda x: x.__str__())
 
         return extensions
 
@@ -701,7 +702,7 @@ class Pattern(MultiDiGraph):
         extensions = extension_manager.frequent_extensions()
 
         # DELETE THIS ONLY FOR TESTING
-        extensions = sorted(extensions, key=lambda x: x.__str__())
+        # extensions = sorted(extensions, key=lambda x: x.__str__())
 
         # DELETE THIS ONLY FOR TESTING
         print_green("Edge extensions before grouping")
@@ -767,7 +768,7 @@ class Pattern(MultiDiGraph):
 
         # Apply extension to the pattern (add node and edges)
         new_pattern = Pattern(extended_pattern=self, pattern_mappings=new_pattern_mappings)
-        new_pattern_new_node_id = int(len(new_pattern.nodes())) + 1
+        new_pattern_new_node_id = len(new_pattern.nodes())
         new_pattern.add_node(new_pattern_new_node_id, labels=extension.node_labels)
 
         for lab in extension.in_edge_labels:
@@ -777,6 +778,7 @@ class Pattern(MultiDiGraph):
 
         # Update the pattern mappings
         for target in extension.graphs():
+            print_red("Target", object.__str__(target))
             new_mappings = []
             for target_map in self.pattern_mappings.mappings(target):
 
@@ -785,50 +787,54 @@ class Pattern(MultiDiGraph):
                 # if target_map not in extension.mapping(target):
                 #     continue
 
-                target_node_id = extension.target_node_id(target, target_map)
+                print_yellow("Target map", object.__str__(target_map))
+
+                target_node_ids = extension.target_node_ids(target, target_map)
 
                 # when trying to extend the pattern Pn (pattern with n nodes), there can be some mappings of Pn
                 # that are not extended because the extension is not applicable.
-                if target_node_id is None:
+                if len(target_node_ids) == 0:
                     continue
 
 
-                # node mapping
-                node_mapping = {new_pattern_new_node_id: target_node_id}
-                # edge mapping
-                edge_mapping = {}
+                for target_node_id in target_node_ids:
+                    # node mapping
+                    node_mapping = {new_pattern_new_node_id: target_node_id}
+                    # edge mapping
+                    edge_mapping = {}
 
-                new_key = 0
-                prev_lab = None
-                prev_keys = []
-                for lab in sorted(extension.in_edge_labels):
-                    new_pattern_edge = (pattern_node_id, new_pattern_new_node_id, new_key)
-                    target_edge_src = target_node_id
-                    target_edge_dest= target_map.nodes_mapping()[extension.pattern_node_id]
-                    if prev_lab != lab:
-                        prev_keys = target.edge_keys_by_type(target_edge_src, target_edge_dest, lab)
-                        prev_lab = lab
-                    target_edge = (target_edge_src, target_edge_dest, prev_keys.pop(0))
-                    edge_mapping[new_pattern_edge] = target_edge
-                    new_key += 1
-                prev_lab = None
-                prev_keys = []
-                for lab in sorted(extension.out_edge_labels):
-                    new_pattern_edge = (new_pattern_new_node_id, pattern_node_id, new_key)
-                    target_edge_src = target_map.nodes_mapping()[extension.pattern_node_id]
-                    target_edge_dest = target_node_id
-                    if prev_lab != lab:
-                        prev_keys = target.edge_keys_by_type(target_edge_src, target_edge_dest, lab)
-                        prev_lab = lab
-                    target_edge = (target_edge_src, target_edge_dest, prev_keys.pop(0))
-                    edge_mapping[new_pattern_edge] = target_edge
-                    new_key += 1
+                    new_key = 0
+                    prev_lab = None
+                    prev_keys = []
+                    for lab in sorted(extension.in_edge_labels):
+                        new_pattern_edge = (pattern_node_id, new_pattern_new_node_id, new_key)
+                        target_edge_src = target_node_id
+                        target_edge_dest= target_map.nodes_mapping()[extension.pattern_node_id]
+                        if prev_lab != lab:
+                            prev_keys = target.edge_keys_by_type(target_edge_src, target_edge_dest, lab)
+                            prev_lab = lab
+                        target_edge = (target_edge_src, target_edge_dest, prev_keys.pop(0))
+                        edge_mapping[new_pattern_edge] = target_edge
+                        new_key += 1
+                    prev_lab = None
+                    prev_keys = []
+                    for lab in sorted(extension.out_edge_labels):
+                        new_pattern_edge = (new_pattern_new_node_id, pattern_node_id, new_key)
+                        target_edge_src = target_map.nodes_mapping()[extension.pattern_node_id]
+                        target_edge_dest = target_node_id
+                        if prev_lab != lab:
+                            prev_keys = target.edge_keys_by_type(target_edge_src, target_edge_dest, lab)
+                            prev_lab = lab
+                        target_edge = (target_edge_src, target_edge_dest, prev_keys.pop(0))
+                        edge_mapping[new_pattern_edge] = target_edge
+                        new_key += 1
 
-                new_mapping = Mapping(node_mapping=node_mapping, edge_mapping=edge_mapping, extended_mapping=target_map)
-                new_mappings.append(new_mapping)
+                    new_mapping = Mapping(node_mapping=node_mapping, edge_mapping=edge_mapping, extended_mapping=target_map)
+                    new_mappings.append(new_mapping)
 
             new_pattern_mappings.set_mapping(target, new_mappings)
         return new_pattern
+
 
     def apply_edge_extension(self, extensions: list[EdgeExtension]) -> 'Pattern':
         """
@@ -919,7 +925,8 @@ class Pattern(MultiDiGraph):
         output += f"s {self.support()}\n"
         output += f"f {sum(len(self.pattern_mappings.mappings(g)) for g in self.graphs())}\n"
 
-        if show_mappings:
+        # DELETE or with_debugs
+        if show_mappings or with_debugs:
             for g in self.graphs():
                 # graph_name frequency
                 output += g.get_name() + " " + str(len(self.pattern_mappings.mappings(g))) + " "
@@ -1008,7 +1015,7 @@ class CMiner:
         # Stack for DFS
         stack = self.find_start_patterns()
         # DELETE THIS ONLY FOR TESTING
-        stack = sorted(stack, key=lambda x: x.__str__())
+        # stack = sorted(stack, key=lambda x: x.__str__())
 
         for p in stack:
             self.output(p)
