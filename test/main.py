@@ -3,7 +3,7 @@ from comparator import *
 from checker import Checker
 
 db_path = ("/Users/simoneavellino/Desktop/CMiner/test/Datasets/OntoUML-db/graphs.data")
-solutions_path = "/Users/simoneavellino/Desktop/sol_onto_20.txt"
+solutions_path = "/Users/simoneavellino/Desktop/CMiner/test/solution/sol.data"
 
 checker = Checker(db_path, CMinerParser(solutions_path))
 

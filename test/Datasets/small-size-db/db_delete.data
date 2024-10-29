@@ -1,0 +1,30 @@
+t # 0 g1
+v 4 purple yellow
+v 5 purple
+v 6 purple
+e 4 5 pink
+e 5 4 green
+e 4 6 green
+e 4 6 pink
+t # 1 g2
+v 4 purple yellow
+v 5 purple
+v 6 purple
+v 10 purple yellow
+v 11 purple
+v 12 purple
+e 4 5 pink
+e 5 4 green
+e 4 6 green
+e 4 6 pink
+e 10 11 pink
+e 11 10 green
+e 10 12 green
+e 10 12 pink
+t # 2 g3
+v 4 purple yellow
+v 5 purple
+v 6 purple
+e 4 5 pink
+e 5 4 green
+e 4 6 pink

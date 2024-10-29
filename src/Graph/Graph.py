@@ -117,7 +117,7 @@ class MultiDiGraph(nx.MultiDiGraph):
         """
         Each edge is a triple (src, dest, key).
 
-        In a multigraph it is possible to have multiple edges between the same pair of nodes.
+        In a multi graph it is possible to have multiple edges between the same pair of nodes.
         This method returns the keys of all edges between the same pair of nodes.
         """
         return [key for key in self[src][dest] if self[src][dest][key]['type'] == type]

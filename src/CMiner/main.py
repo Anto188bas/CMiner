@@ -12,6 +12,7 @@ def parse_graph_str(str):
         if line.startswith("v"):
             node_id = parts[1]
             labels = parts[2:]
+            print(int(node_id))
             nodes.append((int(node_id), labels))
         elif line.startswith("e"):
             src = parts[1]

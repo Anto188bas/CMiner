@@ -3,31 +3,80 @@ import copy
 
 class Extension:
 
-    def __init__(self, edge_labels, location):
-        self.edge_labels = edge_labels
+    def __init__(self, out_edge_labels, in_edge_labels, location):
+        self.out_edge_labels = out_edge_labels
+        self.in_edge_labels = in_edge_labels
         self.location = location
 
+    def graphs(self):
+        """
+        Return the graphs where the extension is found.
+        """
+        return list(self.location.keys())
+
+    def mapping(self, graph):
+        """
+        Return the mapping of the pattern in the graph.
+        """
+        return self.location[graph]
+
+    def set_graphs(self, graphs):
+        """
+        Set the graphs where the extension is found.
+        """
+        self.location = {g: {} for g in graphs}
+
     def __str__(self):
-        return str(self.edge_labels) + " " + str(self.location)
+        g_names = sorted([g for g in self.location.keys()])
+        graphs = ", ".join(g_names)
+        return f"Ext: (\n  OutEdgeLabels: {self.out_edge_labels}\n   InEdgeLabels: {self.in_edge_labels}\n   Location: {graphs}\nObjLocation: {self.location}\n)"
 
 class NodeExtension(Extension):
 
-    def __init__(self, src_id, node_labels, edge_labels, location, is_outgoing):
-        super().__init__(edge_labels, location)
-        self.src_id = src_id
+    def __init__(self, pattern_node_id, node_labels, out_edge_labels, in_edge_labels, location):
+        super().__init__(out_edge_labels, in_edge_labels, location)
+        self.pattern_node_id = pattern_node_id
         self.node_labels = node_labels
-        self.is_outgoing = is_outgoing
+
+    def target_node_ids(self, graph, _map):
+        """
+        Return the target node ids from which the extension is found.
+        """
+        ids = []
+        for m, target_node_id in self.location[graph]:
+            if _map == m:
+                ids.append(target_node_id)
+        return ids
+
+    def __str__(self):
+        g_names = sorted([g.name for g in self.location.keys()])
+        graphs = ", ".join(g_names)
+        return f"NodeExt: (\n   PatternNodeId: {self.pattern_node_id}\n   NewNodeLabels: {self.node_labels}\n   OutEdgeLabels: {self.out_edge_labels}\n   InEdgeLabels: {self.in_edge_labels}\n   Location: {graphs}\nObjLocation: {self.location}\n)"
+
 
 class EdgeExtension(Extension):
 
-    def __init__(self, src_id, dst_id, edge_labels, location):
-        super().__init__(edge_labels, location)
-        self.src_id = src_id
-        self.dst_id = dst_id
+    def __init__(self, pattern_node_id_src, pattern_node_id_dst, out_edge_labels, in_edge_labels, location):
+        super().__init__(out_edge_labels, in_edge_labels, location)
+        self.pattern_node_id_src = pattern_node_id_src
+        self.pattern_node_id_dst = pattern_node_id_dst
+
+    def __str__(self):
+        g_names = sorted([g.name for g in self.location.keys()])
+        graphs = ", ".join(g_names)
+        return f"EdgeExt: (\n   PatternNodeIdSrc: {self.pattern_node_id_src}\n   PatternNodeIdDst: {self.pattern_node_id_dst}\n   OutEdgeLabels: {self.out_edge_labels}\n   InEdgeLabels: {self.in_edge_labels}\n   Location: {graphs}\n)"
+
+    def __copy__(self):
+        return EdgeExtension(
+            self.pattern_node_id_src,
+            self.pattern_node_id_dst,
+            self.out_edge_labels,
+            self.in_edge_labels,
+            self.location
+        )
 
 
 class EdgeGroupsFinder:
-
     """
     Class to find all the edge extensions that are frequent.
 
@@ -37,6 +86,7 @@ class EdgeGroupsFinder:
         - The last column contains the location of the edges in the graphs.
         - The table is constructed in such a way that the rows are ordered by the number of 1 in the row.
     """
+
     def __init__(self, min_support):
         # set the column 'location' as the last column
         self.min_support = min_support
@@ -57,7 +107,7 @@ class EdgeGroupsFinder:
         """
         Return the label from the column name.
         """
-        return column_name.split('_')[0]
+        return column_name.rsplit('_', 1)[0]
 
     @staticmethod
     def parse_edge_labels(edge_labels):
@@ -172,28 +222,43 @@ class EdgeGroupsFinder:
     @staticmethod
     def extend_location(location1, location2):
         """
-        Extend the location of the two rows.
+        Extend the location of the two rows by reference.
         """
         for g, mappings in location2.items():
             if g in location1:
-                location1[g].update(mappings)
+                location1[g].update(mappings)  # Keep a reference without deepcopy
             else:
                 location1[g] = mappings
 
     @staticmethod
+    def split_into_in_and_out_array(array):
+        in_array = []
+        out_array = []
+
+        for str in array:
+            if str.startswith("in_"):
+                in_array.append(str[3:])
+            elif str.startswith("out_"):
+                out_array.append(str[4:])
+
+        return in_array, out_array
+
+    @staticmethod
     def transform_row_in_extension(row):
         """
-        Transform a row in an extension.
+        Transform a row into an extension, ensuring that the correct location is used.
         """
-        print(type(row))
         edge_labels = []
         location = {}
+        # Copy the final location to prevent unintended modification during extension creation
         for i, col in enumerate(row.index):
             if i == 0:
-                location = row[col]
+                location = copy.deepcopy(row[col])  # Deep copy here to finalize location
             elif row[col] == 1:
                 edge_labels.append(EdgeGroupsFinder.label_from_column_name(col))
-        return Extension(edge_labels, location)
+
+        in_edge_labels, out_edge_labels = EdgeGroupsFinder.split_into_in_and_out_array(edge_labels)
+        return Extension(out_edge_labels, in_edge_labels, location)
 
     def common_columns(self, row1, row2):
         """
@@ -204,7 +269,6 @@ class EdgeGroupsFinder:
             if row1[col] == 1 and row2[col] == 1:
                 common.append(col)
         return common
-
 
     def find(self):
         """
@@ -220,45 +284,26 @@ class EdgeGroupsFinder:
 
             row = self.df.iloc[i]
 
-            location = row['location']
-
             j = i - 1
 
             while j >= 0:
                 row_to_compare = self.df.iloc[j]
+
                 if self.is_subset(row, row_to_compare):
+                    location = row['location']
                     # merge the location of the two rows
                     location_row_to_compare = row_to_compare['location']
                     EdgeGroupsFinder.extend_location(location, location_row_to_compare)
-                # else:
-                #
-                #     common_columns = self.common_columns(row, row_to_compare)
-                #     if len(common_columns) > 0:
-                #         # if there are two rows have common columns, it means that there are possible extensions
-                #
-                #         # obtain the bitmap representing the common columns
-                #         common_columns_code = "__".join(sorted(common_columns))
-                #         if common_columns_code not in other_extensions:
-                #             new_location = copy.deepcopy(location)
-                #             EdgeGroupsFinder.extend_location(new_location, row_to_compare['location'])
-                #             other_extensions[common_columns_code] = new_location
-                #         else:
-                #             EdgeGroupsFinder.extend_location(other_extensions[common_columns_code], row_to_compare['location'])
-
                 j -= 1
 
             if EdgeGroupsFinder.support(row) >= self.min_support:
-                extensions.append(EdgeGroupsFinder.transform_row_in_extension(row))
-
-        # for common_columns_code, locations in other_extensions.items():
-        #     if len(locations) >= self.min_support:
-        #         extensions.append(EdgeGroupsFinder.transform_row_in_extension(self.compute_new_row(common_columns_code.split('__'), locations)))
+                ext = EdgeGroupsFinder.transform_row_in_extension(row)
+                extensions.append(ext)
 
         return extensions
 
     def __str__(self):
         return self.df.__str__()
-
 
 
 eg = EdgeGroupsFinder(2)
@@ -270,12 +315,9 @@ eg = EdgeGroupsFinder(2)
 # eg.add(['r', 'r'], {'g2': {'e'}})
 # eg.add(['b', 'b'], {'g1': {'b'}})
 
-eg.add(['r', 'r', 'r', 'b', 'b'], {'g1': {'a'}})
-eg.add(['r', 'r', 'r'], {'g3': {'h'}})
-eg.add(['b', 'b', 'p'], {'g3': {'d'}})
-eg.add(['b', 'p'], {'g2': {'f'}})
-eg.add(['r', 'r'], {'g2': {'e'}})
-eg.add(['b', 'b'], {'g1': {'b'}})
+eg.add(['out_g', 'in_p'], {'g1': {'a'}, 'g2': {'c', 'e'}, 'g3': {'g'}})
+eg.add(['in_g', 'in_p'], {'g1': {'b'}, 'g2': {'d', 'f'}})
+eg.add(['in_p'], {'g3': {'h'}})
 
 
 

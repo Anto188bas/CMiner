@@ -1,0 +1,596 @@
+
+t # 773
+v 0 characterization
+v 1 category
+v 2 gen
+e 1 0 target
+e 1 2 general
+s 21
+f 80
+----------
+
+t # 774
+v 0 characterization
+v 1 quality
+v 2 1_1
+e 1 0 source
+e 2 0 cardinalities
+s 20
+f 47
+----------
+
+t # 775
+v 0 gen
+v 1 category
+e 1 0 general
+s 77
+f 994
+----------
+
+t # 776
+v 0 gen
+v 1 category
+e 1 0 specific
+s 38
+f 257
+----------
+
+t # 777
+v 0 gen
+v 1 role
+e 1 0 specific
+s 90
+f 1372
+----------
+
+t # 778
+v 0 gen
+v 1 role
+e 1 0 general
+s 40
+f 354
+----------
+
+t # 779
+v 0 gen
+v 1 relator
+e 1 0 general
+s 44
+f 417
+----------
+
+t # 780
+v 0 gen
+v 1 relator
+e 1 0 specific
+s 26
+f 327
+----------
+
+t # 781
+v 0 gen
+v 1 roleMixin
+e 1 0 general
+s 41
+f 387
+----------
+
+t # 782
+v 0 gen
+v 1 roleMixin
+e 1 0 specific
+s 35
+f 274
+----------
+
+t # 783
+v 0 gen
+v 1 roleMixin
+v 2 gen
+e 1 0 specific
+e 1 2 general
+s 22
+f 270
+----------
+
+t # 784
+v 0 gen
+v 1 roleMixin
+v 2 category
+e 1 0 specific
+e 2 0 general
+s 28
+f 118
+----------
+
+t # 785
+v 0 gen
+v 1 roleMixin
+v 2 roleMixin
+e 1 0 specific
+e 2 0 general
+s 24
+f 142
+----------
+
+t # 786
+v 0 gen
+v 1 roleMixin
+v 2 roleMixin
+v 3 gen
+e 1 0 specific
+e 2 0 general
+e 2 3 general
+s 22
+f 594
+----------
+
+t # 787
+v 0 gen
+v 1 roleMixin
+v 2 category
+v 3 gen
+e 1 0 specific
+e 2 0 general
+e 2 3 general
+s 24
+f 852
+----------
+
+t # 788
+v 0 gen
+v 1 roleMixin
+v 2 role
+e 1 0 general
+e 2 0 specific
+s 29
+f 231
+----------
+
+t # 789
+v 0 gen
+v 1 roleMixin
+v 2 gen
+e 1 0 general
+e 1 2 general
+s 36
+f 2143
+----------
+
+t # 790
+v 0 gen
+v 1 roleMixin
+v 2 gen
+v 3 role
+e 1 0 general
+e 1 2 general
+e 3 0 specific
+s 24
+f 1796
+----------
+
+t # 791
+v 0 gen
+v 1 roleMixin
+v 2 gen
+v 3 role
+v 4 role
+e 1 0 general
+e 1 2 general
+e 3 0 specific
+e 4 2 specific
+s 23
+f 49
+----------
+
+t # 792
+v 0 gen
+v 1 roleMixin
+v 2 gen
+v 3 role
+v 4 gen
+e 1 0 general
+e 1 2 general
+e 3 0 specific
+e 3 4 specific
+s 21
+f 2098
+----------
+
+t # 793
+v 0 gen
+v 1 roleMixin
+v 2 gen
+v 3 role
+v 4 gen
+v 5 role
+e 1 0 general
+e 1 2 general
+e 3 0 specific
+e 3 4 specific
+e 5 2 specific
+s 20
+f 1965
+----------
+
+t # 794
+v 0 gen
+v 1 roleMixin
+v 2 gen
+v 3 role
+v 4 gen
+v 5 role
+v 6 gen
+e 1 0 general
+e 1 2 general
+e 3 0 specific
+e 3 4 specific
+e 5 2 specific
+e 5 6 specific
+s 20
+f 1218
+----------
+
+t # 795
+v 0 gen
+v 1 roleMixin
+v 2 role
+v 3 gen
+e 1 0 general
+e 2 0 specific
+e 2 3 specific
+s 25
+f 233
+----------
+
+t # 796
+v 0 gen
+v 1 relator
+v 2 gen
+e 1 0 general
+e 1 2 general
+s 37
+f 768
+----------
+
+t # 797
+v 0 gen
+v 1 role
+v 2 role
+e 1 0 general
+e 2 0 specific
+s 39
+f 317
+----------
+
+t # 798
+v 0 gen
+v 1 role
+v 2 gen
+e 1 0 general
+e 1 2 general
+s 32
+f 396
+----------
+
+t # 799
+v 0 gen
+v 1 role
+v 2 gen
+e 1 0 general
+e 1 2 specific
+s 40
+f 408
+----------
+
+t # 800
+v 0 gen
+v 1 role
+v 2 gen
+v 3 role
+e 1 0 general
+e 1 2 specific
+e 3 0 specific
+s 39
+f 371
+----------
+
+t # 801
+v 0 gen
+v 1 role
+v 2 gen
+v 3 gen
+e 1 0 general
+e 1 2 specific
+e 1 3 general
+s 32
+f 417
+----------
+
+t # 802
+v 0 gen
+v 1 role
+v 2 gen
+v 3 gen
+v 4 role
+e 1 0 general
+e 1 2 specific
+e 1 3 general
+e 4 0 specific
+s 31
+f 367
+----------
+
+t # 803
+v 0 gen
+v 1 role
+v 2 gen
+v 3 gen
+v 4 role
+v 5 role
+e 1 0 general
+e 1 2 specific
+e 1 3 general
+e 4 0 specific
+e 5 3 specific
+s 30
+f 99
+----------
+
+t # 804
+v 0 gen
+v 1 role
+v 2 gen
+v 3 role
+e 1 0 general
+e 1 2 general
+e 3 0 specific
+s 31
+f 345
+----------
+
+t # 805
+v 0 gen
+v 1 role
+v 2 gen
+v 3 role
+v 4 role
+e 1 0 general
+e 1 2 general
+e 3 0 specific
+e 4 2 specific
+s 30
+f 98
+----------
+
+t # 806
+v 0 gen
+v 1 role
+v 2 gen
+e 1 0 specific
+e 1 2 specific
+s 38
+f 324
+----------
+
+t # 807
+v 0 gen
+v 1 category
+v 2 category
+e 1 0 specific
+e 2 0 general
+s 34
+f 241
+----------
+
+t # 808
+v 0 gen
+v 1 category
+v 2 gen
+e 1 0 specific
+e 1 2 general
+s 33
+f 527
+----------
+
+t # 809
+v 0 gen
+v 1 category
+v 2 gen
+v 3 category
+e 1 0 specific
+e 1 2 general
+e 3 0 general
+s 29
+f 490
+----------
+
+t # 810
+v 0 gen
+v 1 category
+v 2 gen
+v 3 gen
+e 1 0 specific
+e 1 2 general
+e 1 3 general
+s 31
+f 986
+----------
+
+t # 811
+v 0 gen
+v 1 category
+v 2 gen
+v 3 category
+e 1 0 specific
+e 1 2 general
+e 3 2 specific
+s 21
+f 141
+----------
+
+t # 812
+v 0 gen
+v 1 category
+v 2 gen
+v 3 gen
+v 4 category
+e 1 0 specific
+e 1 2 general
+e 1 3 general
+e 4 0 general
+s 27
+f 937
+----------
+
+t # 813
+v 0 gen
+v 1 category
+v 2 gen
+v 3 gen
+v 4 gen
+e 1 0 specific
+e 1 2 general
+e 1 3 general
+e 1 4 general
+s 23
+f 1673
+----------
+
+t # 814
+v 0 gen
+v 1 category
+v 2 gen
+v 3 gen
+v 4 gen
+v 5 category
+e 1 0 specific
+e 1 2 general
+e 1 3 general
+e 1 4 general
+e 5 0 general
+s 20
+f 1616
+----------
+
+t # 815
+v 0 gen
+v 1 category
+v 2 gen
+v 3 gen
+v 4 category
+v 5 gen
+e 1 0 specific
+e 1 2 general
+e 1 3 general
+e 4 0 general
+e 4 5 general
+s 22
+f 2041
+----------
+
+t # 816
+v 0 gen
+v 1 category
+v 2 gen
+v 3 category
+v 4 gen
+e 1 0 specific
+e 1 2 general
+e 3 0 general
+e 3 4 general
+s 27
+f 947
+----------
+
+t # 817
+v 0 gen
+v 1 category
+v 2 category
+v 3 gen
+e 1 0 specific
+e 2 0 general
+e 2 3 general
+s 31
+f 720
+----------
+
+t # 818
+v 0 gen
+v 1 category
+v 2 category
+v 3 gen
+v 4 gen
+e 1 0 specific
+e 2 0 general
+e 2 3 general
+e 2 4 general
+s 22
+f 1551
+----------
+
+t # 819
+v 0 gen
+v 1 category
+v 2 category
+v 3 gen
+v 4 category
+e 1 0 specific
+e 2 0 general
+e 2 3 general
+e 4 3 specific
+s 25
+f 225
+----------
+
+t # 820
+v 0 gen
+v 1 category
+v 2 gen
+e 1 0 general
+e 1 2 general
+s 71
+f 1970
+----------
+
+t # 821
+v 0 gen
+v 1 category
+v 2 gen
+v 3 gen
+e 1 0 general
+e 1 2 general
+e 1 3 general
+s 56
+f 5068
+----------
+
+t # 822
+v 0 gen
+v 1 category
+v 2 gen
+v 3 gen
+v 4 gen
+e 1 0 general
+e 1 2 general
+e 1 3 general
+e 1 4 general
+s 37
+f 17130
+----------
+
+t # 823
+v 0 gen
+v 1 category
+v 2 gen
+v 3 gen
+v 4 gen
+v 5 gen
+e 1 0 general
+e 1 2 general
+e 1 3 general
+e 1 4 general
+e 1 5 general
+s 27
+f 59417
+----------
