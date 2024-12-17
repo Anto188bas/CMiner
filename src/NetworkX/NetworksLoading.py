@@ -115,9 +115,10 @@ class NetworksLoading:
             elif components[0] == "v": node_func(components, nodes_dict, metadata[SL])
             # EDGES SECTION
             elif components[0] == "e":
-                edges_vect.append(
-                  (components[1], components[2], {"type": components[3]})
-                )
+                for type in components[3:]:
+                    edges_vect.append(
+                      (components[1], components[2], {"type": type})
+                    )
         # ADD NODES TO THE LAST GRAPH
         self.Networks[last_net_id].add_nodes_from([(k, {"labels": v}) for k, v in nodes_dict.items()])
         self.Networks[last_net_id].add_edges_from(edges_vect)
