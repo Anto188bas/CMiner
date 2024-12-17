@@ -60,7 +60,10 @@ miner = CMiner(
     max_nodes=float('inf'),
     show_mappings=False,
     output_path=None,
-    start_patterns=None
+    start_patterns=None,
+    is_directed=False,
+    with_frequencies=False,
+    only_closed_patterns=False
 )
 
 miner.mine()
@@ -77,9 +80,13 @@ miner.mine()
 ### Additional options:
 - `-l`, `--min_nodes`: Minimum number of nodes in the pattern (default: 1).
 - `-u`, `--max_nodes`: Maximum number of nodes in the pattern (default: infinite).
+- `-n`, `--num_nodes`: Exact number of nodes in the pattern (if not set -l and -u are considered).
+- `-d`, `--directed`: Flag to indicate if the graphs are directed (default: 0).
 - `-m`, `--show_mappings`: Display mappings of found patterns (default: 0).
 - `-o`, `--output_path`: File path to save results, if not set the results are shown in the console.
 - `-p`, `--patterns_path`: File paths to start the search.
+- `-f`, `--with_frequencies`: Flag to indicate if the frequencies of the patterns for each graph must be shown (default: False).
+- `-c`, `--only_closed_patterns`: Flag to indicate if only closed patterns should be shown (default: False).
 
 ### Usage example
 
