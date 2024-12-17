@@ -46,11 +46,12 @@ class BreakingConditionsNodes:
         Check if the node q can be mapped to the node t.
 
         q can be mapped to t if for all nodes q' in the same orbit
-        with smaller id than q f(q') != None and f(q') < t
+        with smaller id than q: f(q') != None and f(q') < t
         :param q:
-        :param t:
+        :param t_element:
         :return:
         """
+        # print("CCONTROLLO SE POSSO MAPPARE IL NODO", q, "DEL PATTERN CON IL NODO", t_element, "DEL DATASET")
         # WRITE BETTER
         elements = self._get_elements_with_smaller_id(q)
         if len(elements) > 0:

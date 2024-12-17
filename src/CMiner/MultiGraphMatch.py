@@ -3,6 +3,8 @@ from CMiner.BreakingConditions import BreakingConditionsNodes, BreakingCondition
 from CMiner.CompatibilityDomain import CompatibilityDomainWithDictionary
 from CMiner.Ordering import Ordering
 import ray
+from sympy import false
+
 
 class Mapping:
 
@@ -108,55 +110,11 @@ class Mapping:
     def set_edge(self, pattern_edge, target_edge):
         self.edge_mapping[pattern_edge] = target_edge
 
-# class Solution:
-#
-#     def __init__(self, f, g):
-#         self.f = f
-#         self.g = g
-#
-#     def copy(self):
-#         return Solution(self.f.copy(), self.g.copy())
-#
-#     def query_nodes(self):
-#         return self.f.keys()
-#
-#     def query_edges(self):
-#         return self.g.keys()
-#
-#     def target_nodes(self):
-#         return self.f.values()
-#
-#     def target_edges(self):
-#         return self.g.values()
-#
-#     def nodes_mapping(self):
-#         return self.f
-#
-#     def add_node_mapping(self, node, target_node):
-#         self.f[node] = target_node
-#
-#     def add_edge_mapping(self, edge, target_edge):
-#         self.g[edge] = target_edge
-#
-#     def get_node_mapping(self, node):
-#         return self.f[node]
-#
-#     def is_edge_mapped(self, edge):
-#         return edge in self.g.values()
-#
-#
-#
-#     def __str__(self):
-#         str = "------------------------------------------\n"
-#         str += "Query node mapping:\n"
-#         for key in self.f.keys():
-#             str += f"{key} -> {self.f[key]}\n"
-#         str += "\nQuery edge mapping:\n"
-#         for key in self.g.keys():
-#             str += f"{key} -> {self.g[key]}\n"
-#         str += "------------------------------------------\n"
-#         return str
-
+    def remove_edge(self, pattern_edge):
+        if pattern_edge in self.edge_mapping:
+            del self.edge_mapping[pattern_edge]
+        if self.extended_mapping is not None:
+            self.extended_mapping.remove_edge(pattern_edge)
 
 class MultiGraphMatch:
 
@@ -366,8 +324,8 @@ class MultiGraphMatch:
                         ) and
                         self.target.edge_contains_attributes(target_edge, self.query.get_edge_attributes(query_edge))
                 ):
-                    # if self.br_cond_edge.check(query_edge, target_edge):
-                    self.cand[query_edge].append(target_edge)
+                    if self.br_cond_edge.check(query_edge, target_edge):
+                        self.cand[query_edge].append(target_edge)
         elif self.f[q_i] is not None:
             for t_i, t_j in self.domain.get_domain((q_i, q_j)):
                 if t_i == self.f[q_i]:
@@ -384,8 +342,8 @@ class MultiGraphMatch:
                                 self.target.edge_contains_attributes(target_edge,
                                                                      self.query.get_edge_attributes(query_edge))
                         ):
-                            # if self.br_cond_node.check(q_j, t_j):
-                            self.cand[query_edge].append(target_edge)
+                            if self.br_cond_node.check(q_j, t_j):
+                                self.cand[query_edge].append(target_edge)
         else:
             for t_i, t_j in self.domain.get_domain((q_i, q_j)):
                 if t_j == self.f[q_j]:
@@ -398,8 +356,8 @@ class MultiGraphMatch:
                                 self.target.edge_contains_attributes(target_edge,
                                                                      self.query.get_edge_attributes(query_edge))
                         ):
-                            # if self.br_cond_node.check(q_i, t_i):
-                            self.cand[query_edge].append(target_edge)
+                            if self.br_cond_node.check(q_i, t_i):
+                                self.cand[query_edge].append(target_edge)
 
 @ray.remote
 def match_parallel_worker(target, query, worker_id):
@@ -408,6 +366,3 @@ def match_parallel_worker(target, query, worker_id):
     matcher.match(query)
     solutions = matcher.solutions()
     return solutions
-
-
-

@@ -38,6 +38,11 @@ def main_function():
     parser.add_argument('-m', '--show_mappings', type=int, help="Show pattern mappings", default=0)
     parser.add_argument('-o', '--output_path', type=str, help="Output file", default=None)
     parser.add_argument('-p', '--patterns_path', type=str, help="Starting patterns file", default=None)
+    parser.add_argument('-d', '--directed', type=int, help="Specify if the graph is directed", default=0)
+    parser.add_argument('-f', '--frequencies', type=int, help="Show the relative frequencies of the pattern", default=0)
+    parser.add_argument('-c', '--closed_patterns', type=int, help="Show only the maximum closed patterns", default=0)
+
+
 
 
     args = parser.parse_args()
@@ -59,7 +64,10 @@ def main_function():
         max_nodes=args.max_nodes,
         show_mappings=args.show_mappings,
         output_path=args.output_path,
-        start_patterns=start_patterns
+        start_patterns=start_patterns,
+        is_directed=args.directed,
+        with_frequencies=args.frequencies,
+        only_closed_patterns=args.closed_patterns
     )
 
     start_time = time.time()
