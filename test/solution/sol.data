@@ -1,411 +1,1162 @@
-
-t # 773
-v 0 characterization
-v 1 category
+t # 0
+v 0 material
+v 1 role
 v 2 gen
+v 3 mediation
+v 4 relator
+v 5 mediation
 e 1 0 target
-e 1 2 general
-s 21
-f 80
-----------
-
-t # 774
-v 0 characterization
-v 1 quality
-v 2 1_1
-e 1 0 source
-e 2 0 cardinalities
-s 20
-f 47
-----------
-
-t # 775
-v 0 gen
-v 1 category
-e 1 0 general
-s 77
-f 994
-----------
-
-t # 776
-v 0 gen
-v 1 category
-e 1 0 specific
-s 38
-f 257
-----------
-
-t # 777
-v 0 gen
-v 1 role
-e 1 0 specific
-s 90
-f 1372
-----------
-
-t # 778
-v 0 gen
-v 1 role
-e 1 0 general
-s 40
-f 354
-----------
-
-t # 779
-v 0 gen
-v 1 relator
-e 1 0 general
-s 44
-f 417
-----------
-
-t # 780
-v 0 gen
-v 1 relator
-e 1 0 specific
-s 26
-f 327
-----------
-
-t # 781
-v 0 gen
-v 1 roleMixin
-e 1 0 general
-s 41
-f 387
-----------
-
-t # 782
-v 0 gen
-v 1 roleMixin
-e 1 0 specific
-s 35
-f 274
-----------
-
-t # 783
-v 0 gen
-v 1 roleMixin
-v 2 gen
-e 1 0 specific
-e 1 2 general
-s 22
-f 270
-----------
-
-t # 784
-v 0 gen
-v 1 roleMixin
-v 2 category
-e 1 0 specific
-e 2 0 general
-s 28
-f 118
-----------
-
-t # 785
-v 0 gen
-v 1 roleMixin
-v 2 roleMixin
-e 1 0 specific
-e 2 0 general
-s 24
-f 142
-----------
-
-t # 786
-v 0 gen
-v 1 roleMixin
-v 2 roleMixin
-v 3 gen
-e 1 0 specific
-e 2 0 general
-e 2 3 general
-s 22
-f 594
-----------
-
-t # 787
-v 0 gen
-v 1 roleMixin
-v 2 category
-v 3 gen
-e 1 0 specific
-e 2 0 general
-e 2 3 general
-s 24
-f 852
-----------
-
-t # 788
-v 0 gen
-v 1 roleMixin
-v 2 role
-e 1 0 general
-e 2 0 specific
+e 1 2 specific
+e 1 3 target
+e 4 3 source
+e 4 5 source
 s 29
-f 231
+f 210
 ----------
-
-t # 789
-v 0 gen
-v 1 roleMixin
+t # 1
+v 0 material
+v 1 role
 v 2 gen
-e 1 0 general
-e 1 2 general
+v 3 role
+v 4 gen
+e 1 0 target
+e 1 2 specific
+e 3 0 source
+e 3 4 specific
+s 13
+f 151
+----------
+t # 2
+v 0 material
+v 1 role
+v 2 gen
+v 3 kind
+e 1 0 source
+e 1 2 specific
+e 3 2 general
+s 29
+f 112
+----------
+t # 3
+v 0 material
+v 1 role
+v 2 gen
+v 3 mediation
+v 4 relator
+v 5 mediation
+e 1 0 source
+e 1 2 specific
+e 1 3 target
+e 4 3 source
+e 4 5 source
+s 28
+f 260
+----------
+t # 4
+v 0 phase
+v 1 gen
+v 2 gen-set
+v 3 gen
+v 4 phase
+e 0 1 specific
+e 1 2 generalization
+e 3 2 generalization
+e 4 3 specific
+s 32
+f 180
+----------
+t # 5
+v 0 phase
+v 1 gen
+v 2 kind
+e 0 1 specific
+e 2 1 general
+s 28
+f 136
+----------
+t # 6
+v 0 gen-set
+v 1 gen
+v 2 role
+v 3 gen
+v 4 role
+e 1 0 generalization
+e 2 1 specific
+e 3 0 generalization
+e 4 3 specific
 s 36
-f 2143
+f 389
 ----------
-
-t # 790
-v 0 gen
-v 1 roleMixin
-v 2 gen
-v 3 role
-e 1 0 general
-e 1 2 general
-e 3 0 specific
-s 24
-f 1796
-----------
-
-t # 791
-v 0 gen
-v 1 roleMixin
-v 2 gen
-v 3 role
-v 4 role
-e 1 0 general
-e 1 2 general
-e 3 0 specific
-e 4 2 specific
-s 23
-f 49
-----------
-
-t # 792
-v 0 gen
-v 1 roleMixin
-v 2 gen
-v 3 role
+t # 7
+v 0 gen-set
+v 1 gen
+v 2 subkind
+v 3 kind
 v 4 gen
-e 1 0 general
-e 1 2 general
-e 3 0 specific
-e 3 4 specific
-s 21
-f 2098
+v 5 gen
+v 6 subkind
+e 1 0 generalization
+e 2 1 specific
+e 3 1 general
+e 3 4 general
+e 5 0 generalization
+e 6 5 specific
+s 27
+f 2114
 ----------
-
-t # 793
-v 0 gen
-v 1 roleMixin
-v 2 gen
-v 3 role
+t # 8
+v 0 gen-set
+v 1 gen
+v 2 subkind
+v 3 kind
 v 4 gen
-v 5 role
-e 1 0 general
-e 1 2 general
-e 3 0 specific
-e 3 4 specific
-e 5 2 specific
-s 20
-f 1965
-----------
-
-t # 794
-v 0 gen
-v 1 roleMixin
-v 2 gen
-v 3 role
-v 4 gen
-v 5 role
-v 6 gen
-e 1 0 general
-e 1 2 general
-e 3 0 specific
-e 3 4 specific
-e 5 2 specific
-e 5 6 specific
-s 20
-f 1218
-----------
-
-t # 795
-v 0 gen
-v 1 roleMixin
-v 2 role
-v 3 gen
-e 1 0 general
-e 2 0 specific
-e 2 3 specific
-s 25
-f 233
-----------
-
-t # 796
-v 0 gen
-v 1 relator
-v 2 gen
-e 1 0 general
-e 1 2 general
-s 37
-f 768
-----------
-
-t # 797
-v 0 gen
-v 1 role
-v 2 role
-e 1 0 general
-e 2 0 specific
+v 5 subkind
+e 1 0 generalization
+e 2 1 specific
+e 3 1 general
+e 3 4 general
+e 4 0 generalization
+e 5 4 specific
 s 39
-f 317
+f 374
 ----------
-
-t # 798
-v 0 gen
-v 1 role
-v 2 gen
-e 1 0 general
-e 1 2 general
-s 32
-f 396
+t # 9
+v 0 gen-set
+v 1 gen
+v 2 subkind
+v 3 kind
+v 4 gen
+v 5 subkind
+e 1 0 generalization
+e 2 1 specific
+e 3 1 general
+e 3 4 general
+e 5 4 specific
+s 42
+f 637
 ----------
-
-t # 799
-v 0 gen
-v 1 role
-v 2 gen
-e 1 0 general
-e 1 2 specific
-s 40
-f 408
+t # 10
+v 0 gen-set
+v 1 gen
+v 2 subkind
+v 3 kind
+v 4 gen
+v 5 subkind
+e 1 0 generalization
+e 2 1 specific
+e 3 1 general
+e 4 0 generalization
+e 5 4 specific
+s 42
+f 457
 ----------
-
-t # 800
-v 0 gen
-v 1 role
-v 2 gen
-v 3 role
-e 1 0 general
-e 1 2 specific
-e 3 0 specific
-s 39
-f 371
-----------
-
-t # 801
-v 0 gen
-v 1 role
-v 2 gen
+t # 11
+v 0 gen-set
+v 1 gen
+v 2 subkind
 v 3 gen
-e 1 0 general
-e 1 2 specific
-e 1 3 general
-s 32
-f 417
-----------
-
-t # 802
-v 0 gen
-v 1 role
-v 2 gen
-v 3 gen
-v 4 role
-e 1 0 general
-e 1 2 specific
-e 1 3 general
-e 4 0 specific
-s 31
-f 367
-----------
-
-t # 803
-v 0 gen
-v 1 role
-v 2 gen
-v 3 gen
-v 4 role
-v 5 role
-e 1 0 general
-e 1 2 specific
-e 1 3 general
-e 4 0 specific
+v 4 gen
+v 5 subkind
+v 6 subkind
+e 1 0 generalization
+e 2 1 specific
+e 3 0 generalization
+e 4 0 generalization
 e 5 3 specific
-s 30
-f 99
+e 6 4 specific
+s 26
+f 617
 ----------
-
-t # 804
-v 0 gen
-v 1 role
-v 2 gen
-v 3 role
-e 1 0 general
-e 1 2 general
-e 3 0 specific
-s 31
-f 345
-----------
-
-t # 805
-v 0 gen
-v 1 role
-v 2 gen
-v 3 role
+t # 12
+v 0 gen-set
+v 1 gen
+v 2 kind
+v 3 gen
 v 4 role
-e 1 0 general
-e 1 2 general
-e 3 0 specific
-e 4 2 specific
+v 5 gen
+e 1 0 generalization
+e 2 1 general
+e 2 3 general
+e 4 3 specific
+e 5 0 generalization
 s 30
-f 98
+f 1911
 ----------
-
-t # 806
-v 0 gen
-v 1 role
-v 2 gen
-e 1 0 specific
-e 1 2 specific
-s 38
-f 324
+t # 13
+v 0 gen-set
+v 1 gen
+v 2 kind
+v 3 gen
+v 4 role
+v 5 gen
+e 1 0 generalization
+e 2 1 general
+e 2 3 general
+e 2 5 general
+e 4 3 specific
+e 5 0 generalization
+s 28
+f 1278
 ----------
-
-t # 807
-v 0 gen
-v 1 category
+t # 14
+v 0 gen-set
+v 1 gen
+v 2 kind
+v 3 gen
+v 4 gen
+v 5 subkind
+e 1 0 generalization
+e 2 1 general
+e 2 3 general
+e 2 4 general
+e 5 3 specific
+s 28
+f 4551
+----------
+t # 15
+v 0 gen-set
+v 1 gen
+v 2 kind
+v 3 gen
+v 4 gen
+v 5 gen
+e 1 0 generalization
+e 2 1 general
+e 2 3 general
+e 2 4 general
+e 2 5 general
+s 31
+f 24133
+----------
+t # 16
+v 0 gen-set
+v 1 gen
+v 2 kind
+v 3 gen
+v 4 gen
+v 5 gen
+e 1 0 generalization
+e 2 1 general
+e 2 3 general
+e 2 4 general
+e 2 5 general
+e 5 0 generalization
+s 30
+f 19434
+----------
+t # 17
+v 0 gen-set
+v 1 gen
+v 2 kind
+v 3 gen
+v 4 gen
+v 5 gen
+e 1 0 generalization
+e 2 1 general
+e 2 3 general
+e 2 4 general
+e 5 0 generalization
+s 33
+f 25069
+----------
+t # 18
+v 0 gen-set
+v 1 gen
+v 2 kind
+v 3 gen
+v 4 gen
+e 1 0 generalization
+e 2 1 general
+e 2 3 general
+e 2 4 general
+e 3 0 generalization
+e 4 0 generalization
+s 29
+f 3594
+----------
+t # 19
+v 0 gen-set
+v 1 gen
+v 2 kind
+v 3 gen
+v 4 gen
+e 1 0 generalization
+e 2 1 general
+e 2 3 general
+e 3 0 generalization
+e 4 0 generalization
+s 29
+f 4012
+----------
+t # 20
+v 0 gen-set
+v 1 gen
+v 2 kind
+v 3 gen
+v 4 gen
+e 1 0 generalization
+e 2 1 general
+e 3 0 generalization
+e 4 0 generalization
+s 32
+f 3219
+----------
+t # 21
+v 0 gen-set
+v 1 gen
+v 2 kind
+v 3 category
+v 4 gen
+v 5 kind
+e 1 0 generalization
+e 2 1 specific
+e 3 1 general
+e 3 4 general
+e 4 0 generalization
+e 5 4 specific
+s 28
+f 136
+----------
+t # 22
+v 0 gen-set
+v 1 gen
+v 2 kind
+v 3 category
+v 4 gen
+v 5 kind
+e 1 0 generalization
+e 2 1 specific
+e 3 1 general
+e 3 4 general
+e 5 4 specific
+s 29
+f 333
+----------
+t # 23
+v 0 gen-set
+v 1 gen
 v 2 category
-e 1 0 specific
-e 2 0 general
+v 3 gen
+v 4 gen
+e 1 0 generalization
+e 2 1 general
+e 2 3 general
+e 2 4 general
+s 36
+f 8523
+----------
+t # 24
+v 0 gen-set
+v 1 gen
+v 2 category
+v 3 gen
+v 4 gen
+e 1 0 generalization
+e 2 1 general
+e 2 3 general
+e 2 4 general
+e 4 0 generalization
 s 34
+f 2636
+----------
+t # 25
+v 0 gen-set
+v 1 gen
+v 2 category
+v 3 gen
+v 4 gen
+e 1 0 generalization
+e 2 1 general
+e 2 3 general
+e 4 0 generalization
+s 35
+f 5208
+----------
+t # 26
+v 0 gen-set
+v 1 gen
+v 2 gen
+v 3 gen
+v 4 gen
+e 1 0 generalization
+e 2 0 generalization
+e 3 0 generalization
+e 4 0 generalization
+s 41
+f 9680
+----------
+t # 27
+v 0 componentOf
+v 1 kind
+v 2 gen
+e 1 0 source
+e 1 2 general
+s 29
+f 296
+----------
+t # 28
+v 0 componentOf
+v 1 kind
+v 2 kind
+e 1 0 source
+e 2 0 target
+s 28
+f 191
+----------
+t # 29
+v 0 componentOf
+v 1 kind
+v 2 componentOf
+e 1 0 target
+e 1 2 target
+s 28
+f 243
+----------
+t # 30
+v 0 1*_1*
+v 1 mediation
+v 2 relator
+v 3 mediation
+e 0 1 cardinalities
+e 2 1 source
+e 2 3 source
+s 28
+f 165
+----------
+t # 31
+v 0 subkind
+v 1 relation
+v 2 gen
+e 0 1 source
+e 0 2 specific
+s 36
+f 217
+----------
+t # 32
+v 0 subkind
+v 1 relation
+v 2 gen
+e 0 1 target
+e 0 2 specific
+s 37
 f 241
 ----------
-
-t # 808
-v 0 gen
-v 1 category
-v 2 gen
-e 1 0 specific
-e 1 2 general
-s 33
-f 527
+t # 33
+v 0 subkind
+v 1 gen
+v 2 subkind
+v 3 gen
+v 4 kind
+e 0 1 general
+e 0 3 specific
+e 2 1 specific
+e 4 3 general
+s 28
+f 297
 ----------
-
-t # 809
-v 0 gen
-v 1 category
+t # 34
+v 0 subkind
+v 1 gen
+v 2 subkind
+v 3 gen
+v 4 subkind
+e 0 1 general
+e 0 3 general
+e 2 1 specific
+e 4 3 specific
+s 28
+f 788
+----------
+t # 35
+v 0 subkind
+v 1 gen
+v 2 role
+v 3 gen
+e 0 1 general
+e 0 3 specific
+e 2 1 specific
+s 30
+f 227
+----------
+t # 36
+v 0 subkind
+v 1 gen
 v 2 gen
-v 3 category
-e 1 0 specific
-e 1 2 general
-e 3 0 general
+v 3 kind
+v 4 gen
+e 0 1 general
+e 0 2 specific
+e 3 2 general
+e 3 4 general
+s 27
+f 1444
+----------
+t # 37
+v 0 subkind
+v 1 gen
+v 2 gen
+v 3 kind
+v 4 gen
+v 5 gen
+e 0 1 general
+e 0 2 specific
+e 0 4 general
+e 3 2 general
+e 3 5 general
+s 17
+f 3524
+----------
+t # 38
+v 0 subkind
+v 1 gen
+v 2 kind
+v 3 gen
+v 4 category
+v 5 gen
+v 6 kind
+e 0 1 specific
+e 2 1 general
+e 2 3 specific
+e 4 3 general
+e 4 5 general
+e 6 5 specific
+s 28
+f 790
+----------
+t # 39
+v 0 subkind
+v 1 gen
+v 2 kind
+v 3 gen
+v 4 category
+v 5 gen
+e 0 1 specific
+e 2 1 general
+e 2 3 specific
+e 2 5 general
+e 4 3 general
 s 29
-f 490
+f 1563
 ----------
-
-t # 810
+t # 40
+v 0 subkind
+v 1 gen
+v 2 kind
+v 3 gen
+v 4 gen
+v 5 subkind
+e 0 1 specific
+e 2 1 general
+e 2 3 specific
+e 2 4 general
+e 5 4 specific
+s 28
+f 633
+----------
+t # 41
+v 0 subkind
+v 1 gen
+v 2 kind
+v 3 gen
+v 4 gen
+v 5 subkind
+v 6 subkind
+e 0 1 specific
+e 2 1 general
+e 2 3 general
+e 2 4 general
+e 5 3 specific
+e 6 4 specific
+s 32
+f 1212
+----------
+t # 42
+v 0 subkind
+v 1 gen
+v 2 kind
+v 3 gen
+v 4 gen
+v 5 subkind
+v 6 gen
+v 7 subkind
+e 0 1 specific
+e 2 1 general
+e 2 3 general
+e 2 4 general
+e 2 6 general
+e 5 3 specific
+e 7 4 specific
+s 22
+f 2689
+----------
+t # 43
+v 0 subkind
+v 1 gen
+v 2 kind
+v 3 gen
+v 4 gen
+v 5 gen
+v 6 gen
+e 0 1 specific
+e 2 1 general
+e 2 3 general
+e 2 4 general
+e 2 5 general
+e 2 6 general
+s 29
+f 47753
+----------
+t # 44
+v 0 subkind
+v 1 gen
+v 2 kind
+v 3 gen
+v 4 subkind
+v 5 gen
+e 0 1 specific
+e 2 1 general
+e 2 3 general
+e 4 3 specific
+e 4 5 general
+s 36
+f 667
+----------
+t # 45
+v 0 kind
+v 1 relation
+v 2 kind
+e 0 1 source
+e 2 1 target
+s 35
+f 143
+----------
+t # 46
+v 0 kind
+v 1 relation
+v 2 gen
+e 0 1 source
+e 0 2 general
+s 31
+f 364
+----------
+t # 47
+v 0 kind
+v 1 relation
+v 2 relation
+e 0 1 source
+e 0 2 target
+s 33
+f 239
+----------
+t # 48
+v 0 kind
+v 1 relation
+v 2 relation
+e 0 1 source
+e 0 2 source
+s 32
+f 201
+----------
+t # 49
+v 0 kind
+v 1 relation
+v 2 relation
+e 0 1 target
+e 0 2 target
+s 30
+f 218
+----------
+t # 50
+v 0 kind
+v 1 relation
+v 2 gen
+e 0 1 target
+e 0 2 general
+s 33
+f 406
+----------
+t # 51
+v 0 kind
+v 1 gen
+v 2 category
+v 3 gen
+e 0 1 specific
+e 2 1 general
+e 2 3 specific
+s 28
+f 275
+----------
+t # 52
+v 0 kind
+v 1 gen
+v 2 category
+v 3 gen
+v 4 kind
+v 5 gen
+v 6 kind
+e 0 1 specific
+e 2 1 general
+e 2 3 general
+e 2 5 general
+e 4 3 specific
+e 6 5 specific
+s 34
+f 878
+----------
+t # 53
+v 0 kind
+v 1 gen
+v 2 category
+v 3 gen
+v 4 kind
+v 5 gen
+v 6 gen
+e 0 1 specific
+e 0 6 general
+e 2 1 general
+e 2 3 general
+e 2 5 general
+e 4 3 specific
+s 23
+f 763
+----------
+t # 54
+v 0 kind
+v 1 gen
+v 2 category
+v 3 gen
+v 4 kind
+v 5 gen
+v 6 gen
+e 0 1 specific
+e 0 5 general
+e 0 6 general
+e 2 1 general
+e 2 3 general
+e 4 3 specific
+s 29
+f 2039
+----------
+t # 55
+v 0 kind
+v 1 gen
+v 2 category
+v 3 gen
+v 4 gen
+v 5 gen
+e 0 1 specific
+e 2 1 general
+e 2 3 general
+e 2 4 general
+e 2 5 general
+s 28
+f 15267
+----------
+t # 56
+v 0 kind
+v 1 gen
+v 2 category
+v 3 gen
+v 4 gen
+v 5 gen
+e 0 1 specific
+e 0 5 general
+e 2 1 general
+e 2 3 general
+e 2 4 general
+s 23
+f 1411
+----------
+t # 57
+v 0 kind
+v 1 gen
+v 2 category
+v 3 gen
+v 4 gen
+e 0 1 specific
+e 0 4 general
+e 2 1 general
+e 2 3 general
+s 29
+f 815
+----------
+t # 58
+v 0 kind
+v 1 gen
+v 2 category
+v 3 gen
+v 4 gen
+v 5 gen
+e 0 1 specific
+e 0 3 general
+e 0 4 general
+e 2 1 general
+e 2 5 general
+s 21
+f 5821
+----------
+t # 59
+v 0 kind
+v 1 gen
+v 2 role
+v 3 gen
+v 4 role
+e 0 1 general
+e 2 1 specific
+e 2 3 general
+e 4 3 specific
+s 29
+f 157
+----------
+t # 60
+v 0 kind
+v 1 gen
+v 2 role
+v 3 gen
+v 4 gen
+e 0 1 general
+e 0 4 general
+e 2 1 specific
+e 2 3 general
+s 20
+f 387
+----------
+t # 61
+v 0 kind
+v 1 gen
+v 2 role
+v 3 gen
+e 0 1 general
+e 2 1 specific
+e 2 3 specific
+s 28
+f 154
+----------
+t # 62
+v 0 kind
+v 1 gen
+v 2 role
+v 3 mediation
+v 4 relator
+v 5 mediation
+v 6 role
+e 0 1 general
+e 2 1 specific
+e 2 3 target
+e 4 3 source
+e 4 5 source
+e 6 5 target
+s 29
+f 225
+----------
+t # 63
+v 0 kind
+v 1 gen
+v 2 role
+v 3 mediation
+v 4 relator
+v 5 mediation
+v 6 1*_1
+e 0 1 general
+e 2 1 specific
+e 2 3 target
+e 4 3 source
+e 4 5 source
+e 6 5 cardinalities
+s 28
+f 92
+----------
+t # 64
+v 0 kind
+v 1 gen
+v 2 role
+v 3 mediation
+v 4 relator
+v 5 mediation
+v 6 gen
+v 7 role
+e 0 1 general
+e 0 6 general
+e 2 1 specific
+e 2 3 target
+e 4 3 source
+e 4 5 source
+e 7 6 specific
+s 33
+f 851
+----------
+t # 65
+v 0 kind
+v 1 gen
+v 2 role
+v 3 mediation
+v 4 gen
+v 5 gen
+e 0 1 general
+e 0 4 general
+e 0 5 general
+e 2 1 specific
+e 2 3 target
+s 29
+f 4020
+----------
+t # 66
+v 0 kind
+v 1 gen
+v 2 role
+v 3 gen
+v 4 gen
+v 5 role
+v 6 role
+e 0 1 general
+e 0 3 general
+e 0 4 general
+e 2 1 specific
+e 5 4 specific
+e 6 3 specific
+s 14
+f 230
+----------
+t # 67
+v 0 kind
+v 1 gen
+v 2 mediation
+v 3 relator
+v 4 mediation
+e 0 1 general
+e 0 2 target
+e 3 2 source
+e 3 4 source
+s 31
+f 477
+----------
+t # 68
+v 0 kind
+v 1 gen
+v 2 gen
+v 3 gen
+v 4 gen
+v 5 gen
+v 6 gen
+e 0 1 general
+e 0 2 general
+e 0 3 general
+e 0 4 general
+e 0 5 general
+e 0 6 general
+s 29
+f 61655
+----------
+t # 69
+v 0 kind
+v 1 mediation
+v 2 relator
+v 3 mediation
+v 4 role
+v 5 gen
+e 0 1 target
+e 2 1 source
+e 2 3 source
+e 4 3 target
+e 4 5 specific
+s 31
+f 139
+----------
+t # 70
+v 0 relation
+v 1 role
+v 2 gen
+e 1 0 source
+e 1 2 specific
+s 32
+f 146
+----------
+t # 71
+v 0 relation
+v 1 category
+v 2 gen
+v 3 gen
+e 1 0 target
+e 1 2 general
+e 1 3 general
+s 29
+f 809
+----------
+t # 72
+v 0 relation
+v 1 category
+v 2 gen
+e 1 0 source
+e 1 2 general
+s 29
+f 225
+----------
+t # 73
+v 0 mediation
+v 1 roleMixin
+v 2 relator
+v 3 mediation
+e 1 0 target
+e 2 0 source
+e 2 3 source
+s 28
+f 152
+----------
+t # 74
+v 0 mediation
+v 1 roleMixin
+v 2 1*_1
+e 1 0 target
+e 2 0 cardinalities
+s 28
+f 66
+----------
+t # 75
+v 0 mediation
+v 1 1*_1
+v 2 relator
+v 3 mediation
+v 4 1*_1
+e 1 0 cardinalities
+e 2 0 source
+e 2 3 source
+e 4 3 cardinalities
+s 31
+f 82
+----------
+t # 76
+v 0 mediation
+v 1 1*_1
+v 2 relator
+v 3 mediation
+v 4 role
+v 5 gen
+e 1 0 cardinalities
+e 2 0 source
+e 2 3 source
+e 4 0 target
+e 4 5 specific
+s 34
+f 208
+----------
+t # 77
+v 0 mediation
+v 1 role
+v 2 gen
+v 3 1_1
+v 4 relator
+v 5 mediation
+e 1 0 target
+e 1 2 specific
+e 3 0 cardinalities
+e 4 0 source
+e 4 5 source
+s 29
+f 305
+----------
+t # 78
+v 0 mediation
+v 1 role
+v 2 gen
+v 3 gen
+v 4 role
+v 5 relator
+v 6 mediation
+e 1 0 target
+e 1 2 specific
+e 1 3 general
+e 4 3 specific
+e 5 0 source
+e 5 6 source
+s 30
+f 219
+----------
+t # 79
+v 0 mediation
+v 1 role
+v 2 gen
+v 3 relator
+v 4 mediation
+v 5 role
+v 6 gen
+e 1 0 target
+e 1 2 specific
+e 3 0 source
+e 3 4 source
+e 5 4 target
+e 5 6 specific
+s 36
+f 317
+----------
+t # 80
+v 0 mediation
+v 1 role
+v 2 gen
+v 3 relator
+v 4 mediation
+v 5 1_1
+e 1 0 target
+e 1 2 specific
+e 3 0 source
+e 3 4 source
+e 5 4 cardinalities
+s 30
+f 322
+----------
+t # 81
+v 0 mediation
+v 1 relator
+v 2 mediation
+e 1 0 target
+e 1 2 source
+s 30
+f 203
+----------
+t # 82
+v 0 mediation
+v 1 relator
+v 2 gen
+v 3 gen
+e 1 0 source
+e 1 2 general
+e 1 3 general
+s 33
+f 1413
+----------
+t # 83
+v 0 mediation
+v 1 relator
+v 2 gen
+v 3 mediation
+e 1 0 source
+e 1 2 general
+e 1 3 source
+s 31
+f 497
+----------
+t # 84
+v 0 mediation
+v 1 relator
+v 2 mediation
+v 3 mediation
+e 1 0 source
+e 1 2 source
+e 1 3 source
+s 31
+f 348
+----------
+t # 85
+v 0 mediation
+v 1 relator
+v 2 mediation
+v 3 1_1
+e 1 0 source
+e 1 2 source
+e 3 0 cardinalities
+s 36
+f 238
+----------
+t # 86
 v 0 gen
 v 1 category
 v 2 gen
@@ -416,94 +1167,18 @@ e 1 3 general
 s 31
 f 986
 ----------
-
-t # 811
+t # 87
 v 0 gen
 v 1 category
 v 2 gen
 v 3 category
-e 1 0 specific
-e 1 2 general
-e 3 2 specific
-s 21
-f 141
-----------
-
-t # 812
-v 0 gen
-v 1 category
-v 2 gen
-v 3 gen
-v 4 category
-e 1 0 specific
-e 1 2 general
-e 1 3 general
-e 4 0 general
-s 27
-f 937
-----------
-
-t # 813
-v 0 gen
-v 1 category
-v 2 gen
-v 3 gen
-v 4 gen
-e 1 0 specific
-e 1 2 general
-e 1 3 general
-e 1 4 general
-s 23
-f 1673
-----------
-
-t # 814
-v 0 gen
-v 1 category
-v 2 gen
-v 3 gen
-v 4 gen
-v 5 category
-e 1 0 specific
-e 1 2 general
-e 1 3 general
-e 1 4 general
-e 5 0 general
-s 20
-f 1616
-----------
-
-t # 815
-v 0 gen
-v 1 category
-v 2 gen
-v 3 gen
-v 4 category
-v 5 gen
-e 1 0 specific
-e 1 2 general
-e 1 3 general
-e 4 0 general
-e 4 5 general
-s 22
-f 2041
-----------
-
-t # 816
-v 0 gen
-v 1 category
-v 2 gen
-v 3 category
-v 4 gen
 e 1 0 specific
 e 1 2 general
 e 3 0 general
-e 3 4 general
-s 27
-f 947
+s 29
+f 490
 ----------
-
-t # 817
+t # 88
 v 0 gen
 v 1 category
 v 2 category
@@ -514,58 +1189,16 @@ e 2 3 general
 s 31
 f 720
 ----------
-
-t # 818
+t # 89
 v 0 gen
 v 1 category
-v 2 category
-v 3 gen
-v 4 gen
-e 1 0 specific
-e 2 0 general
-e 2 3 general
-e 2 4 general
-s 22
-f 1551
-----------
-
-t # 819
-v 0 gen
-v 1 category
-v 2 category
-v 3 gen
-v 4 category
-e 1 0 specific
-e 2 0 general
-e 2 3 general
-e 4 3 specific
-s 25
-f 225
-----------
-
-t # 820
-v 0 gen
-v 1 category
-v 2 gen
+v 2 roleMixin
 e 1 0 general
-e 1 2 general
-s 71
-f 1970
+e 2 0 specific
+s 28
+f 118
 ----------
-
-t # 821
-v 0 gen
-v 1 category
-v 2 gen
-v 3 gen
-e 1 0 general
-e 1 2 general
-e 1 3 general
-s 56
-f 5068
-----------
-
-t # 822
+t # 90
 v 0 gen
 v 1 category
 v 2 gen
@@ -578,19 +1211,58 @@ e 1 4 general
 s 37
 f 17130
 ----------
-
-t # 823
+t # 91
 v 0 gen
-v 1 category
+v 1 role
 v 2 gen
 v 3 gen
-v 4 gen
-v 5 gen
+v 4 role
+v 5 role
+e 1 0 general
+e 1 2 specific
+e 1 3 general
+e 4 0 specific
+e 5 3 specific
+s 27
+f 99
+----------
+t # 92
+v 0 gen
+v 1 role
+v 2 gen
+v 3 role
+v 4 role
 e 1 0 general
 e 1 2 general
-e 1 3 general
-e 1 4 general
-e 1 5 general
+e 3 0 specific
+e 4 2 specific
 s 27
-f 59417
+f 98
+----------
+t # 93
+v 0 gen
+v 1 role
+v 2 gen
+e 1 0 specific
+e 1 2 specific
+s 38
+f 324
+----------
+t # 94
+v 0 gen
+v 1 role
+v 2 roleMixin
+e 1 0 specific
+e 2 0 general
+s 29
+f 231
+----------
+t # 95
+v 0 gen
+v 1 roleMixin
+v 2 gen
+e 1 0 general
+e 1 2 general
+s 36
+f 2143
 ----------

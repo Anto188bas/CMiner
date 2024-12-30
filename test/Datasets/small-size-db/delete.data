@@ -1,0 +1,168 @@
+t # 0 g1
+v 0 NodeA Label1
+v 1 NodeB Label2
+v 2 NodeC Label3
+v 3 NodeD Label4
+v 4 NodeE Label5
+v 5 NodeF Label6
+v 6 NodeG Label7
+v 7 NodeH Label8
+v 8 NodeI Label9
+v 9 NodeJ Label10
+e 0 1 Edge1 Edge2
+e 1 2 Edge2 Edge3
+e 2 3 Edge3 Edge4
+e 3 4 Edge4 Edge5
+e 4 5 Edge5 Edge6
+e 5 6 Edge6 Edge7
+e 6 7 Edge7 Edge8
+e 7 8 Edge8 Edge9
+e 8 9 Edge9 Edge10
+e 9 0 Edge10 Edge1
+e 0 3 EdgeA EdgeB
+e 2 6 EdgeC EdgeD
+e 4 8 EdgeE EdgeF
+t # 1 g2
+v 0 NodeA Label1
+v 1 NodeB Label2
+v 2 NodeC Label3
+v 3 NodeD Label4
+v 4 NodeE Label5
+v 5 NodeF Label6
+v 6 NodeG Label7
+v 7 NodeH Label8
+v 8 NodeI Label9
+v 9 NodeJ Label10
+e 0 1 Edge1 Edge2
+e 1 2 Edge2 Edge3
+e 2 3 Edge3 Edge4
+e 3 4 Edge4 Edge5
+e 4 5 Edge5 Edge6
+e 5 6 Edge6 Edge7
+e 6 7 Edge7 Edge8
+e 7 8 Edge8 Edge9
+e 8 9 Edge9 Edge10
+e 9 0 Edge10 Edge1
+e 0 3 EdgeA EdgeB
+e 2 6 EdgeC EdgeD
+e 4 8 EdgeE EdgeF
+t # 2 g3
+v 0 NodeA Label1
+v 1 NodeB Label2
+v 2 NodeC Label3
+v 3 NodeD Label4
+v 4 NodeE Label5
+v 5 NodeF Label6
+v 6 NodeG Label7
+v 7 NodeH Label8
+v 8 NodeI Label9
+v 9 NodeJ Label10
+e 0 1 Edge1 Edge2
+e 1 2 Edge2 Edge3
+e 2 3 Edge3 Edge4
+e 3 4 Edge4 Edge5
+e 4 5 Edge5 Edge6
+e 5 6 Edge6 Edge7
+e 6 7 Edge7 Edge8
+e 7 8 Edge8 Edge9
+e 8 9 Edge9 Edge10
+e 9 0 Edge10 Edge1
+e 0 3 EdgeA EdgeB
+e 2 6 EdgeC EdgeD
+e 4 8 EdgeE EdgeF
+t # 3 g4
+v 0 NodeA Label1
+v 1 NodeB Label2
+v 2 NodeC Label3
+v 3 NodeD Label4
+v 4 NodeE Label5
+v 5 NodeF Label6
+v 6 NodeG Label7
+v 7 NodeH Label8
+v 8 NodeI Label9
+v 9 NodeJ Label10
+e 0 1 Edge1 Edge2
+e 1 2 Edge2 Edge3
+e 2 3 Edge3 Edge4
+e 3 4 Edge4 Edge5
+e 4 5 Edge5 Edge6
+e 5 6 Edge6 Edge7
+e 6 7 Edge7 Edge8
+e 7 8 Edge8 Edge9
+e 8 9 Edge9 Edge10
+e 9 0 Edge10 Edge1
+e 0 3 EdgeA EdgeB
+e 2 6 EdgeC EdgeD
+e 4 8 EdgeE EdgeF
+t # 4 g5
+v 0 NodeA Label1
+v 1 NodeB Label2
+v 2 NodeC Label3
+v 3 NodeD Label4
+v 4 NodeE Label5
+v 5 NodeF Label6
+v 6 NodeG Label7
+v 7 NodeH Label8
+v 8 NodeI Label9
+v 9 NodeJ Label10
+e 0 1 Edge1 Edge2
+e 1 2 Edge2 Edge3
+e 2 3 Edge3 Edge4
+e 3 4 Edge4 Edge5
+e 4 5 Edge5 Edge6
+e 5 6 Edge6 Edge7
+e 6 7 Edge7 Edge8
+e 7 8 Edge8 Edge9
+e 8 9 Edge9 Edge10
+e 9 0 Edge10 Edge1
+e 0 3 EdgeA EdgeB
+e 2 6 EdgeC EdgeD
+e 4 8 EdgeE EdgeF
+t # 5 g6
+v 0 NodeA Label1
+v 1 NodeB Label2
+v 2 NodeC Label3
+v 3 NodeD Label4
+v 4 NodeE Label5
+v 5 NodeF Label6
+v 6 NodeG Label7
+v 7 NodeH Label8
+v 8 NodeI Label9
+v 9 NodeJ Label10
+e 0 1 Edge1 Edge2
+e 1 2 Edge2 Edge3
+e 2 3 Edge3 Edge4
+e 3 4 Edge4 Edge5
+e 4 5 Edge5 Edge6
+e 5 6 Edge6 Edge7
+e 6 7 Edge7 Edge8
+e 7 8 Edge8 Edge9
+e 8 9 Edge9 Edge10
+e 9 0 Edge10 Edge1
+e 0 3 EdgeA EdgeB
+e 2 6 EdgeC EdgeD
+e 4 8 EdgeE EdgeF
+t # 6 g7
+v 0 NodeA Label1
+v 1 NodeB Label2
+v 2 NodeC Label3
+v 3 NodeD Label4
+v 4 NodeE Label5
+v 5 NodeF Label6
+v 6 NodeG Label7
+v 7 NodeH Label8
+v 8 NodeI Label9
+v 9 NodeJ Label10
+e 0 1 Edge1 Edge2
+e 1 2 Edge2 Edge3
+e 2 3 Edge3 Edge4
+e 3 4 Edge4 Edge5
+e 4 5 Edge5 Edge6
+e 5 6 Edge6 Edge7
+e 6 7 Edge7 Edge8
+e 7 8 Edge8 Edge9
+e 8 9 Edge9 Edge10
+e 9 0 Edge10 Edge1
+e 0 3 EdgeA EdgeB
+e 2 6 EdgeC EdgeD
+e 4 8 EdgeE EdgeF

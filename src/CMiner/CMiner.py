@@ -5,6 +5,9 @@ from CMiner.BitMatrix import TargetBitMatrixOptimized, BitMatrixStrategy2
 from CMiner.MultiGraphMatch import MultiGraphMatch, Mapping
 from Graph.Graph import MultiDiGraph
 import pandas as pd
+import itertools
+
+from accelerate.utils import slice_tensors
 
 pattern_count = 0
 
@@ -272,11 +275,14 @@ class NodeExtension(Extension):
         """
         Return the target node ids from which the extension is found.
         """
-        ids = []
-        for m, target_node_id in self.location[graph]:
-            if _map == m:
-                ids.append(target_node_id)
-        return ids
+        # ids = []
+        # for m, target_node_id in self.location[graph]:
+        #     if _map == m:
+        #         ids.append(target_node_id)
+        # return ids
+        if _map not in self.location[graph]:
+            return []
+        return self.location[graph][_map]
 
 class EdgeExtension(Extension):
 
@@ -335,6 +341,21 @@ class DBGraph(MultiDiGraph):
     def __str__(self):
         return self.name
 
+    def all_edges_of_subgraph(self, nodes):
+        """
+        Return all edges of the subgraph induced by the given nodes.
+        The edges are returned as a set of tuples (u, v, key).
+        """
+        nodes_set = set(nodes)
+        edges = set()
+
+        for src, dst in itertools.combinations(nodes, 2):
+            for u, v, key in self.edges([src, dst], keys=True):
+                if u in nodes_set and v in nodes_set:
+                    edges.add((u, v, key))
+
+        return edges
+
 class PatternMappings:
 
     def __init__(self):
@@ -367,6 +388,9 @@ class NodeExtensionManager:
         self.min_support = support
         self.extensions = {}
 
+        self.memoization = {}
+
+
     def add(self, pattern_node_id, target_node_id, neigh_target_node_id, db_graph, _map):
         """
         Add an extension to the manager
@@ -379,9 +403,12 @@ class NodeExtensionManager:
             _map (Mapping): the mapping of the pattern in the db_graph
         """
         edge_labels = []
-        for label in db_graph.get_edge_labels_with_duplicate(target_node_id, neigh_target_node_id):
+        if (pattern_node_id, neigh_target_node_id) not in self.memoization:
+            self.memoization[(target_node_id, neigh_target_node_id)] = db_graph.get_edge_labels_with_duplicate(target_node_id, neigh_target_node_id)
+            self.memoization[(neigh_target_node_id, target_node_id)] = db_graph.get_edge_labels_with_duplicate(neigh_target_node_id, target_node_id)
+        for label in self.memoization[(target_node_id, neigh_target_node_id)]:
             edge_labels.append(NodeExtensionManager.orientation_code(label, True))
-        for label in db_graph.get_edge_labels_with_duplicate(neigh_target_node_id, target_node_id):
+        for label in self.memoization[(neigh_target_node_id, target_node_id)]:
             edge_labels.append(NodeExtensionManager.orientation_code(label, False))
 
         neigh_target_node_labels = db_graph.get_node_labels(neigh_target_node_id)
@@ -418,7 +445,12 @@ class NodeExtensionManager:
             # create the location dictionary
             location = {}
             for g in db_graphs:
-                location[g] = set(db_graphs[g])
+                aa = {}
+                for mapping, node_id in db_graphs[g]:
+                    if mapping not in aa:
+                        aa[mapping] = []
+                    aa[mapping].append(node_id)
+                location[g] = aa
 
             # select the correct finder and add the edge extension
             edge_group_finder = edge_group_finders[finder_code]
@@ -556,6 +588,7 @@ class Pattern(MultiDiGraph):
                         extension_manager.add(node_p, node_db, neigh, g, _map)
 
         extensions = extension_manager.frequent_extensions()
+        del extension_manager
         return extensions
 
     def find_edge_extensions(self, min_support) -> list[list[EdgeExtension]]:
@@ -568,9 +601,7 @@ class Pattern(MultiDiGraph):
 
         for g in self.graphs():
             for _map in self.pattern_mappings.mappings(g):
-                # subgraph of the projected pattern (include also edges not mapped with the patten)
-                mapped_pattern_complete_graph = g.subgraph(_map.nodes())
-                mapped_pattern_complete_graph_edges = set(mapped_pattern_complete_graph.edges(keys=True))
+                mapped_pattern_complete_graph_edges = g.all_edges_of_subgraph(_map.nodes())
                 mapped_pattern_edges = set(_map.get_target_edges())
                 candidate_edges = set()
 
@@ -643,6 +674,92 @@ class Pattern(MultiDiGraph):
             groups.append(group)
 
         return groups
+
+    # def find_edge_extensions(self, min_support) -> list[list[EdgeExtension]]:
+    #
+    #     if len(self.nodes()) < 3:
+    #         # if the pattern has less than 3 nodes, it is not possible to find edge extensions
+    #         return []
+    #
+    #     extension_manager = EdgeExtensionManager(min_support)
+    #
+    #     for g in self.graphs():
+    #         for _map in self.pattern_mappings.mappings(g):
+    #             # subgraph of the projected pattern (include also edges not mapped with the patten)
+    #             mapped_pattern_complete_graph = g.subgraph(_map.nodes())
+    #             mapped_pattern_complete_graph_edges = set(mapped_pattern_complete_graph.edges(keys=True))
+    #             mapped_pattern_edges = set(_map.get_target_edges())
+    #             candidate_edges = set()
+    #
+    #             for src, dst, key in mapped_pattern_complete_graph_edges:
+    #                 skip = False
+    #                 for s, d, k in mapped_pattern_edges:
+    #                     if src == s and dst == d:
+    #                         # remove i-th element from the list
+    #                         ss, dd, kk = s, d, k
+    #                         mapped_pattern_edges.remove((ss, dd, kk))
+    #                         skip = True
+    #                         break
+    #                 if skip:
+    #                     continue
+    #                 candidate_edges.add((src, dst, key, g.get_edge_label((src, dst, key))))
+    #
+    #
+    #             groups = {}
+    #
+    #             inverse_map = _map.inverse()
+    #             for src, dst, key, lab in candidate_edges:
+    #                 pattern_node_src = inverse_map.node(src)
+    #                 pattern_node_dest = inverse_map.node(dst)
+    #                 code = (pattern_node_src, pattern_node_dest)
+    #                 if code not in groups:
+    #                     groups[code] = []
+    #                 groups[code].append(lab)
+    #
+    #             for (src, dst), labels in groups.items():
+    #                 extension_manager.add(src, dst, labels, g, _map)
+    #
+    #     extensions = extension_manager.frequent_extensions()
+    #
+    #     if len(extensions) == 0:
+    #         return []
+    #
+    #     graphs = sorted(self.graphs(), key=lambda x: x.get_name())
+    #     extension_matrix = [[0 for _ in range(len(graphs))] for _ in range(len(extensions))]
+    #     for i, ext in enumerate(extensions):
+    #         for j, g in enumerate(graphs):
+    #             if g in ext.graphs():
+    #                 extension_matrix[i][j] = 1
+    #
+    #     # group row by row
+    #     matrix_indices_grouped = {}
+    #     for i, row in enumerate(extension_matrix):
+    #         row_code = "".join(map(str, row))
+    #         if row_code not in matrix_indices_grouped:
+    #             matrix_indices_grouped[row_code] = []
+    #         matrix_indices_grouped[row_code].append(i)
+    #
+    #     groups = []
+    #     for row_code, indices in matrix_indices_grouped.items():
+    #         columns_to_select = [i for i, v in enumerate(row_code) if v == "1"]
+    #         group = []
+    #         for i, ext in enumerate(extensions):
+    #             skip = False
+    #             if all(extension_matrix[i][j] == 1 for j in columns_to_select):
+    #                 for e in group:
+    #                     if ext.pattern_node_id_src == e.pattern_node_id_src and ext.pattern_node_id_dst == e.pattern_node_id_dst:
+    #                         skip = True
+    #                         break
+    #                 if skip:
+    #                     continue
+    #                 ext_copy = ext.__copy__()
+    #                 new_location = {v: k for v, k in ext.location.items() if
+    #                                 any(v == graphs[j] for j in columns_to_select)}
+    #                 ext_copy.location = new_location
+    #                 group.append(ext_copy)
+    #         groups.append(group)
+    #
+    #     return groups
 
     def apply_node_extension(self, extension: NodeExtension) -> 'Pattern':
         """
@@ -886,6 +1003,17 @@ class Pattern(MultiDiGraph):
             graph_str += f"v {node[0]} {' '.join(node[1]['labels'])}\n"
         for edge in self.edges(data=True):
             graph_str += f"e {edge[0]} {edge[1]} {edge[2]['type']}\n"
+
+        # edge_labels = {}
+        # for edge in self.edges(data=True):
+        #     e = (edge[0], edge[1])
+        #     if e not in edge_labels:
+        #         edge_labels[e] = []
+        #     edge_labels[e].append(edge[2]['type'])
+        # for edge, labels in edge_labels.items():
+        #     labels = " ".join(labels)
+        #     graph_str += f"e {edge[0]} {edge[1]} {labels}\n"
+
         return graph_str
 
     def undirected_pattern_str(self):

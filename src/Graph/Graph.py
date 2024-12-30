@@ -80,12 +80,6 @@ class MultiDiGraph(nx.MultiDiGraph):
             labels.extend([edge_data.get('type') for edge_data in self[source][destination].values() if edge_data.get('type') != NULL_LABEL])
         return sorted(set(labels))
 
-    def get_edge_labels_with_duplicate(self, source, destination):
-        labels = []
-        if self.has_edge(source, destination):
-            labels.extend([edge_data.get('type') for edge_data in self[source][destination].values() if edge_data.get('type') != NULL_LABEL])
-        return sorted(labels)
-
     def get_edge_label(self, edge):
         source, destination, key = edge
         return self[source][destination][key]['type']
@@ -567,28 +561,34 @@ class MultiDiGraph(nx.MultiDiGraph):
 
         return new_graph
 
-    # def code(self):
-    #     # sort nodes by out degree
-    #     nodes = sorted(self.nodes(), key=lambda n: self.out_deg(n))
-    #     # group nodes by out degree
-    #     groups = {}
-    #     for n in nodes:
-    #         deg = self.out_deg(n)
-    #         if deg not in groups:
-    #             groups[deg] = []
-    #         groups[deg].append(n)
-    #     # sort nodes within each group by node labels
-    #     for deg in groups:
-    #         groups[deg] = sorted(groups[deg], key=lambda n: "".join(self.get_node_labels(n)))
-    #     # compute code
-    #     code = ""
-    #     for deg in sorted(groups.keys()):
-    #         for n in groups[deg]:
-    #             # for each node of the group
-    #             code += "".join(self.get_node_labels(n)) # concatenate all labels
-    #             for v in self.successors(n):
-    #                 code += "".join(self.get_edge_labels(n, v))
-    #     return code
+
+    def subgraph(self, nodes):
+        """
+        Returns a subgraph induced by the given nodes.
+
+        Args:
+            nodes: A list of node IDs.
+
+        Returns:
+            A MultiDiGraph object representing the subgraph induced by the given nodes.
+        """
+        subgraph = MultiDiGraph()
+        for node in nodes:
+            subgraph.add_node(node, **self.nodes[node])
+        for u, v, key, data in self.edges(keys=True, data=True):
+            if u in nodes and v in nodes:
+                subgraph.add_edge(u, v, key, **data)
+        return subgraph
+
+    def get_edge_labels_with_duplicate(self, source, destination):
+        if not self.has_edge(source, destination):
+            return []
+
+        return [
+            edge_data['type']
+            for edge_data in self[source][destination].values()
+            if edge_data.get('type') != ""
+        ]
 
     def code(self):
         # sort nodes by out degree
@@ -618,21 +618,3 @@ class MultiDiGraph(nx.MultiDiGraph):
                 code += "".join(self.get_node_labels(node)) + edge_code
 
         return code
-
-    def subgraph(self, nodes):
-        """
-        Returns a subgraph induced by the given nodes.
-
-        Args:
-            nodes: A list of node IDs.
-
-        Returns:
-            A MultiDiGraph object representing the subgraph induced by the given nodes.
-        """
-        subgraph = MultiDiGraph()
-        for node in nodes:
-            subgraph.add_node(node, **self.nodes[node])
-        for u, v, key, data in self.edges(keys=True, data=True):
-            if u in nodes and v in nodes:
-                subgraph.add_edge(u, v, key, **data)
-        return subgraph

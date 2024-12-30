@@ -51,7 +51,6 @@ class BreakingConditionsNodes:
         :param t_element:
         :return:
         """
-        # print("CCONTROLLO SE POSSO MAPPARE IL NODO", q, "DEL PATTERN CON IL NODO", t_element, "DEL DATASET")
         # WRITE BETTER
         elements = self._get_elements_with_smaller_id(q)
         if len(elements) > 0:

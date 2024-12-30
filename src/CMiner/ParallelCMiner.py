@@ -1,60 +1,14 @@
-import copy
-from xml.dom.expatbuilder import TEXT_NODE
-
 from NetworkX.NetworkConfigurator import NetworkConfigurator
 from NetworkX.NetworksLoading import NetworksLoading
-from CMiner.MultiGraphMatch import MultiGraphMatch
-from Graph.Graph import MultiDiGraph
+from CMiner.BreakingConditions import BreakingConditionsNodes
 from CMiner.BitMatrix import TargetBitMatrixOptimized, BitMatrixStrategy2
 from CMiner.MultiGraphMatch import MultiGraphMatch, Mapping
-import time
-import shutil
+from Graph.Graph import MultiDiGraph
 import pandas as pd
-from CMiner.BreakingConditions import BreakingConditionsNodes
+import concurrent.futures
+import os
 
-with_debugs = False
-
-
-def print_red(*args, **kwargs):
-    if not with_debugs:
-        return
-    red_text = ' '.join(map(str, args))
-    print(f"\033[91m{red_text}\033[0m", **kwargs)
-
-
-def print_green(*args, **kwargs):
-    if not with_debugs:
-        return
-    green_text = ' '.join(map(str, args))
-    print(f"\033[92m{green_text}\033[0m", **kwargs)
-
-
-def print_yellow(*args, **kwargs):
-    if not with_debugs:
-        return
-    yellow_text = ' '.join(map(str, args))
-    print(f"\033[93m{yellow_text}\033[0m", **kwargs)
-
-
-def print_orange(*args, **kwargs):
-    if not with_debugs:
-        return
-    orange_text = ' '.join(map(str, args))
-    print(f"\033[38;5;214m{orange_text}\033[0m", **kwargs)
-
-
-def print_blue(*args, **kwargs):
-    if not with_debugs:
-        return
-    blue_text = ' '.join(map(str, args))
-    print(f"\033[94m{blue_text}\033[0m", **kwargs)
-
-
-def print_pink(*args, **kwargs):
-    if not with_debugs:
-        return
-    pink_text = ' '.join(map(str, args))
-    print(f"\033[95m{pink_text}\033[0m", **kwargs)
+pattern_count = 0
 
 
 class EdgeGroupsFinder:
@@ -143,7 +97,7 @@ class EdgeGroupsFinder:
 
         new_row_size = sum(row[1:])  # Number of 1s in the new row
 
-        # Trova la posizione corretta in base al numero di 1
+        # Find the correct position based on the number of 1s
         for i in range(len(self.df)):
             row_size = sum(self.df.iloc[i][1:])  # number of 1s in the row
             if row_size < new_row_size:
@@ -155,7 +109,7 @@ class EdgeGroupsFinder:
                 self.df.loc[i] = row
                 return
 
-        # Se non si trova una riga con meno 1s, aggiungi in fondo
+        # If no row with less 1s is found, add at the end
         self.df.loc[len(self.df)] = row
 
     def add(self, edge_labels, location):
@@ -179,7 +133,8 @@ class EdgeGroupsFinder:
         """
         return len(row['location'].keys())
 
-    def bitmap(self, row):
+    @staticmethod
+    def bitmap(row):
         """
         Return the bitmap of the row.
         """
@@ -193,8 +148,8 @@ class EdgeGroupsFinder:
         """
         Return True if row1 is a subset of row2.
         """
-        bitmap1 = self.bitmap(row1)
-        bitmap2 = self.bitmap(row2)
+        bitmap1 = EdgeGroupsFinder.bitmap(row1)
+        bitmap2 = EdgeGroupsFinder.bitmap(row2)
         for i in range(len(bitmap1)):
             if bitmap1.iloc[i] > bitmap2.iloc[i]:
                 return False
@@ -207,7 +162,7 @@ class EdgeGroupsFinder:
         """
         for g, mappings in location2.items():
             if g in location1:
-                location1[g].update(mappings) # FIX deepcopy?
+                location1[g].update(mappings)  # FIX deepcopy?
             else:
                 location1[g] = mappings
 
@@ -255,12 +210,9 @@ class EdgeGroupsFinder:
         """
         extensions = []
 
-        # other_extensions = {}
-
         # i := index row to check
         # j := index row to compare with i-th row
         for i in range(len(self.df)):
-
             row = self.df.iloc[i]
 
             j = i - 1
@@ -280,30 +232,13 @@ class EdgeGroupsFinder:
 
         return extensions
 
-    def __str__(self):
-        return self.df.__str__()
-
-
-count_pattern = 0
-
-
-def remove_redundant_patterns(patterns):
-    """
-    Removes patterns that are duplicates based on their code.
-    """
-    already_seen = set()
-    new_patterns = []
-    for pattern in patterns:
-        code = pattern.code()
-        if code not in already_seen:
-            already_seen.add(code)
-            new_patterns.append(pattern)
-    return new_patterns
-
 
 class Extension:
 
     def __init__(self, out_edge_labels, in_edge_labels, location):
+        """
+        Represents an extension of the pattern in the database.
+        """
         self.out_edge_labels = out_edge_labels
         self.in_edge_labels = in_edge_labels
         self.location = location
@@ -327,10 +262,14 @@ class Extension:
         self.location = {g: {} for g in graphs}
 
 
-
 class NodeExtension(Extension):
 
     def __init__(self, pattern_node_id, node_labels, out_edge_labels, in_edge_labels, location):
+        """
+        pattern_node_id -- [out_edge_labels] --> neigh_target_node_id
+        pattern_node_id <- [in_edge_labels]  --- neigh_target_node_id
+        location (dict[DBGraph, list[Mapping]]): location of the extension in the graphs
+        """
         super().__init__(out_edge_labels, in_edge_labels, location)
         self.pattern_node_id = pattern_node_id
         self.node_labels = node_labels
@@ -345,23 +284,19 @@ class NodeExtension(Extension):
                 ids.append(target_node_id)
         return ids
 
-    def __str__(self):
-        g_names = sorted([g.name for g in self.location.keys()])
-        graphs = ", ".join(g_names)
-        return f"NodeExt: (\n   PatternNodeId: {self.pattern_node_id}\n   NewNodeLabels: {self.node_labels}\n   OutEdgeLabels: {self.out_edge_labels}\n   InEdgeLabels: {self.in_edge_labels}\n   Location: {graphs}\n)"
-
 
 class EdgeExtension(Extension):
 
     def __init__(self, pattern_node_id_src, pattern_node_id_dst, out_edge_labels, in_edge_labels, location):
+        """
+
+        pattern_node_id_src -- [out_edge_labels] --> pattern_node_id_dst
+        pattern_node_id_src <- [in_edge_labels]  --- pattern_node_id_dst
+        location (dict[DBGraph, list[Mapping]]): location of the extension in the graphs
+        """
         super().__init__(out_edge_labels, in_edge_labels, location)
         self.pattern_node_id_src = pattern_node_id_src
         self.pattern_node_id_dst = pattern_node_id_dst
-
-    def __str__(self):
-        g_names = sorted([g.name for g in self.location.keys()])
-        graphs = ", ".join(g_names)
-        return f"EdgeExt: (\n   PatternNodeIdSrc: {self.pattern_node_id_src}\n   PatternNodeIdDst: {self.pattern_node_id_dst}\n   OutEdgeLabels: {self.out_edge_labels}\n   InEdgeLabels: {self.in_edge_labels}\n   Location: {graphs}\n)"
 
     def __copy__(self):
         return EdgeExtension(
@@ -477,13 +412,6 @@ class NodeExtensionManager:
         """
         Return a list of NodeExtensions that if applied to the pattern, it still remains frequent.
         """
-        # DELETE
-        # for code, dbs in self.extensions.items():
-        #     print(code)
-        #     for db_graph, ext in dbs.items():
-        #         print(db_graph.name)
-        #         for e in ext:
-        #             print(e)
 
         frequent_extensions = []
 
@@ -540,23 +468,6 @@ class EdgeExtensionManager:
         """
         Add an extension to the manager.
         """
-        # edge_labels = []
-        # target_src_node_id = _map.node(pattern_node_src)
-        # target_dst_node_id = _map.node(pattern_node_dest)
-
-        # for label in db_graph.get_edge_labels_with_duplicate(target_src_node_id, target_dst_node_id):
-        #     edge_labels.append(NodeExtensionManager.orientation_code(label, True))
-        # ??????????????
-        # if with_in_labels:
-        #     for label in db_graph.get_edge_labels_with_duplicate(target_dst_node_id, target_src_node_id):
-        #         edge_labels.append(NodeExtensionManager.orientation_code(label, False))
-        # ??????????????
-
-        # edge_labels = sorted(edge_labels)
-
-        # target_edge_labels_code = " ".join(edge_labels)
-
-        # extension_code = (pattern_node_src, pattern_node_dest, target_edge_labels_code)
 
         target_edge_labels_code = " ".join(
             sorted([NodeExtensionManager.orientation_code(label, True) for label in labels]))
@@ -617,6 +528,12 @@ class Pattern(MultiDiGraph):
         self.extended_pattern = extended_pattern
         self.pattern_mappings = pattern_mappings
 
+    def to_graph(self):
+        """
+        Return the pattern as a networkx graph
+        """
+        return MultiDiGraph(self)
+
     def graphs(self) -> list[DBGraph]:
         """
         Return the graphs that contains the pattern
@@ -633,10 +550,6 @@ class Pattern(MultiDiGraph):
         """
         Generate all possible node extension that if applied to the pattern, it still remains frequent.
         """
-
-        print_orange("--- Find node extensions ---")
-        print_orange(self)
-
         extension_manager = NodeExtensionManager(min_support)
         # for all graph in the database that contains the current extension
         for g in self.graphs():
@@ -655,15 +568,9 @@ class Pattern(MultiDiGraph):
                         extension_manager.add(node_p, node_db, neigh, g, _map)
 
         extensions = extension_manager.frequent_extensions()
-        # DELETE THIS ONLY FOR TESTING
-        # extensions = sorted(extensions, key=lambda x: x.__str__())
-
         return extensions
 
     def find_edge_extensions(self, min_support) -> list[list[EdgeExtension]]:
-
-        print_orange("--- Find edge extensions ---")
-        print_orange(self)
 
         if len(self.nodes()) < 3:
             # if the pattern has less than 3 nodes, it is not possible to find edge extensions
@@ -679,10 +586,6 @@ class Pattern(MultiDiGraph):
                 mapped_pattern_edges = set(_map.get_target_edges())
                 candidate_edges = set()
 
-                # for src, dst, _ in mapped_pattern_complete_graph_edges:
-                #     if all(src != s or dst != d for s, d, _ in mapped_pattern_edges):
-                #         candidate_edges.add((src, dst))
-
                 for src, dst, key in mapped_pattern_complete_graph_edges:
                     skip = False
                     for s, d, k in mapped_pattern_edges:
@@ -695,7 +598,6 @@ class Pattern(MultiDiGraph):
                     if skip:
                         continue
                     candidate_edges.add((src, dst, key, g.get_edge_label((src, dst, key))))
-
 
                 groups = {}
 
@@ -712,14 +614,6 @@ class Pattern(MultiDiGraph):
                     extension_manager.add(src, dst, labels, g, _map)
 
         extensions = extension_manager.frequent_extensions()
-
-        # DELETE THIS ONLY FOR TESTING
-        # extensions = sorted(extensions, key=lambda x: x.__str__())
-
-        # DELETE THIS ONLY FOR TESTING
-        print_green("Edge extensions before grouping")
-        for e in extensions:
-            print_green(e)
 
         if len(extensions) == 0:
             return []
@@ -739,9 +633,6 @@ class Pattern(MultiDiGraph):
                 matrix_indices_grouped[row_code] = []
             matrix_indices_grouped[row_code].append(i)
 
-        print_pink("Matrix indices grouped")
-        print_pink(matrix_indices_grouped)
-
         groups = []
         for row_code, indices in matrix_indices_grouped.items():
             columns_to_select = [i for i, v in enumerate(row_code) if v == "1"]
@@ -751,8 +642,6 @@ class Pattern(MultiDiGraph):
                 if all(extension_matrix[i][j] == 1 for j in columns_to_select):
                     for e in group:
                         if ext.pattern_node_id_src == e.pattern_node_id_src and ext.pattern_node_id_dst == e.pattern_node_id_dst:
-                            print_red(ext)
-                            print_red(e)
                             skip = True
                             break
                     if skip:
@@ -770,8 +659,6 @@ class Pattern(MultiDiGraph):
         """
         Apply the node extension to the pattern.
         """
-        print_yellow("--- Apply node extension ---")
-        print_yellow(extension)
 
         # Object to keep track of the new pattern mappings
         new_pattern_mappings = PatternMappings()
@@ -783,33 +670,26 @@ class Pattern(MultiDiGraph):
         new_pattern_new_node_id = len(new_pattern.nodes())
         new_pattern.add_node(new_pattern_new_node_id, labels=extension.node_labels)
 
+        # in_edge_labels: labels that enter the node from which the extension start
         for lab in extension.in_edge_labels:
             new_pattern.add_edge(new_pattern_new_node_id, pattern_node_id, type=lab)
+        # out_edge_labels: labels that exit the node from which the extension start
         for lab in extension.out_edge_labels:
             new_pattern.add_edge(pattern_node_id, new_pattern_new_node_id, type=lab)
 
-
         # Update the pattern mappings
         for target in extension.graphs():
-            print_red("Target", object.__str__(target), target.name)
             new_mappings = []
             for target_map in self.pattern_mappings.mappings(target):
-
-                # # Check if the extension is applicable by verifying if target_map is in extension_node_ids[target]
-                # # (it means that the extension is applicable because it let us discover a new extension)
-                # if target_map not in extension.mapping(target):
-                #     continue
-
-                br_cond_node = BreakingConditionsNodes(new_pattern, target_map._retrieve_node_mapping())
-
-                print_yellow("Target map", object.__str__(target_map), target_map)
-
                 target_node_ids = extension.target_node_ids(target, target_map)
-
                 # when trying to extend the pattern Pn (pattern with n nodes), there can be some mappings of Pn
                 # that are not extended because the extension is not applicable.
                 if len(target_node_ids) == 0:
                     continue
+
+                br_cond_node = BreakingConditionsNodes(new_pattern, target_map._retrieve_node_mapping())
+
+                # print("AAA", target_node_ids)
 
                 for target_node_id in target_node_ids:
 
@@ -825,7 +705,7 @@ class Pattern(MultiDiGraph):
                     prev_lab = None
                     prev_keys = []
                     for lab in sorted(extension.in_edge_labels):
-                        new_pattern_edge = (pattern_node_id, new_pattern_new_node_id, new_key)
+                        new_pattern_edge = (new_pattern_new_node_id, pattern_node_id, new_key)
                         target_edge_src = target_node_id
                         target_edge_dest = target_map.nodes_mapping()[extension.pattern_node_id]
                         if prev_lab != lab:
@@ -834,10 +714,11 @@ class Pattern(MultiDiGraph):
                         target_edge = (target_edge_src, target_edge_dest, prev_keys.pop(0))
                         edge_mapping[new_pattern_edge] = target_edge
                         new_key += 1
+                    new_key = 0
                     prev_lab = None
                     prev_keys = []
                     for lab in sorted(extension.out_edge_labels):
-                        new_pattern_edge = (new_pattern_new_node_id, pattern_node_id, new_key)
+                        new_pattern_edge = (pattern_node_id, new_pattern_new_node_id, new_key)
                         target_edge_src = target_map.nodes_mapping()[extension.pattern_node_id]
                         target_edge_dest = target_node_id
                         if prev_lab != lab:
@@ -850,18 +731,14 @@ class Pattern(MultiDiGraph):
                     new_mapping = Mapping(node_mapping=node_mapping, edge_mapping=edge_mapping,
                                           extended_mapping=target_map)
                     new_mappings.append(new_mapping)
-
-            new_pattern_mappings.set_mapping(target, new_mappings)
+            if len(new_mappings) > 0:  # ???????????
+                new_pattern_mappings.set_mapping(target, new_mappings)
         return new_pattern
 
     def apply_edge_extension(self, extensions: list[EdgeExtension]) -> 'Pattern':
         """
         Apply the edge extension to the pattern.
         """
-
-        print_yellow("--- Apply edge extension ---")
-        for ext in extensions:
-            print_yellow(ext)
 
         db_graphs = extensions[0].graphs()
         new_pattern_mappings = PatternMappings()
@@ -927,41 +804,246 @@ class Pattern(MultiDiGraph):
 
         return new_pattern
 
-    def __str__(self, show_mappings=False):
-        global count_pattern
+    def __str__(self, show_mappings=False, is_directed=False, with_frequencies=False):
+
+        global pattern_count
         output = ""
+
+        output += f"t # {pattern_count}\n"
+
+        to_remove = None
+
         # graph info
-        output += f"t # {count_pattern}\n"
-        for node in self.nodes(data=True):
-            output += f"v {node[0]} {' '.join(node[1]['labels'])}\n"
-        for edge in self.edges(data=True):
-            output += f"e {edge[0]} {edge[1]} {edge[2]['type']}\n"
-        # support
+        if is_directed:
+            output += self.directed_pattern_str()
+        else:
+            output += self.undirected_pattern_str()
+
         output += f"s {self.support()}\n"
         output += f"f {sum(len(self.pattern_mappings.mappings(g)) for g in self.graphs())}\n"
 
-        # DELETE or with_debugs
-        if show_mappings or with_debugs:
-            for g in self.graphs():
-                # graph_name frequency
-                output += g.get_name() + " " + str(len(self.pattern_mappings.mappings(g))) + " "
-                # ({nodes map}, {edges map}), ...
-                output += " ".join(
-                    [str(_map) for _map in self.pattern_mappings.mappings(g)])
-                output += "\n"
-        else:
-            # frequency info
+        if with_frequencies:
             frequencies = ["(" + g.get_name() + ", " + str(len(self.pattern_mappings.mappings(g))) + ")" for g in
                            self.graphs()]
-            # DELETE THIS ONLY FOR TESTING
-            frequencies = sorted(frequencies)
-            #
-            # output += "x " + " ".join(frequencies) + "\n"
-        output += "----------" + "\n"
+            output += "x " + " ".join(frequencies) + "\n"
+        if show_mappings:
+            if is_directed:
+                output += self.directed_mapping_str()
+            else:
+                output += self.undirected_mapping_str(to_remove)
 
-        count_pattern += 1
+        output += "----------"
+
+        pattern_count += 1
         return output
 
+    def edge_to_remove_when_undirected(self):
+        """
+        Return the edges to remove when the pattern is undirected.
+        """
+        to_remove = {}
+        for e in self.edges(keys=True):
+            s, d, k = e
+            src_code = "".join(sorted(self.get_node_labels(s)))
+            dst_code = "".join(sorted(self.get_node_labels(d)))
+            if src_code != dst_code:
+                continue
+
+            if (d, s) in to_remove:
+                continue
+            if (s, d) not in to_remove:
+                to_remove[(s, d)] = []
+            to_remove[(s, d)].append(k)
+        return to_remove
+
+    def directed_mapping_str(self):
+        """
+        Print the mappings in a directed way.
+        """
+        output = ""
+        for g in self.graphs():
+            output += g.get_name() + " " + str(len(self.pattern_mappings.mappings(g))) + " "
+            output += " ".join([str(_map) for _map in self.pattern_mappings.mappings(g)])
+            output += "\n"
+        return output
+
+    def undirected_mapping_str(self, to_remove):
+        """
+        Print the corret mappings for the undirected pattern.
+        """
+        to_remove = self.edge_to_remove_when_undirected()
+        output = ""
+        for g in self.graphs():
+            output += g.get_name() + " " + str(len(self.pattern_mappings.mappings(g))) + " "
+            for _map in self.pattern_mappings.mappings(g):
+                m = _map._retrieve_edge_mapping()
+                for (s, d) in to_remove:
+                    for k in to_remove[(s, d)]:
+                        if (s, d, k) in m:
+                            del m[(s, d, k)]
+                new_map = Mapping(edge_mapping=m, node_mapping=_map._retrieve_node_mapping())
+                output += str(new_map) + " "
+                del new_map
+            output += "\n"
+
+        return output
+
+    def directed_pattern_str(self):
+        """
+        Print the pattern in a directed way.
+        """
+        graph_str = ""
+        for node in self.nodes(data=True):
+            graph_str += f"v {node[0]} {' '.join(node[1]['labels'])}\n"
+        for edge in self.edges(data=True):
+            graph_str += f"e {edge[0]} {edge[1]} {edge[2]['type']}\n"
+
+        # edge_labels = {}
+        # for edge in self.edges(data=True):
+        #     e = (edge[0], edge[1])
+        #     if e not in edge_labels:
+        #         edge_labels[e] = []
+        #     edge_labels[e].append(edge[2]['type'])
+        # for edge, labels in edge_labels.items():
+        #     labels = " ".join(labels)
+        #     graph_str += f"e {edge[0]} {edge[1]} {labels}\n"
+
+        return graph_str
+
+    def undirected_pattern_str(self):
+        """
+        Print the pattern in an undirected way.
+        """
+
+        to_remove = {}
+        for e in self.edges(keys=True):
+            s, d, k = e
+            src_code = "".join(sorted(self.get_node_labels(s)))
+            dst_code = "".join(sorted(self.get_node_labels(d)))
+            if src_code != dst_code:
+                continue
+
+            if (d, s) in to_remove:
+                continue
+            if (s, d) not in to_remove:
+                to_remove[(s, d)] = []
+            to_remove[(s, d)].append(k)
+
+        graph_str = ""
+        for node in self.nodes(data=True):
+            graph_str += f"v {node[0]} {' '.join(node[1]['labels'])}\n"
+
+        for s, d, data in self.edges(data=True):
+            if (s, d) not in to_remove:
+                graph_str += f"e {s} {d} {data['type']}\n"
+
+        return graph_str
+
+
+class DFSStack(list):
+
+    def __init__(self, min_nodes, max_nodes, output_options, starting_patterns=[]):
+        """
+        Stack that only keeps patterns that can be extended.
+        """
+        super().__init__()
+        self.min_nodes = min_nodes
+        self.max_nodes = max_nodes
+        # Dictionary that keeps track of already computed pattern.
+        # key   := pattern_code
+        # value := list of patterns
+        self.found_patterns = {}
+        self.output_options = output_options
+        # In case of closed pattern mining, keep track of the last popped pattern
+        # in case of backtracking it is printed.
+        self.last_popped_pattern = None
+        # Memoize BitMatrices
+        self.bit_matrices = {}
+        for s in starting_patterns:
+            self.push(s)
+
+    def pop(self, __index=-1, backtracking=False) -> Pattern:
+        """
+        Pop the last element from the stack.
+        """
+        if self.output_options["closed_patterns"] and backtracking:
+            self.output(self.last_popped_pattern)
+
+        pattern = super().pop(__index)
+        self.last_popped_pattern = pattern
+        return pattern
+
+    def push(self, pattern: Pattern):
+        """
+        Push the pattern into the stack.
+        """
+        if len(pattern.nodes()) <= self.max_nodes and not self.was_stacked(pattern):
+            super().append(pattern)
+            code = pattern.code()
+            if code not in self.found_patterns:
+                self.found_patterns[code] = []
+            self.found_patterns[code].append(pattern.to_graph())
+            if not self.output_options["closed_patterns"]:
+                self.output(pattern)
+        else:
+            del pattern
+
+    def was_stacked(self, pattern: Pattern):
+        """
+        Check if the pattern is already computed.
+
+        NOTE: If two pattern are isomorphic, they have the same code.
+              There could be two different patterns with the same code,
+              so the code is used to prune the search space, but the
+              isomorphism check is still needed.
+        """
+        code = pattern.code()
+        pattern_graph = pattern.to_graph()
+        if code not in self.found_patterns:
+            return False
+        graphs = self.found_patterns[code]
+        matcher = MultiGraphMatch(pattern_graph,
+                                  target_bit_matrix=TargetBitMatrixOptimized(pattern_graph, BitMatrixStrategy2()))
+        if any(len(matcher.match(g)) > 0 for g in graphs):
+            del pattern
+            return True
+        return False
+
+    def output(self, pattern: Pattern):
+        if len(pattern.nodes()) < self.min_nodes:
+            return
+        print(pattern.__str__(self.output_options["show_mappings"], self.output_options["is_directed"],
+                              self.output_options["with_frequencies"]))
+
+class PatternManager:
+
+    def __init__(self):
+        self.found_patterns = {}
+
+    def add(self, pattern: Pattern):
+        """
+        Add the pattern to the manager.
+        """
+        code = pattern.code()
+        if code not in self.found_patterns:
+            self.found_patterns[code] = []
+        self.found_patterns[code].append(pattern.to_graph())
+
+    def was_generated(self, pattern: Pattern):
+        """
+        Check if the pattern was already generated.
+        """
+        code = pattern.code()
+        pattern_graph = pattern.to_graph()
+        if code not in self.found_patterns:
+            return False
+        graphs = self.found_patterns[code]
+        matcher = MultiGraphMatch(pattern_graph,
+                                  target_bit_matrix=TargetBitMatrixOptimized(pattern_graph, BitMatrixStrategy2()))
+        if any(len(matcher.match(g)) > 0 for g in graphs):
+            del pattern
+            return True
+        return False
 
 class CMiner:
 
@@ -972,27 +1054,190 @@ class CMiner:
                  max_nodes=float('inf'),
                  start_patterns=None,  # implement
                  show_mappings=False,
-                 output_path=None
+                 output_path=None,
+                 is_directed=False,
+                 with_frequencies=False,
+                 only_closed_patterns=False
                  ):
         self.db_file = db_file
-        self._min_nodes = min_nodes
-        self._max_nodes = max_nodes
+        self.min_nodes = min_nodes
+        self.max_nodes = max_nodes
+        self.output_options = {
+            "is_directed": is_directed,
+            "show_mappings": show_mappings,
+            "with_frequencies": with_frequencies,
+            "closed_patterns": only_closed_patterns
+        }
+        self.stack = DFSStack(min_nodes, max_nodes, {
+            "is_directed": is_directed,
+            "show_mappings": show_mappings,
+            "with_frequencies": with_frequencies,
+            "closed_patterns": only_closed_patterns
+        })
         self.min_support = support
         self._start_patterns = start_patterns
         self.db = []
         self.show_mappings = show_mappings
         self.output_path = output_path
+        self.is_directed = is_directed
+        self.with_frequencies = with_frequencies
+        self.only_closed_patterns = only_closed_patterns
+        self.pattern_manager = PatternManager()
 
-    def find_start_patterns(self) -> [Pattern]:
+    def mine(self):
+        self._read_graphs_from_file()
+        self._parse_support()
+        self._find_start_patterns()
+        self.parallel_mine()
+
+    # def parallel_mine(self):
+    #     num_workers = os.cpu_count()
+    #
+    #     with concurrent.futures.ThreadPoolExecutor(max_workers=num_workers) as executor:
+    #         # associate a thread to each starting pattern
+    #         futures = [executor.submit(self.mine_helper, DFSStack(self.min_nodes, self.max_nodes, self.output_options, starting_patterns=[p])) for p in self.stack]
+    #         # wait for all the threads to finish
+    #         concurrent.futures.wait(futures)
+    #
+    # def mine_helper(self, stack: DFSStack):
+    #     backtracking = False
+    #
+    #     while stack:
+    #
+    #         pattern_to_extend = stack.pop(backtracking=backtracking)
+    #
+    #         backtracking = False
+    #
+    #         if len(pattern_to_extend.nodes()) >= stack.max_nodes:
+    #             backtracking = True
+    #             continue
+    #
+    #         node_extensions = pattern_to_extend.find_node_extensions(self.min_support)
+    #
+    #         if len(node_extensions) == 0:
+    #             # Backtracking occurs when no more extensions are found
+    #             backtracking = True
+    #             del pattern_to_extend
+    #             continue
+    #
+    #         for node_ext in node_extensions:
+    #
+    #             node_extended_pattern = pattern_to_extend.apply_node_extension(node_ext)
+    #             # Ensure no duplicate patterns are processed
+    #             if self.pattern_manager.was_generated(node_extended_pattern) or stack.was_stacked(node_extended_pattern):
+    #                 continue
+    #
+    #             self.pattern_manager.add(node_extended_pattern)
+    #
+    #             tree_pattern_added = False
+    #
+    #             edge_extensions = node_extended_pattern.find_edge_extensions(self.min_support)
+    #
+    #             # If no edge extensions are found, add the pattern
+    #             # to the stack, it could be extended adding a node
+    #             if len(edge_extensions) == 0:
+    #                 if not self.pattern_manager.was_generated(node_extended_pattern):
+    #                     stack.push(node_extended_pattern)
+    #                 continue
+    #
+    #             graphs_covered_by_edge_extensions = {g for edge_ext in edge_extensions for g in edge_ext[0].graphs()}
+    #
+    #             for edge_ext in edge_extensions:
+    #
+    #                 edge_extended_pattern = node_extended_pattern.apply_edge_extension(edge_ext)
+    #                 self.pattern_manager.add(edge_extended_pattern)
+    #                 # If the support of the tree pattern is greater than the cycle pattern
+    #                 # it means that the tree cannot be closed in a cycle for all of his
+    #                 # occurrence in each graph, so it's considered the tree pattern and added to the stack.
+    #                 # Also check if the pattern is not already in the stack, because the same tree can be
+    #                 # considered with more than one edge extension.
+    #                 if (not tree_pattern_added) and (
+    #                         node_extended_pattern.support() > len(graphs_covered_by_edge_extensions)) and (
+    #                         node_extended_pattern.support() > edge_extended_pattern.support()):
+    #                     if not self.pattern_manager.was_generated(node_extended_pattern):
+    #                         stack.push(node_extended_pattern)
+    #                         tree_pattern_added = True
+    #
+    #                 if not self.pattern_manager.was_generated(edge_extended_pattern):
+    #                     stack.push(edge_extended_pattern)
+
+    def parallel_mine(self):
+
+        with concurrent.futures.ThreadPoolExecutor() as executor:
+            # associate a thread to each starting pattern
+            futures = [executor.submit(self.mine_helper) for _ in range(len(self.stack))]
+            # wait for all the threads to finish
+            concurrent.futures.wait(futures)
+
+
+    def mine_helper(self):
+        backtracking = False
+
+        while self.stack:
+
+            pattern_to_extend = self.stack.pop(backtracking=backtracking)
+
+            backtracking = False
+
+            if len(pattern_to_extend.nodes()) >= self.stack.max_nodes:
+                backtracking = True
+                continue
+
+            node_extensions = pattern_to_extend.find_node_extensions(self.min_support)
+
+            if len(node_extensions) == 0:
+                # Backtracking occurs when no more extensions are found
+                backtracking = True
+                del pattern_to_extend
+                continue
+
+            for node_ext in node_extensions:
+
+                node_extended_pattern = pattern_to_extend.apply_node_extension(node_ext)
+                # Ensure no duplicate patterns are processed
+                if self.stack.was_stacked(node_extended_pattern):
+                    continue
+
+                tree_pattern_added = False
+
+                edge_extensions = node_extended_pattern.find_edge_extensions(self.min_support)
+
+                # If no edge extensions are found, add the pattern
+                # to the stack, it could be extended adding a node
+                if len(edge_extensions) == 0:
+                    self.stack.push(node_extended_pattern)
+                    continue
+
+                graphs_covered_by_edge_extensions = {g for edge_ext in edge_extensions for g in edge_ext[0].graphs()}
+
+                for edge_ext in edge_extensions:
+
+                    edge_extended_pattern = node_extended_pattern.apply_edge_extension(edge_ext)
+
+                    # If the support of the tree pattern is greater than the cycle pattern
+                    # it means that the tree cannot be closed in a cycle for all of his
+                    # occurrence in each graph, so it's considered the tree pattern and added to the stack.
+                    # Also check if the pattern is not already in the stack, because the same tree can be
+                    # considered with more than one edge extension.
+                    if (not tree_pattern_added) and (
+                            node_extended_pattern.support() > len(graphs_covered_by_edge_extensions)) and (
+                            node_extended_pattern.support() > edge_extended_pattern.support()):
+                        self.stack.push(node_extended_pattern)
+                        tree_pattern_added = True
+
+                    self.stack.push(edge_extended_pattern)
+
+    def _find_start_patterns(self) -> [Pattern]:
 
         if self._start_patterns is None:
-            return self._mine_1node_patterns()
+            for p in self._mine_1node_patterns():
+                self.stack.push(p)
+            return
 
         start_patterns = []
         found_mappings = {}
 
         for p in self._start_patterns:
-            print(p)
             for g in self.db:
                 matching = g.localize(p)
                 if len(matching) > 0:
@@ -1002,115 +1247,7 @@ class CMiner:
             pattern_mappings = PatternMappings()
             for g, mappings in found_mappings.items():
                 pattern_mappings.set_mapping(g, mappings)
-            start_patterns.append(Pattern(extended_pattern=p, pattern_mappings=pattern_mappings))
-
-        return start_patterns
-
-    def output(self, pattern):
-
-        output_file = None
-        if self.output_path is not None:
-            output_file = open(self.output_path, "a")
-
-        if len(pattern.nodes()) >= self._min_nodes:
-            if self.output_path is not None:
-                print("New solution")
-                print(pattern.__str__(self.show_mappings), file=output_file)
-            else:
-                print(pattern.__str__(self.show_mappings))
-
-        if output_file is not None:
-            output_file.close()
-
-    def mine(self):
-        self._read_graphs_from_file()
-        self._parse_support()
-
-        pattern_codes = set()
-
-        # Stack for DFS
-        stack = self.find_start_patterns()
-        # DELETE THIS ONLY FOR TESTING
-        # stack = sorted(stack, key=lambda x: x.__str__())
-
-        for p in stack:
-            self.output(p)
-
-        while len(stack) > 0:
-            pattern_to_extend = stack.pop()
-
-            # Check if the pattern is already at the max number of nodes
-            if len(pattern_to_extend.nodes()) >= self._max_nodes:
-                del pattern_to_extend
-                continue
-
-            print_red("--- Working on ---")
-            print_red(pattern_to_extend)
-
-            # Find extensions
-            node_extensions = pattern_to_extend.find_node_extensions(self.min_support)
-
-            if len(node_extensions) == 0:
-                print_orange("No node extensions found")
-                del pattern_to_extend
-                # Backtracking occurs when no more extensions are found
-                continue
-
-            for node_ext in node_extensions:
-
-                new_tree_pattern = pattern_to_extend.apply_node_extension(node_ext)
-                new_pattern_code = new_tree_pattern.code()
-
-                # Ensure no duplicate patterns are processed
-                if new_pattern_code not in pattern_codes:
-
-                    tree_pattern_added = False
-
-                    edge_extensions = new_tree_pattern.find_edge_extensions(self.min_support)
-
-                    # edge_extensions = []
-
-                    # If no edge extensions are found, add the tree pattern to the stack
-                    if len(edge_extensions) == 0:
-                        print_orange("No edge extensions found")
-                        self.output(new_tree_pattern)
-                        stack.append(new_tree_pattern)
-                        pattern_codes.add(new_pattern_code)
-                        continue
-
-                    # ????????????????
-                    graphs_covered_by_edge_extensions = set()
-                    for edge_ext in edge_extensions:
-                        for g in edge_ext[0].graphs():
-                            graphs_covered_by_edge_extensions.add(g)
-                    # ????????????????
-
-                    for edge_ext in edge_extensions:
-
-                        new_cycle_pattern = new_tree_pattern.apply_edge_extension(edge_ext)
-
-                        # If the support of the tree pattern is greater than the cycle pattern
-                        # it means that the tree cannot be closed in a cycle for all of his
-                        # occurrence in each graph, so it's considered the tree pattern and added to the stack.
-                        # Also check if the pattern is not already in the stack, because the same tree can be
-                        # considered with more than one edge extension.
-                        if (not tree_pattern_added) and (
-                                new_tree_pattern.support() > len(graphs_covered_by_edge_extensions)) and (
-                                new_tree_pattern.support() > new_cycle_pattern.support()):
-                            self.output(new_tree_pattern)
-                            stack.append(new_tree_pattern)
-                            pattern_codes.add(new_pattern_code)
-                            tree_pattern_added = True
-
-                        new_cycle_pattern_code = new_cycle_pattern.code()
-                        if new_cycle_pattern_code not in pattern_codes:
-                            self.output(new_cycle_pattern)
-                            stack.append(new_cycle_pattern)
-                            pattern_codes.add(new_cycle_pattern_code)
-                        else:
-                            del new_cycle_pattern
-                else:
-                    del new_tree_pattern
+                self.stack.push(Pattern(extended_pattern=p, pattern_mappings=pattern_mappings))
 
     def _mine_1node_patterns(self) -> list[Pattern]:
         counter = {}
@@ -1141,6 +1278,33 @@ class CMiner:
         configurator = NetworkConfigurator(self.db_file, type_file)
         for name, network in NetworksLoading(type_file, configurator.config).Networks.items():
             self.db.append(DBGraph(network, name))
+        self._parse_graphs_direction()
+
+    def _parse_graphs_direction(self):
+        """
+        Handle the case when the mining is not directed.
+
+        If the mining is not directed, convert all the graphs to undirected using these rules:
+        Let (x, y) be an edge in the directed graph:
+            if x and y nodes have the same label, then add the edge (y, x) with the same label
+            if x and y nodes have different labels, revert the edge (x, y) to (y, x)
+        """
+        if self.is_directed:
+            return
+
+        for g in self.db:
+            edges = list(g.edges(keys=True))
+            for edge in edges:
+                src, dst, key = edge
+                src_labels_code = "".join(sorted(g.get_node_labels(src)))
+                dst_labels_code = "".join(sorted(g.get_node_labels(dst)))
+                if src_labels_code == dst_labels_code:
+                    all_keys = g.edge_keys(dst, src) if g.has_edge(dst, src) else [-1]
+                    g.add_edge(dst, src, key=max(all_keys) + 1, type=g.get_edge_label(edge))
+                elif src_labels_code > dst_labels_code:
+                    edge_label = g.get_edge_label(edge)
+                    g.remove_edge(src, dst, key=key)
+                    g.add_edge(dst, src, key=key, type=edge_label)
 
     def _parse_support(self):
         """
@@ -1154,4 +1318,3 @@ class CMiner:
         if self.min_support <= 1:
             db_len = len(self.db)
             self.min_support = int(self.min_support * db_len)
-
