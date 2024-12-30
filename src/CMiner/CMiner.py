@@ -7,8 +7,6 @@ from Graph.Graph import MultiDiGraph
 import pandas as pd
 import itertools
 
-from accelerate.utils import slice_tensors
-
 pattern_count = 0
 
 class EdgeGroupsFinder:
