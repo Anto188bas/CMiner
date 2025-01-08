@@ -1,0 +1,26 @@
+t # 24
+v 0 subkind
+v 1 gen
+v 2 kind
+v 3 gen
+v 4 gen
+e 0 1 specific
+e 0 4 general
+e 2 1 general
+e 2 3 general
+s 33
+f 721
+----------
+t # 29
+v 0 subkind
+v 1 gen
+v 2 kind
+v 3 gen
+v 4 gen
+e 0 1 specific
+e 0 3 general
+e 2 1 general
+e 2 4 general
+s 27
+f 1444
+----------

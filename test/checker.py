@@ -101,14 +101,18 @@ class Checker:
             print(f"Checking solution having ID {solution.get_id()}: ", end="", flush=True)
             support = 0
 
+            graph_names_where_not_found = []
             for db_graph in self.db:
                 matching_info =  self._match(db_graph, solution.graph)
                 if matching_info.frequency > 0:
+                    graph_names_where_not_found.append(db_graph.get_name())
                     support += 1
 
             if support != solution.get_support():
                 print(f"WRONG - Expected support: {solution.get_support()}, Found support: {support}")
+                print(f"        Graphs where the solution was not found: {graph_names_where_not_found}")
                 table_data.append([solution.get_id(), solution.get_support(), support])
+                exit()
             else:
                 print("CORRECT")
 

@@ -1,0 +1,236 @@
+t # 5
+v 0 subkind
+v 1 gen
+v 2 gen-set
+v 3 gen
+v 4 kind
+e 0 1 specific
+e 1 2 generalization
+e 3 2 generalization
+e 4 3 general
+
+SOLUZIONE TROVATA DA CMINER IN 43 GRAFI
+unimatch-ontology2022.json
+health-organizations.json
+qam.json
+mgic-antt2011.json
+rodrigues2019turbidite.json
+project-management-ontology.json
+junior2018o4c.json
+aguiar2019ooco.json
+it-infrastructure.json
+music-ontology.json
+internship.json
+fernandez-cejas2022curie-o.json
+tourbo2021.json
+digitaldoctor2022.json
+castro2012cloudvulnerability.json
+fischer2018ontorea.json
+romanenko2023what.json
+bernasconi2021ontovcm.json
+barcelos2015transport-networks.json
+recommendation-ontology.json
+lindeberg2022full-ontorights.json
+abrahao2018agriculture-operations.json
+eu-rent-refactored2022.json
+guizzardi2022ufo.json
+fraller2019abc.json
+alpinebits2022.json
+aires2022valuenetworks-geo.json
+fonseca2022incorporating.json
+sikora2021online-education.json
+albuquerque2011ontobio.json
+silva2012itarchitecture.json
+derave2019dpo.json
+online-mentoring.json
+public-tender.json
+buridan-ontology2021.json
+g809-2015.json
+freshbz2023.json
+ppo-o2021.json
+aguiar2018rdbs-o.json
+stock-broker2021.json
+internal-affairs2013.json
+goncalves2011ecg.json
+barcelos2013normative-acts.json
+
+LA STESSA SOLUZIONE È TROVATA DA VF2 IN 9 GRAFI
+'brazilian-governmental-organizational-structures.json',
+'mgic-antt2011.json',
+'spo2017.json',
+'aguiar2019ooco.json',
+'digitaldoctor2022.json',
+'barcelos2015transport-networks.json',
+'fonseca2022incorporating.json',
+'silva2012itarchitecture.json',
+'buridan-ontology2021.json'
+
+
+Ad esempio in unimatch-ontology2022.json CMiner trova il pattern e lo mappa:
+{0->65 1->80, 2->108, 3->79, 4->38}
+{(0, 1, 0)->('65', '80', 93),
+(1, 2, 0)->('80', '108', 107),
+(3, 2, 0)->('79', '108', 106),
+(4, 3, 0)->('38', '79', 37)
+Mentre VF2 non lo trova proprio.
+
+
+
+
+
+
+
+t # 10
+v 0 subkind
+v 1 gen
+v 2 kind
+v 3 gen
+v 4 subkind
+e 0 1 specific
+e 2 1 general
+e 2 3 general
+e 4 3 specific
+SOLUZIONE TROVATA DA CMINER IN 70 GRAFI
+neves2020nwpontology.json 19
+kritz2020ontobg.json 216
+brazilian-governmental-organizational-structures.json 1
+unimatch-ontology2022.json 21
+health-organizations.json 1
+van-ee2021modular.json 56
+qam.json 4
+mgic-antt2011.json 437
+rodrigues2019turbidite.json 1
+project-management-ontology.json 1
+junior2018o4c.json 1
+haridy2021egyptian-e-government.json 25
+aguiar2019ooco.json 22
+it-infrastructure.json 7
+guizzardi2005ontological.json 1
+aristotle-ontology2019.json 39
+moreira2018saref4health.json 1
+music-ontology.json 4
+internship.json 1
+niederkofler2019dssapple.json 1
+fernandez-cejas2022curie-o.json 1
+tourbo2021.json 14
+castro2012cloudvulnerability.json 9
+fischer2018ontorea.json 1
+romanenko2023what.json 3
+bernasconi2021ontovcm.json 18
+barcelos2015transport-networks.json 38
+recommendation-ontology.json 13
+lindeberg2022full-ontorights.json 16
+university-ontology.json 3
+abrahao2018agriculture-operations.json 1
+eu-rent-refactored2022.json 5
+guizzardi2022ufo.json 2
+fraller2019abc.json 20
+alpinebits2022.json 2
+aires2022valuenetworks-geo.json 1
+fonseca2022incorporating.json 2
+sikora2021online-education.json 47
+albuquerque2011ontobio.json 52
+silva2012itarchitecture.json 54
+derave2019dpo.json 2
+library.json 6
+social-contract.json 9
+online-mentoring.json 1
+public-tender.json 21
+bank-model.json 4
+pereira2015doacao-orgaos.json 1
+ramirez2015userfeedback.json 3
+ferreira2015ontoemergeplan.json 1
+khantong2020ontology.json 6
+cmpo2017.json 2
+dpo2017.json 5
+cgts2021sebim.json 9
+maddalena2021ontocovid.json 4
+buridan-ontology2021.json 19
+g809-2015.json 2
+freshbz2023.json 14
+ppo-o2021.json 1
+srro-ontology.json 3
+aguiar2018rdbs-o.json 6
+repa2021public-administration.json 1
+plato-ontology2019.json 11
+idaf2013.json 37
+bernasconi2023fair-principles.json 3
+construction-model.json 1
+stock-broker2021.json 1
+internal-affairs2013.json 9
+oliveira2007collaboration.json 2
+goncalves2011ecg.json 2
+barcelos2013normative-acts.json 25
+SOLUZIONE TROVATA DA MULTIGRAPHMATCH IN 63 GRAFI
+neves2020nwpontology.json 19
+kritz2020ontobg.json 174
+brazilian-governmental-organizational-structures.json 1
+unimatch-ontology2022.json 15
+van-ee2021modular.json 34
+qam.json 1
+mgic-antt2011.json 48
+rodrigues2019turbidite.json 1
+project-management-ontology.json 1
+junior2018o4c.json 1
+haridy2021egyptian-e-government.json 25
+aguiar2019ooco.json 21
+it-infrastructure.json 2
+guizzardi2005ontological.json 1
+aristotle-ontology2019.json 11
+moreira2018saref4health.json 1
+music-ontology.json 4
+niederkofler2019dssapple.json 1
+tourbo2021.json 4
+castro2012cloudvulnerability.json 6
+fischer2018ontorea.json 1
+romanenko2023what.json 2
+bernasconi2021ontovcm.json 18
+recommendation-ontology.json 13
+lindeberg2022full-ontorights.json 12
+university-ontology.json 3
+abrahao2018agriculture-operations.json 1
+eu-rent-refactored2022.json 1
+guizzardi2022ufo.json 1
+fraller2019abc.json 20
+alpinebits2022.json 1
+aires2022valuenetworks-geo.json 1
+fonseca2022incorporating.json 2
+sikora2021online-education.json 38
+albuquerque2011ontobio.json 47
+silva2012itarchitecture.json 53
+derave2019dpo.json 2
+library.json 6
+social-contract.json 9
+online-mentoring.json 1
+pereira2015doacao-orgaos.json 1
+ramirez2015userfeedback.json 3
+ferreira2015ontoemergeplan.json 1
+khantong2020ontology.json 6
+cmpo2017.json 1
+dpo2017.json 2
+cgts2021sebim.json 6
+maddalena2021ontocovid.json 4
+buridan-ontology2021.json 11
+g809-2015.json 2
+freshbz2023.json 10
+ppo-o2021.json 1
+srro-ontology.json 3
+aguiar2018rdbs-o.json 4
+repa2021public-administration.json 1
+plato-ontology2019.json 9
+idaf2013.json 22
+bernasconi2023fair-principles.json 2
+stock-broker2021.json 1
+internal-affairs2013.json 7
+oliveira2007collaboration.json 2
+goncalves2011ecg.json 2
+barcelos2013normative-acts.json 22
+
+Ad esempio in health-organizations.json CMiner trova il pattern e lo mappa:
+({0->30 1->50, 2->29, 3->49, 4->31},
+
+{(0, 1, 0)->('30', '50', 35),
+(2, 1, 0)->('29', '50', 32),
+(2, 3, 0)->('29', '49', 31),
+(4, 3, 0)->('31', '49', 37)})
+Mentre MULTIGRAPHMATCH non lo trova proprio.

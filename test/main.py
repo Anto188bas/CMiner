@@ -3,14 +3,20 @@ from comparator import *
 from checker import Checker
 
 db_path = "/Users/simoneavellino/Desktop/CMiner/test/Datasets/OntoUML-db/graphs.data"
-solutions_path = "/Users/simoneavellino/Desktop/CMiner/test/solution/sol.data"
+solutions_path = "/Users/simoneavellino/Desktop/CMiner/test/solution/a.txt"
 
 checker = Checker(db_path, CMinerParser(solutions_path), matching_algorithm="VF2")
 
-checker.run()
+checker.isomorphic_solutions()
 
+
+
+
+# cminer_parser = CMinerParser("/Users/simoneavellino/Desktop/CMiner/test/solution/cminer_sol.txt")
+# gpsan_parser = gSpanParser("/Users/simoneavellino/Desktop/CMiner/test/solution/gspan_sol.txt")
 #
-# cminer_parser = CMinerParser("/Users/simoneavellino/Desktop/sol_cycles1_s_2/cminer.txt")
-# gpsan_parser = gSpanParser("/Users/simoneavellino/Desktop/sol_cycles1_s_2/gspan.txt")
+# sol_60 = CMinerParser("/Users/simoneavellino/Desktop/CMiner/test/solution/no_match_48.data")
+# sol_59 = CMinerParser("/Users/simoneavellino/Desktop/CMiner/test/solution/no_match_50.data")
 #
-# Comparator(cminer_parser, gpsan_parser).solution_count().different_solutions()
+#
+# Comparator(sol_60, sol_59).different_solutions()

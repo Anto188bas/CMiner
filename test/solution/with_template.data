@@ -1,0 +1,183 @@
+t # 0
+v 0 subkind
+v 1 gen
+v 2 gen-set
+v 3 kind
+v 4 gen
+e 0 1 specific
+e 1 2 generalization
+e 3 1 general
+e 4 2 generalization
+s 44
+f 1073
+----------
+t # 1
+v 0 subkind
+v 1 gen
+v 2 gen-set
+v 3 kind
+v 4 gen
+e 0 1 specific
+e 1 2 generalization
+e 3 1 general
+e 3 4 general
+e 4 2 generalization
+s 40
+f 782
+----------
+t # 2
+v 0 subkind
+v 1 gen
+v 2 gen-set
+v 3 kind
+v 4 gen
+e 0 1 specific
+e 1 2 generalization
+e 3 1 general
+e 3 4 general
+s 44
+f 1595
+----------
+t # 3
+v 0 subkind
+v 1 gen
+v 2 gen-set
+v 3 gen
+v 4 subkind
+e 0 1 specific
+e 1 2 generalization
+e 3 2 generalization
+e 4 3 specific
+s 53
+f 956
+----------
+t # 4
+v 0 subkind
+v 1 gen
+v 2 gen-set
+v 3 gen
+v 4 gen
+e 0 1 specific
+e 1 2 generalization
+e 3 2 generalization
+e 4 2 generalization
+s 34
+f 5217
+----------
+t # 5
+v 0 subkind
+v 1 gen
+v 2 gen-set
+v 3 gen
+v 4 kind
+e 0 1 specific
+e 1 2 generalization
+e 3 2 generalization
+e 4 3 general
+s 43
+f 997
+----------
+t # 6
+v 0 subkind
+v 1 gen
+v 2 kind
+v 3 gen
+v 4 gen
+e 0 1 specific
+e 2 1 general
+e 2 3 specific
+e 2 4 general
+s 32
+f 1594
+----------
+t # 7
+v 0 subkind
+v 1 gen
+v 2 kind
+v 3 gen
+v 4 category
+e 0 1 specific
+e 2 1 general
+e 2 3 specific
+e 4 3 general
+s 32
+f 332
+----------
+t # 8
+v 0 subkind
+v 1 gen
+v 2 kind
+v 3 gen
+v 4 gen
+e 0 1 specific
+e 0 4 general
+e 2 1 general
+e 2 3 general
+s 33
+f 721
+----------
+t # 9
+v 0 subkind
+v 1 gen
+v 2 kind
+v 3 gen
+v 4 gen
+e 0 1 specific
+e 2 1 general
+e 2 3 general
+e 2 4 general
+s 53
+f 10188
+----------
+t # 10
+v 0 subkind
+v 1 gen
+v 2 kind
+v 3 gen
+v 4 subkind
+e 0 1 specific
+e 2 1 general
+e 2 3 general
+e 4 3 specific
+s 70
+f 1372
+----------
+t # 11
+v 0 subkind
+v 1 gen
+v 2 kind
+v 3 gen
+v 4 gen-set
+e 0 1 specific
+e 2 1 general
+e 2 3 general
+e 3 4 generalization
+s 44
+f 1527
+----------
+t # 12
+v 0 subkind
+v 1 gen
+v 2 kind
+v 3 gen
+v 4 gen
+e 0 1 specific
+e 0 3 general
+e 0 4 general
+e 2 1 general
+s 34
+f 803
+----------
+t # 13
+v 0 subkind
+v 1 gen
+v 2 kind
+v 3 gen
+v 4 gen
+e 0 1 specific
+e 0 3 general
+e 2 1 general
+e 2 4 general
+s 27
+f 1444
+----------

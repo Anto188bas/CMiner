@@ -12,7 +12,6 @@ def parse_graph_str(str):
         if line.startswith("v"):
             node_id = parts[1]
             labels = parts[2:]
-            print(int(node_id))
             nodes.append((int(node_id), labels))
         elif line.startswith("e"):
             src = parts[1]
@@ -47,7 +46,7 @@ def main_function():
     start_patterns = None
     if args.patterns_path is not None:
         with open(args.patterns_path, 'r') as f:
-            patterns = f.read().split("-")
+            patterns = f.read().split("----------")
             start_patterns = [parse_graph_str(pattern) for pattern in patterns]
 
     if args.num_nodes is not None:

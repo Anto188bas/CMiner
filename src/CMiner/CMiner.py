@@ -967,7 +967,7 @@ class Pattern(MultiDiGraph):
         output = ""
         for g in self.graphs():
             output += g.get_name() + " " + str(len(self.pattern_mappings.mappings(g))) + " "
-            output += " ".join([str(_map) for _map in self.pattern_mappings.mappings(g)])
+            # output += " ".join([str(_map) for _map in self.pattern_mappings.mappings(g)])
             output += "\n"
         return output
 
@@ -1099,15 +1099,17 @@ class DFSStack(list):
               isomorphism check is still needed.
         """
         code = pattern.code()
-        pattern_graph = pattern.to_graph()
-        if code not in self.found_patterns:
-            return False
-        graphs = self.found_patterns[code]
-        matcher = MultiGraphMatch(pattern_graph, target_bit_matrix=TargetBitMatrixOptimized(pattern_graph, BitMatrixStrategy2()))
-        if any(len(matcher.match(g)) > 0 for g in graphs):
-            del pattern
-            return True
-        return False
+        return code in self.found_patterns # FIX BREAKING CONDITIONS AND DECOMMENT
+
+        # pattern_graph = pattern.to_graph()
+        # if code not in self.found_patterns:
+        #     return False
+        # graphs = self.found_patterns[code]
+        # matcher = MultiGraphMatch(pattern_graph, target_bit_matrix=TargetBitMatrixOptimized(pattern_graph, BitMatrixStrategy2()))
+        # if any(len(matcher.match(g)) > 0 for g in graphs):
+        #     del pattern
+        #     return True
+        # return False
 
     def output(self, pattern: Pattern):
         if len(pattern.nodes()) < self.min_nodes:
@@ -1173,7 +1175,7 @@ class CMiner:
 
                 node_extended_pattern = pattern_to_extend.apply_node_extension(node_ext)
                 # Ensure no duplicate patterns are processed
-                if self.stack.was_stacked(node_extended_pattern):
+                if self.stack.was_stacked(node_extended_pattern) or node_extended_pattern.support() == 0:
                     continue
 
                 tree_pattern_added = False
@@ -1200,6 +1202,8 @@ class CMiner:
                     if (not tree_pattern_added) and (
                             node_extended_pattern.support() > len(graphs_covered_by_edge_extensions)) and (
                             node_extended_pattern.support() > edge_extended_pattern.support()):
+                    # if (not tree_pattern_added) and (
+                    #             node_extended_pattern.support() > edge_extended_pattern.support()):
                         self.stack.push(node_extended_pattern)
                         tree_pattern_added = True
 
@@ -1212,20 +1216,15 @@ class CMiner:
                 self.stack.push(p)
             return
 
-        start_patterns = []
         found_mappings = {}
 
         for p in self._start_patterns:
+            pattern_mappings = PatternMappings()
             for g in self.db:
                 matching = g.localize(p)
                 if len(matching) > 0:
-                    found_mappings[g] = matching
-
-        for p in self._start_patterns:
-            pattern_mappings = PatternMappings()
-            for g, mappings in found_mappings.items():
-                pattern_mappings.set_mapping(g, mappings)
-                self.stack.push(Pattern(extended_pattern=p, pattern_mappings=pattern_mappings))
+                    pattern_mappings.set_mapping(g, matching)
+            self.stack.push(Pattern(extended_pattern=p, pattern_mappings=pattern_mappings))
                 
     def _mine_1node_patterns(self) -> list[Pattern]:
         counter = {}
